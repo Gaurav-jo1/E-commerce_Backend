@@ -19,14 +19,14 @@ cd E-commerce
 npm install
 ```
 
-4. Generate a secret key from this website [miniwebtool.com/django-secret-key-generator](https://miniwebtool.com/django-secret-key-generator/) and in the **backend** directory create a .env file and paste the secret key like this:
+4. Generate a secret key from this website [miniwebtool.com/django-secret-key-generator](https://miniwebtool.com/django-secret-key-generator/) and in the **backend** directory create a **.env** file and paste the secret key like this:
 ```
 SECRET_KEY='w7%cjn4@v3$73a$_h!$t2q8il1fy5k%uhwqck#pbwzvo+4ztfs'
 ```
 5. For Google Sign-In credentials, you'll need to follow these steps:
 
 * Set up a Google API Console project and configure the consent screen:
-* Go to the Google API Console
+* Go to the [Google API Console](https://console.cloud.google.com/apis/dashboard)
 * Create a new project
 * Click on "Create credentials" and select "OAuth client ID"
 * Select "Web application" as the application type
@@ -40,8 +40,11 @@ SECRET_KEY='w7%cjn4@v3$73a$_h!$t2q8il1fy5k%uhwqck#pbwzvo+4ztfs'
 
 6. After finishing up the Google API console download the file in form of JSON and name the file client_secret.json and paste that file inside frontend directory.
 
-7. Add the Google client ID in the backend directory inside the .env file like this:
+<p align="center">
+<img src="https://user-images.githubusercontent.com/93304640/236677794-cddb3f35-2ef9-4a60-b9cf-8547a3a54753.png" alt="client_json_img" width="450" height="450">
+</p>
 
+7. Add the **Google client ID** in the backend directory inside the **.env** file like this:
 ```
 GOOGLE_CLIENT_ID='your_google_client_id'
 ```
