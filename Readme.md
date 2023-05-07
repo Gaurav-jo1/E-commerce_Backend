@@ -1,7 +1,7 @@
-# E-commerce
+# E-commerce 🏢
 Welcome to my project! This is a brief guide on how to get started with the project after cloning and how to use Docker Compose to start up the project.
 
-## Getting Started
+## Getting Started 🔥
 To get started with the project, follow these steps:
 
 1. Clone the repository to your local machine using the following command:
@@ -14,7 +14,12 @@ git clone https://github.com/Gaurav-jo1/E-commerce.git
 cd E-commerce
 ```
 
-## Using Docker Compose
+3. Install the project dependencies using the following command:
+```
+npm install
+```
+
+## Using Docker Compose 🐋
 The project can also be run using Docker Compose. To do this, follow these steps:
 
 1. Install Docker Compose if it's not already installed on your system.
