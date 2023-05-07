@@ -6,12 +6,12 @@ To get started with the project, follow these steps:
 
 1. Clone the repository to your local machine using the following command:
 ```
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/Gaurav-jo1/E-commerce.git
 ```
 
 2. Navigate to the project directory:
 ```
-cd your-repo-name
+cd E-commerce
 ```
 
 ## Using Docker Compose
