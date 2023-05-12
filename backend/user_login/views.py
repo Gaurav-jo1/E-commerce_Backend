@@ -48,7 +48,7 @@ class RegisterView(APIView):
                         user.refresh_from_db()
                         # Generate refresh and access tokens for the new user
                         refresh = RefreshToken.for_user(user)
-                        return Response({'refresh': str(refresh), 'access': str(refresh.access_token)})
+                        return Response({'refresh': str(refresh), 'access': str(refresh.access_token)},status.HTTP_200_OK)
 
         except ValueError:
             # If a ValueError is raised, return an error response with a 401 status code

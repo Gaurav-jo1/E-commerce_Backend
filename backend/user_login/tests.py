@@ -1,33 +1,54 @@
 from rest_framework.test import APITestCase
-from rest_framework import status
 from django.urls import reverse
+from rest_framework import status
 from django.contrib.auth.models import User
 
-
 class RegisterViewTestCase(APITestCase):
-
     def setUp(self):
-        self.url = reverse('register/')
-        self.valid_payload = {
+        self.register_url = reverse('register')
+
+    def test_register_user(self):
+        """
+        Ensure we can register a new user
+        """
+        data = {
             'username': 'testuser',
-            'email': 'testuser@example.com',
-            'password': 'D@nnyp0laaaa',
-            'first_name': 'Test'
+            'email': 'test@example.com',
+            'first_name': 'Test',
+            'password': 'testpassword',
         }
-        # self.invalid_payload = {
-        #     'username': '',
-        #     'email': 'testuser@example.com',
-        #     'password': 'testpassword',
-        #     'first_name': 'Test'
-        # }
+        response = self.client.post(self.register_url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('refresh', response.data)
+        self.assertIn('access', response.data)
 
-    def test_register_user_with_valid_payload(self):
-        response = self.client.post(self.url, data=self.valid_payload)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(User.objects.count(), 1)
-        self.assertEqual(User.objects.get().username, 'testuser')
+        user = User.objects.get(email='test@example.com')
+        self.assertEqual(user.username, 'testuser')
+        self.assertEqual(user.first_name, 'Test')
 
-    # def test_register_user_with_invalid_payload(self):
-    #     response = self.client.post(self.url, data=self.invalid_payload)
-    #     self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-    #     self.assertEqual(User.objects.count(), 0)
+    def test_register_user_already_exists(self):
+        """
+        Ensure we cannot register a user that already exists
+        """
+        # Create a user with the email address we want to use for testing
+        existing_user = User.objects.create_user(username='existinguser', email='test@example.com', first_name='Existing', password='testpassword')
+        # Attempt to register a new user with the same email address
+        data = {
+            'username': 'testuser',
+            'email': 'test@example.com',
+            'first_name': 'Test',
+            'password': 'testpassword',
+        }
+        response = self.client.post(self.register_url, data, format='json')
+
+        # Ensure that the response status code is 400 (Bad Request)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # Ensure that the response contains an error message indicating that the user already exists
+        self.assertIn('error', response.data)
+        self.assertEqual(response.data['error'], 'A user with this credential already exists')
+
+        # Ensure that the existing user was not modified
+        existing_user.refresh_from_db()
+        self.assertEqual(existing_user.username, 'existinguser')
+        self.assertEqual(existing_user.first_name, 'Existing')

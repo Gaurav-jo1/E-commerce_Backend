@@ -50,7 +50,9 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser'
-    ]
+    ],
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+
 }
 
 SIMPLE_JWT = {
