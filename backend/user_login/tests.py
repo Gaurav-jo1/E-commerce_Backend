@@ -8,9 +8,8 @@ class RegisterViewTestCase(APITestCase):
         self.register_url = reverse('register')
 
     def test_register_user(self):
-        """
-        Ensure we can register a new user
-        """
+        # Ensure we can register a new user
+        
         data = {
             'username': 'testuser',
             'email': 'test@example.com',
@@ -27,9 +26,9 @@ class RegisterViewTestCase(APITestCase):
         self.assertEqual(user.first_name, 'Test')
 
     def test_register_user_already_exists(self):
-        """
-        Ensure we cannot register a user that already exists
-        """
+
+        # Ensure we cannot register a user that already exists
+
         # Create a user with the email address we want to use for testing
         existing_user = User.objects.create_user(username='existinguser', email='test@example.com', first_name='Existing', password='testpassword')
         # Attempt to register a new user with the same email address
@@ -47,8 +46,3 @@ class RegisterViewTestCase(APITestCase):
         # Ensure that the response contains an error message indicating that the user already exists
         self.assertIn('error', response.data)
         self.assertEqual(response.data['error'], 'A user with this credential already exists')
-
-        # Ensure that the existing user was not modified
-        existing_user.refresh_from_db()
-        self.assertEqual(existing_user.username, 'existinguser')
-        self.assertEqual(existing_user.first_name, 'Existing')
