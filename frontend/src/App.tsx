@@ -1,9 +1,11 @@
 import { Routes, Route } from "react-router-dom";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+// Pages
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import LoginPage from "./pages/LoginPage";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import SignupPage from "./pages/SignupPage";
+import LinksPage from "./pages/LinksPage";
 
 function App(): JSX.Element {
 
@@ -11,7 +13,8 @@ function App(): JSX.Element {
     <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
       <div>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<LinksPage />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />

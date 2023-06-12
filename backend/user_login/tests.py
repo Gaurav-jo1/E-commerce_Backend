@@ -30,7 +30,7 @@ class RegisterViewTestCase(APITestCase):
         # Ensure we cannot register a user that already exists
 
         # Create a user with the email address we want to use for testing
-        existing_user = User.objects.create_user(username='existinguser', email='test@example.com', first_name='Existing', password='testpassword')
+        User.objects.create_user(username='existinguser', email='test@example.com', first_name='Existing', password='testpassword')
         # Attempt to register a new user with the same email address
         data = {
             'username': 'testuser',

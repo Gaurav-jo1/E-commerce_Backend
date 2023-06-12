@@ -27,8 +27,7 @@ class GoogleLogin(APIView):
         try:
             # Verify the ID token using the Google API
             CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
-            idinfo = id_token.verify_oauth2_token(
-                user_token, requests.Request(), CLIENT_ID)
+            idinfo = id_token.verify_oauth2_token(user_token, requests.Request(), CLIENT_ID)
 
             # Extract the user info from the user token
 
@@ -46,8 +45,7 @@ class GoogleLogin(APIView):
                     return Response({'refresh': str(refresh), 'access': str(refresh.access_token)})
                 else:
                     # User with this email does not exist, create a new user and generate access and refresh tokens
-                    user = User.objects.create_user(
-                        name, email=email, password=None)
+                    user = User.objects.create_user(name, email=email, password=None)
                     user.name = name
                     try:
                         user.save()
@@ -64,10 +62,3 @@ class GoogleLogin(APIView):
         except ValueError:
             # Invalid token
             return Response(status=401)
-
-
-@receiver(post_save, sender=User)
-def create_tokens(sender, instance, created, **kwargs):
-    if created:
-        refresh = RefreshToken.for_user(instance)
-        return Response({'refresh': str(refresh), 'access': str(refresh.access_token)})
