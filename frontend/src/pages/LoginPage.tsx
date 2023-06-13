@@ -1,9 +1,13 @@
 import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
-
 import axios from "axios";
 import art from "../assets/login_art.jpeg";
 import "../styles/Auth.scss";
+
+interface LoginComponentProps {
+  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 function handleGoogleLogin(idToken?: string) {
   axios
@@ -18,7 +22,13 @@ function handleGoogleLogin(idToken?: string) {
     });
 }
 
-const Loginpage: React.FC = () => {
+const Loginpage: React.FC<LoginComponentProps> = ({setSignupOpen,setLoginOpen}) => {
+
+  const SignupLink = () => {
+    setSignupOpen(true);
+    setLoginOpen(false)
+  }
+  
   return (
     <div className="LoginPage">
       <div className="Auth_login-form">
@@ -28,7 +38,7 @@ const Loginpage: React.FC = () => {
 
           <div className="Auth_sign_in_or_up-link">
             <p>New to Shoppy? &nbsp; </p>
-            <p>Create an account</p>
+            <p onClick={SignupLink}>Create an account</p>
           </div>
         </div>
         <div className="Auth_google-div">
@@ -38,7 +48,11 @@ const Loginpage: React.FC = () => {
             }}
             onError={() => {
               console.log("Login Failed");
-            }} type="standard" text="signin_with" logo_alignment="left" width="260px"
+            }}
+            type="standard"
+            text="signin_with"
+            logo_alignment="left"
+            width="260px"
           />
         </div>
         <div className="Auth_login_form-divider">
@@ -47,7 +61,7 @@ const Loginpage: React.FC = () => {
         <div className="Auth_login-inputs">
           <form>
             <input type="text" placeholder="Username" required />
-            <input type="password" placeholder="Password" required/>
+            <input type="password" placeholder="Password" required />
             <div className="Auth_login_forgot-password">
               <p>Forgot your password?</p>
             </div>

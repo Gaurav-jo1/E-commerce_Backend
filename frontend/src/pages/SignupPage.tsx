@@ -1,8 +1,13 @@
-import React from 'react'
+import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import art2 from "../assets/art2.jpeg";
 import axios from "axios";
 import "../styles/Auth.scss";
+
+interface SignupComponentProps {
+  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 function handleGoogleLogin(idToken?: string) {
   axios
@@ -17,16 +22,19 @@ function handleGoogleLogin(idToken?: string) {
     });
 }
 
-const SignupPage:React.FC = () => {
+const SignupPage: React.FC<SignupComponentProps> = ({setSignupOpen,setLoginOpen}) => {
+  const SigninLink = () => {
+    setSignupOpen(false);
+    setLoginOpen(true)
+  }
   return (
-    <div className='SignupPage'>
+    <div className="SignupPage">
       <div className="Auth_login-form">
         <div className="Auth_login-text">
           <h4>Sign up with Shoppy for free</h4>
-
           <div className="Auth_sign_in_or_up-link">
             <p>Already have an account?&nbsp; </p>
-            <p>Sign in</p>
+            <p onClick={SigninLink}>Sign in</p>
           </div>
         </div>
         <div className="Auth_google-div">
@@ -36,7 +44,11 @@ const SignupPage:React.FC = () => {
             }}
             onError={() => {
               console.log("Login Failed");
-            }} type="standard" text="continue_with" logo_alignment="left" width="260px"
+            }}
+            type="standard"
+            text="continue_with"
+            logo_alignment="left"
+            width="260px"
           />
         </div>
         <div className="Auth_login_form-divider">
@@ -44,11 +56,14 @@ const SignupPage:React.FC = () => {
         </div>
         <div className="Auth_login-inputs">
           <form>
-            <input type="email" placeholder='Enter your Email Address' required/>
-            <input type="text" placeholder="Username" required/>
-            <input type="password" placeholder="Password" required/>
-            <div className="Auth_login_forgot-password">
-            </div>
+            <input
+              type="email"
+              placeholder="Enter your Email Address"
+              required
+            />
+            <input type="text" placeholder="Username" required />
+            <input type="password" placeholder="Password" required />
+            <div className="Auth_login_forgot-password"></div>
             <button>Sign up</button>
           </form>
         </div>
@@ -61,7 +76,7 @@ const SignupPage:React.FC = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignupPage
+export default SignupPage;

@@ -7,6 +7,8 @@ import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 // import { Link } from 'react-router-dom'
 
+
+
 const HomePage: React.FC = () => {
   const [loginOpen, setloginOpen] = useState<boolean>(false);
   const [signupOpen, setsignupOpen] = useState<boolean>(false);
@@ -18,7 +20,7 @@ const HomePage: React.FC = () => {
         <div className="backdrop">
           <dialog className="Homepage_login-dialog" open>
             <p className="Homepage_login-close"><RxCross2 onClick={() => setloginOpen(false)}/></p>
-            <LoginPage />
+            <LoginPage setSignupOpen={setsignupOpen} setLoginOpen={setloginOpen}/>
           </dialog>
         </div>
         }
@@ -28,7 +30,7 @@ const HomePage: React.FC = () => {
         <div className="backdrop">
           <dialog className="Homepage_login-dialog" open>
             <p className="Homepage_login-close"><RxCross2 onClick={() => setsignupOpen(false)}/></p>
-            <SignupPage />
+            <SignupPage setSignupOpen={setsignupOpen} setLoginOpen={setloginOpen}/>
           </dialog>
         </div>
         }
