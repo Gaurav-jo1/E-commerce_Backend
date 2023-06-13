@@ -3,7 +3,7 @@ import { GoogleLogin } from "@react-oauth/google";
 
 import axios from "axios";
 import art from "../assets/login_art.jpeg";
-import "../styles/LoginPage.scss";
+import "../styles/Auth.scss";
 
 function handleGoogleLogin(idToken?: string) {
   axios
@@ -18,37 +18,37 @@ function handleGoogleLogin(idToken?: string) {
     });
 }
 
-const LoginPage: React.FC = () => {
+const Loginpage: React.FC = () => {
   return (
-    <div className="Loginpage">
-      <div className="Loginpage_login-form">
-        <div className="Loginpage_login-text">
+    <div className="LoginPage">
+      <div className="Auth_login-form">
+        <div className="Auth_login-text">
           <h4>Welcome back to Shoppy!</h4>
           <h4>Please sign in</h4>
 
-          <div className="Loginpage_signup-link">
+          <div className="Auth_sign_in_or_up-link">
             <p>New to Shoppy? &nbsp; </p>
             <p>Create an account</p>
           </div>
         </div>
-        <div className="Loginpage_google-div">
+        <div className="Auth_google-div">
           <GoogleLogin
             onSuccess={(credentialResponse) => {
               handleGoogleLogin(credentialResponse.credential);
             }}
             onError={() => {
               console.log("Login Failed");
-            }} type="standard" text="continue_with" logo_alignment="left" width="260px" auto_select={false}
+            }} type="standard" text="signin_with" logo_alignment="left" width="260px"
           />
         </div>
-        <div className="Loginpage_login_form-divider">
+        <div className="Auth_login_form-divider">
           <p>or</p>
         </div>
-        <div className="Loginpage_login-inputs">
+        <div className="Auth_login-inputs">
           <form>
-            <input type="text" placeholder="Username" />
-            <input type="password" placeholder="Password" />
-            <div className="Loginpage_login_forgot-password">
+            <input type="text" placeholder="Username" required />
+            <input type="password" placeholder="Password" required/>
+            <div className="Auth_login_forgot-password">
               <p>Forgot your password?</p>
             </div>
             <button>Sign in</button>
@@ -56,9 +56,9 @@ const LoginPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="Loginpage_bg_img">
-        <div className="Loginpage_bg_img-logo"></div>
-        <div className="Loginpage_bg_img-art">
+      <div className="Auth_bg_img">
+        <div className="Auth_bg_img-logo"></div>
+        <div className="Auth_bg_img-art">
           <img src={art} alt="art" />
         </div>
       </div>
@@ -66,4 +66,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default Loginpage;

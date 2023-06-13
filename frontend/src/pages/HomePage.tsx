@@ -27,8 +27,8 @@ const HomePage: React.FC = () => {
         {signupOpen && 
         <div className="backdrop">
           <dialog className="Homepage_login-dialog" open>
+            <p className="Homepage_login-close"><RxCross2 onClick={() => setsignupOpen(false)}/></p>
             <SignupPage />
-            <button onClick={() => setsignupOpen(false)}>close</button>
           </dialog>
         </div>
         }
@@ -46,7 +46,7 @@ const HomePage: React.FC = () => {
             </p>
           </li>
           <li>
-            <button onClick={() => setloginOpen(true)}>Log in</button>
+            <button onClick={() => setloginOpen(true)}>Sign in</button>
             <button onClick={() => setsignupOpen(true)}>Sign up</button>
           </li>
         </ul>
