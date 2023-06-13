@@ -1,12 +1,52 @@
-// .Homepage_div {
-//     height: 100vh;
-//     width: 100%;
-//     background-color: red;
-// }
+.Homepage_div {
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgb(24,26,31), rgb(26,41,71), rgb(29,55,112));
+}
+
+.backdrop {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    // background-color: rgba(0, 0, 0, 0.583);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+}
+
+.Homepage_login-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    border: none;
+
+
+    .Homepage_login-close {
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+      top: 26px;
+      right: -30px;
+      
+      svg {
+        background-color: rgba(0, 0, 0, 0.42);
+        border-radius: 50%;
+        padding: 4px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+}
 
 nav {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: transparent;
   padding: 0px 40px;
+  padding-top: 6px;
 }
 
 ul {
@@ -17,7 +57,7 @@ ul {
 
   li:first-child {
     img {
-        width: 100%;
+      width: 100%;
     }
   }
 
@@ -26,64 +66,61 @@ ul {
     align-items: center;
 
     input {
-        border-radius: 15px;
-        border: 1px solid white;
-        height: 30px;
-        width: 360px;
-        padding: 0 20px;
-        background-color: rgb(25, 24, 24);
+      border-radius: 15px;
+      border: 1px solid white;
+      height: 30px;
+      width: 360px;
+      padding: 0 20px;
+      background-color: rgb(25, 24, 24);
+      color: white;
+
+      &::placeholder {
         color: white;
+        font-weight: 700;
+      }
+
+      &:focus {
+        border: 1px solid rgb(131, 131, 131);
+        outline: none;
 
         &::placeholder {
-            color: white;
-            font-weight:700;
+          color: rgb(131, 131, 131);
         }
-
-        &:focus {
-            border: 1px solid rgb(131, 131, 131);
-            outline: none;
-
-            &::placeholder {
-                color:  rgb(131, 131, 131);
-            }
-        }
+      }
     }
 
     p {
-        display: flex;
-        position: relative;
-        right: 33px;
-        color: white;
-        font-size: 18px;
+      display: flex;
+      position: relative;
+      right: 33px;
+      color: white;
+      font-size: 18px;
 
-        &:hover {
-            cursor: pointer;
-        }
+      &:hover {
+        cursor: pointer;
+      }
     }
-
-    
   }
 
   li:last-child {
     display: flex;
 
     button {
-        border: none;
-        padding: 5px 10px;
-        border-radius: 2px;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 2px;
 
-        &:hover {
-            cursor: pointer;
-        }
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     button:first-child {
-        margin-right: 8px;
+      margin-right: 8px;
     }
 
     button:last-child {
-        margin-left: 8px;
+      margin-left: 8px;
     }
-
   }
 }
