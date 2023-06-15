@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { GoogleLogin } from "@react-oauth/google";
-import { SignComponentProps } from "../components/SignComponent";
+import { SignComponentProps } from "../components/ComponentsInterface";
 import art2 from "../assets/art2.jpeg";
 import axios from "axios";
 import "../styles/Auth.scss";

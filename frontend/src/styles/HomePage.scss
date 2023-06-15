@@ -1,11 +1,12 @@
 .Homepage_div {
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(
-    rgb(24, 26, 31),
-    rgb(26, 41, 71),
-    rgb(29, 55, 112)
-  );
+  // background-image: linear-gradient(
+  //   rgb(24, 26, 31),
+  //   rgb(26, 41, 71),
+  //   rgb(29, 55, 112)
+  // );
+  background-color: white;
 }
 
 @keyframes revealAnimation {

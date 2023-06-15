@@ -1,7 +1,7 @@
 import React from "react";
-import shoppy_logo from "../assets/logo2.png";
-import { IoSearchSharp } from "react-icons/io5";
-import { SignComponentProps } from "./SignComponent";
+// import shoppy_logo from "../assets/logo4.png";
+import { HiMagnifyingGlass } from "react-icons/hi2";
+import { SignComponentProps } from "./ComponentsInterface";
 import "../styles/Navbar.scss"
 
 const Navbar: React.FC<SignComponentProps> = ({setSignupOpen, setLoginOpen}) => {
@@ -9,14 +9,13 @@ const Navbar: React.FC<SignComponentProps> = ({setSignupOpen, setLoginOpen}) => 
     <nav>
       <ul>
         <li>
-          <img src={shoppy_logo} alt="shoppy logo" height={"30px"} />
+          <p>
+            <HiMagnifyingGlass />
+          </p>
+          <input type="text" placeholder="Search..." />
         </li>
         <li>
-          <input type="text" placeholder="Search..." />
-          <p>
-            {" "}
-            <IoSearchSharp />{" "}
-          </p>
+          <p>Shoppy</p>
         </li>
         <li>
           <p onClick={() => setSignupOpen(true)}>Sign up</p>

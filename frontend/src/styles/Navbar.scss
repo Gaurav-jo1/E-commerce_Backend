@@ -1,63 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+
 nav {
-  background-color: transparent;
-  padding: 0px 40px;
-  padding-top: 6px;
+  background-color: white;
+  padding: 0px 30px;
 }
 
 ul {
   list-style: none;
   display: flex;
   justify-content: space-between;
-  padding: 15px 0;
+  align-content: center;
+  padding: 10px 0;
+  text-align: center;
 
   li:first-child {
-    img {
-      width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    p {
+      display: flex;
+      color: black;
+      font-size: 18px;
+      position: relative;
+      left: 30px;
+      font-weight: bold;
 
       &:hover {
         cursor: pointer;
+      }
+    }
+
+    input {
+      border-radius: 15px;
+      height: 35px;
+      padding-left: 40px;
+      width: 140px;
+      background-color: rgb(245, 245, 245);
+      color: black;
+      border: none;
+      outline: none;
+
+      &::placeholder {
+        color: rgb(142, 142, 142);
+      }
+
+      &:hover {
+        outline: none;
+        background-color: rgb(235, 220, 220);
+        color: black;
+        &:focus {
+          outline: none;
+          background-color: rgb(235, 220, 220);
+          color: black;
+        }
+
+        &::placeholder {
+          color: rgb(121, 121, 121);
+        }
       }
     }
   }
 
   li:nth-last-child(2) {
-    display: flex;
-    align-items: center;
-
-    input {
-      border-radius: 15px;
-      border: 1px solid white;
-      height: 30px;
-      width: 360px;
-      padding: 0 20px;
-      background-color: rgb(25, 24, 24);
-      color: white;
-
-      &::placeholder {
-        color: white;
-        font-weight: 700;
-      }
-
-      &:focus {
-        border: 1px solid rgb(131, 131, 131);
-        outline: none;
-
-        &::placeholder {
-          color: rgb(131, 131, 131);
-        }
-      }
-    }
-
     p {
-      display: flex;
-      position: relative;
-      right: 33px;
-      color: white;
-      font-size: 18px;
-
-      &:hover {
-        cursor: pointer;
-      }
+      font-family: "Abril Fatface", cursive;
+      font-size: 40px;
+      letter-spacing: 1.8px;
     }
   }
 
@@ -65,6 +74,7 @@ ul {
     display: flex;
     align-items: center;
     color: white;
+    width: 194.6px;
 
     button {
       border: none;
@@ -80,6 +90,7 @@ ul {
 
     p {
       margin-right: 10px;
+      color: black;
       &:hover {
         cursor: pointer;
       }
