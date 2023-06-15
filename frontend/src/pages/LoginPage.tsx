@@ -3,11 +3,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import art from "../assets/login_art.jpeg";
 import "../styles/Auth.scss";
-
-interface LoginComponentProps {
-  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { SignComponentProps } from "../components/SignComponent";
 
 function handleGoogleLogin(idToken?: string) {
   axios
@@ -16,13 +12,14 @@ function handleGoogleLogin(idToken?: string) {
     })
     .then(function (response) {
       console.log(response.data);
+      localStorage.setItem("authTokens", JSON.stringify(response.data));
     })
     .catch(function (error) {
       console.log(error);
     });
 }
 
-const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen, }) => {
+const Loginpage: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -33,11 +30,11 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     axios.post("http://127.0.0.1:8000/user_login/api/token/", {
-      username: username,
-      password: password,
+      username: username, password: password,
     })
     .then(function (response) {
-      console.log(response.data);
+      console.log("Response from LoginPage: ",response.data);
+      localStorage.setItem("authTokens", JSON.stringify(response.data));
     })
     .catch(function (error) {
       console.log(error);

@@ -3,23 +3,24 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 // Pages
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
 import LinksPage from "./pages/LinksPage";
+
+// Global Context
+import AuthProvider from "./context/AuthContext";
 
 function App(): JSX.Element {
 
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
-      <div>
-        <Routes>
-          <Route path="/" element={<LinksPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-        </Routes>
-      </div>
+      <AuthProvider>
+        <div>
+          <Routes>
+            <Route path="/" element={<LinksPage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Routes>
+        </div>
+        </AuthProvider>
     </GoogleOAuthProvider>
   );
 }

@@ -1,17 +1,12 @@
 import React, {useState} from "react";
 import { GoogleLogin } from "@react-oauth/google";
+import { SignComponentProps } from "../components/SignComponent";
 import art2 from "../assets/art2.jpeg";
 import axios from "axios";
 import "../styles/Auth.scss";
 
-interface SignupComponentProps {
-  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 function handleGoogleLogin(idToken?: string) {
-  axios
-    .post("http://127.0.0.1:8000/google_login/google/", {
+  axios.post("http://127.0.0.1:8000/google_login/google/", {
       id_token: idToken,
     })
     .then(function (response) {
@@ -22,7 +17,7 @@ function handleGoogleLogin(idToken?: string) {
     });
 }
 
-const SignupPage: React.FC<SignupComponentProps> = ({setSignupOpen,setLoginOpen}) => {
+const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) => {
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');

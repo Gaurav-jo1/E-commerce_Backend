@@ -1,14 +1,10 @@
 import React from "react";
 import shoppy_logo from "../assets/logo2.png";
 import { IoSearchSharp } from "react-icons/io5";
+import { SignComponentProps } from "./SignComponent";
 import "../styles/Navbar.scss"
 
-interface NavbarComponentProps {
-    setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  }
-
-const Navbar: React.FC<NavbarComponentProps> = ({setSignupOpen, setLoginOpen}) => {
+const Navbar: React.FC<SignComponentProps> = ({setSignupOpen, setLoginOpen}) => {
   return (
     <nav>
       <ul>
