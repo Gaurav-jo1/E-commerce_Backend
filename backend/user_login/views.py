@@ -16,13 +16,12 @@ class RegisterView(APIView):
         # Extract user information from the request data
         username = request.data.get('username')
         email = request.data.get('email')
-        first_name = request.data.get('first_name')
         password = request.data.get('password')
 
         try:
 
             # Check if all required information is present
-            if username and email and first_name and password:
+            if username and email  and password:
 
                 # Check if a user with the same email address already exists
                 user_exists = User.objects.filter(email=email).first()
@@ -34,9 +33,8 @@ class RegisterView(APIView):
                 else:
 
                     # If the user does not already exist, create a new user and generate access and refresh tokens
-                    user = User.objects.create_user(
-                        username, email=email, first_name=first_name, password=password)
-                    user.name = username
+                    user = User.objects.create_user(username, email=email, password=password)
+                    
                     try:
                         user.save()
                     except IntegrityError as e:

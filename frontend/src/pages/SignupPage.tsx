@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import art2 from "../assets/art2.jpeg";
 import axios from "axios";
@@ -23,10 +23,29 @@ function handleGoogleLogin(idToken?: string) {
 }
 
 const SignupPage: React.FC<SignupComponentProps> = ({setSignupOpen,setLoginOpen}) => {
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
   const SigninLink = () => {
-    setSignupOpen(false);
-    setLoginOpen(true)
+    setSignupOpen(false); setLoginOpen(true);
   }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    axios.post("http://127.0.0.1:8000/user_login/register/", {
+      username: username,
+      email: email,
+      password: password,
+    })
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   return (
     <div className="SignupPage">
       <div className="Auth_login-form">
@@ -55,15 +74,18 @@ const SignupPage: React.FC<SignupComponentProps> = ({setSignupOpen,setLoginOpen}
           <p>or</p>
         </div>
         <div className="Auth_login-inputs">
-          <form>
-            <input
-              type="email"
-              placeholder="Enter your Email Address"
-              required
-            />
-            <input type="text" placeholder="Username" required />
-            <input type="password" placeholder="Password" required />
+          <form onSubmit={handleSubmit}>
+            <input type="email" placeholder="Email" title="Enter your Email Address"
+            value={email} onChange={(e) => setEmail(e.target.value)} required/>
+
+            <input type="text" placeholder="Username" title="Enter you Username"
+            value={username} onChange={(e) => setUsername(e.target.value)} required />
+
+            <input type="password" placeholder="Password" title="Enter you Password"
+            value={password} onChange={(e) => setPassword(e.target.value)} required/>
+
             <div className="Auth_login_forgot-password"></div>
+
             <button>Sign up</button>
           </form>
         </div>
