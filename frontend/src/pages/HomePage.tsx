@@ -5,9 +5,6 @@ import { IoSearchSharp } from "react-icons/io5";
 import {RxCross2} from "react-icons/rx";
 import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
-// import { Link } from 'react-router-dom'
-
-
 
 const HomePage: React.FC = () => {
   const [loginOpen, setloginOpen] = useState<boolean>(false);
@@ -48,8 +45,8 @@ const HomePage: React.FC = () => {
             </p>
           </li>
           <li>
+            <p onClick={() => setsignupOpen(true)}>Sign up</p>
             <button onClick={() => setloginOpen(true)}>Sign in</button>
-            <button onClick={() => setsignupOpen(true)}>Sign up</button>
           </li>
         </ul>
       </nav>

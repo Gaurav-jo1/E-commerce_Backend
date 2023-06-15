@@ -117,23 +117,30 @@ ul {
 
   li:last-child {
     display: flex;
+    align-items: center;
+    color: white;
 
     button {
       border: none;
-      padding: 5px 10px;
-      border-radius: 2px;
+      padding: 10px 14px;
+      border-radius: 30px;
+      background-color: blueviolet;
+      color: white;
 
       &:hover {
         cursor: pointer;
       }
     }
 
-    button:first-child {
-      margin-right: 8px;
+    p {
+      margin-right: 10px;
+      &:hover {
+        cursor: pointer;
+      }
     }
 
-    button:last-child {
-      margin-left: 8px;
+    button {
+      margin-left: 10px;
     }
   }
 }
