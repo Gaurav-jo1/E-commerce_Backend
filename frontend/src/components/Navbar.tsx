@@ -7,21 +7,15 @@ import "../styles/Navbar.scss"
 const Navbar: React.FC<SignComponentProps> = ({setSignupOpen, setLoginOpen}) => {
   return (
     <nav className="Navbar_container">
-      <ul className="Navbar_container-ul">
-        <li>
-          <p>
-            <HiMagnifyingGlass />
-          </p>
+        <div className="Navbar_container-search">
+          <p> <HiMagnifyingGlass /> </p>
           <input type="text" placeholder="Search..." />
-        </li>
-        <li>
-          <p>Shoppy</p>
-        </li>
-        <li>
+        </div>
+        <div className="Navbar_container-logo"> <p>Shoppy</p> </div>
+        <div className="Navbar_container-buttons">
           <p onClick={() => setSignupOpen(true)}>Sign up</p>
           <button onClick={() => setLoginOpen(true)}>Sign in</button>
-        </li>
-      </ul>
+        </div>
     </nav>
   );
 };

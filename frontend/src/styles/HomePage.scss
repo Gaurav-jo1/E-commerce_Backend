@@ -1,11 +1,6 @@
 .Homepage_div {
   height: 100vh;
   width: 100%;
-  // background-image: linear-gradient(
-  //   rgb(24, 26, 31),
-  //   rgb(26, 41, 71),
-  //   rgb(29, 55, 112)
-  // );
   background-color: white;
 }
 
@@ -16,14 +11,6 @@
   100% {
     transform: scale(1);
   }
-}
-
-.Homepage_backdrop-bg {
-  position: absolute;
-  background-color: rgba(194, 194, 194, 0.636);
-  height: 100vh;
-  width: 100%;
-  z-index: 5;
 }
 
 .Homepage_backdrop {
@@ -63,7 +50,3 @@
     }
   }
 }
-
-// .HomePage_nav-container{
-
-// }

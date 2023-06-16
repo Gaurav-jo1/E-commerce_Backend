@@ -1,103 +1,100 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
 
 .Navbar_container {
-  background-color: white;
-  padding: 0px 30px;
-}
-
-.Navbar_container-ul {
-  list-style: none;
+  background-color: rgb(243, 235, 235);
   display: flex;
   justify-content: space-between;
   align-content: center;
-  padding: 10px 0;
+  padding: 5px 30px 10px 30px;
+  text-align: center;
+}
+
+.Navbar_container-search {
+  display: flex;
+  align-items: center;
   text-align: center;
 
-  li:first-child {
+  p {
     display: flex;
-    align-items: center;
-    text-align: center;
+    color: black;
+    font-size: 18px;
+    position: relative;
+    left: 30px;
+    font-weight: bold;
 
-    p {
-      display: flex;
-      color: black;
-      font-size: 18px;
-      position: relative;
-      left: 30px;
-      font-weight: bold;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
-      &:hover {
-        cursor: pointer;
-      }
+  input {
+    border-radius: 15px;
+    height: 35px;
+    padding-left: 40px;
+    width: 140px;
+    background-color: white;
+    color: black;
+    border: none;
+    outline: none;
+
+    &::placeholder {
+      color: rgb(142, 142, 142);
     }
 
-    input {
-      border-radius: 15px;
-      height: 35px;
-      padding-left: 40px;
-      width: 140px;
-      background-color: rgb(239, 230, 230);
-      color: black;
-      border: none;
+    &:hover {
       outline: none;
+      background-color: rgb(255, 255, 255);
+      color: black;
+      border: 1px solid black;
+      &:focus {
+        outline: none;
+        background-color: rgb(255, 255, 255);
+        color: black;
+        border: 1px solid black;
+      }
 
       &::placeholder {
-        color: rgb(142, 142, 142);
-      }
-
-      &:hover {
-        outline: none;
-        background-color: rgb(235, 220, 220);
-        color: black;
-        &:focus {
-          outline: none;
-          background-color: rgb(235, 220, 220);
-          color: black;
-        }
-
-        &::placeholder {
-          color: rgb(121, 121, 121);
-        }
+        color: rgb(121, 121, 121);
       }
     }
   }
+}
 
-  li:nth-last-child(2) {
-    p {
-      font-family: "Abril Fatface", cursive;
-      font-size: 40px;
-      letter-spacing: 1.8px;
-    }
+.Navbar_container-logo{
+  p {
+    font-family: "Abril Fatface", cursive;
+    font-size: 40px;
+    letter-spacing: 1.8px;
   }
+}
 
-  li:last-child {
-    display: flex;
-    align-items: center;
+.Navbar_container-buttons {
+  display: flex;
+  align-items: center;
+  color: white;
+  width: 194.6px;
+
+  button {
+    border: none;
+    padding: 10px 14px;
+    border-radius: 30px;
+    background-color: blueviolet;
     color: white;
-    width: 194.6px;
 
-    button {
-      border: none;
-      padding: 10px 14px;
-      border-radius: 30px;
-      background-color: blueviolet;
-      color: white;
-
-      &:hover {
-        cursor: pointer;
-      }
+    &:hover {
+      cursor: pointer;
     }
+  }
 
-    p {
-      margin-right: 10px;
-      color: black;
-      &:hover {
-        cursor: pointer;
-      }
+  p {
+    margin-right: 10px;
+    color: black;
+    &:hover {
+      cursor: pointer;
     }
+  }
 
-    button {
-      margin-left: 10px;
-    }
+  button {
+    margin-left: 10px;
   }
 }

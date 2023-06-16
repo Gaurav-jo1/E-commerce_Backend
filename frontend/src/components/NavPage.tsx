@@ -3,7 +3,7 @@ import React from 'react'
 // Styling
 import "../styles/NavPage.scss"
 
-const NavPages:React.FC = () => {
+const NavPage:React.FC = () => {
   return (
     <nav className='NavPages_container'>
         <ul className='NavPages_container-ul'>
@@ -17,4 +17,4 @@ const NavPages:React.FC = () => {
   )
 }
 
-export default NavPages
+export default NavPage;
