@@ -15,21 +15,25 @@ const HomePage: React.FC = () => {
     <div className="Homepage_div">
       <div className="Homepage_login">
         {loginOpen && 
-        <div className="Homepage_backdrop">
-          <dialog className="Homepage_login-dialog" open>
-            <p className="Homepage_login-close"><RxCross2 onClick={() => setloginOpen(false)}/></p>
-            <LoginPage setSignupOpen={setsignupOpen} setLoginOpen={setloginOpen}/>
-          </dialog>
+        <div className="Homepage_backdrop-bg">
+          <div className="Homepage_backdrop">
+            <dialog className="Homepage_login-dialog" open>
+              <p className="Homepage_login-close"><RxCross2 onClick={() => setloginOpen(false)}/></p>
+              <LoginPage setSignupOpen={setsignupOpen} setLoginOpen={setloginOpen}/>
+            </dialog>
+          </div>
         </div>
         }
       </div> 
       <div className="Homepage_signup">
         {signupOpen && 
-        <div className="Homepage_backdrop">
-          <dialog className="Homepage_login-dialog" open>
-            <p className="Homepage_login-close"><RxCross2 onClick={() => setsignupOpen(false)}/></p>
-            <SignupPage setSignupOpen={setsignupOpen} setLoginOpen={setloginOpen}/>
-          </dialog>
+        <div className="Homepage_backdrop-bg">
+          <div className="Homepage_backdrop">
+            <dialog className="Homepage_login-dialog" open>
+              <p className="Homepage_login-close"><RxCross2 onClick={() => setsignupOpen(false)}/></p>
+              <SignupPage setSignupOpen={setsignupOpen} setLoginOpen={setloginOpen}/>
+            </dialog>
+          </div>
         </div>
         }
       </div>

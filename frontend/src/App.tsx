@@ -8,6 +8,9 @@ import LinksPage from "./pages/LinksPage";
 // Global Context
 import AuthProvider from "./context/AuthContext";
 
+// App.tsx styling
+import "./styles/App.scss"
+
 function App(): JSX.Element {
 
   return (

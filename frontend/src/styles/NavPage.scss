@@ -1,5 +1,6 @@
 .NavPages_container {
-  background-color: white;
+  background-color: rgb(239, 230, 230);
+  width: 100%;
 }
 
 @keyframes reveal-border {
@@ -39,24 +40,7 @@
     }
 
     &:hover {
-        cursor: pointer;
+      cursor: pointer;
     }
-
-    // &::after {
-    //     content: '';
-    //     display: block;
-    //     width: 0;
-    //     height: 1px;
-    //     background: #000;
-    //     transition: width .3s;
-    // }
-
-    // &:hover::after {
-    //     width: 100%;
-    // }
-
-    // &:hover {
-    //   cursor: pointer;
-    // }
   }
 }
