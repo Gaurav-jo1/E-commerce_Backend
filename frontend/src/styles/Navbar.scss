@@ -1,11 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
 
-nav {
+.Navbar_container {
   background-color: white;
-  padding: 0px 30px;
 }
 
-ul {
+.Navbar_container-ul {
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -36,7 +35,7 @@ ul {
       height: 35px;
       padding-left: 40px;
       width: 140px;
-      background-color: rgb(245, 245, 245);
+      background-color: rgb(239, 230, 230);
       color: black;
       border: none;
       outline: none;

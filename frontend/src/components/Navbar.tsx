@@ -6,8 +6,8 @@ import "../styles/Navbar.scss"
 
 const Navbar: React.FC<SignComponentProps> = ({setSignupOpen, setLoginOpen}) => {
   return (
-    <nav>
-      <ul>
+    <nav className="Navbar_container">
+      <ul className="Navbar_container-ul">
         <li>
           <p>
             <HiMagnifyingGlass />

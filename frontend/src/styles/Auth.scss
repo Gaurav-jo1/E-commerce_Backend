@@ -1,8 +1,10 @@
 .SignupPage {
   height: 450px;
   width: 800px;
-  background-color: rgba(255, 255, 255, 0.852);
+  // background-color: rgba(255, 255, 255, 0.852);
+  background-color: whitesmoke;
   border-radius: 20px;
+  border: 1px solid rgb(231, 220, 220);
   overflow: hidden;
   display: flex;
   justify-content: space-between;
@@ -11,8 +13,10 @@
 .LoginPage {
   height: 450px;
   width: 800px;
-  background-color: rgba(255, 255, 255, 0.852);
+  // background-color: rgba(255, 255, 255, 0.852);
+  background-color: whitesmoke;
   border-radius: 20px;
+  border: 1px solid rgb(227, 214, 214);
   overflow: hidden;
   display: flex;
   justify-content: space-between;

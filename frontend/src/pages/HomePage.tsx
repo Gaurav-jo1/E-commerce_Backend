@@ -5,6 +5,7 @@ import {RxCross2} from "react-icons/rx";
 import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import Navbar from "../components/Navbar";
+import NavPages from "../components/NavPages";
 
 const HomePage: React.FC = () => {
   const [loginOpen, setloginOpen] = useState<boolean>(false);
@@ -32,8 +33,10 @@ const HomePage: React.FC = () => {
         </div>
         }
       </div>
-      <div className="HomePage_nav-contai">
+      <div className="HomePage_nav-container">
         <Navbar setSignupOpen={setsignupOpen} setLoginOpen={setloginOpen} />
+        
+        <NavPages />
       </div>
     </div>
   );
