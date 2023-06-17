@@ -6,6 +6,7 @@ import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
+import SaleBar from "../components/SaleBar";
 
 const HomePage: React.FC = () => {
   const [loginOpen, setloginOpen] = useState<boolean>(false);
@@ -42,6 +43,9 @@ const HomePage: React.FC = () => {
       </div>
       <div className="HomePage_navbar-container">
         <NavPage />
+      </div>
+      <div className="HomePage_salebar-container">
+        <SaleBar />
       </div>
     </div>
   );

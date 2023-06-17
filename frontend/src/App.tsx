@@ -8,6 +8,9 @@ import LinksPage from "./pages/LinksPage";
 // Global Context
 import AuthProvider from "./context/AuthContext";
 
+// Styling
+import "./styles/App.scss"
+
 function App(): JSX.Element {
 
   return (
