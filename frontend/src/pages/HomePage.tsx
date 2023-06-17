@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+
+// Styling
 import "../styles/HomePage.scss";
 
 import {RxCross2} from "react-icons/rx";
+
+// Pages and Components
 import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
 import SaleBar from "../components/SaleBar";
+import MainContent from "./MainContent";
 
 const HomePage: React.FC = () => {
   const [loginOpen, setloginOpen] = useState<boolean>(false);
@@ -46,6 +51,9 @@ const HomePage: React.FC = () => {
       </div>
       <div className="HomePage_salebar-container">
         <SaleBar />
+      </div>
+      <div className="HomePage_main-container">
+        <MainContent />
       </div>
     </div>
   );

@@ -83,8 +83,8 @@ const Loginpage: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, 
 
       <div className="Auth_bg_img">
         <div className="Auth_bg_img-logo"></div>
-        <div className="Auth_bg_img-art">
-          <img src={art} alt="art" />
+        <div className="Auth_bg_img-art" style={{width:"460px"}} >
+          <img src={art} alt="art"/>
         </div>
       </div>
     </div>
