@@ -5,7 +5,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from rest_framework import status
-# Create your views here.
+
 
 
 class RegisterView(APIView):
@@ -19,7 +19,6 @@ class RegisterView(APIView):
         password = request.data.get('password')
 
         try:
-
             # Check if all required information is present
             if username and email  and password:
 
@@ -51,3 +50,39 @@ class RegisterView(APIView):
         except ValueError:
             # If a ValueError is raised, return an error response with a 401 status code
             return Response(status=401)
+
+
+# from django.core.mail import send_mail
+# import os
+# import random
+
+# Create your views here.
+# class ResetPassword(APIView):
+#     permission_classes = [permissions.AllowAny]
+
+#     def get(self, request,format=None):
+#         user_email = request.data.get("user_email")
+#         random_number = random.randint(100000, 999999)
+#         print("Local: ", random_number)
+#         email_message = f"Here is your recovery code {random_number} for {user_email}" 
+        
+#         # Check if email information is present
+#         if user_email:
+
+#             # Check if a user with the same email address already exists
+#             email_exists = User.objects.filter(email=user_email).first()
+
+#             if email_exists:
+#                 send_mail(
+#                     subject="Shoppy recovery code",
+#                     message=email_message,
+#                     from_email= os.environ.get('EMAIL_HOST_USER'),
+#                     recipient_list=[user_email])
+                
+#                 return Response(status.HTTP_200_OK)
+            
+#             else:
+#                 return Response({"error": "A user with this credential does not exists"}, status=status.HTTP_400_BAD_REQUEST)
+            
+#         else:
+#             return Response(status=status.HTTP_401_BAD_REQUEST)
