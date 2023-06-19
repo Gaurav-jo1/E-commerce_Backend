@@ -3,7 +3,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import art from "../assets/login_art.jpeg";
 import "../styles/Auth.scss";
-import { SignComponentProps } from "../components/ComponentsInterface";
+import { LoginComponentProps } from "../components/ComponentsInterface";
 
 function handleGoogleLogin(idToken?: string) {
   axios
@@ -19,12 +19,16 @@ function handleGoogleLogin(idToken?: string) {
     });
 }
 
-const Loginpage: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) => {
+const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen, setForgotOpen}) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const SignupLink = () => {
      setSignupOpen(true); setLoginOpen(false);
+    };
+
+  const ForgotLink = () => {
+      setForgotOpen(true); setLoginOpen(false);
     };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -74,7 +78,7 @@ const Loginpage: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, 
             <input type="password" placeholder="Password" title="Enter you Password"
               value={password} onChange={(e) => setPassword(e.target.value)} required />
             <div className="Auth_login_forgot-password">
-              <p>Forgot your password?</p>
+              <p onClick={ForgotLink}>Forgot your password?</p>
             </div>
             <button>Sign in</button>
           </form>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Styling
 import "../styles/HomePage.scss";
@@ -12,10 +12,26 @@ import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
 import SaleBar from "../components/SaleBar";
 import MainContent from "./MainContent";
+import ForgotPage from "./ForgotPage";
+import NewPassPage from "./NewPassPage";
+
+
 
 const HomePage: React.FC = () => {
-  const [loginOpen, setloginOpen] = useState<boolean>(false);
-  const [signupOpen, setsignupOpen] = useState<boolean>(false);
+  const [loginOpen, setLoginOpen] = useState<boolean>(false);
+  const [signupOpen, setSignupOpen] = useState<boolean>(false);
+  const [forgotOpen, setForgotOpen] = useState<boolean>(false);
+  const [newPassword, setNewPassword] = useState<boolean>(false);
+
+  useEffect(() => {
+    if ( loginOpen || signupOpen || forgotOpen ) {
+      // Disable scrolling
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Enable scrolling
+      document.body.style.overflow = 'auto';
+    }
+  }, [loginOpen, signupOpen, forgotOpen]);
 
   return (
     <div className="Homepage_div">
@@ -24,8 +40,8 @@ const HomePage: React.FC = () => {
         <div className="Homepage_backdrop-bg">
           <div className="Homepage_backdrop">
             <dialog className="Homepage_login-dialog" open>
-              <p className="Homepage_login-close"><RxCross2 onClick={() => setloginOpen(false)}/></p>
-              <LoginPage setSignupOpen={setsignupOpen} setLoginOpen={setloginOpen}/>
+              <p className="Homepage_login-close"><RxCross2 onClick={() => setLoginOpen(false)}/></p>
+              <LoginPage setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} setForgotOpen={setForgotOpen}/>
             </dialog>
           </div>
         </div>
@@ -36,15 +52,39 @@ const HomePage: React.FC = () => {
         <div className="Homepage_backdrop-bg">
           <div className="Homepage_backdrop">
             <dialog className="Homepage_login-dialog" open>
-              <p className="Homepage_login-close"><RxCross2 onClick={() => setsignupOpen(false)}/></p>
-              <SignupPage setSignupOpen={setsignupOpen} setLoginOpen={setloginOpen}/>
+              <p className="Homepage_login-close"><RxCross2 onClick={() => setSignupOpen(false)}/></p>
+              <SignupPage setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen}/>
+            </dialog>
+          </div>
+        </div>
+        }
+      </div>
+      <div className="Homepage_forgot-password">
+        {forgotOpen && 
+        <div className="Homepage_backdrop-bg">
+          <div className="Homepage_backdrop">
+            <dialog className="Homepage_login-dialog" open>
+              <p className="Homepage_login-close"><RxCross2 onClick={() => setForgotOpen(false)}/></p>
+              <ForgotPage setNewPassword={setNewPassword} setForgotOpen={setForgotOpen}/>
+            </dialog>
+          </div>
+        </div>
+        }
+      </div>
+      <div className="Homepage_forgot-password">
+        {newPassword && 
+        <div className="Homepage_backdrop-bg">
+          <div className="Homepage_backdrop">
+            <dialog className="Homepage_login-dialog" open>
+              <p className="Homepage_login-close"><RxCross2 onClick={() => setForgotOpen(false)}/></p>
+              <NewPassPage />
             </dialog>
           </div>
         </div>
         }
       </div>
       <div className="HomePage_navbar-container">
-        <Navbar setSignupOpen={setsignupOpen} setLoginOpen={setloginOpen} />
+        <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
       </div>
       <div className="HomePage_navbar-container">
         <NavPage />
