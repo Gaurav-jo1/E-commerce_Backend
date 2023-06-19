@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 // import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { NewPassComponentProps } from "../components/ComponentsInterface";
 // Styling
 import "../styles/ForgotPage.scss";
+import { GlobalValue } from "../context/GlobalValue";
 
 const ForgotPage: React.FC<NewPassComponentProps> = ({setNewPassword, setForgotOpen}) => {
-  const [userEmail, setUserEmail] = useState<string>("");
-  const [userCode, setUserCode] = useState<string>("");
-  const [userId, setUserId] = useState<string>("");
+  const { userEmail,userCode,userId, setUserEmail,setUserId,setUserCode } = useContext(GlobalValue);
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

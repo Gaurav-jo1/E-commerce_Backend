@@ -1,22 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import axios from "axios";
 
 // style
 import "../styles/NewPassPage.scss";
-import axios from "axios";
+import { GlobalValue } from "../context/GlobalValue";
 
 const NewPassPage: React.FC = () => {
   const [newPass, setNewPass] = useState<string>("");
   const [reNewPass, setReNewPass] = useState<string>("");
+  const { userEmail,userCode,userId } = useContext(GlobalValue);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    axios
-      .post("http://127.0.0.1:8000/user_login/reset_password/", {
+    axios.post("http://127.0.0.1:8000/user_login/change_password/", {
+        user_id: userId,
+        user_email: userEmail,
+        user_code :userCode,
         user_new_password: newPass,
         user_reEnter_password: reNewPass,
       })
       .then(function (response) {
-        console.log(response.status);
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);

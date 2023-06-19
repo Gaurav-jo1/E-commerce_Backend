@@ -13,7 +13,10 @@ interface CurrentUserContextType {
   callLogout: () => void;
 }
 
-export const AuthContext = createContext<CurrentUserContextType | null>(null);
+export const AuthContext = createContext<CurrentUserContextType>(
+  {} as CurrentUserContextType
+);
+
 
 type AuthProviderProps = {
   children: React.ReactNode;
