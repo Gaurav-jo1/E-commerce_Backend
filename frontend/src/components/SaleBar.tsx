@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Style
-import "../styles/SaleBar.scss";
+import "../styles/components_styles/SaleBar.scss";
 
 const SaleBar:React.FC = () => {
   return (

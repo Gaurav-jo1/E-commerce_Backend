@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Styling
-import "../styles/NavPage.scss"
+import "../styles/components_styles/NavPage.scss"
 
 const NavPage:React.FC = () => {
   return (

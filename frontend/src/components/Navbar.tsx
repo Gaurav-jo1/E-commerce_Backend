@@ -2,7 +2,7 @@ import React from "react";
 // import shoppy_logo from "../assets/logo4.png";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { SignComponentProps } from "./ComponentsInterface";
-import "../styles/Navbar.scss"
+import "../styles/components_styles/Navbar.scss"
 
 const Navbar: React.FC<SignComponentProps> = ({setSignupOpen, setLoginOpen}) => {
   return (

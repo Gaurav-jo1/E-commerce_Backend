@@ -8,10 +8,6 @@ const LinksPage:React.FC = () => {
         <Link to="/home">Home Page</Link>
         {" "}
         <Link to="/profile">Profile Page</Link>
-        {" "}
-        <Link to="/login">Login Page</Link>
-        {" "}
-        <Link to="/signup">Signup Page</Link>
     </div>
   )
 }

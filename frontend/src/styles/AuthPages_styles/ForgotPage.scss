@@ -1,0 +1,88 @@
+.ForgotPage_container {
+  height: 450px;
+  width: 800px;
+  background-color: rgba(255, 255, 255, 0.852);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ForgotPage_forgot-form {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+
+  .ForgotPage_container-text {
+    p:first-child {
+      color: rgb(91, 91, 91);
+      font-size: 38px;
+      padding-bottom: 15px;
+    }
+
+    h3 {
+      padding-bottom: 10px;
+      font-size: 18px;
+    }
+
+    p:last-child {
+      padding-bottom: 20px;
+      font-size: 14px;
+    }
+  }
+
+  .ForgotPage_container-inputs {
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    input {
+      margin-bottom: 10px;
+      width: 240px;
+      padding: 8px 10px;
+      border: 1px solid gray;
+      border-radius: 3px;
+
+      &:focus {
+        border: 1px solid rgb(131, 131, 131);
+        outline: none;
+
+        &::placeholder {
+          color: rgb(131, 131, 131);
+        }
+      }
+    }
+
+    button[type="submit"] {
+      width: 260px;
+      padding: 10px 0;
+      margin-top: 18px;
+      border-radius: 3px;
+      border: 1px solid gray;
+      background-color: rgb(26, 115, 232);
+      color: whitesmoke;
+      font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    p {
+      margin-top: 18px;
+      color: blue;
+      font-size: 15px;
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -4,9 +4,9 @@ import React from "react";
 import MainBG from "../assets/1.webp";
 
 // Styling
-import "../styles/MainContent.scss";
+import "../styles/MainPage.scss";
 
-const MainContent: React.FC = () => {
+const MainPage: React.FC = () => {
   return (
     <div className="Maincontent_container">
       <div className="Maincontent_container-textbg">
@@ -32,4 +32,4 @@ const MainContent: React.FC = () => {
   );
 };
 
-export default MainContent;
+export default MainPage;

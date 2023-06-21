@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import art from "../assets/login_art.jpeg";
-import "../styles/Auth.scss";
-import { LoginComponentProps } from "../components/ComponentsInterface";
+import login_art from "../../assets/login_art.jpeg";
+import "../../styles/AuthPages_styles/Auth.scss";
+import { LoginComponentProps } from "../../components/ComponentsInterface";
 
 function handleGoogleLogin(idToken?: string) {
   axios
@@ -88,7 +88,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
       <div className="Auth_bg_img">
         <div className="Auth_bg_img-logo"></div>
         <div className="Auth_bg_img-art" style={{width:"460px"}} >
-          <img src={art} alt="art"/>
+          <img src={login_art} alt="login_art"/>
         </div>
       </div>
     </div>

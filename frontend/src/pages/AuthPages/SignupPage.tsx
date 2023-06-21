@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import { GoogleLogin } from "@react-oauth/google";
-import { SignComponentProps } from "../components/ComponentsInterface";
-import art2 from "../assets/art2.jpeg";
+import { SignComponentProps } from "../../components/ComponentsInterface";
+import signup_art from "../../assets/signup_art.jpeg";
 import axios from "axios";
-import "../styles/Auth.scss";
+import "../../styles/AuthPages_styles/Auth.scss";
 
 function handleGoogleLogin(idToken?: string) {
   axios.post("http://127.0.0.1:8000/google_login/google/", {
@@ -89,7 +89,7 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
       <div className="Auth_bg_img">
         <div className="Auth_bg_img-logo"></div>
         <div className="Auth_bg_img-art">
-          <img src={art2} alt="art" style={{width:"460px"}} />
+          <img src={signup_art} alt="signup_art" style={{width:"460px"}} />
         </div>
       </div>
     </div>
