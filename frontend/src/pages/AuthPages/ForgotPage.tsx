@@ -1,23 +1,29 @@
 import React, { useContext } from "react";
-import axios from "axios";
-import { ForgotPassComponentProps } from "../../components/ComponentsInterface";
-import { ImKey } from "react-icons/im";
-import forgot_art from "../../assets/forgot_art.jpeg";
-// Styling
-import "../../styles/AuthPages_styles/ForgotPage.scss";
+
+// Global values 
 import { GlobalValue } from "../../context/GlobalValue";
 
-const ForgotPage: React.FC<ForgotPassComponentProps> = ({
-  setForgotOpen,
-  setLoginOpen,
-  setRecoverCode
-}) => {
+// Interface and Types
+import { ForgotPassComponentProps } from "../../components/ComponentsInterface";
+
+// React Icons
+import { ImKey } from "react-icons/im";
+
+// Media files
+import forgot_art from "../../assets/forgot_art.jpeg";
+
+// Styling
+import "../../styles/AuthPages_styles/ForgotPage.scss";
+
+import axios from "axios";
+
+const ForgotPage: React.FC<ForgotPassComponentProps> = ({ setForgotOpen, setLoginOpen, setEmailCode, }) => {
   const { userEmail, setUserEmail, setUserId } = useContext(GlobalValue);
 
+  // Function to Make Network request For Resetting Password
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    axios
-      .post("http://127.0.0.1:8000/user_login/reset_password/", {
+    axios.post("http://127.0.0.1:8000/user_login/reset_password/", {
         user_email: userEmail,
       })
       .then(function (response) {
@@ -25,7 +31,7 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
 
         if (response.status == 200) {
           setForgotOpen(false);
-          setRecoverCode(true)
+          setEmailCode(true);
         }
       })
       .catch(function (error) {
@@ -33,6 +39,7 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
       });
   };
 
+  // Function for Going back to Login Page
   const GoBack = () => {
     setForgotOpen(false);
     setLoginOpen(true);
@@ -40,31 +47,25 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
 
   return (
     <div className="ForgotPage_container">
+
+      {/* Form Container */}
       <div className="ForgotPage_forgot-form">
         <div className="ForgotPage_container-text">
-          <p>
-            {" "}
-            <ImKey />{" "}
-          </p>
+          <p> <ImKey /> </p>
           <h3>Yo! Forgot your Password?</h3>
           <p>No worries! Enter your email to reset your password.</p>
         </div>
         <div className="ForgotPage_container-inputs">
           <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              placeholder="Email"
-              title="Enter your Email Address"
-              value={userEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
-              required
-            />
+            <input type="email" placeholder="Email" title="Enter your Email Address" value={userEmail}
+                   onChange={(e) => setUserEmail(e.target.value)} required />
             <button type="submit">Send Request</button>
             <p onClick={GoBack}>Go Back</p>
           </form>
         </div>
       </div>
 
+      {/* Image Container */}
       <div className="Auth_bg_img">
         <div className="Auth_bg_img-logo"></div>
         <div className="Auth_bg_img-art" style={{ width: "460px" }}>

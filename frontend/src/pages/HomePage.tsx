@@ -17,8 +17,9 @@ import SignupPage from "./AuthPages/SignupPage";
 import MainPage from "./MainPage";
 import ForgotPage from "./AuthPages/ForgotPage";
 import NewPassPage from "./AuthPages/NewPassPage";
-import RecoverCodePage from "./AuthPages/RecoverCodePage";
+import EmailCodePage from "./AuthPages/EmailCodePage";
 
+// Interfaces and Types
 interface AuthContainerProps {
   isOpen: boolean;
   onClose: () => void;
@@ -29,18 +30,18 @@ const HomePage: React.FC = () => {
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
   const [signupOpen, setSignupOpen] = useState<boolean>(false);
   const [forgotOpen, setForgotOpen] = useState<boolean>(false);
+  const [emailCode, setEmailCode] = useState<boolean>(false);
   const [newPassword, setNewPassword] = useState<boolean>(false);
-  const [recoverCode, setRecoverCode] = useState<boolean>(false);
 
   useEffect(() => {
-    if (loginOpen || signupOpen || forgotOpen || newPassword || recoverCode) {
+    if (loginOpen || signupOpen || forgotOpen || newPassword || emailCode) {
       // Disable scrolling
       document.body.style.overflow = "hidden";
     } else {
       // Enable scrolling
       document.body.style.overflow = "auto";
     }
-  }, [loginOpen, signupOpen, forgotOpen, newPassword, recoverCode]);
+  }, [loginOpen, signupOpen, forgotOpen, newPassword, emailCode]);
 
   function AuthContainer({ isOpen, onClose, children }: AuthContainerProps) {
     if (!isOpen) {
@@ -77,7 +78,7 @@ const HomePage: React.FC = () => {
 
       {/* ForgotPage */}
       <AuthContainer isOpen={forgotOpen} onClose={() => setForgotOpen(false)}>
-        <ForgotPage setForgotOpen={setForgotOpen} setLoginOpen={setLoginOpen} setRecoverCode={setRecoverCode} />
+        <ForgotPage setForgotOpen={setForgotOpen} setLoginOpen={setLoginOpen} setEmailCode={setEmailCode} />
       </AuthContainer>
 
       {/* NewPassPage */}
@@ -85,9 +86,9 @@ const HomePage: React.FC = () => {
         <NewPassPage />
       </AuthContainer>
 
-      {/* RecoverCodePage */}
-      <AuthContainer isOpen={recoverCode} onClose={() => setRecoverCode(false)}>
-        <RecoverCodePage setForgotOpen={setForgotOpen} setNewPassword={setNewPassword} />
+      {/* EmailCodePage */}
+      <AuthContainer isOpen={emailCode} onClose={() => setEmailCode(false)}>
+        <EmailCodePage setNewPassword={setNewPassword} setEmailCode={setEmailCode}/>
       </AuthContainer>
 
       <div className="HomePage_navbar-container">

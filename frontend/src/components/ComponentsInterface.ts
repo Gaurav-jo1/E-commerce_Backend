@@ -10,11 +10,11 @@ export interface LoginComponentProps extends SignComponentProps {
 export interface ForgotPassComponentProps {
   setForgotOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setRecoverCode: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface RecoverCodePassComponentProps {
+export interface EmailCodeComponentProps {
   setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  setForgotOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
