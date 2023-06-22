@@ -30,6 +30,8 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [wrongC, setWrongC] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const SigninLink = () => {
     setSignupOpen(false); setLoginOpen(true);
@@ -37,6 +39,7 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true)
     axios.post("http://127.0.0.1:8000/user_login/register/", {
       username: username,
       email: email,
@@ -86,7 +89,16 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
 
             <div className="Auth_login_forgot-password"></div>
 
-            <button>Sign up</button>
+            {isLoading ? (
+              <button disabled={true} type="submit">
+                <>
+                  Creating... &nbsp;
+                  <span className="loading-circle"></span>
+                </>
+              </button>
+            ) : (
+              <button type="submit">Sign up</button>
+            )}
           </form>
         </div>
       </div>

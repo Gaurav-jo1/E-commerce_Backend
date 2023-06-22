@@ -49,10 +49,12 @@
   }
 
   .NewPassPage_container-inputs {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
 
     input {
       margin-bottom: 10px;
@@ -80,6 +82,8 @@
       background-color: rgb(26, 115, 232);
       color: whitesmoke;
       font-weight: bold;
+      display: flex;
+      justify-content: center;
 
       &:hover {
         cursor: pointer;

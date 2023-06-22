@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 
-// Global values 
+// Global values
 import { GlobalValue } from "../../context/GlobalValue";
 
 // Interface and Types
@@ -17,12 +17,22 @@ import "../../styles/AuthPages_styles/ForgotPage.scss";
 
 import axios from "axios";
 
-const ForgotPage: React.FC<ForgotPassComponentProps> = ({ setForgotOpen, setLoginOpen, setEmailCode, }) => {
+
+const ForgotPage: React.FC<ForgotPassComponentProps> = ({
+  setForgotOpen,
+  setLoginOpen,
+  setEmailCode,
+}) => {
+  const [noEmail, setNoEmail] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const { userEmail, setUserEmail, setUserId } = useContext(GlobalValue);
 
   // Function to Make Network request For Resetting Password
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+
     axios.post("http://127.0.0.1:8000/user_login/reset_password/", {
         user_email: userEmail,
       })
@@ -32,11 +42,16 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({ setForgotOpen, setLogi
         if (response.status == 200) {
           setForgotOpen(false);
           setEmailCode(true);
+          setIsLoading(false)
         }
       })
       .catch(function (error) {
-        console.log(error);
-      });
+        if (error.response.status == 404) {
+          setNoEmail(true)
+          setIsLoading(false)
+        }
+        setIsLoading(false)
+      })
   };
 
   // Function for Going back to Login Page
@@ -47,19 +62,45 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({ setForgotOpen, setLogi
 
   return (
     <div className="ForgotPage_container">
-
       {/* Form Container */}
       <div className="ForgotPage_forgot-form">
+        {noEmail ? (
+          <div className="ForgotPage_email-match">
+            <span>"User with this email does not exist"</span>
+          </div>
+        ) : (
+          ""
+        )}
         <div className="ForgotPage_container-text">
-          <p> <ImKey /> </p>
+          <p>
+            {" "}
+            <ImKey />{" "}
+          </p>
           <h3>Yo! Forgot your Password?</h3>
           <p>No worries! Enter your email to reset your password.</p>
         </div>
         <div className="ForgotPage_container-inputs">
           <form onSubmit={handleSubmit}>
-            <input type="email" placeholder="Email" title="Enter your Email Address" value={userEmail}
-                   onChange={(e) => setUserEmail(e.target.value)} required />
-            <button type="submit">Send Request</button>
+            <input
+              type="email"
+              placeholder="Email"
+              title="Enter your Email Address"
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
+              required
+            />
+
+            {isLoading ? (
+              <button disabled={true} type="submit">
+                <>
+                  Sending... &nbsp;
+                  <span className="loading-circle"></span>
+                </>
+              </button>
+            ) : (
+              <button type="submit">Send Request</button>
+            )}
+
             <p onClick={GoBack}>Go Back</p>
           </form>
         </div>

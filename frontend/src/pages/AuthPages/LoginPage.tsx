@@ -32,6 +32,8 @@ function handleGoogleLogin(idToken?: string) {
 const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen, setForgotOpen}) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [wrongC, setWrongC] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {passChanged} = useContext(GlobalValue)
 
@@ -45,15 +47,23 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true)
+
     axios.post("http://127.0.0.1:8000/user_login/api/token/", {
       username: username, password: password,
     })
     .then(function (response) {
+      setIsLoading(false)
       console.log("Response from LoginPage: ",response.data);
       localStorage.setItem("authTokens", JSON.stringify(response.data));
     })
     .catch(function (error) {
       console.log(error);
+      if (error.response.status == 401) {
+        setWrongC(true)
+        setIsLoading(false)
+      }
+      setIsLoading(false)
     });
   }
 
@@ -63,7 +73,11 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
 
         { passChanged ?
           <div className="LoginPage_password-changed">
-            <span>Password Changed Successfully &nbsp; <p>✅</p> </span>
+            <span>"Password Changed Successfully" &nbsp; <p>✅</p> </span>
+          </div> : "" }
+        { wrongC ?
+          <div className="LoginPage_password-wrong">
+            <span>"The credentials you entered are incorrect"</span>
           </div> : "" }
 
         <div className="Auth_login-text">
@@ -98,7 +112,17 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
             <div className="Auth_login_forgot-password">
               <p onClick={ForgotLink}>Forgot your password?</p>
             </div>
-            <button>Sign in</button>
+
+            {isLoading ? (
+              <button disabled={true} type="submit">
+                <>
+                  Signing... &nbsp;
+                  <span className="loading-circle"></span>
+                </>
+              </button>
+            ) : (
+              <button type="submit">Sign in</button>
+            )}
           </form>
         </div>
       </div>

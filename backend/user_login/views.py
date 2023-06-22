@@ -26,26 +26,28 @@ class ResetPassword(APIView):
         if user_email:
             # Check if a user with the same email address already exists
             email_exists = User.objects.filter(email=user_email).first()
-            cache_key = f"user_variable_{email_exists.id}"
-            if cache.has_key(cache_key):
-                cache.delete(cache_key)
-                cache.set(cache_key, random_number_str, 3600)
-            else:
-                cache.set(cache_key, random_number_str, 3600)
 
             if email_exists:
+                cache_key = f"user_variable_{email_exists.id}"
+                if cache.has_key(cache_key):
+                    cache.delete(cache_key)
+                    cache.set(cache_key, random_number_str, 3600)
+                else:
+                    cache.set(cache_key, random_number_str, 3600)
+
                 send_mail(
                     subject="Shoppy recovery code",
                     message=email_message,
-                    from_email= os.environ.get('EMAIL_HOST_USER'),
-                    recipient_list=[user_email])
+                    from_email=os.environ.get("EMAIL_HOST_USER"),
+                    recipient_list=[user_email],
+                )
 
                 return Response({"user_id": email_exists.id}, status.HTTP_200_OK)
 
             else:
                 return Response(
                     {"error": "A user with this credential does not exists"},
-                    status=status.HTTP_400_BAD_REQUEST,
+                    status=status.HTTP_404_NOT_FOUND,
                 )
 
         else:
@@ -95,10 +97,12 @@ class UserNewPassword(APIView):
                     user_email_exists.set_password(user_new_password)
                     user_email_exists.save()
 
-                return Response(
-                    {"Success": "User successfuly changed the password"},
-                    status.HTTP_200_OK,
-                )
+                    return Response(
+                        {"Success": "User successfuly changed the password"},
+                        status.HTTP_200_OK,
+                    )
+                else:
+                    return Response(status=401)
 
 
 class RegisterView(APIView):

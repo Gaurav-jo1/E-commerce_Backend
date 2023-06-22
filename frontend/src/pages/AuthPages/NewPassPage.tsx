@@ -21,10 +21,13 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOp
   const [newPass, setNewPass] = useState<string>("");
   const [reNewPass, setReNewPass] = useState<string>("");
   const [passNot, setPassNot] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userEmail, userCode, userId, setUserCode, setUserEmail, setUserId, setPassChanged } = useContext(GlobalValue);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+
     if (newPass == reNewPass) {
       axios.post("http://127.0.0.1:8000/user_login/change_password/", {
           user_id: userId,
@@ -43,15 +46,23 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOp
             setUserCode("");
             setUserEmail("");
             setUserId("");
+            setIsLoading(false);
+
           }
         })
         .catch(function (error) {
-          console.log(error);
+          if (error.response.status == 404) {
+            setPassNot(true)
+            setIsLoading(false)
+          }
+          setIsLoading(false);
         });
     }
 
     else {
       setPassNot(true)
+      setIsLoading(false);
+
       console.log("Password Does not Match");
     }
   };
@@ -61,7 +72,7 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOp
       <div className="NewPassPage_container-form">
           { passNot ?
             <div className="NewPassPage_password-match">
-              <span>The password you entered does not match</span>
+              <span>"The password you entered does not match"</span>
             </div> : "" }
 
         <div className="NewPassPage_container-text">
@@ -92,7 +103,17 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOp
               required
             />
 
-            <button type="submit">Submit</button>
+            {isLoading ? (
+              <button disabled={true} type="submit">
+                <>
+                  Sending... &nbsp;
+                  <span className="loading-circle"></span>
+                </>
+              </button>
+            ) : (
+              <button type="submit">Send Request</button>
+            )}
+
           </form>
         </div>
       </div>

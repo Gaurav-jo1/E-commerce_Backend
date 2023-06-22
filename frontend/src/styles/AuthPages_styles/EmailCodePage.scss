@@ -17,6 +17,18 @@
   text-align: center;
   width: 100%;
 
+  .Emailcode_recover-match {
+    padding-bottom: 20px;
+  
+    span {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      color: red;
+      font-size: 15px;
+    }
+  }
+
   form {
     display: flex;
     flex-direction: column;
@@ -51,6 +63,8 @@
       background-color: rgb(26, 115, 232);
       color: whitesmoke;
       font-weight: bold;
+      display: flex;
+      justify-content: center;
 
       &:hover {
         cursor: pointer;

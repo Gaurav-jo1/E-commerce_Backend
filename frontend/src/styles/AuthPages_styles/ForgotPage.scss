@@ -17,6 +17,18 @@
   text-align: center;
   width: 100%;
 
+  .ForgotPage_email-match {
+    padding-bottom: 20px;
+  
+    span {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      color: red;
+      font-size: 15px;
+    }
+  }
+
   .ForgotPage_container-text {
     p:first-child {
       color: rgb(91, 91, 91);
@@ -68,6 +80,8 @@
       background-color: rgb(26, 115, 232);
       color: whitesmoke;
       font-weight: bold;
+      display: flex;
+      justify-content: center;
 
       &:hover {
         cursor: pointer;

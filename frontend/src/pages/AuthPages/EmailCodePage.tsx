@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, {useState, useContext } from "react";
 
 // Styling
 import "../../styles/AuthPages_styles/EmailCodePage.scss";
@@ -19,10 +19,15 @@ import axios from "axios";
 
 const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, setEmailCode,}) => {
 
+  const [noCode, setNoCode] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const { userCode, userId, setUserCode, userEmail } = useContext(GlobalValue);
 
   const handleSubmitCode = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true)
+
     axios.post("http://127.0.0.1:8000/user_login/reset_code/", {
         user_id: userId,
         user_code: userCode,
@@ -31,11 +36,17 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, se
         if (response.status == 200) {
           setEmailCode(false);
           setNewPassword(true);
+          setIsLoading(false)
         }
         console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
+        if (error.response.status == 401) {
+          setNoCode(true)
+          setIsLoading(false)
+        }
+        setIsLoading(false)
       });
   };
 
@@ -44,6 +55,13 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, se
 
       {/* Form Container */}
       <div className="Emailcode_recover-form">
+        {noCode ? (
+            <div className="Emailcode_recover-match">
+              <span>"The code you provided is incorrect."</span>
+            </div>
+          ) : (
+            ""
+          )}
         <div className="Emailcode_container-text">
           <p> <MdMarkEmailUnread /> </p>
           <h3>Password Recovery</h3>
@@ -53,7 +71,17 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, se
         <form onSubmit={handleSubmitCode}>
           <input type="number" placeholder="Enter Recovery Code" title="Enter your Code" 
             value={userCode} onChange={(e) => setUserCode(e.target.value)} required />
-          <button type="submit">Submit</button>
+
+            {isLoading ? (
+              <button disabled={true} type="submit">
+                <>
+                  Submitting... &nbsp;
+                  <span className="loading-circle"></span>
+                </>
+              </button>
+            ) : (
+              <button type="submit">Submit</button>
+            )}
         </form>
       </div>
 
