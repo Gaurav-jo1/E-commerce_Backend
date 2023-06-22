@@ -1,15 +1,21 @@
 import os
 import random
+
+# Django 
+from django.contrib.auth.models import User
+from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
+from django.core.cache import cache
+from django.core.mail import EmailMultiAlternatives
+
+# Rest Framework
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework_simplejwt.tokens import RefreshToken
-from django.contrib.auth.models import User
-from django.db import IntegrityError
 from rest_framework import status
-from django.core.exceptions import ObjectDoesNotExist
-from django.core.mail import send_mail
-from django.core.cache import cache
+from django.template.loader import render_to_string
 
 # Create your views here.
 
@@ -22,6 +28,10 @@ class ResetPassword(APIView):
             user_email = request.data.get("user_email")
             random_number = random.randint(100000, 999999)
             random_number_str = str(random_number)
+
+            # Email Content
+            first_three_numbers,last_three_numbers = random_number_str[:3], random_number_str[-3:]
+            html_message = render_to_string('email_template.html', {'code1': first_three_numbers, 'code2': last_three_numbers, 'code': random_number_str})
             email_message = f"Here is your recovery code {random_number} for {user_email} \n The code is valid for only 1 hour"
 
             # Check if email information is present
@@ -30,6 +40,7 @@ class ResetPassword(APIView):
                 email_exists = User.objects.filter(email=user_email).first()
 
                 if email_exists:
+
                     cache_key = f"user_variable_{email_exists.id}"
                     if cache.has_key(cache_key):
                         cache.delete(cache_key)
@@ -40,8 +51,9 @@ class ResetPassword(APIView):
                     send_mail(
                         subject="Shoppy recovery code",
                         message=email_message,
-                        from_email=os.environ.get("EMAIL_HOST_USER"),
+                        from_email='Shoppy Code <{}>'.format(os.environ.get("EMAIL_HOST_USER")),
                         recipient_list=[user_email],
+                        html_message=html_message
                     )
 
                     return Response({"user_id": email_exists.id}, status.HTTP_200_OK)
