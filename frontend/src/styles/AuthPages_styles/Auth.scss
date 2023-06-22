@@ -18,6 +18,22 @@
   justify-content: space-between;
 }
 
+.LoginPage_password-changed {
+  padding-bottom: 15px;
+  
+  span {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    color: green;
+    font-size: 14px;
+  }
+
+  p {
+    font-size: 11px;
+  }
+}
+
 .Auth_login-form {
   padding: 25px;
   display: flex;

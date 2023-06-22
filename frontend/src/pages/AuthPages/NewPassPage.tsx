@@ -20,8 +20,8 @@ import axios from "axios";
 const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOpen}) => {
   const [newPass, setNewPass] = useState<string>("");
   const [reNewPass, setReNewPass] = useState<string>("");
-  const { userEmail, userCode, userId, setUserCode, setUserEmail, setUserId } =
-    useContext(GlobalValue);
+  const [passNot, setPassNot] = useState<boolean>(false);
+  const { userEmail, userCode, userId, setUserCode, setUserEmail, setUserId, setPassChanged } = useContext(GlobalValue);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,6 +39,7 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOp
           if (response.status == 200) {
             setNewPassword(false);
             setLoginOpen(true);
+            setPassChanged(true);
             setUserCode("");
             setUserEmail("");
             setUserId("");
@@ -50,6 +51,7 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOp
     }
 
     else {
+      setPassNot(true)
       console.log("Password Does not Match");
     }
   };
@@ -57,10 +59,14 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOp
   return (
     <div className="NewPassPage_container">
       <div className="NewPassPage_container-form">
+          { passNot ?
+            <div className="NewPassPage_password-match">
+              <span>The password you entered does not match</span>
+            </div> : "" }
+
         <div className="NewPassPage_container-text">
           <p>
-            {" "}
-            <BsFillUnlockFill />{" "}
+            <BsFillUnlockFill />
           </p>
           <h3>Unlock the Possibilities</h3>
           <p>

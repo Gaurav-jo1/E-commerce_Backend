@@ -18,6 +18,18 @@
   text-align: center;
   width: 100%;
 
+  .NewPassPage_password-match {
+    padding-bottom: 20px;
+  
+    span {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      color: red;
+      font-size: 15px;
+    }
+  }
+
   .NewPassPage_container-text {
     padding-bottom: 20px;
     p:first-child {

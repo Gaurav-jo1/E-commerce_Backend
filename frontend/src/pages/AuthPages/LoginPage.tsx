@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 // Styling
 import "../../styles/AuthPages_styles/Auth.scss";
@@ -13,6 +13,7 @@ import login_art from "../../assets/login_art.jpeg";
 import { LoginComponentProps } from "../../components/ComponentsInterface";
 
 import axios from "axios";
+import { GlobalValue } from "../../context/GlobalValue";
 
 function handleGoogleLogin(idToken?: string) {
   axios
@@ -31,6 +32,8 @@ function handleGoogleLogin(idToken?: string) {
 const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen, setForgotOpen}) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const {passChanged} = useContext(GlobalValue)
 
   const SignupLink = () => {
      setSignupOpen(true); setLoginOpen(false);
@@ -57,6 +60,12 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
   return (
     <div className="LoginPage">
       <div className="Auth_login-form">
+
+        { passChanged ?
+          <div className="LoginPage_password-changed">
+            <span>Password Changed Successfully &nbsp; <p>✅</p> </span>
+          </div> : "" }
+
         <div className="Auth_login-text">
           <h4>Welcome back to Shoppy!</h4>
           <h4>Please sign in</h4>
