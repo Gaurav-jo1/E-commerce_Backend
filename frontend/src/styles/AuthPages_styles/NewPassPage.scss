@@ -8,3 +8,72 @@
   justify-content: center;
   align-items: center;
 }
+
+.NewPassPage_container-form {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+
+  .NewPassPage_container-text {
+    padding-bottom: 20px;
+    p:first-child {
+      color: blue;
+      font-size: 45px;
+      padding-bottom: 25px;
+    }
+
+    h3 {
+      padding-bottom: 8px;
+    }
+
+    p:last-child {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  .NewPassPage_container-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    input {
+      margin-bottom: 10px;
+      width: 240px;
+      padding: 8px 10px;
+      border: 1px solid gray;
+      border-radius: 3px;
+
+      &:focus {
+        border: 1px solid rgb(131, 131, 131);
+        outline: none;
+
+        &::placeholder {
+          color: rgb(131, 131, 131);
+        }
+      }
+    }
+
+    button[type="submit"] {
+      width: 260px;
+      padding: 10px 0;
+      margin-top: 18px;
+      border-radius: 3px;
+      border: 1px solid gray;
+      background-color: rgb(26, 115, 232);
+      color: whitesmoke;
+      font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+
+}

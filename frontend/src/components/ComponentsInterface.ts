@@ -18,3 +18,8 @@ export interface EmailCodeComponentProps {
   setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface NewPassComponentProps {
+  setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+

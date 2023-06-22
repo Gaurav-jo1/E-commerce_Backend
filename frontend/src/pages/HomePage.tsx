@@ -81,14 +81,14 @@ const HomePage: React.FC = () => {
         <ForgotPage setForgotOpen={setForgotOpen} setLoginOpen={setLoginOpen} setEmailCode={setEmailCode} />
       </AuthContainer>
 
-      {/* NewPassPage */}
-      <AuthContainer isOpen={newPassword} onClose={() => setNewPassword(false)}>
-        <NewPassPage />
-      </AuthContainer>
-
       {/* EmailCodePage */}
       <AuthContainer isOpen={emailCode} onClose={() => setEmailCode(false)}>
         <EmailCodePage setNewPassword={setNewPassword} setEmailCode={setEmailCode}/>
+      </AuthContainer>
+
+      {/* NewPassPage */}
+      <AuthContainer isOpen={newPassword} onClose={() => setNewPassword(false)}>
+        <NewPassPage setNewPassword={setNewPassword} setLoginOpen={setLoginOpen}/>
       </AuthContainer>
 
       <div className="HomePage_navbar-container">
