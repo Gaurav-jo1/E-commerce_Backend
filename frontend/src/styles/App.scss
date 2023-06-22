@@ -1,10 +1,9 @@
 .Auth_bg_img {
-    .Auth_bg_img-art {
+  .Auth_bg_img-art {
+    height: 100%;
+    img {
       height: 100%;
-      img {
-        height: 100%;
-        width: 100%;
-      }
+      width: 100%;
     }
   }
-  
+}

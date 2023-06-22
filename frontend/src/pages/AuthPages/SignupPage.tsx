@@ -1,9 +1,18 @@
 import React, {useState} from "react";
-import { GoogleLogin } from "@react-oauth/google";
-import { SignComponentProps } from "../../components/ComponentsInterface";
-import signup_art from "../../assets/signup_art.jpeg";
-import axios from "axios";
+
+// Styling
 import "../../styles/AuthPages_styles/Auth.scss";
+
+// Google Sign Up
+import { GoogleLogin } from "@react-oauth/google";
+
+// Interface and Types
+import { SignComponentProps } from "../../components/ComponentsInterface";
+
+// Media
+import signup_art from "../../assets/signup_art.jpeg";
+
+import axios from "axios";
 
 function handleGoogleLogin(idToken?: string) {
   axios.post("http://127.0.0.1:8000/google_login/google/", {
@@ -43,6 +52,8 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
 
   return (
     <div className="SignupPage">
+
+      {/* Form Container */}
       <div className="Auth_login-form">
         <div className="Auth_login-text">
           <h4>Sign up with Shoppy for free</h4>
@@ -52,18 +63,12 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
           </div>
         </div>
         <div className="Auth_google-div">
-          <GoogleLogin
-            onSuccess={(credentialResponse) => {
+          <GoogleLogin onSuccess={(credentialResponse) => {
               handleGoogleLogin(credentialResponse.credential);
             }}
-            onError={() => {
-              console.log("Login Failed");
-            }}
-            type="standard"
-            text="continue_with"
-            logo_alignment="left"
-            width="260px"
-          />
+            onError={() => { console.log("Login Failed"); }}
+            type="standard" text="continue_with" logo_alignment="left"
+            width="260px" />
         </div>
         <div className="Auth_login_form-divider">
           <p>or</p>
@@ -86,6 +91,7 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
         </div>
       </div>
 
+      {/* Image Container */}
       <div className="Auth_bg_img">
         <div className="Auth_bg_img-logo"></div>
         <div className="Auth_bg_img-art">

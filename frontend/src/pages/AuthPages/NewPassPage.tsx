@@ -1,9 +1,12 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
 
 // style
 import "../../styles/AuthPages_styles/NewPassPage.scss";
+
+// Global Values
 import { GlobalValue } from "../../context/GlobalValue";
+
+import axios from "axios";
 
 const NewPassPage: React.FC = () => {
   const [newPass, setNewPass] = useState<string>("");

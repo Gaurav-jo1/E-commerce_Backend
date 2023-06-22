@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+
+// Google Auth
 import { GoogleOAuthProvider } from "@react-oauth/google";
 // Pages
 import HomePage from "./pages/HomePage";

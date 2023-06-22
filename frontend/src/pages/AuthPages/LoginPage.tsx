@@ -1,9 +1,18 @@
 import React, { useState } from "react";
-import { GoogleLogin } from "@react-oauth/google";
-import axios from "axios";
-import login_art from "../../assets/login_art.jpeg";
+
+// Styling
 import "../../styles/AuthPages_styles/Auth.scss";
+
+// Google Sign In
+import { GoogleLogin } from "@react-oauth/google";
+
+// Media
+import login_art from "../../assets/login_art.jpeg";
+
+// Interface and Types
 import { LoginComponentProps } from "../../components/ComponentsInterface";
+
+import axios from "axios";
 
 function handleGoogleLogin(idToken?: string) {
   axios
