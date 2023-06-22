@@ -17,7 +17,6 @@ import "../../styles/AuthPages_styles/ForgotPage.scss";
 
 import axios from "axios";
 
-
 const ForgotPage: React.FC<ForgotPassComponentProps> = ({
   setForgotOpen,
   setLoginOpen,
@@ -25,6 +24,7 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
 }) => {
   const [noEmail, setNoEmail] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>("");
 
   const { userEmail, setUserEmail, setUserId } = useContext(GlobalValue);
 
@@ -33,7 +33,8 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
     e.preventDefault();
     setIsLoading(true);
 
-    axios.post("http://127.0.0.1:8000/user_login/reset_password/", {
+    axios
+      .post("http://127.0.0.1:8000/user_login/reset_password/", {
         user_email: userEmail,
       })
       .then(function (response) {
@@ -42,16 +43,14 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
         if (response.status == 200) {
           setForgotOpen(false);
           setEmailCode(true);
-          setIsLoading(false)
+          setIsLoading(false);
         }
       })
       .catch(function (error) {
-        if (error.response.status == 404) {
-          setNoEmail(true)
-          setIsLoading(false)
-        }
-        setIsLoading(false)
-      })
+        setErrorText(error.response.data.error);
+        setNoEmail(true);
+        setIsLoading(false);
+      });
   };
 
   // Function for Going back to Login Page
@@ -66,7 +65,7 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
       <div className="ForgotPage_forgot-form">
         {noEmail ? (
           <div className="ForgotPage_email-match">
-            <span>"User with this email does not exist"</span>
+            <span>"{errorText}"</span>
           </div>
         ) : (
           ""

@@ -30,7 +30,7 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [wrongC, setWrongC] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const SigninLink = () => {
@@ -47,9 +47,11 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
     })
     .then(function (response) {
       console.log(response.data);
+      setIsLoading(false)
     })
     .catch(function (error) {
-      console.log(error);
+      setErrorText(error.response.data.error);
+      setIsLoading(false)
     });
   }
 
@@ -58,6 +60,13 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
 
       {/* Form Container */}
       <div className="Auth_login-form">
+        {errorText ? (
+          <div className="LoginPage_password-wrong">
+            <span>"{errorText}"</span>
+          </div>
+        ) : (
+          ""
+        )}
         <div className="Auth_login-text">
           <h4>Sign up with Shoppy for free</h4>
           <div className="Auth_sign_in_or_up-link">

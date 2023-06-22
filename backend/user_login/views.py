@@ -161,7 +161,7 @@ class RegisterView(APIView):
                 if user_exists:
                     # If a user with this email already exists, return an error message
                     return Response(
-                        {"error": "A user with this credential already exists"},
+                        {"error": "User with this credential already exists"},
                         status=status.HTTP_400_BAD_REQUEST,
                     )
                 else:

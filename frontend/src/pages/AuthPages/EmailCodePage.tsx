@@ -21,6 +21,7 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, se
 
   const [noCode, setNoCode] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>("");
 
   const { userCode, userId, setUserCode, userEmail } = useContext(GlobalValue);
 
@@ -41,12 +42,10 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, se
         console.log(response.data);
       })
       .catch(function (error) {
-        console.log(error);
-        if (error.response.status == 401) {
-          setNoCode(true)
-          setIsLoading(false)
-        }
-        setIsLoading(false)
+        console.log(error)
+        setErrorText(error.response.data.error);
+        setNoCode(true);
+        setIsLoading(false);
       });
   };
 
@@ -57,7 +56,7 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, se
       <div className="Emailcode_recover-form">
         {noCode ? (
             <div className="Emailcode_recover-match">
-              <span>"The code you provided is incorrect."</span>
+              <span>"{errorText}"</span>
             </div>
           ) : (
             ""
