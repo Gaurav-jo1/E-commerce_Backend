@@ -35,9 +35,9 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
   const [wrongC, setWrongC] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const field_state = username.includes("@") ? true : false;
+  const field_state = username.includes("@") && ".com" ? true : false;
 
-  const {passChanged} = useContext(GlobalValue)
+  const {passChanged, userCreated} = useContext(GlobalValue)
 
   const SignupLink = () => {
      setSignupOpen(true); setLoginOpen(false);
@@ -47,9 +47,9 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
       setForgotOpen(true); setLoginOpen(false);
     };
 
-    const postFunction = (field_name: string, password: string) => {
+    const postFunction = (field_name: string) => {
     axios.post("http://127.0.0.1:8000/user_login/api/token/", {
-      [field_name]: username, password:password
+      [field_name]: username.toLowerCase(), password:password
     })
     .then(function (response) {
       setIsLoading(false)
@@ -58,10 +58,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
     })
     .catch(function (error) {
       console.log(error);
-      if (error.response.status == 401) {
-        setWrongC(true)
-        setIsLoading(false)
-      }
+      setWrongC(true)
       setIsLoading(false)
     });
 
@@ -72,9 +69,9 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
     setIsLoading(true);
 
     if (field_state) {
-      postFunction("email", password);
+      postFunction("email");
     } else {
-      postFunction("username", password);
+      postFunction("username");
     }
   }
 
@@ -85,6 +82,11 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
         { passChanged ?
           <div className="LoginPage_password-changed">
             <span>"Password Changed Successfully" &nbsp; <p>✅</p> </span>
+          </div> : "" }
+
+        { userCreated ?
+          <div className="LoginPage_password-changed">
+            <span>"User Created Successfully" &nbsp; <p>✅</p> </span>
           </div> : "" }
         { wrongC ?
           <div className="LoginPage_password-wrong">

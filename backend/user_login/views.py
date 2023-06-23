@@ -23,10 +23,10 @@ class UserLoginView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
+        username = request.data.get("username")
+        email = request.data.get("email")
+        password = request.data.get("password")
         try:
-            username = request.data.get("username")
-            email = request.data.get("email")
-            password = request.data.get("password")
 
             if username and password:
                 user = authenticate(username=username, password=password)
@@ -101,6 +101,7 @@ class RegisterView(APIView):
                         {"error": "User with this credential already exists"},
                         status=status.HTTP_400_BAD_REQUEST,
                     )
+                    
                 else:
                     # If the user does not already exist, create a new user and generate access and refresh tokens
                     user = User.objects.create_user(

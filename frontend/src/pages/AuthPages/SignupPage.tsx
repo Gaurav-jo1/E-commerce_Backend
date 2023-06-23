@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 
 // Styling
 import "../../styles/AuthPages_styles/Auth.scss";
@@ -11,6 +11,9 @@ import { SignComponentProps } from "../../components/ComponentsInterface";
 
 // Media
 import signup_art from "../../assets/signup_art.jpeg";
+
+// Global values
+import { GlobalValue } from "../../context/GlobalValue";
 
 import axios from "axios";
 
@@ -33,6 +36,8 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
   const [errorText, setErrorText] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const {setUserCreated} = useContext(GlobalValue)
+
   const SigninLink = () => {
     setSignupOpen(false); setLoginOpen(true);
   }
@@ -41,13 +46,18 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
     e.preventDefault();
     setIsLoading(true)
     axios.post("http://127.0.0.1:8000/user_login/register/", {
-      username: username,
+      username: username.toLowerCase(),
       email: email,
       password: password,
     })
     .then(function (response) {
       console.log(response.data);
       setIsLoading(false)
+
+      if (response.status == 200) {
+        setUserCreated(true)
+        SigninLink()
+      }
     })
     .catch(function (error) {
       setErrorText(error.response.data.error);
