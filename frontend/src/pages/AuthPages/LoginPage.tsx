@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState,useContext } from "react";
 
 // Styling
 import "../../styles/AuthPages_styles/Auth.scss";
@@ -35,6 +35,8 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
   const [wrongC, setWrongC] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const field_state = username.includes("@") ? true : false;
+
   const {passChanged} = useContext(GlobalValue)
 
   const SignupLink = () => {
@@ -45,12 +47,9 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
       setForgotOpen(true); setLoginOpen(false);
     };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true)
-
+    const postFunction = (field_name: string, password: string) => {
     axios.post("http://127.0.0.1:8000/user_login/api/token/", {
-      username: username, password: password,
+      [field_name]: username, password:password
     })
     .then(function (response) {
       setIsLoading(false)
@@ -65,6 +64,18 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
       }
       setIsLoading(false)
     });
+
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    if (field_state) {
+      postFunction("email", password);
+    } else {
+      postFunction("username", password);
+    }
   }
 
   return (
@@ -105,7 +116,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
         </div>
         <div className="Auth_login-inputs">
           <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Username" title="Enter you Username"
+            <input type="text" placeholder="Email or Username" title="Enter you Email or Username"
              value={username} onChange={(e) => setUsername(e.target.value)} required />
             <input type="password" placeholder="Password" title="Enter you Password"
               value={password} onChange={(e) => setPassword(e.target.value)} required />
