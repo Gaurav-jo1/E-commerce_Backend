@@ -1,13 +1,13 @@
 import os
 import random
 
-# Django 
+# Django
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.core.cache import cache
-from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 
 # Rest Framework
 from rest_framework.views import APIView
@@ -15,9 +15,123 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
-from django.template.loader import render_to_string
+from django.contrib.auth import authenticate
+
 
 # Create your views here.
+class UserLoginView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        try:
+            username = request.data.get("username")
+            email = request.data.get("email")
+            password = request.data.get("password")
+
+            if username and password:
+                user = authenticate(username=username, password=password)
+                if user is not None:
+
+                    refresh = RefreshToken.for_user(user)
+
+                    return Response(
+                        {
+                            "refresh": str(refresh),
+                            "access": str(refresh.access_token),
+                        },
+                        status.HTTP_200_OK,
+                    )
+
+                else:
+                    return Response(
+                        {"error": "Credentials are invalid"},
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
+
+            elif email and password:
+                user = User.objects.get(email=email)
+                user_username = user.username
+                valid_user = authenticate(username=user_username, password=password)
+
+                if valid_user is not None:
+
+                    refresh = RefreshToken.for_user(valid_user)
+
+                    return Response(
+                        {
+                            "refresh": str(refresh),
+                            "access": str(refresh.access_token),
+                        },
+                        status.HTTP_200_OK,
+                    )
+                else:
+                    return Response(
+                        {"error": "Credentials are invalid"},
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
+            else:
+                return Response(
+                    {"error": "Missing credentials "},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+        except Exception as e:
+            return Response(
+                {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class RegisterView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request, format=None):
+        # Extract user information from the request data
+        username = request.data.get("username")
+        email = request.data.get("email")
+        password = request.data.get("password")
+
+        try:
+            # Check if all required information is present
+            if username and email and password:
+                # Check if a user with the same email address already exists
+                user_exists = User.objects.filter(email=email).first()
+
+                if user_exists:
+                    # If a user with this email already exists, return an error message
+                    return Response(
+                        {"error": "User with this credential already exists"},
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
+                else:
+                    # If the user does not already exist, create a new user and generate access and refresh tokens
+                    user = User.objects.create_user(
+                        username, email=email, password=password
+                    )
+
+                    try:
+                        user.save()
+                    except IntegrityError as e:
+                        # If an IntegrityError is raised, handle it by printing an error message
+                        print(f"Error saving user: {e}")
+                    else:
+                        # If the save operation completes successfully, refresh the user's information
+                        user.refresh_from_db()
+                        # Generate refresh and access tokens for the new user
+                        refresh = RefreshToken.for_user(user)
+                        return Response(
+                            {
+                                "refresh": str(refresh),
+                                "access": str(refresh.access_token),
+                            },
+                            status.HTTP_200_OK,
+                        )
+            else:
+                return Response(
+                    {"error": "Missing credentials "},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+        except ValueError:
+            # If a ValueError is raised, return an error response with a 401 status code
+            return Response(status=401)
 
 
 class ResetPassword(APIView):
@@ -30,8 +144,18 @@ class ResetPassword(APIView):
             random_number_str = str(random_number)
 
             # Email Content
-            first_three_numbers,last_three_numbers = random_number_str[:3], random_number_str[-3:]
-            html_message = render_to_string('email_template.html', {'code1': first_three_numbers, 'code2': last_three_numbers, 'code': random_number_str})
+            first_three_numbers, last_three_numbers = (
+                random_number_str[:3],
+                random_number_str[-3:],
+            )
+            html_message = render_to_string(
+                "email_template.html",
+                {
+                    "code1": first_three_numbers,
+                    "code2": last_three_numbers,
+                    "code": random_number_str,
+                },
+            )
             email_message = f"Here is your recovery code {random_number} for {user_email} \n The code is valid for only 1 hour"
 
             # Check if email information is present
@@ -40,7 +164,6 @@ class ResetPassword(APIView):
                 email_exists = User.objects.filter(email=user_email).first()
 
                 if email_exists:
-
                     cache_key = f"user_variable_{email_exists.id}"
                     if cache.has_key(cache_key):
                         cache.delete(cache_key)
@@ -51,9 +174,11 @@ class ResetPassword(APIView):
                     send_mail(
                         subject="Shoppy recovery code",
                         message=email_message,
-                        from_email='Shoppy Code <{}>'.format(os.environ.get("EMAIL_HOST_USER")),
+                        from_email="Shoppy Code <{}>".format(
+                            os.environ.get("EMAIL_HOST_USER")
+                        ),
                         recipient_list=[user_email],
-                        html_message=html_message
+                        html_message=html_message,
                     )
 
                     return Response({"user_id": email_exists.id}, status.HTTP_200_OK)
@@ -153,53 +278,3 @@ class UserNewPassword(APIView):
                 {"error": "Missing required parameters"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-
-
-class RegisterView(APIView):
-    permission_classes = [permissions.AllowAny]
-
-    def post(self, request, format=None):
-        # Extract user information from the request data
-        username = request.data.get("username")
-        email = request.data.get("email")
-        password = request.data.get("password")
-
-        try:
-            # Check if all required information is present
-            if username and email and password:
-                # Check if a user with the same email address already exists
-                user_exists = User.objects.filter(email=email).first()
-
-                if user_exists:
-                    # If a user with this email already exists, return an error message
-                    return Response(
-                        {"error": "User with this credential already exists"},
-                        status=status.HTTP_400_BAD_REQUEST,
-                    )
-                else:
-                    # If the user does not already exist, create a new user and generate access and refresh tokens
-                    user = User.objects.create_user(
-                        username, email=email, password=password
-                    )
-
-                    try:
-                        user.save()
-                    except IntegrityError as e:
-                        # If an IntegrityError is raised, handle it by printing an error message
-                        print(f"Error saving user: {e}")
-                    else:
-                        # If the save operation completes successfully, refresh the user's information
-                        user.refresh_from_db()
-                        # Generate refresh and access tokens for the new user
-                        refresh = RefreshToken.for_user(user)
-                        return Response(
-                            {
-                                "refresh": str(refresh),
-                                "access": str(refresh.access_token),
-                            },
-                            status.HTTP_200_OK,
-                        )
-
-        except ValueError:
-            # If a ValueError is raised, return an error response with a 401 status code
-            return Response(status=401)
