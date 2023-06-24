@@ -68,7 +68,11 @@ const HomePage: React.FC = () => {
     <div className="Homepage_div">
       {/* LoginPage */}
       <AuthContainer isOpen={loginOpen} onClose={() => setLoginOpen(false)}>
-        <LoginPage setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} setForgotOpen={setForgotOpen} />
+        <LoginPage
+          setSignupOpen={setSignupOpen}
+          setLoginOpen={setLoginOpen}
+          setForgotOpen={setForgotOpen}
+        />
       </AuthContainer>
 
       {/* SignupPage */}
@@ -78,17 +82,27 @@ const HomePage: React.FC = () => {
 
       {/* ForgotPage */}
       <AuthContainer isOpen={forgotOpen} onClose={() => setForgotOpen(false)}>
-        <ForgotPage setForgotOpen={setForgotOpen} setLoginOpen={setLoginOpen} setEmailCode={setEmailCode} />
+        <ForgotPage
+          setForgotOpen={setForgotOpen}
+          setLoginOpen={setLoginOpen}
+          setEmailCode={setEmailCode}
+        />
       </AuthContainer>
 
       {/* EmailCodePage */}
       <AuthContainer isOpen={emailCode} onClose={() => setEmailCode(false)}>
-        <EmailCodePage setNewPassword={setNewPassword} setEmailCode={setEmailCode}/>
+        <EmailCodePage
+          setNewPassword={setNewPassword}
+          setEmailCode={setEmailCode}
+        />
       </AuthContainer>
 
       {/* NewPassPage */}
       <AuthContainer isOpen={newPassword} onClose={() => setNewPassword(false)}>
-        <NewPassPage setNewPassword={setNewPassword} setLoginOpen={setLoginOpen}/>
+        <NewPassPage
+          setNewPassword={setNewPassword}
+          setLoginOpen={setLoginOpen}
+        />
       </AuthContainer>
 
       <div className="HomePage_navbar-container">
