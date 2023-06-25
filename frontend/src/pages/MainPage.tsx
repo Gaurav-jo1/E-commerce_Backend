@@ -17,12 +17,24 @@ import HoverImage2 from "../assets/42.webp";
 import HoverImage3 from "../assets/22.webp";
 import HoverImage4 from "../assets/32.webp";
 
+import ImageCard1 from "../assets/card1.webp";
+import ImageCard2 from "../assets/card2.webp";
+
 // Interface
 interface ShopImages {
   [key: string]: {
     property1: string;
     property2: string;
     property3: number;
+    property4: string;
+  };
+}
+
+interface CardImages {
+  [card: string]: {
+    property1: string;
+    property2: string;
+    property3: string;
     property4: string;
   };
 }
@@ -51,6 +63,21 @@ const myLists: ShopImages = {
     property2: "Bringing The Vibes Distressed Denim Shorts",
     property3: 38.0,
     property4: HoverImage4,
+  },
+};
+
+const myCards: CardImages = {
+  card1: {
+    property1: ImageCard1,
+    property2: "App Drops",
+    property3: "Nike Dunk Low",
+    property4: "Get it First",
+  },
+  card2: {
+    property1: ImageCard2,
+    property2: "Trending: That 90's vibe with the Nike Air Max 90 Futura",
+    property3: "Stylin' Up With Wasu",
+    property4: "Read Now",
   },
 };
 
@@ -91,20 +118,34 @@ const MainPage: React.FC = () => {
         {Object.keys(myLists).map((key) => (
           <div key={key} className="Maincontent_shop_image-container">
             <img
-              id={`hide_img-${isHovered == key ? key : ''}`}
+              id={`hide_img-${isHovered == key ? key : ""}`}
               className="Shop-options_main-img"
               src={myLists[key].property1}
               alt={myLists[key].property1}
               onMouseEnter={() => setIsHovered(key)}
             />
             <img
-              id={`show_img-${isHovered == key ? key : ''}`}
+              id={`show_img-${isHovered == key ? key : ""}`}
               className="Shop-options_hover-img"
               src={myLists[key].property4}
               alt={myLists[key].property4}
+              onMouseLeave={() => setIsHovered(null)}
             />
             <p>{myLists[key].property2} </p>
             <span>$ {myLists[key].property3.toFixed(2)}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="Maincontent_container_cards-options">
+      {Object.entries(myCards).map(([card, properties]) => (
+          <div key={card} className="Maincontent_shop_card-container">
+            <img src={properties.property1} alt={card} />
+            <div className="Maincontent_shop_card-texts">
+              <span>{properties.property2}</span>
+              <p>{properties.property3}</p>
+              <button>{properties.property4}</button>
+            </div>
           </div>
         ))}
       </div>
