@@ -20,6 +20,10 @@ import HoverImage4 from "../assets/32.webp";
 import ImageCard1 from "../assets/card1.webp";
 import ImageCard2 from "../assets/card2.webp";
 
+import ShoeBanner from "../assets/shoe_banner.png";
+
+import ShoppyLogo from "../assets/android-chrome-512x512.png";
+
 // Interface
 interface ShopImages {
   [key: string]: {
@@ -88,6 +92,7 @@ const MainPage: React.FC = () => {
 
   return (
     <div className="Maincontent_container">
+      {/* 1. First Component */}
       <div className="Maincontent_container-textbg">
         <div className="Maincontent_container-bg">
           <img
@@ -102,6 +107,8 @@ const MainPage: React.FC = () => {
           <span>SHOP&nbsp;ALL&nbsp;NEW</span>
         </div>
       </div>
+      
+      {/* 2. Summer text Banner Component */}
       <div className="Maincontent_container-summer_text">
         <span>Summer Essentials</span>
         <h3>Chase the day</h3>
@@ -114,6 +121,7 @@ const MainPage: React.FC = () => {
         <button>Shop</button>
       </div>
 
+      {/* 3. Shop Options Component */}
       <div className="Maincontent_container_shop-options">
         {Object.keys(myLists).map((key) => (
           <div key={key} className="Maincontent_shop_image-container">
@@ -137,6 +145,7 @@ const MainPage: React.FC = () => {
         ))}
       </div>
 
+      {/* 4. Card Options Component */}
       <div className="Maincontent_container_cards-options">
       {Object.entries(myCards).map(([card, properties]) => (
           <div key={card} className="Maincontent_shop_card-container">
@@ -148,6 +157,16 @@ const MainPage: React.FC = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* 5. Shoe Banner Component */}
+      <div className="Maincontent_container_shoes-banner">
+        <div className="Shoe_banner-logo_text-container">
+          <img src={ShoppyLogo} alt="Shoppy Logo" />
+          <h1>New <br /> Arrivals</h1>
+        </div>
+        <img src={ShoeBanner} alt="Shoe Banner" />
+        <button>Shop Now</button>
       </div>
     </div>
   );
