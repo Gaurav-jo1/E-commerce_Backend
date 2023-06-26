@@ -28,6 +28,7 @@ import ShoppyLogo from "../assets/android-chrome-512x512.png";
 import Mens from "../assets/men.webp";
 import Women from "../assets/women.webp";
 import Kids from "../assets/kid.webp";
+import Footer from "../components/Footer";
 
 // Interface
 interface ShopImages {
@@ -233,6 +234,10 @@ const MainPage: React.FC = () => {
 
           <button>ABOUT US</button>
         </div>
+      </div>
+
+      <div className="Maincontent_container-footer">
+        <Footer />
       </div>
     </div>
   );
