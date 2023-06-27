@@ -7,7 +7,7 @@ import "../../styles/AuthPages_styles/Auth.scss";
 import { GoogleLogin } from "@react-oauth/google";
 
 // Interface and Types
-import { SignComponentProps } from "../../components/ComponentsInterface";
+import { SignComponentProps } from "../../components/CommonInterfaces";
 
 // Media
 import signup_art from "../../assets/signup_art.jpeg";

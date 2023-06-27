@@ -10,7 +10,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import login_art from "../../assets/login_art.jpeg";
 
 // Interface and Types
-import { LoginComponentProps } from "../../components/ComponentsInterface";
+import { LoginComponentProps } from "../../components/CommonInterfaces";
 
 import axios from "axios";
 import { GlobalValue } from "../../context/GlobalValue";

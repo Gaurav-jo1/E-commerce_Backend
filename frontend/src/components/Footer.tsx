@@ -34,10 +34,10 @@ const Footer: React.FC = () => {
           </ul>
         </div>
         <div className="Footer_container-logos_container">
-          <p> <BsTwitter /> </p>
-          <p> <BsGithub /> </p>
-          <p> <BsLinkedin /> </p>
-          <p> <BsFillFileEarmarkCodeFill /> </p>
+          <a href="https://twitter.com/Gaurav1_Jo" target="_blank"><BsTwitter /></a>
+          <a href="https://github.com/Gaurav-jo1" target="_blank"><BsGithub /></a>
+          <a href="https://www.linkedin.com/in/gaurav-jo1/" target="_blank"><BsLinkedin /></a>
+          <a href="https://github.com/Gaurav-jo1/E-commerce" target="_blank"><BsFillFileEarmarkCodeFill /></a>
         </div>
       </div>
       <div className="Footer_container_two-div">

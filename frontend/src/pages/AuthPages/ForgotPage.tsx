@@ -4,7 +4,7 @@ import React, { useState, useContext } from "react";
 import { GlobalValue } from "../../context/GlobalValue";
 
 // Interface and Types
-import { ForgotPassComponentProps } from "../../components/ComponentsInterface";
+import { ForgotPassComponentProps } from "../../components/CommonInterfaces";
 
 // React Icons
 import { ImKey } from "react-icons/im";

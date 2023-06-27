@@ -4,7 +4,7 @@ import React, { useState, useContext } from "react";
 import "../../styles/AuthPages_styles/NewPassPage.scss";
 
 // Interface and Types
-import { NewPassComponentProps } from "../../components/ComponentsInterface";
+import { NewPassComponentProps } from "../../components/CommonInterfaces";
 
 // Icons
 import { BsFillUnlockFill } from "react-icons/bs";

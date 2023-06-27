@@ -10,7 +10,7 @@ import { MdMarkEmailUnread } from "react-icons/md";
 import { GlobalValue } from "../../context/GlobalValue";
 
 // Interface and Types
-import { EmailCodeComponentProps } from "../../components/ComponentsInterface";
+import { EmailCodeComponentProps } from "../../components/CommonInterfaces";
 
 // Media
 import code_art from "../../assets/code_art.jpeg";

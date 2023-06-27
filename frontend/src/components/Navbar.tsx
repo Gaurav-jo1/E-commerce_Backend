@@ -4,7 +4,7 @@ import React from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 
 // Interface and Types
-import { SignComponentProps } from "./ComponentsInterface";
+import { SignComponentProps } from "./CommonInterfaces";
 
 // Styling
 import "../styles/components_styles/Navbar.scss"

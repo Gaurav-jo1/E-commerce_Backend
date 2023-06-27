@@ -18,13 +18,12 @@
       flex-direction: row;
 
       p {
-        font-size: 15px;
+        font-size: 14px;
         line-height: 30px;
-        font-weight: bold;
-
+        font-weight: 700;
 
         &:hover {
-            cursor: pointer;
+          cursor: pointer;
         }
       }
 
@@ -33,9 +32,8 @@
         line-height: 30px;
         font-size: 14px;
 
-
         &:hover {
-            cursor: pointer;
+          cursor: pointer;
         }
       }
 
@@ -47,8 +45,9 @@
     .Footer_container-logos_container {
       display: flex;
 
-      p {
+      a {
         font-size: 24px;
+        text-decoration: none;
         padding: 10px 10px;
         margin: 0 5px;
         background-color: whitesmoke;
@@ -59,7 +58,7 @@
         text-align: center;
 
         &:hover {
-            cursor: pointer;
+          cursor: pointer;
         }
       }
     }
@@ -76,7 +75,7 @@
         color: rgb(56, 56, 56);
 
         &:hover {
-            cursor: pointer;
+          cursor: pointer;
         }
       }
 
@@ -90,7 +89,7 @@
         font-size: 14px;
 
         &:hover {
-            cursor: pointer;
+          cursor: pointer;
         }
       }
     }

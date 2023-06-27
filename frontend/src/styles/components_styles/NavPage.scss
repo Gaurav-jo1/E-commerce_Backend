@@ -1,6 +1,7 @@
 .NavPages_container {
   background-color: white;
   margin: 9px 0;
+  position: relative;
 }
 
 @keyframes reveal-border {
@@ -43,4 +44,12 @@
       cursor: pointer;
     }
   }
+}
+
+.NavPage_newpage-links {
+  height: 300px;
+  width: 100%;
+  background-color: white;
+  position: absolute;
+  z-index: 10;
 }

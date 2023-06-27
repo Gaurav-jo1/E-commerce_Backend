@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 
-// Assests
-import MainBG from "../assets/1.webp";
+// Interfaces
+import { ShopImages, CardImages, SectionImages } from "../components/CommonInterfaces";
 
 // Styling
 import "../styles/MainPage.scss";
 
+// Components
+import Footer from "../components/Footer";
+
 // Media
+import MainBG from "../assets/1.webp";
 // 1. First Component
 import MainImage1 from "../assets/11.webp";
 import MainImage2 from "../assets/41.webp";
@@ -28,33 +32,6 @@ import ShoppyLogo from "../assets/android-chrome-512x512.png";
 import Mens from "../assets/men.webp";
 import Women from "../assets/women.webp";
 import Kids from "../assets/kid.webp";
-import Footer from "../components/Footer";
-
-// Interface
-interface ShopImages {
-  [key: string]: {
-    property1: string;
-    property2: string;
-    property3: number;
-    property4: string;
-  };
-}
-
-interface CardImages {
-  [card: string]: {
-    property1: string;
-    property2: string;
-    property3: string;
-    property4: string;
-  };
-}
-
-interface SectionImages {
-  [section: string]: {
-    property1: string;
-    property2: string;
-  };
-}
 
 const myLists: ShopImages = {
   keys1: {
