@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 // Icons
 import { HiMagnifyingGlass } from "react-icons/hi2";
@@ -10,11 +10,14 @@ import { SignComponentProps } from "./CommonInterfaces";
 import "../styles/components_styles/Navbar.scss"
 
 const Navbar: React.FC<SignComponentProps> = ({setSignupOpen, setLoginOpen}) => {
+  const [userSearch, setUserSearch] = useState<string>("")
+
+  console.log(userSearch)
   return (
     <nav className="Navbar_container">
         <div className="Navbar_container-search">
           <p> <HiMagnifyingGlass /> </p>
-          <input type="text" placeholder="Search..." />
+          <input value={userSearch} type="text" placeholder="Search..." onChange={(e) => setUserSearch(e.target.value)} />
         </div>
         <div className="Navbar_container-logo"> <p>Shoppy</p> </div>
         <div className="Navbar_container-buttons">
