@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 
 // Styling
 import "../../styles/AuthPages_styles/Auth.scss";
@@ -14,55 +14,67 @@ import { LoginComponentProps } from "../../components/CommonInterfaces";
 
 import axios from "axios";
 import { GlobalValue } from "../../context/GlobalValue";
+import { AuthContext } from "../../context/AuthContext";
 
-function handleGoogleLogin(idToken?: string) {
-  axios
-    .post("http://127.0.0.1:8000/google_login/google/", {
-      id_token: idToken,
-    })
-    .then(function (response) {
-      console.log(response.data);
-      localStorage.setItem("authTokens", JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-}
-
-const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen, setForgotOpen}) => {
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+const Loginpage: React.FC<LoginComponentProps> = ({
+  setSignupOpen,
+  setLoginOpen,
+  setForgotOpen,
+}) => {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [wrongC, setWrongC] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const field_state = username.includes("@") && ".com" ? true : false;
 
-  const {passChanged, userCreated} = useContext(GlobalValue)
+  const { passChanged, userCreated } = useContext(GlobalValue);
+
+  const { setAuthTokens } = useContext(AuthContext);
 
   const SignupLink = () => {
-     setSignupOpen(true); setLoginOpen(false);
-    };
+    setSignupOpen(true);
+    setLoginOpen(false);
+  };
 
   const ForgotLink = () => {
-      setForgotOpen(true); setLoginOpen(false);
-    };
+    setForgotOpen(true);
+    setLoginOpen(false);
+  };
 
-    const postFunction = (field_name: string) => {
-    axios.post("http://127.0.0.1:8000/user_login/api/token/", {
-      [field_name]: username.toLowerCase(), password:password
-    })
-    .then(function (response) {
-      setIsLoading(false)
-      console.log("Response from LoginPage: ",response.data);
-      localStorage.setItem("authTokens", JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-      setWrongC(true)
-      setIsLoading(false)
-    });
+  const handleGoogleLogin = (idToken?: string) => {
+    axios
+      .post("http://127.0.0.1:8000/google_login/google/", {
+        id_token: idToken,
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setAuthTokens(response.data);
+        localStorage.setItem("authTokens", JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
-  }
+  const postFunction = (field_name: string) => {
+    axios
+      .post("http://127.0.0.1:8000/user_login/api/token/", {
+        [field_name]: username.toLowerCase(),
+        password: password,
+      })
+      .then(function (response) {
+        setIsLoading(false);
+        console.log("Response from LoginPage: ", response.data);
+        setAuthTokens(response.data);
+        localStorage.setItem("authTokens", JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+        setWrongC(true);
+        setIsLoading(false);
+      });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,25 +85,37 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
     } else {
       postFunction("username");
     }
-  }
+  };
 
   return (
     <div className="LoginPage">
       <div className="Auth_login-form">
-
-        { passChanged ?
+        {passChanged ? (
           <div className="LoginPage_password-changed">
-            <span>"Password Changed Successfully" &nbsp; <p>✅</p> </span>
-          </div> : "" }
+            <span>
+              "Password Changed Successfully" &nbsp; <p>✅</p>{" "}
+            </span>
+          </div>
+        ) : (
+          ""
+        )}
 
-        { userCreated ?
+        {userCreated ? (
           <div className="LoginPage_password-changed">
-            <span>"User Created Successfully" &nbsp; <p>✅</p> </span>
-          </div> : "" }
-        { wrongC ?
+            <span>
+              "User Created Successfully" &nbsp; <p>✅</p>{" "}
+            </span>
+          </div>
+        ) : (
+          ""
+        )}
+        {wrongC ? (
           <div className="LoginPage_password-wrong">
             <span>"The credentials you entered are incorrect"</span>
-          </div> : "" }
+          </div>
+        ) : (
+          ""
+        )}
 
         <div className="Auth_login-text">
           <h4>Welcome back to Shoppy!</h4>
@@ -110,7 +134,10 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
             onError={() => {
               console.log("Login Failed");
             }}
-            type="standard" text="signin_with" logo_alignment="left" width="260px"
+            type="standard"
+            text="signin_with"
+            logo_alignment="left"
+            width="260px"
           />
         </div>
         <div className="Auth_login_form-divider">
@@ -118,10 +145,22 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
         </div>
         <div className="Auth_login-inputs">
           <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Email or Username" title="Enter you Email or Username"
-             value={username} onChange={(e) => setUsername(e.target.value)} required />
-            <input type="password" placeholder="Password" title="Enter you Password"
-              value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <input
+              type="text"
+              placeholder="Email or Username"
+              title="Enter you Email or Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              title="Enter you Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
             <div className="Auth_login_forgot-password">
               <p onClick={ForgotLink}>Forgot your password?</p>
             </div>
@@ -142,8 +181,8 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
 
       <div className="Auth_bg_img">
         <div className="Auth_bg_img-logo"></div>
-        <div className="Auth_bg_img-art" style={{width:"460px"}} >
-          <img src={login_art} alt="login_art"/>
+        <div className="Auth_bg_img-art" style={{ width: "460px" }}>
+          <img src={login_art} alt="login_art" />
         </div>
       </div>
     </div>

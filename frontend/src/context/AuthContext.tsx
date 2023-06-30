@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 
-type AccessTokensType = {
+export type AccessTokensType = {
   access: string | undefined;
   refresh: string | undefined;
 };
