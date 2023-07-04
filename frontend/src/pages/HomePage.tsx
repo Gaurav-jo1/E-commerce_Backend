@@ -77,7 +77,7 @@ const HomePage: React.FC = () => {
 
       {/* SignupPage */}
       <AuthContainer isOpen={signupOpen} onClose={() => setSignupOpen(false)}>
-        <SignupPage setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
+        <SignupPage setSignupOpen={setSignupOpen} />
       </AuthContainer>
 
       {/* ForgotPage */}

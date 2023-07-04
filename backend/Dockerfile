@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY requirements.txt /app
 
+RUN apk add --no-cache postgresql-dev gcc musl-dev python3-dev libffi-dev
+
 RUN pip install -r requirements.txt --no-cache-dir
 
 COPY . /app 
