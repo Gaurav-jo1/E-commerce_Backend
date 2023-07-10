@@ -1,13 +1,12 @@
 // Sign up Page
 export interface SignComponentProps {
   setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Login Page
-export interface LoginComponentProps {
+export interface LoginComponentProps extends SignComponentProps {
   setForgotOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Forgot Component
@@ -27,12 +26,6 @@ export interface EmailCodeComponentProps {
 // New Password Component
 export interface NewPassComponentProps {
   setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-// Navbar 
-export interface NavComponentProps {
-  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

@@ -4,13 +4,13 @@ import React, { useState, useContext } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 
 // Interface and Types
-import { NavComponentProps } from "./CommonInterfaces";
+import { SignComponentProps } from "./CommonInterfaces";
 
 // Styling
 import "../styles/components_styles/Navbar.scss";
 import { AuthContext } from "../context/AuthContext";
 
-const Navbar: React.FC<NavComponentProps> = ({
+const Navbar: React.FC<SignComponentProps> = ({
   setSignupOpen,
   setLoginOpen,
 }) => {

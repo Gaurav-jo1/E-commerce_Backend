@@ -1,5 +1,17 @@
 version: '3.9'
 services:
+  db:
+    container_name: db
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
   backend:
     build: ./backend
     container_name: backend_c
@@ -7,6 +19,13 @@ services:
       - '8000:8000'
     volumes:
       - ./backend:/app
+    environment:
+      - PG_DB=postgres
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_HOST=db
+    depends_on:
+      - db
 
   frontend:
     build: ./frontend
@@ -15,3 +34,6 @@ services:
       - "5173:5173"
     volumes:
       - ./frontend:/app
+
+volumes:
+  pgdata: {}

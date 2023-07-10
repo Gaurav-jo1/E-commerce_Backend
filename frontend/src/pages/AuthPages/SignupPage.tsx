@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 
 // Styling
 import "../../styles/AuthPages_styles/Auth.scss";
@@ -13,6 +13,7 @@ import { SignComponentProps } from "../../components/CommonInterfaces";
 import signup_art from "../../assets/signup_art.jpeg";
 
 // Global values
+import { GlobalValue } from "../../context/GlobalValue";
 
 import axios from "axios";
 
@@ -28,15 +29,17 @@ function handleGoogleLogin(idToken?: string) {
     });
 }
 
-const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen}) => {
+const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) => {
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errorText, setErrorText] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const {setUserCreated} = useContext(GlobalValue)
+
   const SigninLink = () => {
-    setSignupOpen(false);
+    setSignupOpen(false); setLoginOpen(true);
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -52,6 +55,7 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen}) => {
       setIsLoading(false)
 
       if (response.status == 200) {
+        setUserCreated(true)
         SigninLink()
       }
     })
