@@ -13,21 +13,10 @@ import { SignComponentProps } from "../../components/CommonInterfaces";
 import signup_art from "../../assets/signup_art.jpeg";
 
 // Global values
-import { GlobalValue } from "../../context/GlobalValue";
+import { AuthContext } from "../../context/AuthContext";
 
 import axios from "axios";
 
-function handleGoogleLogin(idToken?: string) {
-  axios.post("http://127.0.0.1:8000/google_login/google/", {
-      id_token: idToken,
-    })
-    .then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-}
 
 const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) => {
   const [username, setUsername] = useState<string>('');
@@ -36,10 +25,26 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
   const [errorText, setErrorText] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const {setUserCreated} = useContext(GlobalValue)
+  const { setAuthTokens } = useContext(AuthContext);
+
 
   const SigninLink = () => {
     setSignupOpen(false); setLoginOpen(true);
+  }
+
+  const handleGoogleLogin = (idToken?: string) => {
+    axios.post("http://127.0.0.1:8000/google_login/google/", {
+        id_token: idToken,
+      })
+      .then(function (response) {
+        console.log("User Created");
+        setAuthTokens(response.data);
+        localStorage.setItem("authTokens", JSON.stringify(response.data));
+        setSignupOpen(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -55,8 +60,10 @@ const SignupPage: React.FC<SignComponentProps> = ({setSignupOpen,setLoginOpen}) 
       setIsLoading(false)
 
       if (response.status == 200) {
-        setUserCreated(true)
-        SigninLink()
+        console.log("User Created");
+        setAuthTokens(response.data);
+        localStorage.setItem("authTokens", JSON.stringify(response.data));
+        setSignupOpen(false);
       }
     })
     .catch(function (error) {

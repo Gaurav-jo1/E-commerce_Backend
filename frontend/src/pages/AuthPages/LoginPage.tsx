@@ -28,7 +28,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({
 
   const field_state = username.includes("@") && ".com" ? true : false;
 
-  const { passChanged, userCreated } = useContext(GlobalValue);
+  const { passChanged } = useContext(GlobalValue);
 
   const { setAuthTokens } = useContext(AuthContext);
 
@@ -100,15 +100,6 @@ const Loginpage: React.FC<LoginComponentProps> = ({
           ""
         )}
 
-        {userCreated ? (
-          <div className="LoginPage_password-changed">
-            <span>
-              "User Created Successfully" &nbsp; <p>✅</p>{" "}
-            </span>
-          </div>
-        ) : (
-          ""
-        )}
         {wrongC ? (
           <div className="LoginPage_password-wrong">
             <span>"The credentials you entered are incorrect"</span>
