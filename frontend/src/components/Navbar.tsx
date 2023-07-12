@@ -1,10 +1,17 @@
+import axios from "axios";
 import React, { useState, useContext } from "react";
-
 // Icons
 import { HiMagnifyingGlass } from "react-icons/hi2";
-
+import {CiShoppingCart} from "react-icons/ci" 
+import {BsSearch} from "react-icons/bs" 
 // Interface and Types
 import { SignComponentProps } from "./CommonInterfaces";
+
+interface MyData {
+  id: number;
+  user: string;
+  picture: string;
+}
 
 // Styling
 import "../styles/components_styles/Navbar.scss";
@@ -15,10 +22,31 @@ const Navbar: React.FC<SignComponentProps> = ({
   setLoginOpen,
 }) => {
   const [userSearch, setUserSearch] = useState<string>("");
-  // const [avatarSrc, setAvatarSrc] = useState();
+  const [getUserInfo, setGetUserInfo] = useState<boolean>(true);
+  const [userInfo, setUserInfo] = useState<MyData>();
 
   const { authTokens } = useContext(AuthContext);
 
+  const UserProfileData = () => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + String(authTokens.access),
+    };
+
+    axios.get("http://127.0.0.1:8000/user_profile/info/", { headers })
+      .then(response => {
+        console.log(response.data);
+        setUserInfo(response.data)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  if (authTokens && getUserInfo) {
+    UserProfileData()
+    setGetUserInfo(false);
+  }
 
   // console.log(userSearch);
   return (
@@ -39,9 +67,11 @@ const Navbar: React.FC<SignComponentProps> = ({
         {" "}
         <p>Shoppy</p>{" "}
       </div>
-      {authTokens ? (
+      {userInfo ? (
         <div className="Navbar_container-profile">
-          {/* <img src={avatarUrl} alt="profile pic" /> */}
+          <p> <BsSearch/> </p>
+          <p> <CiShoppingCart/> </p>
+          <img src={`http://127.0.0.1:8000${userInfo.picture}`} alt="profile pic" />
         </div>
       ) : (
         <div className="Navbar_container-buttons">

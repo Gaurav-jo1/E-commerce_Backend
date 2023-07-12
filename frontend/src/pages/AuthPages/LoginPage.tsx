@@ -51,6 +51,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({
         console.log(response.data);
         setAuthTokens(response.data);
         localStorage.setItem("authTokens", JSON.stringify(response.data));
+        setLoginOpen(false);
       })
       .catch(function (error) {
         console.log(error);
