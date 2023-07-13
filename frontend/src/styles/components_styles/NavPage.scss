@@ -21,7 +21,7 @@
   text-align: center;
 
   li {
-    margin: 0 30px;
+    margin: 0 20px;
     height: 100%;
     line-height: 30px;
     position: relative;
@@ -46,10 +46,37 @@
   }
 }
 
-.NavPage_newpage-links {
-  height: 300px;
+.NavPage_newpage_container-links {
+  height: 115vh;
   width: 100%;
-  background-color: white;
-  position: absolute;
-  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.27);
+  backdrop-filter: blur(4px);
+  position:absolute;
+  z-index: 10;
+
+  .NavPage_newpage-links {
+    padding: 50px 0;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      margin: 0 22px;
+
+      p {
+        padding-bottom: 10px;
+      }
+
+      li {
+        color: #757575;
+        list-style: none;
+        padding: 5px 0;
+      }
+    }
+  }
 }

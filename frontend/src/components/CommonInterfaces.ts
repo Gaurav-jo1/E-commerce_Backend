@@ -56,4 +56,5 @@ export interface SectionImages {
   };
 }
 
-// NavPage Interface
+// NavPage type
+export type TypeDictionary = Record<string, string[]>;
