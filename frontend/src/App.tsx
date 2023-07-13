@@ -5,7 +5,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 // Pages
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
-import LinksPage from "./pages/LinksPage";
+import CartPage from "./pages/CartPage";
 
 // Global Context
 import AuthProvider from "./context/AuthContext";
@@ -21,9 +21,9 @@ function App(): JSX.Element {
         <GlobalProvider>
           <div>
             <Routes>
-              <Route path="/" element={<LinksPage />} />
-              <Route path="/home" element={<HomePage />} />
+              <Route path="/" element={<HomePage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/cart" element={<CartPage />} />
             </Routes>
           </div>
         </GlobalProvider>

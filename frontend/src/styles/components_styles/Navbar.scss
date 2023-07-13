@@ -81,7 +81,7 @@
   width: 194.6px;
   height: 50px;
   border-radius: 50%;
-  // overflow: hidden;
+  overflow: hidden;
 
   img {
     height: 50px;
@@ -92,9 +92,9 @@
 
     margin: 0 10px;
   }
-  
+
   p:first-child {
-    font-size: 24px;
+    font-size: 20px;
     color: rgb(65, 65, 65);
     margin: 0px 10px;
     padding-top: 10px;
@@ -105,8 +105,8 @@
       cursor: pointer;
     }
   }
-  p {
-    font-size: 32px;
+  p:last-child {
+    font-size: 28px;
     color: rgb(65, 65, 65);
     margin: 0px 10px;
     padding-top: 10px;
@@ -117,7 +117,6 @@
       cursor: pointer;
     }
   }
-  
 }
 
 .Navbar_container-buttons {

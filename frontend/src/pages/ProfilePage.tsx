@@ -2,17 +2,17 @@ import React, { useContext } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 interface MyData {
   id: number;
-  username: string;
-  email: string;
+  user: string;
 }
 
 const ProfilePage: React.FC = () => {
   const { authTokens } = useContext(AuthContext);
 
-  const { isLoading, error, data } = useQuery<MyData, Error>(["data"], () =>
+  const { isLoading, error, data } = useQuery<MyData>(["data"], () =>
     axios
       .get<MyData>("http://127.0.0.1:8000/user_profile/info/", {
         headers: {
@@ -27,13 +27,14 @@ const ProfilePage: React.FC = () => {
 
   if (error) return "An error has occurred: " + error;
 
-  console.log(authTokens);
-
   return (
     <div>
       <h1>Profile Page</h1>
-      <p>Username: {data?.username}</p>
-      <p>Email: {data?.email}</p>
+      <Link to="/">Home Page</Link>
+      <p>
+        {" "}
+        <b>Username:</b> {data?.user}
+      </p>
     </div>
   );
 };

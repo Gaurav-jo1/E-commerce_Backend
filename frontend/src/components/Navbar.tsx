@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 // Icons
 import { HiMagnifyingGlass } from "react-icons/hi2";
-import {CiShoppingCart} from "react-icons/ci" 
-import {BsSearch} from "react-icons/bs" 
+import { CiShoppingCart } from "react-icons/ci";
+import { BsSearch } from "react-icons/bs";
 // Interface and Types
 import { SignComponentProps } from "./CommonInterfaces";
 
@@ -27,35 +28,27 @@ const Navbar: React.FC<SignComponentProps> = ({
 
   const { authTokens } = useContext(AuthContext);
 
-  const UserProfileData = () => {
+  if (authTokens && getUserInfo) {
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + String(authTokens.access),
     };
-
-    axios.get("http://127.0.0.1:8000/user_profile/info/", { headers })
-      .then(response => {
+    axios
+      .get("http://127.0.0.1:8000/user_profile/info/", { headers })
+      .then((response) => {
         console.log(response.data);
-        setUserInfo(response.data)
+        setGetUserInfo(false);
+        setUserInfo(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
-  };
-
-  if (authTokens && getUserInfo) {
-    UserProfileData()
-    setGetUserInfo(false);
   }
 
-  // console.log(userSearch);
   return (
     <nav className="Navbar_container">
       <div className="Navbar_container-search">
-        <p>
-          {" "}
-          <HiMagnifyingGlass />{" "}
-        </p>
+        <p> <HiMagnifyingGlass /> </p>
         <input
           value={userSearch}
           type="text"
@@ -64,14 +57,26 @@ const Navbar: React.FC<SignComponentProps> = ({
         />
       </div>
       <div className="Navbar_container-logo">
-        {" "}
-        <p>Shoppy</p>{" "}
+        <p>Shoppy</p>
       </div>
       {userInfo ? (
         <div className="Navbar_container-profile">
-          <p> <BsSearch/> </p>
-          <p> <CiShoppingCart/> </p>
-          <img src={`http://127.0.0.1:8000${userInfo.picture}`} alt="profile pic" />
+          <p>
+            {" "}
+            <BsSearch />{" "}
+          </p>
+          <Link to="/cart">
+            <p>
+              {" "}
+              <CiShoppingCart />{" "}
+            </p>
+          </Link>
+          <Link to="/profile">
+            <img
+              src={`http://127.0.0.1:8000${userInfo.picture}`}
+              alt="profile pic"
+            />
+          </Link>
         </div>
       ) : (
         <div className="Navbar_container-buttons">
