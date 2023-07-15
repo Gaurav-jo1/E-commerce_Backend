@@ -25,7 +25,7 @@ import Kids from "../assets/kid.webp";
 export const myLists: ShopImages = {
   keys1: {
     property1: MainImage1,
-    property2: "Bohemian Sun Crochet Knit Halter Mini Dress",
+    property2: "Sun Crochet Knit Halter Mini Dress",
     property3: 52.0,
     property4: HoverImage1,
   },

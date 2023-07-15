@@ -58,3 +58,11 @@ export interface SectionImages {
 
 // NavPage type
 export type TypeDictionary = Record<string, string[]>;
+
+
+// Auth Components 
+export interface AuthContainerProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}

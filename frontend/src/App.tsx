@@ -13,6 +13,7 @@ import GlobalProvider from "./context/GlobalValue";
 
 // Styling
 import "./styles/App.scss";
+import ShopPage from "./pages/ShopPage";
 
 function App(): JSX.Element {
   return (
@@ -23,6 +24,7 @@ function App(): JSX.Element {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/shop" element={<ShopPage />} />
               <Route path="/cart" element={<CartPage />} />
             </Routes>
           </div>

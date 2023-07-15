@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 
 // Styling
 import "../styles/HomePage.scss";
@@ -18,20 +18,24 @@ import MainPage from "./MainPage";
 import ForgotPage from "./AuthPages/ForgotPage";
 import NewPassPage from "./AuthPages/NewPassPage";
 import EmailCodePage from "./AuthPages/EmailCodePage";
+import { GlobalValue } from "../context/GlobalValue";
 
 // Interfaces and Types
-interface AuthContainerProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-}
+import { AuthContainerProps } from "../components/CommonInterfaces";
 
 const HomePage: React.FC = () => {
-  const [loginOpen, setLoginOpen] = useState<boolean>(false);
-  const [signupOpen, setSignupOpen] = useState<boolean>(false);
-  const [forgotOpen, setForgotOpen] = useState<boolean>(false);
-  const [emailCode, setEmailCode] = useState<boolean>(false);
-  const [newPassword, setNewPassword] = useState<boolean>(false);
+  const {
+    loginOpen,
+    signupOpen,
+    forgotOpen,
+    emailCode,
+    newPassword,
+    setLoginOpen,
+    setSignupOpen,
+    setForgotOpen,
+    setEmailCode,
+    setNewPassword,
+  } = useContext(GlobalValue);
 
   useEffect(() => {
     if (loginOpen || signupOpen || forgotOpen || newPassword || emailCode) {

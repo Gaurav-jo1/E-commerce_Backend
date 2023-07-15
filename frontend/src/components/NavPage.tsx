@@ -2,8 +2,14 @@ import React, { useState } from "react";
 
 // Styling
 import "../styles/components_styles/NavPage.scss";
-
-import { newFeatureArray, mensArray, womensArray,kidsArray, saleArray } from "./CommonData";
+import { Link } from "react-router-dom";
+import {
+  newFeatureArray,
+  mensArray,
+  womensArray,
+  kidsArray,
+  saleArray,
+} from "./CommonData";
 
 enum AllowedValues {
   Zero = 0,
@@ -14,27 +20,29 @@ enum AllowedValues {
   Five = 5,
 }
 
-
+const myNavArray: string[] = ["New & Featured", "Men", "Women", "Kids", "Sale"];
 
 const NavPage: React.FC = () => {
-  const [navHover, setNavHover] = useState<AllowedValues>(AllowedValues.One);
+  const [navHover, setNavHover] = useState<AllowedValues>(AllowedValues.Zero);
+
+  console.log(navHover);
 
   return (
     <nav className="NavPages_container">
-      <ul
-        className="NavPages_container-ul"
-        onMouseLeave={() => setNavHover(AllowedValues.Zero)}
-      >
-        <li onMouseEnter={() => setNavHover(AllowedValues.One)}>
-          New & Featured
-        </li>
-        <li onMouseEnter={() => setNavHover(AllowedValues.Two)}>Men</li>
-        <li onMouseEnter={() => setNavHover(AllowedValues.Three)}>Women</li>
-        <li onMouseEnter={() => setNavHover(AllowedValues.Four)}>Kids</li>
-        <li onMouseEnter={() => setNavHover(AllowedValues.Five)}>Sale</li>
+      <ul className="NavPages_container-ul">
+        {myNavArray.map((item, index) => (
+          <li onClick={() => setNavHover(AllowedValues.Zero)} key={index}>
+            <Link to="/shop" onMouseEnter={() => setNavHover(index + 1)}>
+              {item}
+            </Link>
+          </li>
+        ))}
       </ul>
       {navHover == 1 && (
-        <div className="NavPage_newpage_container-links">
+        <div
+          className="NavPage_newpage_container-links"
+          onMouseLeave={() => setNavHover(AllowedValues.Zero)}
+        >
           <div
             onMouseLeave={() => setNavHover(AllowedValues.One)}
             className="NavPage_newpage-links"

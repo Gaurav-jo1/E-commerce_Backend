@@ -9,6 +9,18 @@ interface CurrentVarContextType {
   setUserId: React.Dispatch<React.SetStateAction<string>>;
   passChanged: boolean;
   setPassChanged: React.Dispatch<React.SetStateAction<boolean>>;
+
+  // Login and Signup Interface
+  loginOpen: boolean;
+  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  signupOpen: boolean;
+  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  forgotOpen: boolean;
+  setForgotOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  emailCode: boolean;
+  setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
+  newPassword: boolean;
+  setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const GlobalValue = createContext<CurrentVarContextType>(
@@ -24,10 +36,37 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
   const [userCode, setUserCode] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
   const [passChanged, setPassChanged] = useState<boolean>(false);
+
+  // Login and Signup UseStates
+  const [loginOpen, setLoginOpen] = useState<boolean>(false);
+  const [signupOpen, setSignupOpen] = useState<boolean>(false);
+  const [forgotOpen, setForgotOpen] = useState<boolean>(false);
+  const [emailCode, setEmailCode] = useState<boolean>(false);
+  const [newPassword, setNewPassword] = useState<boolean>(false);
+
   return (
     <GlobalValue.Provider
-      value={{ userEmail, userCode, userId, setUserEmail,
-        setUserCode, setUserId, passChanged, setPassChanged}} >
+      value={{
+        userEmail,
+        userCode,
+        userId,
+        passChanged,
+        loginOpen,
+        signupOpen,
+        forgotOpen,
+        emailCode,
+        newPassword,
+        setUserEmail,
+        setUserCode,
+        setUserId,
+        setPassChanged,
+        setLoginOpen,
+        setSignupOpen,
+        setForgotOpen,
+        setEmailCode,
+        setNewPassword,
+      }}
+    >
       {children}
     </GlobalValue.Provider>
   );

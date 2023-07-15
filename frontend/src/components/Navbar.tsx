@@ -57,7 +57,9 @@ const Navbar: React.FC<SignComponentProps> = ({
         />
       </div>
       <div className="Navbar_container-logo">
-        <p>Shoppy</p>
+          <Link to="/">
+            <p>Shoppy</p>
+          </Link>
       </div>
       {userInfo ? (
         <div className="Navbar_container-profile">
