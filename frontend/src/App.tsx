@@ -24,7 +24,7 @@ function App(): JSX.Element {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/shop" element={<ShopPage />} />
+              <Route path="/Shop" element={<ShopPage />} />
               <Route path="/cart" element={<CartPage />} />
             </Routes>
           </div>

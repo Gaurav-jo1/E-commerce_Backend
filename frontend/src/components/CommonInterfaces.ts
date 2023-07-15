@@ -29,7 +29,6 @@ export interface NewPassComponentProps {
   setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-
 // Main Page Interface
 export interface ShopImages {
   [key: string]: {
@@ -59,10 +58,11 @@ export interface SectionImages {
 // NavPage type
 export type TypeDictionary = Record<string, string[]>;
 
-
-// Auth Components 
+// Auth Components
 export interface AuthContainerProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
 }
+
+// Navigation Custom name
