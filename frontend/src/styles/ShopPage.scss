@@ -1,12 +1,25 @@
 .ShopPage_container {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .ShopPage_container-main {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 
-    img {
-        width: 100%;
+  .ShopPage_container-main_text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.18);
+
+    h1 {
+      color: white;
+      font-size: 50px;
+
     }
+  }
 }

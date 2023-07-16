@@ -18,7 +18,7 @@ import HoverImage4 from "../assets/32.webp";
 import ImageCard1 from "../assets/card1.webp";
 import ImageCard2 from "../assets/card2.webp";
 
-import Mens from "../assets/men.webp";
+import Men from "../assets/men.webp";
 import Women from "../assets/women.webp";
 import Kids from "../assets/kid.webp";
 
@@ -53,29 +53,27 @@ export const myCards: CardImages = {
   card1: {
     property1: ImageCard1,
     property2: "App Drops",
-    property3: "Nike Dunk Low",
-    property4: "Get it First",
+    property3: "Shoppy Dunk Low",
   },
   card2: {
     property1: ImageCard2,
     property2: "Trending: That 90's vibe with the Nike Air Max 90 Futura",
     property3: "Stylin' Up With Wasu",
-    property4: "Read Now",
   },
 };
 
 export const mySections: SectionImages = {
-  mens: {
-    property1: Mens,
-    property2: "Men's",
+  Men: {
+    property1: Men,
+    property2: "Men",
   },
   Women: {
     property1: Women,
-    property2: "Women's",
+    property2: "Women",
   },
-  Kid: {
+  Kids: {
     property1: Kids,
-    property2: "Kid's",
+    property2: "Kid",
   },
 };
 

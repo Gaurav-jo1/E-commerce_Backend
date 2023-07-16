@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 
 // Styling
 import "../styles/components_styles/NavPage.scss";
@@ -7,20 +7,18 @@ import { GlobalValue } from "../context/GlobalValue";
 
 const myNavArray: string[] = ["New & Featured", "Men", "Women", "Kids", "Sale"];
 
-
 const NavPage: React.FC = () => {
-
-  const {setNavValue} = useContext(GlobalValue)
+  const { setNavValue } = useContext(GlobalValue);
 
   return (
     <nav className="NavPages_container">
       <ul className="NavPages_container-ul">
         {myNavArray.map((item, index) => (
-          <li key={index} onClick={() => setNavValue(item)}>
-            <Link to="/Shop">
+          <Link key={index} to="/Shop">
+            <li onClick={() => setNavValue(item)}>
               {item}
-            </Link>
-          </li>
+            </li>
+          </Link>
         ))}
       </ul>
     </nav>

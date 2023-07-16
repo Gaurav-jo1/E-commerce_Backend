@@ -20,16 +20,14 @@
   list-style: none;
   text-align: center;
   padding: 1px 0;
-
+  
   li {
     margin: 0 20px;
     height: 100%;
-    line-height: 30px;
+    line-height: 36px;
+    font-size: 18px;
+    font-family: 'Lunasima', sans-serif;
     position: relative;
-
-    a {
-      all: unset;
-    }
 
     &:after {
       content: "";
@@ -51,37 +49,3 @@
   }
 }
 
-.NavPage_newpage_container-links {
-  height: fit-content;
-  width: 100%;
-  position: absolute;
-  z-index: 10;
-
-  .NavPage_newpage-links {
-    padding: 50px 0;
-    width: 100%;
-    background-color: white;
-    position: absolute;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    box-shadow:0px 100px 20px 30px rgba(0, 0, 0, 0.4);
-    width: 100%;
-
-    ul {
-      display: flex;
-      flex-direction: column;
-      margin: 0 22px;
-
-      p {
-        padding-bottom: 10px;
-      }
-
-      li {
-        color: #757575;
-        list-style: none;
-        padding: 5px 0;
-      }
-    }
-  }
-}

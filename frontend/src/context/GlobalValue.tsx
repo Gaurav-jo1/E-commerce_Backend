@@ -48,8 +48,10 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
   const [emailCode, setEmailCode] = useState<boolean>(false);
   const [newPassword, setNewPassword] = useState<boolean>(false);
 
+  
   // NavBar Navigation
-  const [navValue, setNavValue] = useState<string>("Home");
+  const [navValue, setNavValue] = useState<string>("New & Featured");
+  console.log(navValue)
 
   return (
     <GlobalValue.Provider
