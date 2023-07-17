@@ -20,7 +20,6 @@ class UserProfileView(APIView):
         if user:
             user_info = UserProfile.objects.get(user=user.id)
             serializer = UserProfileSerializer(user_info)
-            # print("User id: ",user_info.picture)
             return Response(serializer.data,status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)

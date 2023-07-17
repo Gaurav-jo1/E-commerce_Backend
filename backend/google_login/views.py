@@ -7,8 +7,6 @@ from google.oauth2 import id_token
 from django.contrib.auth.models import User
 from google.auth.transport import requests
 import os
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 
