@@ -6,7 +6,7 @@ import { AuthPages } from "../components/Commonfun";
 import { ShopPageProps } from "../components/CommonInterfaces";
 import Footer from "../components/Footer";
 
-import { BsCart2 } from "react-icons/bs";
+import {BsFillCartCheckFill } from "react-icons/bs";
 
 // styling
 import "../styles/ShopPage.scss";
@@ -22,7 +22,6 @@ const ShopPage: React.FC<ShopPageProps> = ({
     (a, b) => a.position_id - b.position_id
   );
 
-  console.log(sortedProducts);
   return (
     <div className="ShopPage_container">
       <AuthPages />
@@ -47,20 +46,21 @@ const ShopPage: React.FC<ShopPageProps> = ({
         <div className="ShopPage_products-container">
           {sortedProducts.map((product) => (
             <div key={product.id} className="ShopPage_products_container-item">
-              <img
-                src={`http://127.0.0.1:8000${product.image}`}
-                alt={product.product}
-                height={"100%"}
-                width={"100%"}
-              />
-              <p>{product.product}</p>
+              <div className="ShopPage_products_container-item_image">
+                <img
+                  src={`http://127.0.0.1:8000${product.image}`}
+                  alt={product.product}
+                  height={"100%"}
+                  width={"100%"}
+                />
+              </div>
+              <div className="ShopPage_products_container-item_title">
+                <p>{product.product}</p>
+              </div>
 
-              <button>
-                Add to Cart{" "}
-                <p>
-                  <BsCart2 />
-                </p>{" "}
-              </button>
+              <div className="ShopPage_products_container-item_cart">
+                <button> <p> <BsFillCartCheckFill /> </p>Add to Cart  &nbsp; </button>
+              </div>
             </div>
           ))}
         </div>
