@@ -3,6 +3,10 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { AuthPages } from "../components/Commonfun";
+import Navbar from "../components/Navbar";
+import NavPage from "../components/NavPage";
+import { GlobalValue } from "../context/GlobalValue";
 
 interface MyData {
   id: number;
@@ -11,6 +15,8 @@ interface MyData {
 
 const ProfilePage: React.FC = () => {
   const { authTokens } = useContext(AuthContext);
+  const { setLoginOpen, setSignupOpen } = useContext(GlobalValue);
+
 
   const { isLoading, error, data } = useQuery<MyData>(["user_profile"], () =>
     axios
@@ -29,6 +35,9 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div>
+      <AuthPages />
+      <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
+      <NavPage />
       <h1>Profile Page</h1>
       <Link to="/">Home Page</Link>
       <p>

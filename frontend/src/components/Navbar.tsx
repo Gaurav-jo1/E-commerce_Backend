@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // Icons
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiShoppingCart } from "react-icons/ci";
-import { BsSearch } from "react-icons/bs";
+import { AiOutlineHeart } from "react-icons/ai";
 // Interface and Types
 import { SignComponentProps } from "./CommonInterfaces";
 
@@ -65,7 +65,7 @@ const Navbar: React.FC<SignComponentProps> = ({
         <div className="Navbar_container-profile">
           <p>
             {" "}
-            <BsSearch />{" "}
+            <AiOutlineHeart />{" "}
           </p>
           <Link to="/cart">
             <p>
