@@ -6,7 +6,17 @@ import "./styles/index.scss";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Create a client
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Set cacheTime to 0 to disable caching and always refetch the data
+      cacheTime: 0,
+
+      // Set staleTime to 5 seconds (or any short duration you prefer)
+      staleTime: 5000, // 5 seconds in milliseconds
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <QueryClientProvider client={queryClient}>

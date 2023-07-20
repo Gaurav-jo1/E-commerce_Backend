@@ -11,8 +11,18 @@ import { BsCart2 } from "react-icons/bs";
 // styling
 import "../styles/ShopPage.scss";
 
-const ShopPage: React.FC<ShopPageProps> = ({ productData, MainImage, PageName }) => {
+const ShopPage: React.FC<ShopPageProps> = ({
+  productData,
+  MainImage,
+  PageName,
+}) => {
   const { setLoginOpen, setSignupOpen } = useContext(GlobalValue);
+
+  const sortedProducts = productData.sort(
+    (a, b) => a.position_id - b.position_id
+  );
+
+  console.log(sortedProducts);
   return (
     <div className="ShopPage_container">
       <AuthPages />
@@ -23,17 +33,19 @@ const ShopPage: React.FC<ShopPageProps> = ({ productData, MainImage, PageName })
         <NavPage />
       </div>
       <div className="ShopPage_container-main">
-        <img
-          src={MainImage}
-          alt="Mens Section "
-          height={"100%"}
-          width={"100%"}
-        />
-        <div className="ShopPage_container-main_text">
-          <h1>{PageName}</h1>
+        <div className="ShopPage_container-main_poster">
+          <img
+            src={MainImage}
+            alt="Mens Section "
+            height={"100%"}
+            width={"100%"}
+          />
+          <div className="ShopPage_container-main_text">
+            <h1>{PageName}</h1>
+          </div>
         </div>
         <div className="ShopPage_products-container">
-          {productData.map((product) => (
+          {sortedProducts.map((product) => (
             <div key={product.id} className="ShopPage_products_container-item">
               <img
                 src={`http://127.0.0.1:8000${product.image}`}
