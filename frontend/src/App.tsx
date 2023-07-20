@@ -13,7 +13,11 @@ import GlobalProvider from "./context/GlobalValue";
 
 // Styling
 import "./styles/App.scss";
-import ShopPage from "./pages/ShopPage";
+import NewFeatured from "./pages/ShopPages/NewFeatured";
+import MenPage from "./pages/ShopPages/MenPage";
+import WomenPage from "./pages/ShopPages/WomenPage";
+import KidsPage from "./pages/ShopPages/KidsPage";
+import SalePage from "./pages/ShopPages/SalePage";
 
 function App(): JSX.Element {
   return (
@@ -24,8 +28,12 @@ function App(): JSX.Element {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/Shop" element={<ShopPage />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/New & Featured" element={<NewFeatured />} />
+              <Route path="/Men" element={<MenPage />} />
+              <Route path="/Women" element={<WomenPage />} />
+              <Route path="/Kids" element={<KidsPage />} />
+              <Route path="/Sale" element={<SalePage />} />
             </Routes>
           </div>
         </GlobalProvider>

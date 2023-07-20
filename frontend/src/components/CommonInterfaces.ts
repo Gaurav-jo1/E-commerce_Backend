@@ -64,4 +64,15 @@ export interface AuthContainerProps {
   children: React.ReactNode;
 }
 
-// Navigation Custom name
+// ShopPage 
+type ShopPageData  = {
+  id: number;
+  position_id: number;
+  product: string;
+  image: string;
+}
+export interface ShopPageProps {
+  PageName: string;
+  productData: ShopPageData[];
+  MainImage: string;
+}

@@ -12,7 +12,7 @@ interface MyData {
 const ProfilePage: React.FC = () => {
   const { authTokens } = useContext(AuthContext);
 
-  const { isLoading, error, data } = useQuery<MyData>(["data"], () =>
+  const { isLoading, error, data } = useQuery<MyData>(["user_profile"], () =>
     axios
       .get<MyData>("http://127.0.0.1:8000/user_profile/info/", {
         headers: {

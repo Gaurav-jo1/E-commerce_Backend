@@ -5,13 +5,13 @@
 .ShopPage_container-main {
   display: flex;
   flex-direction: column;
-  position: relative;
+  position:absolute;
 
   .ShopPage_container-main_text {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: relative;
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.18);
@@ -19,7 +19,49 @@
     h1 {
       color: white;
       font-size: 50px;
+    }
+  }
 
+  .ShopPage_products-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    padding: 0 80px;
+    margin: 30px 0;
+    line-height: 25px;
+
+    .ShopPage_products_container-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      img {
+        border: 1px solid black;
+      }
+
+      p {
+        font-size: 20px;
+      }
+
+      button {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        padding: 6px 12px;
+        border-radius: 10px;
+        background: rgb(115, 115, 236);
+        color: white;
+        border: none;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        p {
+          padding-left: 4px;
+          font-size: 18px;
+        }
+      }
     }
   }
 }

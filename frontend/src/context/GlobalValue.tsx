@@ -21,10 +21,6 @@ interface CurrentVarContextType {
   setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
   newPassword: boolean;
   setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
-
-  // NavBar Navigation
-  navValue: string;
-  setNavValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const GlobalValue = createContext<CurrentVarContextType>(
@@ -48,11 +44,6 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
   const [emailCode, setEmailCode] = useState<boolean>(false);
   const [newPassword, setNewPassword] = useState<boolean>(false);
 
-  
-  // NavBar Navigation
-  const [navValue, setNavValue] = useState<string>("New & Featured");
-  console.log(navValue)
-
   return (
     <GlobalValue.Provider
       value={{
@@ -65,7 +56,6 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
         forgotOpen,
         emailCode,
         newPassword,
-        navValue,
         setUserEmail,
         setUserCode,
         setUserId,
@@ -75,7 +65,6 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
         setForgotOpen,
         setEmailCode,
         setNewPassword,
-        setNavValue,
       }}
     >
       {children}
