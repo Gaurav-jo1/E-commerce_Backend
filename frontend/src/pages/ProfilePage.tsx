@@ -7,6 +7,7 @@ import { AuthPages } from "../components/Commonfun";
 import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
 import { GlobalValue } from "../context/GlobalValue";
+import Footer from "../components/Footer";
 
 interface MyData {
   id: number;
@@ -44,6 +45,7 @@ const ProfilePage: React.FC = () => {
         {" "}
         <b>Username:</b> {data?.user}
       </p>
+      <Footer />
     </div>
   );
 };

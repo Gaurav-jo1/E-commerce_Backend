@@ -4,6 +4,7 @@ import { AuthPages } from "../components/Commonfun";
 import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
 import { GlobalValue } from "../context/GlobalValue";
+import Footer from "../components/Footer";
 
 const CartPage:React.FC = () => {
   const { setLoginOpen, setSignupOpen } = useContext(GlobalValue);
@@ -14,6 +15,7 @@ const CartPage:React.FC = () => {
       <NavPage />
       <h1>CartPage</h1>
       <Link to="/"> Homepage </Link>
+      <Footer />
     </div>
   )
 }
