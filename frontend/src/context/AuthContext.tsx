@@ -34,7 +34,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.removeItem("authTokens");
   }
 
-  console.log("AuthContext",authTokens)
+  // console.log("AuthContext",authTokens)
 
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens, loading, setLoading, callLogout}}>

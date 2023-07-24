@@ -13,7 +13,7 @@ const queryClient = new QueryClient({
       cacheTime: 0,
 
       // Set staleTime to 5 seconds (or any short duration you prefer)
-      staleTime: 5000, // 5 seconds in milliseconds
+      staleTime: 0, // 5 seconds in milliseconds
     },
   },
 });

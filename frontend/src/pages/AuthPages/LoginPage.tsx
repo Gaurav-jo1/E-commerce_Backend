@@ -66,6 +66,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({
       })
       .then(function (response) {
         setIsLoading(false);
+        setLoginOpen(false);
         console.log("Response from LoginPage: ", response.data);
         setAuthTokens(response.data);
         localStorage.setItem("authTokens", JSON.stringify(response.data));

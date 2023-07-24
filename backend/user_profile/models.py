@@ -13,7 +13,7 @@ class Avatar(models.Model):
     
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True, null=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     picture = models.ForeignKey(Avatar, on_delete=models.SET_NULL, null=True)
 
     @receiver(post_save, sender=User)
