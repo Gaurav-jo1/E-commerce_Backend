@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import ShopPage from '../ShopPage';
-import NewFeature from "../../assets/NewFeature.png";
+import NewFeature from "../../assets/newfeature.webp";
 
 
 
@@ -21,7 +21,7 @@ const NewFeatured:React.FC = () => {
 
   return (
     <div>
-      <ShopPage productData={NewFeaturedData} MainImage={NewFeature} PageName={"New & Featured"}/>
+      <ShopPage productData={NewFeaturedData} mainImage={NewFeature} pageName={"New & Featured"}/>
     </div>
   )
 }

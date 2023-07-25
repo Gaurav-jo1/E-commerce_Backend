@@ -64,15 +64,21 @@ export interface AuthContainerProps {
   children: React.ReactNode;
 }
 
-// ShopPage 
-type ShopPageData  = {
+// ShopPage
+interface Product {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+}
+
+interface ShopPageData {
   id: number;
   position_id: number;
-  product: string;
-  image: string;
+  product: Product;
 }
 export interface ShopPageProps {
-  PageName: string;
+  pageName: string;
   productData: ShopPageData[];
-  MainImage: string;
+  mainImage: string;
 }

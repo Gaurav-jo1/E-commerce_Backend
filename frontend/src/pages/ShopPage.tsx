@@ -14,8 +14,8 @@ import { AuthContext } from "../context/AuthContext";
 
 const ShopPage: React.FC<ShopPageProps> = ({
   productData,
-  MainImage,
-  PageName,
+  mainImage,
+  pageName,
 }) => {
   const { setLoginOpen, setSignupOpen } = useContext(GlobalValue);
   const { authTokens } = useContext(AuthContext);
@@ -54,13 +54,13 @@ const ShopPage: React.FC<ShopPageProps> = ({
       <div className="ShopPage_container-main">
         <div className="ShopPage_container-main_poster">
           <img
-            src={MainImage}
+            src={mainImage}
             alt="Mens Section "
             height={"100%"}
             width={"100%"}
           />
           <div className="ShopPage_container-main_text">
-            <h1>{PageName}</h1>
+            <h1>{pageName}</h1>
           </div>
         </div>
         <div className="ShopPage_products-container">
@@ -68,14 +68,14 @@ const ShopPage: React.FC<ShopPageProps> = ({
             <div key={product.id} className="ShopPage_products_container-item">
               <div className="ShopPage_products_container-item_image">
                 <img
-                  src={`http://127.0.0.1:8000${product.image}`}
-                  alt={product.product}
+                  src={`http://127.0.0.1:8000${product.product.image}`}
+                  alt={product.product.name}
                   height={"100%"}
                   width={"100%"}
                 />
               </div>
               <div className="ShopPage_products_container-item_title">
-                <p>{product.product}</p>
+                <p>{product.product.name}</p>
               </div>
 
               <div className="ShopPage_products_container-item_cart">

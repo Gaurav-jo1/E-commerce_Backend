@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import ShopPage from '../ShopPage';
-import WomensPoster from "../../assets/womenPoster.png";
+import WomensPoster from "../../assets/womenposter.webp";
 
 const WomenPage:React.FC = () => {
   const { isLoading, error, data:WomenPageData} = useQuery(["WomenPage_Data"], () =>
@@ -19,7 +19,7 @@ const WomenPage:React.FC = () => {
 
   return (
     <div>
-      <ShopPage productData={WomenPageData} MainImage={WomensPoster} PageName={"Women"}/>
+      <ShopPage productData={WomenPageData} mainImage={WomensPoster} pageName={"Women"}/>
     </div>
   )
 }

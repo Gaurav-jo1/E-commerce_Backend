@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import ShopPage from '../ShopPage';
-import KidsPoster from "../../assets/childPoster.png";
+import KidsPoster from "../../assets/childposter.webp";
 
 
 const KidsPage:React.FC = () => {
@@ -20,7 +20,7 @@ const KidsPage:React.FC = () => {
 
   return (
     <div>
-      <ShopPage productData={KidsPageData} MainImage={KidsPoster}  PageName={"Kids"}/>
+      <ShopPage productData={KidsPageData} mainImage={KidsPoster}  pageName={"Kids"}/>
     </div>
   )
 }

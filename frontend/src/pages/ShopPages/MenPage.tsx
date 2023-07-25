@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import ShopPage from '../ShopPage';
-import MensPoster from "../../assets/mensPoster.png";
+import MensPoster from "../../assets/mensposter.webp";
 
 
 const MenPage:React.FC = () => {
@@ -20,7 +20,7 @@ const MenPage:React.FC = () => {
 
   return (
     <div>
-      <ShopPage productData={MenPageData} MainImage={MensPoster} PageName={"Mens"} />
+      <ShopPage productData={MenPageData} mainImage={MensPoster} pageName={"Mens"} />
     </div>
   )
 }
