@@ -1,5 +1,16 @@
 from django.db import models
 
+class ProductsModel(models.Model):
+    image = models.ImageField(upload_to='products/',default=None)
+    name = models.CharField(max_length=100, default=None)
+    price = models.IntegerField(default=None)
+
+    def __str__(self):
+        return f"{self.name}"
+    
+    class Meta:
+        ordering = ['name'] 
+
 # Create your models here.
 class ShopModel(models.Model):
     category_list = (
@@ -10,10 +21,14 @@ class ShopModel(models.Model):
         ('Sale','Sale'),
     )
     
-    position_id = models.IntegerField(unique=False, default=None)
     category = models.CharField(max_length=100, choices=category_list)
-    product = models.CharField(max_length=100, default=None)
-    image = models.ImageField(upload_to='products/',default=None)
+    position_id = models.IntegerField(unique=False, null=True)
+    product = models.ForeignKey(ProductsModel, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.position_id}. {self.category}: {self.product}"
+    
+    class Meta:
+        ordering = ['category', 'position_id'] 
+
+
