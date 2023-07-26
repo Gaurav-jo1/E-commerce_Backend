@@ -3,9 +3,10 @@ from rest_framework.response import Response
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework import status
-
+from .models import Cart
+from .serializers import CartSerializer
+from shop.models import ProductsModel
 import redis
-from django.core.cache import cache
 
 
 # Create your views here.
@@ -15,13 +16,17 @@ class CartAddView(APIView):
     def add_data_to_redis_set(self, key, data):
         r = redis.Redis(host="redis", port=6379, db=0)
         r.sadd(key, data)
-        cache.set(key, r.smembers(key)) 
 
-    # def get_data_from_redis_set(self, key):
-    #     r = redis.Redis(host="redis", port=6379, db=0)
-    #     cache.clear()
-    #     data = r.smembers(key)
-    #     return data
+    def get_data_from_redis_set(self, key):
+        r = redis.Redis(host="redis", port=6379, db=0)
+        data = r.smembers(key)
+        return data
+
+    def add_data_to_db_shop(self, username, product_id):
+        product = ProductsModel.objects.get(id=product_id)
+        Cart.objects.create(user=username)
+        Cart.Products_list.set(product)
+        Cart.save()
 
     def get(self, request, format=None):
         user_id = request.user.id
@@ -29,10 +34,9 @@ class CartAddView(APIView):
         try:
             if user_id:
                 cache_key = f"{user_id}_cart"
-                # products_list = self.get_data_from_redis_set(cache_key)
-                r = redis.Redis(host="redis", port=6379, db=0)
-                r.smembers(cache_key)
-                return Response({"message": list(r.smembers(cache_key))}, status.HTTP_200_OK)
+                products_cache_list = self.get_data_from_redis_set(cache_key)
+                # products_db_list = Cart.objects.get(User=request.user)
+                return Response({"message": products_cache_list}, status.HTTP_200_OK)
 
             else:
                 return Response(
@@ -49,16 +53,31 @@ class CartAddView(APIView):
         # Getting the product with it's product_id
         product_id = request.data.get("product_id")
         user_id = request.user.id
+        data = {"User": user_id, "Products_list": [product_id]}
 
         try:
             if product_id is not None:
                 cache_key = f"{user_id}_cart"
-                # cache.set(cache_key, product_id, timeout=None)
                 self.add_data_to_redis_set(cache_key, product_id)
 
-                return Response(
-                    {"message": "Product Added to Cart"}, status.HTTP_200_OK
-                )
+                user_cart_exists = Cart.objects.filter(User=user_id)
+
+                if user_cart_exists:
+                    user_cart = Cart.objects.get(User=user_id)
+                    user_cart.add_product(product_id)
+
+                    return Response(
+                        {"message": "Product Added to Cart"}, status.HTTP_200_OK
+                    )
+                else:
+                    serializer = CartSerializer(data=data)
+                    if serializer.is_valid():
+                        serializer.save()
+
+                    return Response(
+                        {"error": "Missing product"},
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
 
             else:
                 return Response(

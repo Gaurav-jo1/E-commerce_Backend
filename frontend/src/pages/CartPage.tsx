@@ -14,7 +14,7 @@ const CartPage: React.FC = () => {
   
   useEffect(() => {
     const fetchCart = () => {
-        axios.get("http://127.0.0.1:8000/cart/get/", {
+        axios.get("http://127.0.0.1:8000/cart/products/", {
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + String(authTokens.access),

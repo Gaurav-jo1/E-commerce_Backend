@@ -9,5 +9,12 @@ class Cart(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     Products_list = models.ManyToManyField(ShopModel)
 
+
+    def add_product(self, product):
+        self.Products_list.add(product)
+
+    def remove_product(self, product):
+        self.Products_list.remove(product)
+
     def __str__(self):
         return f"User: {self.User}"

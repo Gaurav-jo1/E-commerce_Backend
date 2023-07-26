@@ -25,7 +25,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
   );
 
   const addProductToCard = (product_id:number) => {
-    axios.post("http://127.0.0.1:8000/cart/add/", {
+    axios.post("http://127.0.0.1:8000/cart/products/", {
       product_id: product_id
     }, {
       headers: {
