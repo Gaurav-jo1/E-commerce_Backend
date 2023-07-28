@@ -79,7 +79,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
               </div>
 
               <div className="ShopPage_products_container-item_cart">
-                <button onClick={() => addProductToCard(product.id)}>
+                <button onClick={() => addProductToCard(product.product.id)}>
                   {" "}
                   <p>
                     {" "}

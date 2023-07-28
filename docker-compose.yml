@@ -13,9 +13,11 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   redis:
-    container_name: redis
-    image: redis:latest
-
+    image: redis/redis-stack:latest
+    container_name: redis-stack
+    ports:
+      - "6379:6379"
+      
   backend:
     build: ./backend
     container_name: backend_c

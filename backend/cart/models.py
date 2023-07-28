@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-from shop.models import ShopModel
-
+from shop.models import ProductsModel
 # Create your models here.
 
 class Cart(models.Model):
     id = models.AutoField(primary_key=True, null=False)
     User = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
-    Products_list = models.ManyToManyField(ShopModel)
+    Products_list = models.ManyToManyField(ProductsModel)
 
 
     def add_product(self, product):
