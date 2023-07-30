@@ -26,6 +26,13 @@ class CartGetView(APIView):
             user_cart_list.append(product_json)
         return user_cart_list
     
+    def add_data_to_redis_set(self, cart_key, product_data_list):
+        r = redis.Redis(host="redis", port=6379, db=0)                      
+        for product in product_data_list:
+            r.sadd(cart_key, json.dumps(product))
+        r.expire(cart_key, 600)
+
+
     def get(self, request, format=None):
         user_id = request.user.id
 
@@ -40,6 +47,7 @@ class CartGetView(APIView):
                     usercart_db = Cart.objects.get(User=user_id)
                     usercart_db_list = usercart_db.Products_list.all()
                     serializer = ProductsModelSerializer(usercart_db_list, many=True)
+                    self.add_data_to_redis_set(cart_key, serializer.data)
                     return Response(serializer.data, status.HTTP_200_OK)
 
             else:
@@ -60,7 +68,7 @@ class CartAddView(APIView):
     def add_data_to_redis_set(self, cart_key, product_data_json):
         r = redis.Redis(host="redis", port=6379, db=0)
         r.sadd(cart_key, product_data_json)
-        r.expire(cart_key, 600)
+        r.expire(cart_key, 10)
 
     def post(self, request, format=None):
         product_id = request.data.get("product_id")
