@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { AuthPages } from "../components/Commonfun";
 import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
@@ -37,7 +36,6 @@ const CartPage: React.FC = () => {
       <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
       <NavPage />
       <h1>CartPage</h1>
-      <Link to="/"> Homepage </Link>
       <Footer />
     </div>
   );
