@@ -36,7 +36,6 @@ const Navbar: React.FC<SignComponentProps> = ({
     axios
       .get("http://127.0.0.1:8000/user_profile/info/", { headers })
       .then((response) => {
-        console.log(response.data);
         setGetUserInfo(false);
         setUserInfo(response.data);
       })

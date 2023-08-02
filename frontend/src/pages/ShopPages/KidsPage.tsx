@@ -16,8 +16,6 @@ const KidsPage:React.FC = () => {
 
   if (error) return "An error has occurred: " + error;
 
-  console.log("KidsPageData",KidsPageData)
-
   return (
     <div>
       <ShopPage productData={KidsPageData} mainImage={KidsPoster}  pageName={"Kids"}/>

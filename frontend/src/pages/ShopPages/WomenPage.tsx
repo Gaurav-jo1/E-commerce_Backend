@@ -15,8 +15,6 @@ const WomenPage:React.FC = () => {
 
   if (error) return "An error has occurred: " + error;
 
-  console.log("WomenPageData",WomenPageData)
-
   return (
     <div>
       <ShopPage productData={WomenPageData} mainImage={WomensPoster} pageName={"Women"}/>

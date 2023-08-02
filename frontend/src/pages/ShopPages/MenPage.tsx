@@ -16,7 +16,7 @@ const MenPage:React.FC = () => {
 
   if (error) return "An error has occurred: " + error;
 
-  console.log("MenPageData",MenPageData)
+  console.log(MenPageData)
 
   return (
     <div>
