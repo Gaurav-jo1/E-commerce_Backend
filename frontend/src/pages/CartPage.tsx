@@ -61,7 +61,10 @@ const CartPage: React.FC = () => {
           Authorization: "Bearer " + String(authTokens.access),
         },
       })
-      .then((response) => response.data)
+      .then((response) => response.data), 
+      {
+        refetchOnWindowFocus: false,
+      }
   );
 
   if (isLoading) return "Loading...";
