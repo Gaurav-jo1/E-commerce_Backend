@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from shop.models import ProductsModel
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 # Create your models here.
 
 class Cart(models.Model):
     id = models.AutoField(primary_key=True, null=False)
-    User = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
-    Products_list = models.ManyToManyField(ProductsModel)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    Products_list = models.ManyToManyField(ProductsModel, blank=True)
 
     def add_product(self, product):
         self.Products_list.add(product)
@@ -15,5 +16,12 @@ class Cart(models.Model):
     def remove_product(self, product):
         self.Products_list.remove(product)
 
+    @receiver(post_save, sender=User)
+    def create_cart_for_new_user(sender, instance, created, **kwargs):
+        if created:
+            # If the User instance is newly created, create a new Cart for the user
+            Cart.objects.create(user=instance)
+
+
     def __str__(self):
-        return f"User: {self.User}"
+        return f"User: {self.user}"

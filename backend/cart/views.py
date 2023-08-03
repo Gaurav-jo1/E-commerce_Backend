@@ -35,7 +35,7 @@ class CartGetView(APIView):
             if products_cache_list:
                 return Response(products_cache_list, status.HTTP_200_OK)
             else:
-                usercart_cart_db = get_object_or_404(Cart, User=user_id)
+                usercart_cart_db = get_object_or_404(Cart, user=user_id)
                 usercart_db_list = usercart_cart_db.Products_list.all()
                 serializer = ProductsModelSerializer(usercart_db_list, many=True)
 
@@ -81,7 +81,7 @@ class CartAddView(APIView):
             # Check if the user already has a cart
             if Cart.objects.filter(User=user_id).exists():
                 # If the user has a cart, add the product to the existing cart
-                user_cart = Cart.objects.get(User=user_id)
+                user_cart = Cart.objects.get(user=user_id)
                 user_cart.add_product(product_id)
 
                 # Store product data in Redis set associated with the user's cart
@@ -126,7 +126,7 @@ class CartDeleteItemView(APIView):
 
         try:
             # Check if the user has a cart
-            user_cart = get_object_or_404(Cart, User=user_id)
+            user_cart = get_object_or_404(Cart, user=user_id)
         except Cart.DoesNotExist:
             return Response({"error": "Cart not found"}, status=status.HTTP_404_NOT_FOUND)
 

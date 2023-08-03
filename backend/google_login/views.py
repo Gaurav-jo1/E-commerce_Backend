@@ -1,3 +1,4 @@
+import os
 from rest_framework.decorators import APIView
 from rest_framework import status
 from rest_framework import permissions
@@ -6,9 +7,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from google.oauth2 import id_token
 from django.contrib.auth.models import User
 from google.auth.transport import requests
-import os
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from jwt.exceptions import InvalidTokenError
 
 
 # Create your views here.
@@ -26,9 +27,7 @@ class GoogleLogin(APIView):
             # Verify the ID token using the Google API
             CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
             idinfo = id_token.verify_oauth2_token(user_token, requests.Request(), CLIENT_ID)
-
             # Extract the user info from the user token
-
             email = idinfo['email']
             name = idinfo['name']
 
@@ -48,15 +47,16 @@ class GoogleLogin(APIView):
                     try:
                         user.save()
                     except IntegrityError as e:
-                        # Handle the exception here
-                        print(f"Error saving user: {e}")
+                        return Response({"error": f"Error saving user: {e}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
                     else:
                         # The save operation completed successfully
                         user.refresh_from_db()
                         # Continue with the rest of the program here
                         refresh = RefreshToken.for_user(user)
                         return Response({'refresh': str(refresh), 'access': str(refresh.access_token)})
+            
+            else:
+                return Response({"error": "Email and Name not found in id_token"}, status=status.HTTP_400_BAD_REQUEST)
 
-        except ValueError:
-            # Invalid token
-            return Response(status=401)
+        except InvalidTokenError:
+            return Response({"error": "Invalid Token"}, status=status.HTTP_401_UNAUTHORIZED)
