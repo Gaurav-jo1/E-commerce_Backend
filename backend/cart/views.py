@@ -14,7 +14,6 @@ from shop.serializers import ProductsModelSerializer
 import json
 import redis
 
-
 # Create your views here.
 class CartGetView(APIView):
     # Create a connection to the Redis server

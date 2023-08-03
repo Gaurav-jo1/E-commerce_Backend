@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -13,11 +13,15 @@ class UserProfileView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        user = request.user
-        if user:
-            user_info = UserProfile.objects.get(user=user.id)
+        try:
+            user = request.user
+        except AttributeError:
+            return Response({"error": "Missing product"}, status=status.HTTP_404_NOT_FOUND)
+        
+        try:
+            user_info = get_object_or_404(UserProfile, user=user.id)
             serializer = UserProfileSerializer(user_info)
             return Response(serializer.data,status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        
+        except Exception as e:
+            # Return error response for any other exceptions
+            return Response({"error": "Internal Server Error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
