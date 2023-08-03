@@ -7,6 +7,8 @@ import { AuthPages } from "../components/Commonfun";
 import { GlobalValue } from "../context/GlobalValue";
 import { AuthContext } from "../context/AuthContext";
 
+import { queryClient } from "../main";
+
 // Components
 import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
@@ -27,7 +29,24 @@ const CartPage: React.FC = () => {
   const { authTokens } = useContext(AuthContext);
 
   const calculateSubtotal = (products: MyCart[]): number => {
-     return products.reduce((total, product) => total + product.price, 0);
+    return products.reduce((total, product) => total + product.price, 0);
+  };
+
+  const handleDelete = (product_id: number) => {
+    axios
+      .delete(`http://127.0.0.1:8000/cart/products/delete/${product_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        queryClient.invalidateQueries(["user_cart"]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const {
@@ -72,7 +91,9 @@ const CartPage: React.FC = () => {
                 </div>
               </div>
               <div className="CartPage_main-delete-container">
-                  <button><MdDelete /></button>
+                <button onClick={() => handleDelete(product.id)}>
+                  <MdDelete />
+                </button>
               </div>
             </div>
           ))}
@@ -84,7 +105,10 @@ const CartPage: React.FC = () => {
           </div>
           <div className="CartPage_products-container">
             {CartPageData.map((product: MyCart) => (
-              <div key={product.id} className="CartPage_products_container-products">
+              <div
+                key={product.id}
+                className="CartPage_products_container-products"
+              >
                 <p>{product.name}</p>
                 <b>${product.price}</b>
               </div>

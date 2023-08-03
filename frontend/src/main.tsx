@@ -6,7 +6,7 @@ import "./styles/index.scss";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Create a client
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // Set cacheTime to 0 to disable caching and always refetch the data

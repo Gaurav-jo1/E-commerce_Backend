@@ -1,4 +1,3 @@
-
 from django.contrib.auth.models import User
 
 from rest_framework.views import APIView
@@ -9,9 +8,7 @@ from rest_framework import status
 from .serializers import UserProfileSerializer
 from .models import UserProfile
 
-
 # Create your views here.
-
 class UserProfileView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
