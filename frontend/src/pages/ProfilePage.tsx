@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
 import { GlobalValue } from "../context/GlobalValue";
 import Footer from "../components/Footer";
+import { redirect } from "react-router-dom";
 
 interface MyData {
   id: number;
@@ -32,7 +33,9 @@ const ProfilePage: React.FC = () => {
 
   if (isLoading) return "Loading...";
 
-  if (error) return "An error has occurred: " + error;
+  if (error) {
+    redirect("/");
+  }
 
   return (
     <div>

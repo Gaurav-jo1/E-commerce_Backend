@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthPages } from "../components/Commonfun";
 import { GlobalValue } from "../context/GlobalValue";
 import { AuthContext } from "../context/AuthContext";
-
+import { redirect } from "react-router-dom";
 import { queryClient } from "../main";
 
 // Components
@@ -69,7 +69,9 @@ const CartPage: React.FC = () => {
 
   if (isLoading) return "Loading...";
 
-  if (error) return "An error has occurred: " + error;
+  if (error) {
+    redirect("/");
+  }
 
   return (
     <div className="CartPage-Container">

@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.core.cache import cache
 from django.template.loader import render_to_string
+from django.shortcuts import get_object_or_404
 
 # Rest Framework
 from rest_framework.views import APIView
@@ -15,64 +16,50 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
+from rest_framework import permissions
 from django.contrib.auth import authenticate
+import redis
+from .serializers import UserCredentialsSerializer, UserNewSerializer
 
 
-# Create your views here.
 class UserLoginView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
-        username = request.data.get("username")
-        email = request.data.get("email")
-        password = request.data.get("password")
+        # Log in a user with either username or email and password.
         try:
+            # Validate input data using serializer (Assuming you have defined a serializer named UserLoginSerializer)
+            serializer = UserCredentialsSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
 
+            username = serializer.validated_data.get("username")
+            email = serializer.validated_data.get("email")
+            password = serializer.validated_data.get("password")
+
+            # Attempt to authenticate the user
             if username and password:
                 user = authenticate(username=username, password=password)
-                if user is not None:
-
-                    refresh = RefreshToken.for_user(user)
-
-                    return Response(
-                        {
-                            "refresh": str(refresh),
-                            "access": str(refresh.access_token),
-                        },
-                        status.HTTP_200_OK,
-                    )
-
-                else:
-                    return Response(
-                        {"error": "Credentials are invalid"},
-                        status=status.HTTP_400_BAD_REQUEST,
-                    )
-
             elif email and password:
-                user = User.objects.get(email=email)
-                user_username = user.username
-                valid_user = authenticate(username=user_username, password=password)
-
-                if valid_user is not None:
-
-                    refresh = RefreshToken.for_user(valid_user)
-
-                    return Response(
-                        {
-                            "refresh": str(refresh),
-                            "access": str(refresh.access_token),
-                        },
-                        status.HTTP_200_OK,
-                    )
-                else:
-                    return Response(
-                        {"error": "Credentials are invalid"},
-                        status=status.HTTP_400_BAD_REQUEST,
-                    )
+                try:
+                    user = User.objects.get(email=email)
+                    user = authenticate(username=user.username, password=password)
+                except User.DoesNotExist:
+                    user = None
             else:
                 return Response(
-                    {"error": "Missing credentials "},
-                    status=status.HTTP_400_BAD_REQUEST,
+                    {"error": "Missing credentials"}, status=status.HTTP_400_BAD_REQUEST
+                )
+
+            # Check if user is authenticated and generate tokens
+            if user is not None:
+                refresh = RefreshToken.for_user(user)
+                return Response(
+                    {"refresh": str(refresh), "access": str(refresh.access_token)},
+                    status=status.HTTP_200_OK,
+                )
+            else:
+                return Response(
+                    {"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST
                 )
         except Exception as e:
             return Response(
@@ -84,12 +71,14 @@ class RegisterView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request, format=None):
-        # Extract user information from the request data
-        username = request.data.get("username")
-        email = request.data.get("email")
-        password = request.data.get("password")
-
         try:
+            serializer = UserCredentialsSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+
+            username = serializer.validated_data.get("username")
+            email = serializer.validated_data.get("email")
+            password = serializer.validated_data.get("password")
+
             # Check if all required information is present
             if username and email and password:
                 # Check if a user with the same email address already exists
@@ -101,7 +90,7 @@ class RegisterView(APIView):
                         {"error": "User with this credential already exists"},
                         status=status.HTTP_400_BAD_REQUEST,
                     )
-                    
+
                 else:
                     # If the user does not already exist, create a new user and generate access and refresh tokens
                     user = User.objects.create_user(
@@ -141,6 +130,12 @@ class ResetPassword(APIView):
     def post(self, request, format=None):
         try:
             user_email = request.data.get("user_email")
+        except AttributeError:
+            return Response(
+                {"error": "Missing product"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        try:
             random_number = random.randint(100000, 999999)
             random_number_str = str(random_number)
 
@@ -159,47 +154,37 @@ class ResetPassword(APIView):
             )
             email_message = f"Here is your recovery code {random_number} for {user_email} \n The code is valid for only 1 hour"
 
-            # Check if email information is present
-            if user_email:
-                # Check if a user with the same email address already exists
-                email_exists = User.objects.filter(email=user_email).first()
+            # Check if a user with the email address already exists
+            email_exists = get_object_or_404(User, email=user_email)
 
-                if email_exists:
-                    cache_key = f"user_variable_{email_exists.id}"
-                    if cache.has_key(cache_key):
-                        cache.delete(cache_key)
-                        cache.set(cache_key, random_number_str, 3600)
-                    else:
-                        cache.set(cache_key, random_number_str, 3600)
+            cache_key = f"user_variable_{email_exists.id}"
 
-                    send_mail(
-                        subject="Shoppy recovery code",
-                        message=email_message,
-                        from_email="Shoppy Code <{}>".format(
-                            os.environ.get("EMAIL_HOST_USER")
-                        ),
-                        recipient_list=[user_email],
-                        html_message=html_message,
-                    )
+            self.add_code_to_redis(cache_key, random_number_str)
 
-                    return Response({"user_id": email_exists.id}, status.HTTP_200_OK)
+            send_mail(
+                subject="Shoppy recovery code",
+                message=email_message,
+                from_email="Shoppy Code <{}>".format(os.environ.get("EMAIL_HOST_USER")),
+                recipient_list=[user_email],
+                html_message=html_message,
+            )
 
-                else:
-                    return Response(
-                        {"error": "User with this email does not exist"},
-                        status=status.HTTP_404_NOT_FOUND,
-                    )
-
-            else:
-                return Response(
-                    {"error": "Missing user_email field"},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
+            return Response({"user_id": email_exists.id}, status.HTTP_200_OK)
 
         except Exception as e:
             return Response(
                 {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+    def add_code_to_redis(self, cache_key, random_number_str):
+        r = redis.Redis(host="redis", port=6379, db=0)
+        if r.exists(cache_key):
+            r.delete(cache_key)
+            r.set(cache_key, random_number_str)
+            r.expire(cache_key, 3600)
+        else:
+            r.set(cache_key, random_number_str)
+            r.expire(cache_key, 3600)
 
 
 class ResetcodeCheck(APIView):
@@ -209,12 +194,18 @@ class ResetcodeCheck(APIView):
         try:
             user_id = request.data.get("user_id")
             user_code = request.data.get("user_code")
+        except AttributeError:
+            return Response(
+                {"error": "Missing product"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        try:
             cache_key = f"user_variable_{user_id}"
-            correct_code = cache.get(cache_key)
+            correct_code = self.get_code_from_redis(cache_key)
 
             if correct_code is not None:
                 # Check if the code user sent is valid or not
-                if user_code == correct_code:
+                if user_code == correct_code.decode('utf-8'):
                     # cache.delete(cache_key)
                     return Response(
                         {"Success": "User Has successfuly mathced the code"},
@@ -233,49 +224,63 @@ class ResetcodeCheck(APIView):
             return Response(
                 {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+        
+    def get_code_from_redis(self,cache_key):
+        r = redis.Redis(host="redis", port=6379, db=0)
+        return r.get(cache_key)
 
 
 class UserNewPassword(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
-        user_id = request.data.get("user_id")
-        user_email = request.data.get("user_email")
-        user_code = request.data.get("user_code")
-        cache_key = f"user_variable_{user_id}"
-        user_new_password = request.data.get("user_new_password")
-        user_reEnter_password = request.data.get("user_reEnter_password")
-        correct_code = cache.get(cache_key)
+        try:
+            serializer = UserNewSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
 
-        if user_id and user_email and user_code:
-            try:
-                # Check if a user with the same email address already exists
-                user_email_exists = User.objects.filter(email=user_email).first()
-
-                if user_email_exists:
-                    if (
-                        user_new_password == user_reEnter_password
-                        and user_code == correct_code
-                    ):
-                        user_email_exists.set_password(user_new_password)
-                        user_email_exists.save()
-
-                        return Response(
-                            {"Success": "User successfuly changed the password"},
-                            status.HTTP_200_OK,
-                        )
-                    else:
-                        return Response(
-                            {"error": "Invalid code or passwords do not match"},
-                            status=status.HTTP_401_UNAUTHORIZED,
-                        )
-            except ObjectDoesNotExist:
-                return Response(
-                    {"error": "User with the given email does not exist"},
-                    status=status.HTTP_404_NOT_FOUND,
-                )
-        else:
-            return Response(
-                {"error": "Missing required parameters"},
-                status=status.HTTP_400_BAD_REQUEST,
+            user_id = serializer.validated_data.get("user_id")
+            user_email = serializer.validated_data.get("user_email")
+            user_code = serializer.validated_data.get("user_code")
+            user_new_password = serializer.validated_data.get("user_new_password")
+            user_reEnter_password = serializer.validated_data.get(
+                "user_reEnter_password"
             )
+
+        except (KeyError, AttributeError) as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+        cache_key = f"user_variable_{user_id}"
+        correct_code = self.get_code_from_redis(cache_key)
+
+        try:
+            # Check if a user with the same email address already exists
+            user_email_exists = get_object_or_404(User, email=user_email)
+
+            if user_new_password != user_reEnter_password:
+                return Response(
+                    {"error": "Passwords do not match"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            if user_code != correct_code.decode('utf-8'):
+                return Response(
+                    {"error": "Invalid code"},
+                    status=status.HTTP_401_UNAUTHORIZED,
+                )
+
+            user_email_exists.set_password(user_new_password)
+            user_email_exists.save()
+
+            return Response(
+                {"Success": "User successfuly changed the password"},
+                status.HTTP_200_OK,
+            )
+
+        except Exception as e:
+            return Response(
+                {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+    
+    def get_code_from_redis(self,cache_key):
+        r = redis.Redis(host="redis", port=6379, db=0)
+        return r.get(cache_key)

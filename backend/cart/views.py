@@ -16,6 +16,7 @@ import redis
 
 # Create your views here.
 class CartGetView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     # Create a connection to the Redis server
     redis_connection = redis.Redis(host="redis", port=6379, db=0)
 
