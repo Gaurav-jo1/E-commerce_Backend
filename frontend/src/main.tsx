@@ -14,6 +14,7 @@ export const queryClient = new QueryClient({
 
       // Set staleTime to 5 seconds (or any short duration you prefer)
       staleTime: 0, // 5 seconds in milliseconds
+      refetchOnWindowFocus: false,
     },
   },
 });

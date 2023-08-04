@@ -7,14 +7,13 @@ import { Link } from "react-router-dom";
 const myNavArray: string[] = ["New & Featured", "Men", "Women", "Kids", "Sale"];
 
 const NavPage: React.FC = () => {
-
   return (
-    <nav className="NavPages_container">
-      <ul className="NavPages_container-ul">
+    <nav className="navpage-container">
+      <ul>
         {myNavArray.map((item, index) => (
-          <Link key={index} to={`/${item}`}>
-            <li>{item}</li>
-          </Link>
+          <li key={index}>
+            <Link to={`/${item}`}>{item}</Link>
+          </li>
         ))}
       </ul>
     </nav>

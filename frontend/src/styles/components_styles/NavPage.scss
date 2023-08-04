@@ -1,7 +1,43 @@
-.NavPages_container {
+.navpage-container {
   background-color: white;
   margin: 9px 0;
   position: relative;
+
+  &-ul {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    list-style: none;
+    text-align: center;
+    padding: 1px 0;
+
+    li {
+      margin: 0 20px;
+      height: 100%;
+      line-height: 36px;
+      font-size: 18px;
+      font-family: 'Lunasima', sans-serif;
+      position: relative;
+      cursor: pointer;
+
+      &:after {
+        content: "";
+        display: block;
+        margin: auto;
+        height: 1px;
+        width: 0;
+        background: transparent;
+        transition: width 0.5s ease, background-color 0.5s ease;
+      }
+
+      &:hover {
+        &:after {
+          width: 100%;
+          background-color: black;
+        }
+      }
+    }
+  }
 }
 
 @keyframes reveal-border {
@@ -12,40 +48,3 @@
     width: 100%;
   }
 }
-
-.NavPages_container-ul {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  list-style: none;
-  text-align: center;
-  padding: 1px 0;
-  
-  li {
-    margin: 0 20px;
-    height: 100%;
-    line-height: 36px;
-    font-size: 18px;
-    font-family: 'Lunasima', sans-serif;
-    position: relative;
-
-    &:after {
-      content: "";
-      display: block;
-      margin: auto;
-      height: 1px;
-      width: 0px;
-      background: transparent;
-      transition: width 0.5s ease, background-color 0.5s ease;
-    }
-    &:hover:after {
-      width: 100%;
-      background-color: black;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-}
-

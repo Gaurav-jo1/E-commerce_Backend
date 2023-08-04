@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-// Icons
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiShoppingCart } from "react-icons/ci";
 import { AiOutlineHeart } from "react-icons/ai";
-// Interface and Types
 import { SignComponentProps } from "./CommonInterfaces";
+
+import "../styles/components_styles/Navbar.scss";
+import { AuthContext } from "../context/AuthContext";
+import { useQuery } from "@tanstack/react-query";
 
 interface MyData {
   id: number;
@@ -14,40 +16,32 @@ interface MyData {
   picture: string;
 }
 
-// Styling
-import "../styles/components_styles/Navbar.scss";
-import { AuthContext } from "../context/AuthContext";
+const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen,}) => {
 
-const Navbar: React.FC<SignComponentProps> = ({
-  setSignupOpen,
-  setLoginOpen,
-}) => {
   const [userSearch, setUserSearch] = useState<string>("");
-  const [getUserInfo, setGetUserInfo] = useState<boolean>(true);
-  const [userInfo, setUserInfo] = useState<MyData>();
+  const [fetchData, setFetchData] = useState<boolean>(false)
 
   const { authTokens } = useContext(AuthContext);
 
-  if (authTokens && getUserInfo) {
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + String(authTokens.access),
-    };
-    axios
-      .get("http://127.0.0.1:8000/user_profile/info/", { headers })
-      .then((response) => {
-        setGetUserInfo(false);
-        setUserInfo(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  if (authTokens && !fetchData) {
+    setFetchData(true);
   }
 
+  const { data: userInfo } = useQuery<MyData>(["user_profile"], () =>
+    axios .get<MyData>("http://127.0.0.1:8000/user_profile/info/", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      })
+      .then((response) => response.data),
+      { enabled: fetchData, }
+  );
+
   return (
-    <nav className="Navbar_container">
-      <div className="Navbar_container-search">
-        <p> <HiMagnifyingGlass /> </p>
+    <nav className="navbar-container">
+      <div className="navbar-search">
+        <p><HiMagnifyingGlass /></p>
         <input
           value={userSearch}
           type="text"
@@ -55,38 +49,27 @@ const Navbar: React.FC<SignComponentProps> = ({
           onChange={(e) => setUserSearch(e.target.value)}
         />
       </div>
-      <div className="Navbar_container-logo">
-          <Link to="/">
-            <p>Shoppy</p>
-          </Link>
+      <div className="navbar-logo">
+        <Link to="/"><p>Shoppy</p></Link>
       </div>
       {userInfo ? (
-        <div className="Navbar_container-profile">
-          <p>
-            {" "}
-            <AiOutlineHeart />{" "}
-          </p>
+        <div className="navbar-profile">
+          <p><AiOutlineHeart /></p>
           <Link to="/cart">
-            <p>
-              {" "}
-              <CiShoppingCart />{" "}
-            </p>
+            <p><CiShoppingCart /></p>
           </Link>
           <Link to="/profile">
-            <img
-              src={`http://127.0.0.1:8000${userInfo.picture}`}
-              alt="profile pic"
-            />
+            <img src={`http://127.0.0.1:8000${userInfo.picture}`} alt="Profile" />
           </Link>
         </div>
       ) : (
-        <div className="Navbar_container-buttons">
+        <div className="navbar-buttons">
           <p onClick={() => setSignupOpen(true)}>Sign up</p>
           <button onClick={() => setLoginOpen(true)}>Sign in</button>
         </div>
       )}
     </nav>
   );
-};
+}
 
 export default Navbar;

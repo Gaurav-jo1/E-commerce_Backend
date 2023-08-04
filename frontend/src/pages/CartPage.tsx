@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthPages } from "../components/Commonfun";
 import { GlobalValue } from "../context/GlobalValue";
 import { AuthContext } from "../context/AuthContext";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { queryClient } from "../main";
 
 // Components
@@ -16,7 +16,6 @@ import Footer from "../components/Footer";
 
 // Styling
 import "../styles/CartPage.scss";
-
 interface MyCart {
   id: number;
   image: string;
@@ -25,6 +24,8 @@ interface MyCart {
 }
 
 const CartPage: React.FC = () => {
+  const navigate = useNavigate();
+  
   const { setLoginOpen, setSignupOpen } = useContext(GlobalValue);
   const { authTokens } = useContext(AuthContext);
 
@@ -49,11 +50,7 @@ const CartPage: React.FC = () => {
       });
   };
 
-  const {
-    isLoading,
-    error,
-    data: CartPageData,
-  } = useQuery(["user_cart"], () =>
+  const { isLoading, error, data: CartPageData,} = useQuery(["user_cart"], () =>
     axios
       .get("http://127.0.0.1:8000/cart/products/get/", {
         headers: {
@@ -70,8 +67,10 @@ const CartPage: React.FC = () => {
   if (isLoading) return "Loading...";
 
   if (error) {
-    redirect("/");
+    navigate("/")
+
   }
+
 
   return (
     <div className="CartPage-Container">

@@ -1,4 +1,4 @@
-@keyframes slide1 {
+@keyframes slideLeft {
   0% {
     transform: translateX(50%);
   }
@@ -19,7 +19,7 @@
   }
 }
 
-@keyframes slide2 {
+@keyframes slideRight {
   0% {
     transform: translateX(100%);
   }
@@ -40,7 +40,7 @@
   }
 }
 
-.salebar_container {
+.salebar {
   background-color: rgb(243, 235, 235);
   overflow: hidden;
 
@@ -54,30 +54,35 @@
 
     li:nth-child(1) {
       position: relative;
-      animation: slide1 20s ease-in-out infinite;
+      animation: slideLeft 20s ease-in-out infinite;
       width: 100%;
     }
 
     li:nth-child(2) {
       position: relative;
-      animation: slide2 20s ease-in-out infinite;
+      animation: slideRight 20s ease-in-out infinite;
       width: 100%;
     }
 
-    .salebar_container-main {
-      p {
-        font-size: 15px;
-      }
+    .salebar-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
     }
 
-    .salebar_container-para {
-      p {
-        font-size: 12px;
-        text-decoration: underline;
-        padding: 3px 0;
-        &:hover {
-          cursor: pointer;
-        }
+    .salebar-heading {
+      font-size: 15px;
+    }
+
+    .salebar-description {
+      font-size: 12px;
+      text-decoration: underline;
+      padding: 3px 0;
+
+      &:hover {
+        cursor: pointer;
       }
     }
   }

@@ -1,32 +1,34 @@
+type SetBooleanStateAction = React.Dispatch<React.SetStateAction<boolean>>;
+
 // Sign up Page
 export interface SignComponentProps {
-  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSignupOpen: SetBooleanStateAction;
+  setLoginOpen: SetBooleanStateAction;
 }
 
 // Login Page
 export interface LoginComponentProps extends SignComponentProps {
-  setForgotOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setForgotOpen: SetBooleanStateAction;
 }
 
 // Forgot Component
 export interface ForgotPassComponentProps {
-  setForgotOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
+  setForgotOpen: SetBooleanStateAction;
+  setLoginOpen: SetBooleanStateAction;
+  setEmailCode: SetBooleanStateAction;
 }
 
 // Email Verification Component
 
 export interface EmailCodeComponentProps {
-  setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
+  setNewPassword: SetBooleanStateAction;
+  setEmailCode: SetBooleanStateAction;
 }
 
 // New Password Component
 export interface NewPassComponentProps {
-  setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setNewPassword: SetBooleanStateAction;
+  setLoginOpen: SetBooleanStateAction;
 }
 
 // Main Page Interface
@@ -53,9 +55,6 @@ export interface SectionImages {
     property2: string;
   };
 }
-
-// NavPage type
-export type TypeDictionary = Record<string, string[]>;
 
 // Auth Components
 export interface AuthContainerProps {

@@ -1,49 +1,43 @@
 import React from "react";
-import "../styles/Footer.scss";
+import { BsTwitter, BsGithub, BsLinkedin, BsFillFileEarmarkCodeFill } from "react-icons/bs";
 
-import {
-  BsTwitter,
-  BsGithub,
-  BsLinkedin,
-  BsFillFileEarmarkCodeFill,
-} from "react-icons/bs";
+import "../styles/components_styles/Footer.scss";
 
 const Footer: React.FC = () => {
   return (
-    <div className="Footer_container">
-      <div className="Footer_container_one-div">
-        <div className="Footer_container-list_container">
-          <ul className="Footer_container-ul_one">
-            <p>BECOME A MEMEBER</p>
-            <p>STUDENT DISCOUNTS</p>
-            <p>Send Us Feedback</p>
+    <footer className="footer-container">
+      <div className="footer-container-one-div">
+        <nav className="footer-container-list-container">
+          <ul className="footer-container-ul-one">
+            <li>BECOME A MEMBER</li>
+            <li>STUDENT DISCOUNTS</li>
+            <li>Send Us Feedback</li>
           </ul>
-          <ul className="Footer_container-ul_two">
-            <p>GET HELP</p>
+          <ul className="footer-container-ul-two">
+            <li>GET HELP</li>
             <li>Order Status</li>
             <li>Delivery</li>
             <li>Returns</li>
             <li>Payment Options</li>
             <li>Contact Us</li>
           </ul>
-          <ul className="Footer_container-ul_three">
-            <p>ABOUT SHOPPY</p>
+          <ul className="footer-container-ul-three">
+            <li>ABOUT SHOPPY</li>
             <li>News</li>
-            <li>Carrers</li>
+            <li>Careers</li>
             <li>Sustainability</li>
           </ul>
-        </div>
-        <div className="Footer_container-logos_container">
-          <a href="https://twitter.com/Gaurav1_Jo" target="_blank"><BsTwitter /></a>
-          <a href="https://github.com/Gaurav-jo1" target="_blank"><BsGithub /></a>
-          <a href="https://www.linkedin.com/in/gaurav-jo1/" target="_blank"><BsLinkedin /></a>
-          <a href="https://github.com/Gaurav-jo1/E-commerce" target="_blank"><BsFillFileEarmarkCodeFill /></a>
+        </nav>
+        <div className="footer-container-logos-container">
+          <a href="https://twitter.com/Gaurav1_Jo" target="_blank" rel="noopener noreferrer"><BsTwitter aria-label="Twitter" /></a>
+          <a href="https://github.com/Gaurav-jo1" target="_blank" rel="noopener noreferrer"><BsGithub aria-label="GitHub" /></a>
+          <a href="https://www.linkedin.com/in/gaurav-jo1/" target="_blank" rel="noopener noreferrer"><BsLinkedin aria-label="LinkedIn" /></a>
+          <a href="https://github.com/Gaurav-jo1/E-commerce" target="_blank" rel="noopener noreferrer"><BsFillFileEarmarkCodeFill aria-label="GitHub Repository" /></a>
         </div>
       </div>
-      <div className="Footer_container_two-div">
-        <div className="Footer_container-bottom_container">
+      <div className="footer-container-two-div">
+        <div className="footer-container-bottom-container">
           <p>&copy; 2023 Shoppy, Inc. All Rights Reserved</p>
-
           <ul>
             <li>Guides</li>
             <li>Terms of Sale</li>
@@ -52,7 +46,7 @@ const Footer: React.FC = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

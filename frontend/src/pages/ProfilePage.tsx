@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
 import { GlobalValue } from "../context/GlobalValue";
 import Footer from "../components/Footer";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface MyData {
   id: number;
@@ -18,6 +18,8 @@ interface MyData {
 const ProfilePage: React.FC = () => {
   const { authTokens } = useContext(AuthContext);
   const { setLoginOpen, setSignupOpen } = useContext(GlobalValue);
+
+  const navigate = useNavigate();
 
 
   const { isLoading, error, data } = useQuery<MyData>(["user_profile"], () =>
@@ -34,9 +36,8 @@ const ProfilePage: React.FC = () => {
   if (isLoading) return "Loading...";
 
   if (error) {
-    redirect("/");
+    navigate("/")
   }
-
   return (
     <div>
       <AuthPages />

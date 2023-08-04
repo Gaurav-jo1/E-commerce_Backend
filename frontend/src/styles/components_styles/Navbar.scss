@@ -1,4 +1,4 @@
-.Navbar_container {
+.navbar-container {
   background-color: rgb(243, 235, 235);
   display: flex;
   justify-content: space-between;
@@ -7,18 +7,18 @@
   text-align: center;
 }
 
-.Navbar_container-search {
+.navbar-search {
   display: flex;
   align-items: center;
   text-align: center;
 
   p {
     display: flex;
-    color: black;
     font-size: 18px;
+    font-weight: bold;
+    color: black;
     position: relative;
     left: 30px;
-    font-weight: bold;
 
     &:hover {
       cursor: pointer;
@@ -28,13 +28,12 @@
   input {
     border-radius: 15px;
     height: 35px;
-    padding-left: 40px;
     width: 140px;
+    padding-left: 40px;
     background-color: white;
     color: black;
-    border: none;
-    outline: none;
     border: 1px solid white;
+    outline: none;
 
     &::placeholder {
       color: rgb(142, 142, 142);
@@ -45,6 +44,7 @@
       background-color: rgb(255, 255, 255);
       color: black;
       border: 1px solid rgb(167, 167, 167);
+
       &:focus {
         outline: none;
         background-color: rgb(255, 255, 255);
@@ -59,27 +59,27 @@
   }
 }
 
-.Navbar_container-logo {
+.navbar-logo {
   a {
     all: unset;
   }
-  p {
-    font-family: "Abril Fatface", cursive;
-    font-size: 40px;
-    letter-spacing: 1.8px;
-    font-weight: 500;
 
+  p {
+    font-size: 40px;
+    font-weight: 500;
+    font-family: "Abril Fatface", cursive;
+    letter-spacing: 1.8px;
     &:hover {
       cursor: pointer;
     }
   }
 }
 
-.Navbar_container-profile {
+.navbar-profile {
   display: flex;
+  align-items: center;
   justify-content: center;
   text-align: center;
-  align-items: center;
   width: 194.6px;
   height: 50px;
   border-radius: 50%;
@@ -88,45 +88,43 @@
   img {
     height: 50px;
     width: 50px;
-    &:hover {
-      cursor: pointer;
-    }
-
     margin: 0 10px;
-  }
 
-  p:first-child {
-    font-size: 24px;
-    color: rgb(65, 65, 65);
-    margin: 0px 10px;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    display: flex;
-    align-items: center;
     &:hover {
       cursor: pointer;
     }
   }
-  p:last-child {
-    font-size: 29px;
+
+  p {
+    font-size: 24px;
+    font-size: bold;
     color: rgb(65, 65, 65);
     margin: 0px 10px;
     padding-top: 10px;
     padding-bottom: 5px;
     display: flex;
     align-items: center;
-    font-size: bold;
+
     &:hover {
       cursor: pointer;
     }
   }
 }
 
-.Navbar_container-buttons {
+.navbar-buttons {
   display: flex;
   align-items: center;
   color: white;
   width: 194.6px;
+
+  p {
+    margin-right: 10px;
+    color: black;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
   button {
     border: none;
@@ -138,17 +136,7 @@
     &:hover {
       cursor: pointer;
     }
-  }
 
-  p {
-    margin-right: 10px;
-    color: black;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  button {
     margin-left: 10px;
   }
 }
