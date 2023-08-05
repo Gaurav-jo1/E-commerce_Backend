@@ -48,7 +48,6 @@ class CartGetView(APIView):
                     return Response(status=status.HTTP_204_NO_CONTENT)
         except Exception as e:
             # Return error response for any other exceptions
-            print("Got Error Here")
             return Response({"error": "Internal Server Error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def get_data_from_redis_set(self, key):
@@ -84,7 +83,7 @@ class CartAddView(APIView):
             cart_key = f"cart:{user_id}"
 
             # Check if the user already has a cart
-            if Cart.objects.filter(User=user_id).exists():
+            if Cart.objects.filter(user=user_id).exists():
                 # If the user has a cart, add the product to the existing cart
                 user_cart = Cart.objects.get(user=user_id)
                 user_cart.add_product(product_id)
@@ -100,7 +99,7 @@ class CartAddView(APIView):
                 self.add_data_to_redis_set(cart_key, (json.dumps(serializer.data)))
 
                 # Create data for the new cart
-                data = {"User": user_id, "Products_list": [product_id]}
+                data = {"user": user_id, "Products_list": [product_id]}
                 serializer = CartSerializer(data=data)
 
                 # Validate and save the new cart data
