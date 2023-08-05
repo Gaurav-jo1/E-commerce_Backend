@@ -1,15 +1,16 @@
 import React, { useContext, useEffect } from "react";
 
 import axios from "axios";
+
 import { MdDelete } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
-import { AuthPages } from "../components/Commonfun";
 import { GlobalValue } from "../context/GlobalValue";
 import { AuthContext } from "../context/AuthContext";
 import { queryClient } from "../main";
 import { useNavigate } from "react-router-dom";
 
 // Components
+import { AuthPages } from "../components/Commonfun";
 import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
 import Footer from "../components/Footer";
@@ -58,24 +59,17 @@ const CartPage: React.FC = () => {
       });
   };
 
-  const {
-    isLoading,
-    error,
-    data: CartPageData,
-  } = useQuery(
-    ["user_cart"],
-    () =>
-      axios
-        .get("http://127.0.0.1:8000/cart/products/get/", {
+  const { isLoading, error, data: CartPageData,} = useQuery( ["user_cart"], () =>
+      axios.get("http://127.0.0.1:8000/cart/products/get/", {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + String(authTokens.access),
           },
         })
         .then((response) => response.data),
-    {
-      refetchOnWindowFocus: false,
-    }
+      {
+        refetchOnWindowFocus: false,
+      }
   );
 
   if (isLoading) return "Loading...";
@@ -85,64 +79,60 @@ const CartPage: React.FC = () => {
   }
 
   return (
-    <div className="CartPage-Container">
+    <div className="cart_page_container">
       <AuthPages />
       <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
       <NavPage />
-      <div className="CartPage_main_container-div">
-        <div className="CartPage_main_container">
-          {CartPageData &&
-            CartPageData.map((product: MyCart) => (
-              <div key={product.id} className="CartPage_main_container-product">
-                <div className="CartPage_main-image_name-container">
-                  <div className="CartPage_main_image-container">
-                    <img
-                      src={`http://127.0.0.1:8000${product.image}`}
-                      alt={product.name}
-                    />
-                  </div>
-                  <div className="CartPage_main_name-container">
-                    <p>{product.name}</p>
-                    <span>Lorem ipsum dolor sit amet.</span>
-                    <b>$ {product.price}</b>
-                  </div>
+      <div className="cart_page_main_container_div">
+        <div className="cart_page_main_container">
+          {CartPageData && CartPageData.map((product: MyCart) => (
+            <div key={product.id} className="cart_page_product">
+              <div className="cart_page_image_name_container">
+                <div className="cart_page_image_container">
+                  <img
+                    src={`http://127.0.0.1:8000${product.image}`}
+                    alt={product.name}
+                  />
                 </div>
-                <div className="CartPage_main-delete-container">
-                  <button onClick={() => handleDelete(product.id)}>
-                    <MdDelete />
-                  </button>
+                <div className="cart_page_name_container">
+                  <p>{product.name}</p>
+                  <span>Lorem ipsum dolor sit amet.</span>
+                  <b>$ {product.price}</b>
                 </div>
               </div>
-            ))}
+              <div className="cart_page_delete_container">
+                <button onClick={() => handleDelete(product.id)}>
+                  <MdDelete />
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="CartPage_grand_total-section">
-          <div className="CartPage_grand_heading">
+        <div className="cart_page_grand_total_section">
+          <div className="cart_page_grand_heading">
             <h1>Subtotal</h1>
             <span></span>
           </div>
-          <div className="CartPage_products-container">
-            {CartPageData &&
-              CartPageData.map((product: MyCart) => (
-                <div
-                  key={product.id}
-                  className="CartPage_products_container-products"
-                >
-                  <p>{product.name}</p>
-                  <b>${product.price}</b>
-                </div>
-              ))}
+          <div className="cart_page_products_container">
+            {CartPageData && CartPageData.map((product: MyCart) => (
+              <div key={product.id} className="cart_page_products">
+                <p>{product.name}</p>
+                <b>${product.price}</b>
+              </div>
+            ))}
           </div>
-          <div className="CartPage_products_total-price">
+          <div className="cart_page_products_total_price">
             <span></span>
             <p>${CartPageData && calculateSubtotal(CartPageData)}</p>
           </div>
-          <div className="CartPage_products_shop-button">
+          <div className="cart_page_products_shop_button">
             <button>Proceed to Buy &nbsp;💸</button>
           </div>
         </div>
       </div>
       <Footer />
     </div>
+
   );
 };
 

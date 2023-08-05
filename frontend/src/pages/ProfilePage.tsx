@@ -1,14 +1,19 @@
 import React, { useContext } from "react";
 import axios from "axios";
+
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { AuthPages } from "../components/Commonfun";
+import { useNavigate } from "react-router-dom";
+
+import { GlobalValue } from "../context/GlobalValue";
 import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
-import { GlobalValue } from "../context/GlobalValue";
 import Footer from "../components/Footer";
-import { useNavigate } from "react-router-dom";
+
+// Styling
+import "../styles/ProfilePage.scss"
 
 interface MyData {
   id: number;

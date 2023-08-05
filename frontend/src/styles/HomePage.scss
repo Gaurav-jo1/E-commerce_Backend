@@ -1,4 +1,4 @@
-.Homepage_div {
+.homepage_div {
   height: 100vh;
   width: 100%;
   background-color: white;
@@ -12,7 +12,8 @@
     transform: scale(1);
   }
 }
-.Homepage_backdrop-bg {
+
+.homepage_backdrop_bg {
   height: 100vh;
   width: 100%;
   position: absolute;
@@ -20,7 +21,7 @@
   backdrop-filter: blur(4px);
   z-index: 20;
 
-  .Homepage_backdrop {
+  .homepage_backdrop {
     position: absolute;
     height: 100vh;
     width: 100%;
@@ -29,7 +30,7 @@
   }
 }
 
-.Homepage_login-dialog {
+.homepage_login_dialog {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -37,7 +38,7 @@
   background-color: transparent;
   border: none;
 
-  .Homepage_login-close {
+  .homepage_login_close {
     color: white;
     font-size: 17px;
     font-weight: bold;
@@ -51,6 +52,7 @@
       background-color: rgba(0, 0, 0, 0.42);
       border-radius: 50%;
       padding: 4px;
+
       &:hover {
         cursor: pointer;
       }

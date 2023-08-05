@@ -18,11 +18,11 @@ export function AuthContainer({ isOpen, onClose, children, }: AuthContainerProps
   }
 
   return (
-    <div className="Homepage_auth-container">
-      <div className="Homepage_backdrop-bg">
-        <div className="Homepage_backdrop">
-          <dialog className="Homepage_login-dialog" open>
-            <p className="Homepage_login-close">
+    <div className="homepage_auth_container">
+      <div className="homepage_backdrop_bg ">
+        <div className="homepage_backdrop">
+          <dialog className="homepage_login_dialog" open>
+            <p className="homepage_login_close">
               <RxCross2 onClick={onClose} />
             </p>
             {children}

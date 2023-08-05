@@ -1,101 +1,98 @@
-.ShopPage_container {
+.shop_page_container {
   overflow: hidden;
-}
 
-.ShopPage_container-main {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  .ShopPage_container-main_poster {
+  .shop_page_container_main {
     display: flex;
+    flex-direction: column;
     position: relative;
 
-    .ShopPage_container-main_text {
+    .shop_page_container_main_poster {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.18);
+      position: relative;
 
-      h1 {
-        color: white;
-        font-size: 50px;
-      }
-    }
-  }
-
-  .ShopPage_products-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-    padding: 40px 140px;
-    margin: 30px 0;
-    line-height: 25px;
-
-    .ShopPage_products_container-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 0;
-      background-color: rgb(231, 231, 231);
-
-      .ShopPage_products_container-item_image {
-        object-fit: contain;
-        object-position: center;
+      .shop_page_container_main_text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
         height: 100%;
         width: 100%;
-      }
+        background-color: rgba(0, 0, 0, 0.18);
 
-      .ShopPage_products_container-item_title {
-        text-transform: uppercase;
-        
-        p {
-          font-size: 35px;
-          color: black;
+        h1 {
+          color: white;
+          font-size: 50px;
         }
       }
+    }
 
-      .ShopPage_products_container-item_cart {
+    .shop_page_products_container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px;
+      padding: 40px 140px;
+      margin: 30px 0;
+      line-height: 25px;
 
-        margin-top: 30px;
+      .shop_page_products_container_item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 0;
+        background-color: rgb(231, 231, 231);
 
-        button {
-          display: flex;
-          align-items: center;
-          font-size: 14px;
-          padding: 8px 5px;
-          border-radius: 30px;
-          background: rgb(115, 115, 236);
-          color: white;
-          border: none;
+        .shop_page_products_container_item_image {
+          object-fit: contain;
+          object-position: center;
+          height: 100%;
+          width: 100%;
+        }
+
+        .shop_page_products_container_item_title {
           text-transform: uppercase;
-  
-          &:hover {
-            cursor: pointer;
-          }
-  
-          p {
-            display: flex;
-            justify-content: center;
-            background-color: white;
-            color: rgb(115, 115, 236);
-            margin-right: 8px;
-            padding: 6px;
-            border-radius: 50%;
-            font-size: 20px;
-            font-weight: bold;
-            
-            svg {
-              color: rgb(115, 115, 236);
 
+          p {
+            font-size: 35px;
+            color: black;
+          }
+        }
+
+        .shop_page_products_container_item_cart {
+          margin-top: 30px;
+
+          button {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            padding: 8px 5px;
+            border-radius: 30px;
+            background: rgb(115, 115, 236);
+            color: white;
+            border: none;
+            text-transform: uppercase;
+
+            &:hover {
+              cursor: pointer;
+            }
+
+            p {
+              display: flex;
+              justify-content: center;
+              background-color: white;
+              color: rgb(115, 115, 236);
+              margin-right: 8px;
+              padding: 6px;
+              border-radius: 50%;
+              font-size: 20px;
+              font-weight: bold;
+
+              svg {
+                color: rgb(115, 115, 236);
+              }
             }
           }
         }
       }
-
     }
   }
 }

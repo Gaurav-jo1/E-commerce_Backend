@@ -73,13 +73,13 @@ const SignupPage: React.FC<SignComponentProps> = ({
   return (
     <div className="signup-page">
       {/* Form Container */}
-      <div className="auth-login-form">
+      <div className="auth-form">
         {errorText && (
           <div className="signup-page-password-wrong">
             <span>"{errorText}"</span>
           </div>
         )}
-        <div className="auth-login-text">
+        <div className="auth-text">
           <h4>Sign up with Shoppy for free</h4>
           <div className="auth-sign-in-or-up-link">
             <p>Already have an account?&nbsp; </p>
@@ -100,10 +100,10 @@ const SignupPage: React.FC<SignComponentProps> = ({
             width="260px"
           />
         </div>
-        <div className="auth-login-form-divider">
+        <div className="auth-form-divider">
           <p>or</p>
         </div>
-        <div className="auth-login-inputs">
+        <div className="auth-inputs">
           <form onSubmit={handleSubmit}>
             <input
               type="email"
@@ -132,7 +132,7 @@ const SignupPage: React.FC<SignComponentProps> = ({
               required
             />
 
-            <div className="auth-login-forgot-password"></div>
+            <div className="auth-forgot-password"></div>
 
             {isLoading ? (
               <button disabled={true} type="submit">

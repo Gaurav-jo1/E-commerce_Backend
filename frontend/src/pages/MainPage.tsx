@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+import { Link } from "react-router-dom";
+
+import { myLists, myCards, mySections } from "../components/CommonData";
+
 // Components
 import Footer from "../components/Footer";
 
@@ -8,21 +12,43 @@ import MainBG from "../assets/1.webp";
 import ShoeBanner from "../assets/shoe_banner.png";
 import ShoppyLogo from "../assets/android-chrome-512x512.png";
 
-import { myLists, myCards, mySections } from "../components/CommonData";
-
-import { Link } from "react-router-dom";
-
 // Styling
 import "../styles/MainPage.scss";
 
 const MainPage: React.FC = () => {
   const [isHovered, setIsHovered] = useState<string | null>(null);
 
+  const renderShopItems = () => {
+    return Object.keys(myLists).map((key) => (
+      <div key={key} className="maincontent_shop_image_container">
+        <Link to="/Shop">
+          <img
+            id={`hide_img_${isHovered === key ? key : ''}`}
+            className="shop_options_main_img"
+            src={myLists[key].property1}
+            alt={myLists[key].property1}
+            onMouseEnter={() => setIsHovered(key)}
+          />
+          <img
+            id={`show_img_${isHovered === key ? key : ''}`}
+            className="shop_options_hover_img"
+            src={myLists[key].property4}
+            alt={myLists[key].property4}
+            onMouseLeave={() => setIsHovered(null)}
+          />
+        </Link>
+        <p>{myLists[key].property2}</p>
+        <span>$ {myLists[key].property3.toFixed(2)}</span>
+      </div>
+    ));
+  };
+
+
   return (
-    <div className="Maincontent_container">
+    <div className="maincontent_container">
       {/* 1. First Component */}
-      <div className="Maincontent_container-textbg">
-        <div className="Maincontent_container-bg">
+      <div className="maincontent_container_textbg">
+        <div className="maincontent_container_bg">
           <img
             src={MainBG}
             alt="Dress Background"
@@ -30,7 +56,7 @@ const MainPage: React.FC = () => {
             width={"100%"}
           />
         </div>
-        <div className="Maincontent_container-text">
+        <div className="maincontent_container_text">
           <p>PREETY FOR SUMMER</p>
           <Link to="/Shop">
             <span>SHOP&nbsp;ALL&nbsp;NEW</span>
@@ -39,10 +65,9 @@ const MainPage: React.FC = () => {
       </div>
 
       {/* 2. Summer text Banner Component */}
-      <div className="Maincontent_container-summer_text">
+      <div className="maincontent_container_summer_text">
         <span>Summer Essentials</span>
         <h3>Chase the day</h3>
-
         <p>
           Move. Explore. Bring your boldest <br /> Get after summer's endless
           possibilities with ready-for-anything fits.
@@ -53,39 +78,15 @@ const MainPage: React.FC = () => {
       </div>
 
       {/* 3. Shop Options Component */}
-      <div className="Maincontent_container_shop-options">
-        {Object.keys(myLists).map((key) => (
-          <div key={key} className="Maincontent_shop_image-container">
-            <Link to="/Shop">
-              <img
-                id={`hide_img-${isHovered == key ? key : ""}`}
-                className="Shop-options_main-img"
-                src={myLists[key].property1}
-                alt={myLists[key].property1}
-                onMouseEnter={() => setIsHovered(key)}
-              />
-              <img
-                id={`show_img-${isHovered == key ? key : ""}`}
-                className="Shop-options_hover-img"
-                src={myLists[key].property4}
-                alt={myLists[key].property4}
-                onMouseLeave={() => setIsHovered(null)}
-              />
-            </Link>
-            <p>{myLists[key].property2} </p>
-            <span>$ {myLists[key].property3.toFixed(2)}</span>
-          </div>
-        ))}
+      <div className="maincontent_container_shop_options">
+        {renderShopItems()}
       </div>
 
       {/* 4. Shoe Banner Component */}
-      <div className="Maincontent_container_shoes-banner">
-        <div className="Shoe_banner-logo_text-container">
+      <div className="maincontent_container_shoes_banner">
+        <div className="shoe_banner_logo_text_container">
           <img src={ShoppyLogo} alt="Shoppy Logo" />
-          <h1>
-            {" "}
-            New <br /> Arrivals{" "}
-          </h1>
+          <h1> New <br /> Arrivals </h1>
         </div>
         <img src={ShoeBanner} alt="Shoe Banner" />
         <Link to="/Shop">
@@ -94,11 +95,11 @@ const MainPage: React.FC = () => {
       </div>
 
       {/* 5. Card Options Component */}
-      <div className="Maincontent_container_cards-options">
+      <div className="maincontent_container_cards_options">
         {Object.entries(myCards).map(([card, properties]) => (
-          <div key={card} className="Maincontent_shop_card-container">
+          <div key={card} className="maincontent_shop_card_container">
             <img src={properties.property1} alt={card} />
-            <div className="Maincontent_shop_card-texts">
+            <div className="maincontent_shop_card_texts">
               <span>{properties.property2}</span>
               <p>{properties.property3}</p>
             </div>
@@ -106,16 +107,16 @@ const MainPage: React.FC = () => {
         ))}
       </div>
 
-      {/* 6. Men's, Women and Kids Section Heading*/}
-      <div className="Maincontent_container_section-heading">
+      {/* 6. Men's, Women and Kids Section Heading */}
+      <div className="maincontent_container_section_heading">
         <p>Explore</p>
       </div>
 
       {/* 6. Men's, Women and Kids Section */}
-      <div className="Maincontent_container-gender_sections">
+      <div className="maincontent_container_gender_sections">
         {Object.entries(mySections).map(([section, properties]) => (
-          <div key={section} className="Maincontent_container-sections">
-            <Link to="/Shop" >
+          <div key={section} className="maincontent_container_sections">
+            <Link to="/Shop">
               <img src={properties.property1} alt="" />
               <button>{properties.property2}'s</button>
             </Link>
@@ -124,13 +125,10 @@ const MainPage: React.FC = () => {
       </div>
 
       {/* 7. About Page */}
-      <div className="Maincontent_container-about_section">
-        <h1>
-          {" "}
-          MADE FOR THE MODERN <br /> SHOPPING{" "}
-        </h1>
+      <div className="maincontent_container_about_section">
+        <h1> MADE FOR THE MODERN <br /> SHOPPING </h1>
 
-        <div className="Maincontent_container-about_text">
+        <div className="maincontent_container_about_text">
           <p>
             Welcome to Shoppy, where dreams become fashion reality! We are the
             trendsetters, the style mavens, and the shopping destination that
@@ -141,18 +139,19 @@ const MainPage: React.FC = () => {
             effortlessly. Step into a world of endless possibilities and let
             your inner fashionista shine bright with Shoppy!
           </p>
-            <a href="https://github.com/Gaurav-jo1" target="_blank">
+          <a href="https://github.com/Gaurav-jo1" target="_blank">
             <button>
-                ABOUT US
+              ABOUT US
             </button>
-            </a>
+          </a>
         </div>
       </div>
 
-      <div className="Maincontent_container-footer">
+      <div className="maincontent_container_footer">
         <Footer />
       </div>
     </div>
+
   );
 };
 

@@ -9,8 +9,8 @@ import axios from "axios";
 import { BsFillCartCheckFill } from "react-icons/bs";
 
 // styling
-import "../styles/ShopPage.scss";
 import { AuthContext } from "../context/AuthContext";
+import "../styles/ShopPage.scss";
 
 const ShopPage: React.FC<ShopPageProps> = ({
   productData,
@@ -43,30 +43,30 @@ const ShopPage: React.FC<ShopPageProps> = ({
   };
 
   return (
-    <div className="ShopPage_container">
+    <div className="shop_page_container">
       <AuthPages />
-      <div className="ShopPage_navbar-container">
+      <div className="shop_page_navbar_container">
         <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
       </div>
-      <div className="ShopPage_navpage-container">
+      <div className="shop_page_navpage_container">
         <NavPage />
       </div>
-      <div className="ShopPage_container-main">
-        <div className="ShopPage_container-main_poster">
+      <div className="shop_page_container_main">
+        <div className="shop_page_container_main_poster">
           <img
             src={mainImage}
-            alt="Mens Section "
+            alt="Mens Section"
             height={"100%"}
             width={"100%"}
           />
-          <div className="ShopPage_container-main_text">
+          <div className="shop_page_container_main_text">
             <h1>{pageName}</h1>
           </div>
         </div>
-        <div className="ShopPage_products-container">
+        <div className="shop_page_products_container">
           {sortedProducts.map((product) => (
-            <div key={product.id} className="ShopPage_products_container-item">
-              <div className="ShopPage_products_container-item_image">
+            <div key={product.id} className="shop_page_products_container_item">
+              <div className="shop_page_products_container_item_image">
                 <img
                   src={`http://127.0.0.1:8000${product.product.image}`}
                   alt={product.product.name}
@@ -74,11 +74,11 @@ const ShopPage: React.FC<ShopPageProps> = ({
                   width={"100%"}
                 />
               </div>
-              <div className="ShopPage_products_container-item_title">
+              <div className="shop_page_products_container_item_title">
                 <p>{product.product.name}</p>
               </div>
 
-              <div className="ShopPage_products_container-item_cart">
+              <div className="shop_page_products_container_item_cart">
                 <button onClick={() => addProductToCard(product.product.id)}>
                   {" "}
                   <p>
@@ -93,10 +93,11 @@ const ShopPage: React.FC<ShopPageProps> = ({
         </div>
       </div>
 
-      <div className="ShopPage_footer-container">
+      <div className="shop_page_footer_container">
         <Footer />
       </div>
     </div>
+
   );
 };
 

@@ -1,4 +1,4 @@
-.Maincontent_container {
+.maincontent_container {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -6,16 +6,16 @@
 }
 
 // 1. First Component
-.Maincontent_container-textbg {
+.maincontent_container_textbg {
   position: relative;
 
-  .Maincontent_container-bg {
+  .maincontent_container_bg {
     position: relative;
     height: 100%;
     width: 100%;
   }
 
-  .Maincontent_container-text {
+  .maincontent_container_text {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -61,7 +61,7 @@
 }
 
 // 2. Summer text Banner Component
-.Maincontent_container-summer_text {
+.maincontent_container_summer_text {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -102,7 +102,7 @@
 }
 
 // 3. Shop Options Component
-.Maincontent_container_shop-options {
+.maincontent_container_shop_options {
   display: grid;
   justify-items: center;
   align-items: center;
@@ -121,28 +121,28 @@
     }
   }
 
-  .Maincontent_shop_image-container {
+  .maincontent_shop_image_container {
     text-align: center;
 
-    .Shop-options_main-img {
+    .shop_options_main_img {
       display: block;
     }
 
-    .Shop-options_hover-img {
+    .shop_options_hover_img {
       display: none;
     }
 
-    #hide_img-keys1,
-    #hide_img-keys2,
-    #hide_img-keys3,
-    #hide_img-keys4 {
+    #hide_img_keys1,
+    #hide_img_keys2,
+    #hide_img_keys3,
+    #hide_img_keys4 {
       display: none !important;
     }
 
-    #show_img-keys1,
-    #show_img-keys2,
-    #show_img-keys3,
-    #show_img-keys4 {
+    #show_img_keys1,
+    #show_img_keys2,
+    #show_img_keys3,
+    #show_img_keys4 {
       display: block !important;
       animation: fadeIn 0.3s forwards;
     }
@@ -167,7 +167,7 @@
 }
 
 // 4. Shoe Banner Component
-.Maincontent_container_shoes-banner {
+.maincontent_container_shoes_banner {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -175,7 +175,7 @@
   margin: 30px 0;
   background: rgb(243, 235, 235);
 
-  .Shoe_banner-logo_text-container {
+  .shoe_banner_logo_text_container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -211,7 +211,7 @@
 }
 
 // 5. Card Options Component
-.Maincontent_container_cards-options {
+.maincontent_container_cards_options {
   display: grid;
   justify-content: center;
   align-items: center;
@@ -220,14 +220,14 @@
   padding: 0 50px;
   margin: 30px 0;
 
-  .Maincontent_shop_card-container {
+  .maincontent_shop_card_container {
     display: flex;
     flex-direction: column;
     position: relative;
     justify-content: center;
     align-items: center;
 
-    .Maincontent_shop_card-texts {
+    .maincontent_shop_card_texts {
       display: flex;
       flex-direction: column;
       position: absolute;
@@ -246,7 +246,6 @@
         font-size: 20px;
         padding-bottom: 30px;
       }
-
     }
   }
 
@@ -256,8 +255,7 @@
 }
 
 // 6. Men's, Women and Kids Section
-
-.Maincontent_container_section-heading {
+.maincontent_container_section_heading {
   padding: 0 50px;
   margin-top: 50px;
   display: flex;
@@ -268,7 +266,8 @@
     text-transform: uppercase;
   }
 }
-.Maincontent_container-gender_sections {
+
+.maincontent_container_gender_sections {
   display: grid;
   justify-content: center;
   align-items: center;
@@ -277,7 +276,7 @@
   padding: 0 50px;
   margin: 30px 0;
 
-  .Maincontent_container-sections {
+  .maincontent_container_sections {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -316,8 +315,8 @@
   }
 }
 
-// 7. ABOUT PAGE
-.Maincontent_container-about_section {
+// 7. About Page
+.maincontent_container_about_section {
   background: rgb(243, 235, 235);
   margin: 30px 50px;
   display: flex;
@@ -325,7 +324,7 @@
   justify-content: space-between;
   align-items: flex-start;
 
-  .Maincontent_container-about_text {
+  .maincontent_container-about_text {
     display: flex;
     flex-direction: column;
     width: 60%;
@@ -355,9 +354,9 @@
   }
 }
 
-@media (man-width: 768px) {
-  // 3. Shop Options Componen
-  .Maincontent_container_shop-options {
+@media (max-width: 768px) {
+  // 3. Shop Options Component
+  .maincontent_container_shop-options {
     grid-template-columns: repeat(2, 1fr);
   }
 }

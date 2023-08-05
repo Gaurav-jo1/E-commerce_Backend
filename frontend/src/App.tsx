@@ -6,18 +6,19 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import CartPage from "./pages/CartPage";
+import NewFeatured from "./pages/ShopPages/NewFeatured";
+import MenPage from "./pages/ShopPages/MenPage";
+import WomenPage from "./pages/ShopPages/WomenPage";
+import KidsPage from "./pages/ShopPages/KidsPage";
+import SalePage from "./pages/ShopPages/SalePage";
+
 
 // Global Context
 import AuthProvider from "./context/AuthContext";
 import GlobalProvider from "./context/GlobalValue";
 
 // Styling
-import "./styles/App.scss";
-import NewFeatured from "./pages/ShopPages/NewFeatured";
-import MenPage from "./pages/ShopPages/MenPage";
-import WomenPage from "./pages/ShopPages/WomenPage";
-import KidsPage from "./pages/ShopPages/KidsPage";
-import SalePage from "./pages/ShopPages/SalePage";
+import "./App.scss";
 
 function App(): JSX.Element {
   return (
