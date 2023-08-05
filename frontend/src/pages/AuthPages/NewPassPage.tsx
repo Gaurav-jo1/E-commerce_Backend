@@ -17,19 +17,31 @@ import new_art from "../../assets/new_part.jpeg";
 
 import axios from "axios";
 
-const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOpen}) => {
+const NewPassPage: React.FC<NewPassComponentProps> = ({
+  setNewPassword,
+  setLoginOpen,
+}) => {
   const [newPass, setNewPass] = useState<string>("");
   const [reNewPass, setReNewPass] = useState<string>("");
   const [passNot, setPassNot] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { userEmail, userCode, userId, setUserCode, setUserEmail, setUserId, setPassChanged } = useContext(GlobalValue);
+  const {
+    userEmail,
+    userCode,
+    userId,
+    setUserCode,
+    setUserEmail,
+    setUserId,
+    setPassChanged,
+  } = useContext(GlobalValue);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     if (newPass == reNewPass) {
-      axios.post("http://127.0.0.1:8000/user_login/change_password/", {
+      axios
+        .post("http://127.0.0.1:8000/user_login/change_password/", {
           user_id: userId,
           user_email: userEmail,
           user_code: userCode,
@@ -38,7 +50,7 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOp
         })
         .then(function (response) {
           console.log(response);
-  
+
           if (response.status == 200) {
             setNewPassword(false);
             setLoginOpen(true);
@@ -47,20 +59,17 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOp
             setUserEmail("");
             setUserId("");
             setIsLoading(false);
-
           }
         })
         .catch(function (error) {
           if (error.response.status == 404) {
-            setPassNot(true)
-            setIsLoading(false)
+            setPassNot(true);
+            setIsLoading(false);
           }
           setIsLoading(false);
         });
-    }
-
-    else {
-      setPassNot(true)
+    } else {
+      setPassNot(true);
       setIsLoading(false);
 
       console.log("Password Does not Match");
@@ -68,23 +77,24 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOp
   };
 
   return (
-    <div className="NewPassPage_container">
-      <div className="NewPassPage_container-form">
-          { passNot ?
-            <div className="NewPassPage_password-match">
-              <span>"The password you entered does not match"</span>
-            </div> : "" }
+    <div className="new_pass_page_container">
+      <div className="new_pass_page_container_form">
+        {passNot && (
+          <div className="new_pass_page_password_match">
+            <span>"The password you entered does not match"</span>
+          </div>
+        )}
 
-        <div className="NewPassPage_container-text">
+        <div className="new_pass_page_container_text">
           <p>
             <BsFillUnlockFill />
           </p>
           <h3>Unlock the Possibilities</h3>
           <p>
-            Please enter a new password for your email <b>{userEmail}</b>{" "}
+            Please enter a new password for your email <b>{userEmail}</b>
           </p>
         </div>
-        <div className="NewPassPage_container-inputs">
+        <div className="new_pass_page_container_inputs">
           <form onSubmit={handleSubmit}>
             <input
               type="password"
@@ -107,20 +117,19 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({setNewPassword,setLoginOp
               <button disabled={true} type="submit">
                 <>
                   Sending... &nbsp;
-                  <span className="loading-circle"></span>
+                  <span className="loading_circle"></span>
                 </>
               </button>
             ) : (
               <button type="submit">Send Request</button>
             )}
-
           </form>
         </div>
       </div>
 
-      <div className="Auth_bg_img">
-        <div className="Auth_bg_img-logo"></div>
-        <div className="Auth_bg_img-art" style={{ width: "460px" }}>
+      <div className="auth_bg_img">
+        <div className="auth_bg_img_logo"></div>
+        <div className="auth_bg_img_art" style={{ width: "460px" }}>
           <img src={new_art} alt="new_art" />
         </div>
       </div>

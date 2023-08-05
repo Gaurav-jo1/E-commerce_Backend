@@ -9,20 +9,18 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // Set cacheTime to 0 to disable caching and always refetch the data
       cacheTime: 0,
-
-      // Set staleTime to 5 seconds (or any short duration you prefer)
-      staleTime: 0, // 5 seconds in milliseconds
+      staleTime: 0, 
       refetchOnWindowFocus: false,
     },
   },
 });
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+
+ReactDOM.createRoot(document.getElementById('root')as HTMLElement).render(
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </QueryClientProvider>
-);
+)

@@ -1,5 +1,7 @@
 import React, { createContext, useState } from "react";
 
+type SetBooleanStateAction = React.Dispatch<React.SetStateAction<boolean>>;
+
 interface CurrentVarContextType {
   userEmail: string;
   setUserEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -7,20 +9,20 @@ interface CurrentVarContextType {
   setUserCode: React.Dispatch<React.SetStateAction<string>>;
   userId: string;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
-  passChanged: boolean;
-  setPassChanged: React.Dispatch<React.SetStateAction<boolean>>;
 
   // Login and Signup Interface
   loginOpen: boolean;
-  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoginOpen: SetBooleanStateAction;
   signupOpen: boolean;
-  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSignupOpen: SetBooleanStateAction;
   forgotOpen: boolean;
-  setForgotOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setForgotOpen: SetBooleanStateAction;
   emailCode: boolean;
-  setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmailCode: SetBooleanStateAction;
   newPassword: boolean;
-  setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  setNewPassword: SetBooleanStateAction;
+  passChanged: boolean;
+  setPassChanged: SetBooleanStateAction;
 }
 
 export const GlobalValue = createContext<CurrentVarContextType>(

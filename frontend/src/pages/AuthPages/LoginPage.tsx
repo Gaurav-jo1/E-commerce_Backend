@@ -1,26 +1,18 @@
 import React, { useState, useContext } from "react";
 
-// Styling
-import "../../styles/AuthPages_styles/Auth.scss";
-
-// Google Sign In
-import { GoogleLogin } from "@react-oauth/google";
-
-// Media
-import login_art from "../../assets/login_art.jpeg";
-
-// Interface and Types
-import { LoginComponentProps } from "../../components/CommonInterfaces";
-
 import axios from "axios";
+
+import { GoogleLogin } from "@react-oauth/google";
+import { LoginComponentProps } from "../../components/CommonInterfaces";
 import { GlobalValue } from "../../context/GlobalValue";
 import { AuthContext } from "../../context/AuthContext";
 
-const Loginpage: React.FC<LoginComponentProps> = ({
-  setSignupOpen,
-  setLoginOpen,
-  setForgotOpen,
-}) => {
+import login_art from "../../assets/login_art.jpeg";
+
+// Styling
+import "../../styles/AuthPages_styles/Auth.scss";
+
+const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen, setForgotOpen, }) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [wrongC, setWrongC] = useState<boolean>(false);
@@ -90,36 +82,32 @@ const Loginpage: React.FC<LoginComponentProps> = ({
   };
 
   return (
-    <div className="LoginPage">
-      <div className="Auth_login-form">
-        {passChanged ? (
-          <div className="LoginPage_password-changed">
+    <div className="login-page">
+      <div className="auth-form">
+        {passChanged && (
+          <div className="login-page-password-changed">
             <span>
               "Password Changed Successfully" &nbsp; <p>✅</p>{" "}
             </span>
           </div>
-        ) : (
-          ""
         )}
 
-        {wrongC ? (
-          <div className="LoginPage_password-wrong">
+        {wrongC && (
+          <div className="login-page-password-wrong">
             <span>"The credentials you entered are incorrect"</span>
           </div>
-        ) : (
-          ""
         )}
 
-        <div className="Auth_login-text">
+        <div className="auth-text">
           <h4>Welcome back to Shoppy!</h4>
           <h4>Please sign in</h4>
 
-          <div className="Auth_sign_in_or_up-link">
+          <div className="auth-sign-in-or-up-link">
             <p>New to Shoppy? &nbsp; </p>
             <p onClick={SignupLink}>Create an account</p>
           </div>
         </div>
-        <div className="Auth_google-div">
+        <div className="auth-google-div">
           <GoogleLogin
             onSuccess={(credentialResponse) => {
               handleGoogleLogin(credentialResponse.credential);
@@ -133,15 +121,15 @@ const Loginpage: React.FC<LoginComponentProps> = ({
             width="260px"
           />
         </div>
-        <div className="Auth_login_form-divider">
+        <div className="auth-form-divider">
           <p>or</p>
         </div>
-        <div className="Auth_login-inputs">
+        <div className="auth-inputs">
           <form onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Email or Username"
-              title="Enter you Email or Username"
+              title="Enter your Email or Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -149,12 +137,12 @@ const Loginpage: React.FC<LoginComponentProps> = ({
             <input
               type="password"
               placeholder="Password"
-              title="Enter you Password"
+              title="Enter your Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <div className="Auth_login_forgot-password">
+            <div className="auth-forgot-password">
               <p onClick={ForgotLink}>Forgot your password?</p>
             </div>
 
@@ -172,9 +160,9 @@ const Loginpage: React.FC<LoginComponentProps> = ({
         </div>
       </div>
 
-      <div className="Auth_bg_img">
-        <div className="Auth_bg_img-logo"></div>
-        <div className="Auth_bg_img-art" style={{ width: "460px" }}>
+      <div className="auth-bg-img">
+        <div className="auth-bg-img-logo"></div>
+        <div className="auth-bg-img-art" style={{ width: "460px" }}>
           <img src={login_art} alt="login_art" />
         </div>
       </div>

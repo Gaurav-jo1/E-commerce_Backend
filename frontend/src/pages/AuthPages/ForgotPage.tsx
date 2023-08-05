@@ -1,21 +1,12 @@
 import React, { useState, useContext } from "react";
-
-// Global values
+import axios from "axios";
 import { GlobalValue } from "../../context/GlobalValue";
-
-// Interface and Types
 import { ForgotPassComponentProps } from "../../components/CommonInterfaces";
-
-// React Icons
 import { ImKey } from "react-icons/im";
-
-// Media files
 import forgot_art from "../../assets/forgot_art.jpeg";
 
 // Styling
 import "../../styles/AuthPages_styles/ForgotPage.scss";
-
-import axios from "axios";
 
 const ForgotPage: React.FC<ForgotPassComponentProps> = ({
   setForgotOpen,
@@ -28,7 +19,6 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
 
   const { userEmail, setUserEmail, setUserId } = useContext(GlobalValue);
 
-  // Function to Make Network request For Resetting Password
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -60,25 +50,22 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
   };
 
   return (
-    <div className="ForgotPage_container">
+    <div className="forgot-page-container">
       {/* Form Container */}
-      <div className="ForgotPage_forgot-form">
-        {noEmail ? (
-          <div className="ForgotPage_email-match">
+      <div className="forgot-page-forgot-form">
+        {noEmail && (
+          <div className="forgot-page-email-match">
             <span>"{errorText}"</span>
           </div>
-        ) : (
-          ""
         )}
-        <div className="ForgotPage_container-text">
+        <div className="forgot-page-container-text">
           <p>
-            {" "}
-            <ImKey />{" "}
+            <ImKey />
           </p>
           <h3>Yo! Forgot your Password?</h3>
           <p>No worries! Enter your email to reset your password.</p>
         </div>
-        <div className="ForgotPage_container-inputs">
+        <div className="forgot-page-container-inputs">
           <form onSubmit={handleSubmit}>
             <input
               type="email"
@@ -91,10 +78,8 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
 
             {isLoading ? (
               <button disabled={true} type="submit">
-                <>
-                  Sending... &nbsp;
-                  <span className="loading-circle"></span>
-                </>
+                Sending... &nbsp;
+                <span className="loading-circle"></span>
               </button>
             ) : (
               <button type="submit">Send Request</button>
@@ -106,10 +91,10 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
       </div>
 
       {/* Image Container */}
-      <div className="Auth_bg_img">
-        <div className="Auth_bg_img-logo"></div>
-        <div className="Auth_bg_img-art" style={{ width: "460px" }}>
-          <img src={forgot_art} alt="forgot_art" />
+      <div className="auth-bg-img">
+        <div className="auth-bg-img-logo"></div>
+        <div className="auth-bg-img-art" style={{ width: "460px" }}>
+          <img src={forgot_art} alt="Forgot password art" />
         </div>
       </div>
     </div>

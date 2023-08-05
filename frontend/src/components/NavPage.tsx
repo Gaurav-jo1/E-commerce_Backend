@@ -1,8 +1,8 @@
 import React from "react";
 
 // Styling
-import "../styles/components_styles/NavPage.scss";
 import { Link } from "react-router-dom";
+import "../styles/components_styles/NavPage.scss";
 
 const myNavArray: string[] = ["New & Featured", "Men", "Women", "Kids", "Sale"];
 

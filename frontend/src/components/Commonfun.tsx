@@ -12,11 +12,7 @@ import EmailCodePage from "../pages/AuthPages/EmailCodePage";
 // Context
 import { GlobalValue } from "../context/GlobalValue";
 
-export function AuthContainer({
-  isOpen,
-  onClose,
-  children,
-}: AuthContainerProps) {
+export function AuthContainer({ isOpen, onClose, children, }: AuthContainerProps) {
   if (!isOpen) {
     return null;
   }

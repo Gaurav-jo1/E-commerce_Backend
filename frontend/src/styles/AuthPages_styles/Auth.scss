@@ -1,4 +1,5 @@
-.SignupPage {
+.signup-page,
+.login-page {
   height: 450px;
   width: 800px;
   background-color: rgba(255, 255, 255, 0.852);
@@ -6,157 +7,144 @@
   overflow: hidden;
   display: flex;
   justify-content: space-between;
-}
 
-.LoginPage {
-  height: 450px;
-  width: 800px;
-  background-color: rgba(255, 255, 255, 0.852);
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-}
+  .login-page-password-changed,
+  .login-page-password-wrong {
+    padding-bottom: 15px;
 
-.LoginPage_password-changed {
-  padding-bottom: 15px;
-  
-  span {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    color: green;
-    font-size: 14px;
-  }
-
-  p {
-    font-size: 11px;
-  }
-}
-.LoginPage_password-wrong{
-  padding-bottom: 15px;
-  
-  span {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    color: red;
-    font-size: 14px;
-  }
-}
-
-.Auth_login-form {
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
-  .Auth_login-text {
-    h4 {
-      font-size: 22px;
-    }
-
-    h4:first-child {
-      padding-bottom: 4px;
-    }
-
-    .Auth_sign_in_or_up-link {
+    span {
       display: flex;
-      padding: 10px 0;
-      margin-top: 6px;
-      justify-content: center;
+      text-align: center;
+      align-items: center;
+      font-size: 14px;
+    }
 
-      p:first-child {
-        color: rgba(0, 0, 0, 0.759);
-        font-size: 14px;
-      }
+    .auth-changed span {
+      color: green;
+    }
 
-      p:last-child {
-        color: blue;
-        font-size: 14px;
+    .auth-wrong span {
+      color: red;
+    }
 
-        &:hover {
-          cursor: pointer;
-          text-decoration: underline;
-        }
-      }
+    p {
+      font-size: 11px;
     }
   }
 
-  .Auth_google-div {
+  .auth-form {
+    padding: 25px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding-top: 10px;
-    margin-top: 5px;
-  }
 
-  .Auth_login_form-divider {
-    display: flex;
-    justify-content: center;
-    padding: 8px 0;
+    .auth-text {
+      h4 {
+        font-size: 22px;
 
-    p {
-      color: gray;
-    }
-  }
+        &:first-child {
+          padding-bottom: 4px;
+        }
+      }
 
-  .Auth_login-inputs {
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
-    input {
-      margin-bottom: 10px;
-      width: 240px;
-      padding: 8px 10px;
-      border: 1px solid gray;
-      border-radius: 3px;
+      .auth-sign-in-or-up-link {
+        display: flex;
+        padding: 10px 0;
+        margin-top: 6px;
+        justify-content: center;
 
-      &:focus {
-        border: 1px solid rgb(131, 131, 131);
-        outline: none;
+        p:first-child {
+          color: rgba(0, 0, 0, 0.759);
+          font-size: 14px;
+        }
 
-        &::placeholder {
-          color: rgb(131, 131, 131);
+        p:last-child {
+          color: blue;
+          font-size: 14px;
+
+          &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+          }
         }
       }
     }
 
-    button[type="submit"] {
-      width: 260px;
-      padding: 10px 0;
-      margin-top: 18px;
-      border-radius: 3px;
-      border: 1px solid gray;
-      background-color: rgb(26, 115, 232);
-      color: whitesmoke;
-      font-weight: bold;
+    .auth-google-div {
       display: flex;
       justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding-top: 10px;
+      margin-top: 5px;
+    }
 
-      &:hover {
-        cursor: pointer;
+    .auth-form-divider {
+      display: flex;
+      justify-content: center;
+      padding: 8px 0;
+
+      p {
+        color: gray;
       }
     }
 
-    .Auth_login_forgot-password {
-      display: flex;
-      justify-content: flex-end;
-      width: 100%;
+    .auth-inputs {
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      input {
+        margin-bottom: 10px;
+        width: 240px;
+        padding: 8px 10px;
+        border: 1px solid gray;
+        border-radius: 3px;
 
-      p {
-        color: blue;
-        font-size: 14px;
+        &:focus {
+          border: 1px solid rgb(131, 131, 131);
+          outline: none;
+
+          &::placeholder {
+            color: rgb(131, 131, 131);
+          }
+        }
+      }
+
+      button[type="submit"] {
+        width: 260px;
+        padding: 10px 0;
+        margin-top: 18px;
+        border-radius: 3px;
+        border: 1px solid gray;
+        background-color: rgb(26, 115, 232);
+        color: whitesmoke;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
 
         &:hover {
           cursor: pointer;
-          text-decoration: underline;
+        }
+      }
+
+      .auth-forgot-password {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+
+        p {
+          color: blue;
+          font-size: 14px;
+
+          &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+          }
         }
       }
     }

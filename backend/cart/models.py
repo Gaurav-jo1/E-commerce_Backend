@@ -16,12 +16,5 @@ class Cart(models.Model):
     def remove_product(self, product):
         self.Products_list.remove(product)
 
-    @receiver(post_save, sender=User)
-    def create_cart_for_new_user(sender, instance, created, **kwargs):
-        if created:
-            # If the User instance is newly created, create a new Cart for the user
-            Cart.objects.create(user=instance)
-
-
     def __str__(self):
         return f"User: {self.user}"

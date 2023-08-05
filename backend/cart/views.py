@@ -24,7 +24,7 @@ class CartGetView(APIView):
         try:
             user_id = request.user.id
         except AttributeError:
-            return Response({"error": "Missing product"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"error": "Missing User Id"}, status=status.HTTP_404_NOT_FOUND)
 
         cart_key = f"cart:{user_id}"
 
@@ -35,15 +35,20 @@ class CartGetView(APIView):
             if products_cache_list:
                 return Response(products_cache_list, status.HTTP_200_OK)
             else:
-                usercart_cart_db = get_object_or_404(Cart, user=user_id)
-                usercart_db_list = usercart_cart_db.Products_list.all()
-                serializer = ProductsModelSerializer(usercart_db_list, many=True)
+                usercart_cart_exists = Cart.objects.filter(user=user_id).exists()
+                if usercart_cart_exists:
+                    usercart_cart_db = Cart.objects.get(user=user_id)
+                    usercart_db_list = usercart_cart_db.Products_list.all()
+                    serializer = ProductsModelSerializer(usercart_db_list, many=True)
 
-                # Store the fetched data in the Redis cache
-                self.add_data_to_redis_set(cart_key, serializer.data)
-                return Response(serializer.data, status.HTTP_200_OK)
+                    # Store the fetched data in the Redis cache
+                    self.add_data_to_redis_set(cart_key, serializer.data)
+                    return Response(serializer.data, status.HTTP_200_OK)
+                else:
+                    return Response(status=status.HTTP_204_NO_CONTENT)
         except Exception as e:
             # Return error response for any other exceptions
+            print("Got Error Here")
             return Response({"error": "Internal Server Error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def get_data_from_redis_set(self, key):

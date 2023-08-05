@@ -1,4 +1,4 @@
-.ForgotPage_container {
+.forgot-page-container {
   height: 450px;
   width: 800px;
   background-color: rgba(255, 255, 255, 0.852);
@@ -6,97 +6,99 @@
   overflow: hidden;
   display: flex;
   justify-content: space-between;
-}
 
-.ForgotPage_forgot-form {
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 100%;
+  .forgot-page-forgot-form {
+    width: 100%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 
-  .ForgotPage_email-match {
-    padding-bottom: 20px;
-  
-    span {
-      display: flex;
-      text-align: center;
-      align-items: center;
-      color: red;
-      font-size: 15px;
-    }
-  }
-
-  .ForgotPage_container-text {
-    p:first-child {
-      color: rgb(91, 91, 91);
-      font-size: 38px;
-      padding-bottom: 15px;
-    }
-
-    h3 {
-      padding-bottom: 10px;
-      font-size: 18px;
-    }
-
-    p:last-child {
+    .forgot-page-email-match {
       padding-bottom: 20px;
-      font-size: 14px;
+
+      span {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: red;
+        font-size: 15px;
+      }
     }
-  }
 
-  .ForgotPage_container-inputs {
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
+    .forgot-page-container-text {
+      p:first-child {
+        color: rgb(91, 91, 91);
+        font-size: 38px;
+        padding-bottom: 15px;
+      }
+
+      h3 {
+        font-size: 18px;
+        padding-bottom: 10px;
+      }
+
+      p:last-child {
+        font-size: 14px;
+        padding-bottom: 20px;
+      }
     }
-    input {
-      margin-bottom: 10px;
-      width: 240px;
-      padding: 8px 10px;
-      border: 1px solid gray;
-      border-radius: 3px;
 
-      &:focus {
-        border: 1px solid rgb(131, 131, 131);
-        outline: none;
+    .forgot-page-container-inputs {
+      form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        &::placeholder {
-          color: rgb(131, 131, 131);
+      input {
+        width: 240px;
+        padding: 8px 10px;
+        margin-bottom: 10px;
+        border: 1px solid gray;
+        border-radius: 3px;
+
+        &:focus {
+          border: 1px solid rgb(131, 131, 131);
+          outline: none;
+
+          &::placeholder {
+            color: rgb(131, 131, 131);
+          }
+        }
+      }
+
+      button[type="submit"] {
+        width: 260px;
+        padding: 10px 0;
+        margin-top: 18px;
+        border-radius: 3px;
+        border: 1px solid gray;
+        background-color: rgb(26, 115, 232);
+        color: whitesmoke;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      p {
+        margin-top: 18px;
+        font-size: 15px;
+        color: blue;
+
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
         }
       }
     }
-
-    button[type="submit"] {
-      width: 260px;
-      padding: 10px 0;
-      margin-top: 18px;
-      border-radius: 3px;
-      border: 1px solid gray;
-      background-color: rgb(26, 115, 232);
-      color: whitesmoke;
-      font-weight: bold;
-      display: flex;
-      justify-content: center;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    p {
-      margin-top: 18px;
-      color: blue;
-      font-size: 15px;
-
-      &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-      }
-    }
   }
+
 }

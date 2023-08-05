@@ -1,4 +1,4 @@
-.NewPassPage_container {
+.new_pass_page_container {
   height: 450px;
   width: 800px;
   background-color: rgba(255, 255, 255, 0.852);
@@ -7,89 +7,89 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-.NewPassPage_container-form {
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 100%;
+  new_pass_page_containerform {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
 
-  .NewPassPage_password-match {
-    padding-bottom: 20px;
+    new_pass_page_containerpassword-match {
+      padding-bottom: 20px;
   
-    span {
-      display: flex;
-      text-align: center;
-      align-items: center;
-      color: red;
-      font-size: 15px;
-    }
-  }
-
-  .NewPassPage_container-text {
-    padding-bottom: 20px;
-    p:first-child {
-      color: blue;
-      font-size: 45px;
-      padding-bottom: 25px;
+      span {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        color: red;
+        font-size: 15px;
+      }
     }
 
-    h3 {
-      padding-bottom: 8px;
+    new_pass_page_containertext {
+      padding-bottom: 20px;
+
+      p:first-child {
+        color: blue;
+        font-size: 45px;
+        padding-bottom: 25px;
+      }
+
+      h3 {
+        padding-bottom: 8px;
+      }
+
+      p:last-child {
+        font-size: 14px;
+        line-height: 20px;
+      }
     }
 
-    p:last-child {
-      font-size: 14px;
-      line-height: 20px;
-    }
-  }
+    new_pass_page_containerinputs {
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
 
-  .NewPassPage_container-inputs {
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
+      input {
+        margin-bottom: 10px;
+        width: 240px;
+        padding: 8px 10px;
+        border: 1px solid gray;
+        border-radius: 3px;
 
-    input {
-      margin-bottom: 10px;
-      width: 240px;
-      padding: 8px 10px;
-      border: 1px solid gray;
-      border-radius: 3px;
+        &:focus {
+          border: 1px solid rgb(131, 131, 131);
+          outline: none;
 
-      &:focus {
-        border: 1px solid rgb(131, 131, 131);
-        outline: none;
+          &::placeholder {
+            color: rgb(131, 131, 131);
+          }
+        }
+      }
 
-        &::placeholder {
-          color: rgb(131, 131, 131);
+      button[type="submit"] {
+        width: 260px;
+        padding: 10px 0;
+        margin-top: 18px;
+        border-radius: 3px;
+        border: 1px solid gray;
+        background-color: rgb(26, 115, 232);
+        color: whitesmoke;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+
+        &:hover {
+          cursor: pointer;
         }
       }
     }
-
-    button[type="submit"] {
-      width: 260px;
-      padding: 10px 0;
-      margin-top: 18px;
-      border-radius: 3px;
-      border: 1px solid gray;
-      background-color: rgb(26, 115, 232);
-      color: whitesmoke;
-      font-weight: bold;
-      display: flex;
-      justify-content: center;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
   }
-
 
 }

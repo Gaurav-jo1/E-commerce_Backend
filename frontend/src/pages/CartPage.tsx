@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import axios from "axios";
 import { MdDelete } from "react-icons/md";
@@ -6,8 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthPages } from "../components/Commonfun";
 import { GlobalValue } from "../context/GlobalValue";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { queryClient } from "../main";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import Navbar from "../components/Navbar";
@@ -24,10 +24,18 @@ interface MyCart {
 }
 
 const CartPage: React.FC = () => {
-  const navigate = useNavigate();
-  
   const { setLoginOpen, setSignupOpen } = useContext(GlobalValue);
   const { authTokens } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if authTokens exist
+    if (!authTokens) {
+      // Redirect the user to the homepage
+      navigate("/");
+    }
+  }, [authTokens, navigate]);
 
   const calculateSubtotal = (products: MyCart[]): number => {
     return products.reduce((total, product) => total + product.price, 0);
@@ -50,27 +58,31 @@ const CartPage: React.FC = () => {
       });
   };
 
-  const { isLoading, error, data: CartPageData,} = useQuery(["user_cart"], () =>
-    axios
-      .get("http://127.0.0.1:8000/cart/products/get/", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + String(authTokens.access),
-        },
-      })
-      .then((response) => response.data), 
-      {
-        refetchOnWindowFocus: false,
-      }
+  const {
+    isLoading,
+    error,
+    data: CartPageData,
+  } = useQuery(
+    ["user_cart"],
+    () =>
+      axios
+        .get("http://127.0.0.1:8000/cart/products/get/", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authTokens.access),
+          },
+        })
+        .then((response) => response.data),
+    {
+      refetchOnWindowFocus: false,
+    }
   );
 
   if (isLoading) return "Loading...";
 
   if (error) {
-    navigate("/")
-
+    console.log(error);
   }
-
 
   return (
     <div className="CartPage-Container">
@@ -79,28 +91,29 @@ const CartPage: React.FC = () => {
       <NavPage />
       <div className="CartPage_main_container-div">
         <div className="CartPage_main_container">
-          {CartPageData.map((product: MyCart) => (
-            <div key={product.id} className="CartPage_main_container-product">
-              <div className="CartPage_main-image_name-container">
-                <div className="CartPage_main_image-container">
-                  <img
-                    src={`http://127.0.0.1:8000${product.image}`}
-                    alt={product.name}
-                  />
+          {CartPageData &&
+            CartPageData.map((product: MyCart) => (
+              <div key={product.id} className="CartPage_main_container-product">
+                <div className="CartPage_main-image_name-container">
+                  <div className="CartPage_main_image-container">
+                    <img
+                      src={`http://127.0.0.1:8000${product.image}`}
+                      alt={product.name}
+                    />
+                  </div>
+                  <div className="CartPage_main_name-container">
+                    <p>{product.name}</p>
+                    <span>Lorem ipsum dolor sit amet.</span>
+                    <b>$ {product.price}</b>
+                  </div>
                 </div>
-                <div className="CartPage_main_name-container">
-                  <p>{product.name}</p>
-                  <span>Lorem ipsum dolor sit amet.</span>
-                  <b>$ {product.price}</b>
+                <div className="CartPage_main-delete-container">
+                  <button onClick={() => handleDelete(product.id)}>
+                    <MdDelete />
+                  </button>
                 </div>
               </div>
-              <div className="CartPage_main-delete-container">
-                <button onClick={() => handleDelete(product.id)}>
-                  <MdDelete />
-                </button>
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
         <div className="CartPage_grand_total-section">
           <div className="CartPage_grand_heading">
@@ -108,15 +121,16 @@ const CartPage: React.FC = () => {
             <span></span>
           </div>
           <div className="CartPage_products-container">
-            {CartPageData.map((product: MyCart) => (
-              <div
-                key={product.id}
-                className="CartPage_products_container-products"
-              >
-                <p>{product.name}</p>
-                <b>${product.price}</b>
-              </div>
-            ))}
+            {CartPageData &&
+              CartPageData.map((product: MyCart) => (
+                <div
+                  key={product.id}
+                  className="CartPage_products_container-products"
+                >
+                  <p>{product.name}</p>
+                  <b>${product.price}</b>
+                </div>
+              ))}
           </div>
           <div className="CartPage_products_total-price">
             <span></span>

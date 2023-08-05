@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 // Components
 import Footer from "../components/Footer";
@@ -14,12 +14,9 @@ import { Link } from "react-router-dom";
 
 // Styling
 import "../styles/MainPage.scss";
-import { GlobalValue } from "../context/GlobalValue";
 
 const MainPage: React.FC = () => {
   const [isHovered, setIsHovered] = useState<string | null>(null);
-
-  const { setNavValue } = useContext(GlobalValue);
 
   return (
     <div className="Maincontent_container">
@@ -35,7 +32,7 @@ const MainPage: React.FC = () => {
         </div>
         <div className="Maincontent_container-text">
           <p>PREETY FOR SUMMER</p>
-          <Link to="/Shop" onClick={() => setNavValue("New & Featured")}>
+          <Link to="/Shop">
             <span>SHOP&nbsp;ALL&nbsp;NEW</span>
           </Link>
         </div>
@@ -50,7 +47,7 @@ const MainPage: React.FC = () => {
           Move. Explore. Bring your boldest <br /> Get after summer's endless
           possibilities with ready-for-anything fits.
         </p>
-        <Link to="/Shop" onClick={() => setNavValue("Sale")}>
+        <Link to="/Shop">
           <button>Shop</button>
         </Link>
       </div>
@@ -59,7 +56,7 @@ const MainPage: React.FC = () => {
       <div className="Maincontent_container_shop-options">
         {Object.keys(myLists).map((key) => (
           <div key={key} className="Maincontent_shop_image-container">
-            <Link to="/Shop" onClick={() => setNavValue("Women")}>
+            <Link to="/Shop">
               <img
                 id={`hide_img-${isHovered == key ? key : ""}`}
                 className="Shop-options_main-img"
@@ -91,7 +88,7 @@ const MainPage: React.FC = () => {
           </h1>
         </div>
         <img src={ShoeBanner} alt="Shoe Banner" />
-        <Link to="/Shop" onClick={() => setNavValue("Men")}>
+        <Link to="/Shop">
           <button>Shop Now</button>
         </Link>
       </div>
@@ -118,7 +115,7 @@ const MainPage: React.FC = () => {
       <div className="Maincontent_container-gender_sections">
         {Object.entries(mySections).map(([section, properties]) => (
           <div key={section} className="Maincontent_container-sections">
-            <Link to="/Shop" onClick={() => setNavValue(properties.property2)}>
+            <Link to="/Shop" >
               <img src={properties.property1} alt="" />
               <button>{properties.property2}'s</button>
             </Link>

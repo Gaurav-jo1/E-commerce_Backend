@@ -1,4 +1,4 @@
-.Emailcode-container {
+.email-code-container {
   height: 450px;
   width: 800px;
   background-color: rgba(255, 255, 255, 0.852);
@@ -6,86 +6,87 @@
   overflow: hidden;
   display: flex;
   justify-content: space-between;
-}
 
-.Emailcode_recover-form {
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-
-  .Emailcode_recover-match {
-    padding-bottom: 20px;
-  
-    span {
-      display: flex;
-      text-align: center;
-      align-items: center;
-      color: red;
-      font-size: 15px;
-    }
-  }
-
-  form {
+  .email-code-recover-form {
+    padding: 25px;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 100%;
+    text-align: center;
 
-    input {
-      margin-bottom: 10px;
-      width: 240px;
-      padding: 8px 10px;
-      border: 1px solid gray;
-      border-radius: 3px;
+    .email-code-recover-match {
+      padding-bottom: 20px;
 
-      &:focus {
-        border: 1px solid rgb(131, 131, 131);
-        letter-spacing: 2px;
-        outline: none;
+      span {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: red;
+        font-size: 15px;
+      }
+    }
 
-        &::placeholder {
-          color: rgb(131, 131, 131);
-          letter-spacing: normal;
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+      input {
+        margin-bottom: 10px;
+        width: 240px;
+        padding: 8px 10px;
+        border: 1px solid gray;
+        border-radius: 3px;
+
+        &:focus {
+          border: 1px solid rgb(131, 131, 131);
+          letter-spacing: 2px;
+          outline: none;
+
+          &::placeholder {
+            color: rgb(131, 131, 131);
+            letter-spacing: normal;
+          }
+        }
+      }
+
+      button[type="submit"] {
+        width: 260px;
+        padding: 10px 0;
+        margin-top: 18px;
+        border-radius: 3px;
+        border: 1px solid gray;
+        background-color: rgb(26, 115, 232);
+        color: whitesmoke;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+
+        &:hover {
+          cursor: pointer;
         }
       }
     }
 
-    button[type="submit"] {
-      width: 260px;
-      padding: 10px 0;
-      margin-top: 18px;
-      border-radius: 3px;
-      border: 1px solid gray;
-      background-color: rgb(26, 115, 232);
-      color: whitesmoke;
-      font-weight: bold;
-      display: flex;
-      justify-content: center;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-
-  .Emailcode_container-text {
-    padding-bottom: 20px;
-    p:first-child {
-      color: blue;
-      font-size: 45px;
-    }
-
-    h3 {
+    .email-code-container-text {
       padding-bottom: 20px;
-    }
 
-    p:last-child {
-      font-size: 14px;
-      line-height: 20px;
+      p:first-child {
+        color: blue;
+        font-size: 45px;
+      }
+
+      h3 {
+        padding-bottom: 20px;
+      }
+
+      p:last-child {
+        font-size: 14px;
+        line-height: 20px;
+      }
     }
   }
 }
