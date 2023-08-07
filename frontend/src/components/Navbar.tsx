@@ -3,7 +3,6 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiShoppingCart } from "react-icons/ci";
-import { AiOutlineHeart } from "react-icons/ai";
 import { SignComponentProps } from "./CommonInterfaces";
 
 import "../styles/components_styles/Navbar.scss";
@@ -39,8 +38,8 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen,}) =
   );
 
   return (
-    <nav className="navbar-container">
-      <div className="navbar-search">
+    <nav className="navbar_container">
+      <div className="navbar_search">
         <p><HiMagnifyingGlass /></p>
         <input
           value={userSearch}
@@ -49,12 +48,11 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen,}) =
           onChange={(e) => setUserSearch(e.target.value)}
         />
       </div>
-      <div className="navbar-logo">
+      <div className="navbar_logo">
         <Link to="/"><p>Shoppy</p></Link>
       </div>
       {userInfo ? (
-        <div className="navbar-profile">
-          <p><AiOutlineHeart /></p>
+        <div className="navbar_profile">
           <Link to="/cart">
             <p><CiShoppingCart /></p>
           </Link>
@@ -63,7 +61,7 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen,}) =
           </Link>
         </div>
       ) : (
-        <div className="navbar-buttons">
+        <div className="navbar_buttons">
           <p onClick={() => setSignupOpen(true)}>Sign up</p>
           <button onClick={() => setLoginOpen(true)}>Sign in</button>
         </div>

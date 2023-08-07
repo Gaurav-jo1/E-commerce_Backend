@@ -1,4 +1,4 @@
-.navbar-container {
+.navbar_container {
   background-color: rgb(243, 235, 235);
   display: flex;
   justify-content: space-between;
@@ -7,7 +7,7 @@
   text-align: center;
 }
 
-.navbar-search {
+.navbar_search {
   display: flex;
   align-items: center;
   text-align: center;
@@ -59,7 +59,7 @@
   }
 }
 
-.navbar-logo {
+.navbar_logo {
   a {
     all: unset;
   }
@@ -75,7 +75,7 @@
   }
 }
 
-.navbar-profile {
+.navbar_profile {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,8 +86,8 @@
   overflow: hidden;
 
   img {
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     margin: 0 10px;
 
     &:hover {
@@ -96,7 +96,7 @@
   }
 
   p {
-    font-size: 24px;
+    font-size: 32px;
     font-size: bold;
     color: rgb(65, 65, 65);
     margin: 0px 10px;
@@ -111,7 +111,7 @@
   }
 }
 
-.navbar-buttons {
+.navbar_buttons {
   display: flex;
   align-items: center;
   color: white;
