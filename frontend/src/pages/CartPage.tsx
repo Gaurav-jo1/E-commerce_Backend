@@ -7,16 +7,17 @@ import { useQuery } from "@tanstack/react-query";
 import { GlobalValue } from "../context/GlobalValue";
 import { AuthContext } from "../context/AuthContext";
 import { queryClient } from "../main";
-import { useNavigate } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 
 // Components
 import { AuthPages } from "../components/Commonfun";
 import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
 import Footer from "../components/Footer";
-
+import empty_cart from "../assets/empty_cart.png"
 // Styling
 import "../styles/CartPage.scss";
+
 interface MyCart {
   id: number;
   image: string;
@@ -78,11 +79,14 @@ const CartPage: React.FC = () => {
     console.log(error);
   }
 
+  console.log(CartPageData)
+
   return (
     <div className="cart_page_container">
       <AuthPages />
       <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
       <NavPage />
+      {CartPageData.length != 0 ?
       <div className="cart_page_main_container_div">
         <div className="cart_page_main_container">
           {CartPageData && CartPageData.map((product: MyCart) => (
@@ -130,6 +134,16 @@ const CartPage: React.FC = () => {
           </div>
         </div>
       </div>
+      : (
+        <div className="cart_page_empty_message">
+          <img src={empty_cart} alt="Empty Cart" width={"500px"} />
+          <h1>Your cart is currently empty.</h1>
+          <p>Start adding items to your cart and discover amazing products!</p>
+          <button>
+            <Link to="/New & Featured">Start Shopping</Link>
+          </button>
+        </div>
+      )}
       <Footer />
     </div>
 

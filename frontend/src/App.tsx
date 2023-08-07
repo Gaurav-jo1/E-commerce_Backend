@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // Google Auth
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -27,6 +27,7 @@ function App(): JSX.Element {
         <GlobalProvider>
           <div>
             <Routes>
+              <Route path="*" element={<Navigate to="/" replace/>} />
               <Route path="/" element={<HomePage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/cart" element={<CartPage />} />

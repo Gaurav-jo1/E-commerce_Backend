@@ -149,10 +149,10 @@ const SignupPage: React.FC<SignComponentProps> = ({
       </div>
 
       {/* Image Container */}
-      <div className="auth-bg-img">
-        <div className="auth-bg-img-logo"></div>
-        <div className="auth-bg-img-art">
-          <img src={signup_art} alt="signup_art" style={{ width: "460px" }} />
+      <div className="auth_bg_img">
+        <div className="auth_bg_img_logo"></div>
+        <div className="auth_bg_img_art" style={{ width: "460px" }}>
+          <img src={signup_art} alt="signup_art" />
         </div>
       </div>
     </div>
