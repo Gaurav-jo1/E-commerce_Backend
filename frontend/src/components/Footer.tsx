@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
           </ul>
         </nav>
         <div className="footer-container-logos-container">
-          <a href="https://twitter.com/Gaurav1_Jo" target="_blank" rel="noopener noreferrer"> <img src={x_logo} alt="X" aria-aria-label="X.com" width={"22px"}/> </a>
+          <a href="https://twitter.com/Gaurav1_Jo" target="_blank" rel="noopener noreferrer"> <img src={x_logo} alt="X" aria-label="X.com" width={"22px"}/> </a>
           <a href="https://github.com/Gaurav-jo1" target="_blank" rel="noopener noreferrer"><BsGithub aria-label="GitHub" /></a>
           <a href="https://www.linkedin.com/in/gaurav-jo1/" target="_blank" rel="noopener noreferrer"><BsLinkedin aria-label="LinkedIn" /></a>
           <a href="https://github.com/Gaurav-jo1/E-commerce" target="_blank" rel="noopener noreferrer"><BsFillFileEarmarkCodeFill aria-label="GitHub Repository" /></a>

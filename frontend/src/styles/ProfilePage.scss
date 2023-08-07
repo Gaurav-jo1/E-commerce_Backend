@@ -1,0 +1,45 @@
+.profile_page_container {
+  overflow: hidden;
+
+  .profile_main_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+
+    .profile_container_picture {
+      width: 270px;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .profile_container_name {
+      padding: 20px 0;
+
+      p {
+        font-size: 32px;
+        text-transform: capitalize;
+      }
+    }
+
+    .profile_container_logout {
+        padding: 20px 0;
+
+        button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: white;
+            background-color: rgb(255, 0, 0);
+            border: 1px solid rgb(130, 130, 130);
+            
+            &:hover {
+                cursor: pointer;
+                background-color: rgb(230, 24, 24);
+            }
+        }
+    }
+  }
+}

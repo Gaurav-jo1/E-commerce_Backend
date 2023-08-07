@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import axios from "axios";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery,useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../context/AuthContext";
-import { Link } from "react-router-dom";
 import { AuthPages } from "../components/Commonfun";
 import { useNavigate } from "react-router-dom";
 
@@ -17,19 +16,20 @@ import "../styles/ProfilePage.scss"
 
 interface MyData {
   id: number;
+  picture: string;
   user: string;
 }
 
 const ProfilePage: React.FC = () => {
-  const { authTokens } = useContext(AuthContext);
+  const { authTokens, callLogout } = useContext(AuthContext);
   const { setLoginOpen, setSignupOpen } = useContext(GlobalValue);
 
   const navigate = useNavigate();
 
+  const queryClient = useQueryClient();
 
-  const { isLoading, error, data } = useQuery<MyData>(["user_profile"], () =>
-    axios
-      .get<MyData>("http://127.0.0.1:8000/user_profile/info/", {
+  const { isLoading, error, data:UserProfile } = useQuery<MyData>(["user_profile"], () =>
+    axios.get<MyData>("http://127.0.0.1:8000/user_profile/info/", {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + String(authTokens.access),
@@ -43,17 +43,31 @@ const ProfilePage: React.FC = () => {
   if (error) {
     navigate("/")
   }
+  
+  const logUserOut = () => {
+    callLogout()
+    navigate("/")
+    queryClient.removeQueries(["user_profile"]);
+  }
+
+  console.log(UserProfile)
   return (
-    <div>
+    <div className="profile_page_container">
       <AuthPages />
       <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
       <NavPage />
-      <h1>Profile Page</h1>
-      <Link to="/">Home Page</Link>
-      <p>
-        {" "}
-        <b>Username:</b> {data?.user}
-      </p>
+
+      <main className="profile_main_container">
+          <div className="profile_container_picture">
+            <img src={`http://127.0.0.1:8000${UserProfile?.picture}`} alt={UserProfile?.user} />
+          </div>
+          <div className="profile_container_name">
+            <p>{UserProfile?.user}</p>
+          </div>
+          <div className="profile_container_logout">
+            <button onClick={logUserOut}>Logout User</button>
+          </div>
+      </main>
       <Footer />
     </div>
   );

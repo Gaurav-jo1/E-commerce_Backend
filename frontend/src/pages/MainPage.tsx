@@ -38,7 +38,6 @@ const MainPage: React.FC = () => {
           />
         </Link>
         <p>{myLists[key].property2}</p>
-        <span>$ {myLists[key].property3.toFixed(2)}</span>
       </div>
     ));
   };
