@@ -97,7 +97,7 @@ const Navbar: React.FC<SignComponentProps> = ({
           <div className="navbar_user_search">
             <div className="navbar_search_input">
               <p><AiOutlineSearch /> </p>
-              <input type="text" placeholder="Search the Shop" />
+              <input type="text" placeholder="Search the Shop" autoFocus={true} />
             </div>
           </div>
         </>
