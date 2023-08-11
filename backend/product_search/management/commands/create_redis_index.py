@@ -10,10 +10,13 @@ class Command(BaseCommand):
         r = redis.Redis(host="redis", port=6379, db=0, decode_responses=True)
 
         # Define the FT.CREATE command
-        command = "FT.CREATE idx:name ON hash PREFIX 1 'product:' SCHEMA name TEXT SORTABLE price NUMERIC SORTABLE image TEXT NOSTEM"
+        command = "FT.CREATE idx:product ON hash PREFIX 1 'product:' SCHEMA name TEXT SORTABLE price NUMERIC SORTABLE image TEXT NOSTEM"
 
         # Execute the command
         response = r.execute_command(command)
 
-        # Print the response
-        print("Command: ", response)
+        # Check if the index was created or already existed
+        if response == "Index already exists":
+            return print("Index already exists")
+        else:
+            return print("RedisCreateIndex: ", response)

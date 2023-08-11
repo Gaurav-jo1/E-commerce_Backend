@@ -9,23 +9,21 @@ import redis
 # Create your views here.
 
 class LoadProducts:
-    def redisDataLoad(self):
+    def RedisDataLoad(self):
         r = redis.Redis(host="redis", port=6379, db=0, decode_responses=True)
 
         products_list = ProductsModel.objects.all()
 
         for product in products_list:
-            product_id = product.id
+            product_id = f"product:{product.id}"
 
-            field_value_pairs = {
-                "name": product.name,
-                "price": product.price,
-                "image": product.image.url,
-            }
+            r.hset(product_id, "name", product.name)
+            r.hset(product_id, "price", product.price)
+            r.hset(product_id, "image", product.image.url)
 
-            r.hset(f"product:{product_id}", mapping=field_value_pairs)
 
-        return print("Program executed Succesfully")
+
+        return print("RedisDataLoad: Program executed Succesfully")
 
 
 class ProductSearch(APIView):
@@ -39,7 +37,10 @@ class ProductSearch(APIView):
 
         try:
             r = redis.Redis(host="redis", port=6379, db=0, decode_responses=True)
-
+            command = "FT.SEARCH idx:movie '%gdfather%' RETURN 3 title release_year rating"
+            redis_response = r.execute_command(command)
+            print("Redis Response: ", redis_response)
+            Response(status=status.HTTP_200_OK)
         except Exception as e:
             # Return error response for any other exceptions
             return Response(
