@@ -7,4 +7,5 @@ class ProductSearchConfig(AppConfig):
 
     def ready(self):
         from .views import LoadProducts
+        LoadProducts().RedisCreateIndex()
         LoadProducts().RedisDataLoad()
