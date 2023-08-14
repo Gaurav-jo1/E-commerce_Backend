@@ -8,6 +8,7 @@ urlpatterns = [
     path('google_login/', include('google_login.urls')),
     path('user_login/', include('user_login.urls')),
     path('user_profile/', include('user_profile.urls')),
+    path('product_search/', include('product_search.urls')),
     path('shop/', include('shop.urls')),
     path('cart/', include('cart.urls')),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

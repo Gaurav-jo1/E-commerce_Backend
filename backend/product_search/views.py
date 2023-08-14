@@ -4,9 +4,10 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 from shop.models import ProductsModel
 
-import redis
-
 from redis.exceptions import ResponseError
+
+import redis
+import json
 
 
 # Create your views here.
@@ -23,10 +24,7 @@ class LoadProducts:
             index_exists = r.execute_command("FT.INFO idx:product")
 
             if index_exists:
-               return print(f"Index '{index_name}' exists")
-            else:
-                print(f"Index '{index_name}' does not exist")
-                
+                return print(f"Index {index_name} already exists")
 
         except ResponseError as e:
             if "Unknown Index name" in str(e):
@@ -68,10 +66,29 @@ class ProductSearch(APIView):
 
         try:
             r = redis.Redis(host="redis", port=6379, db=0, decode_responses=True)
-            command = "FT.SEARCH idx:movie '%gdfather%' RETURN 3 title release_year rating"
+            command = f"FT.SEARCH idx:product '%{search_text}%' RETURN 3 name price image"
             redis_response = r.execute_command(command)
-            print("Redis Response: ", redis_response)
-            Response(status=status.HTTP_200_OK)
+            redis_response.pop(0)
+
+            # Parse the input data and structure it into a dictionary
+
+            dictionary = {}
+
+            # Loop over the array with a step of 2
+            for i in range(0, len(redis_response), 2):
+                # Get the product ID by removing the "product:" prefix
+                product_id = redis_response[i].replace("product:", "")
+                # Get the nested list
+                product_info = redis_response[i+1]
+                # Add the key-value pair to the dictionary
+                dictionary[product_id] = product_info
+
+            # Convert the dictionary to JSON
+            json_string = json.dumps(dictionary)
+
+            print(json_string)
+
+            return Response(data=json_string,status=status.HTTP_200_OK)
         except Exception as e:
             # Return error response for any other exceptions
             return Response(
