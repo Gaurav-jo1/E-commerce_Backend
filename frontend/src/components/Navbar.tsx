@@ -18,15 +18,20 @@ interface MyData {
   picture: string;
 }
 
+interface SearchResult {
+  [key: string]: string;
+}
+
 const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) => {
   const [userSearch, setUserSearch] = useState<string>("");
   const [fetchData, setFetchData] = useState<boolean>(false);
   const [searchBar, setSearchBar] = useState<boolean>(false);
+  const [searchItems, setSearchItems] = useState<SearchResult | null >(null)
 
   const { authTokens } = useContext(AuthContext);
 
   if (authTokens && !fetchData) {
-    setFetchData(true);
+    setFetchData(true);searchItems
   }
 
   const { data: userInfo } = useQuery<MyData>( ["user_profile"], () =>
@@ -45,7 +50,7 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
         search_text: userSearch,
       })
       .then(function (response) {
-        console.log("Search result", response.data);
+        setSearchItems(JSON.parse(response.data));
       })
       .catch(function (error) {
         console.log(error);
@@ -56,9 +61,12 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
     if (userSearch !== "") {
       productSearch(userSearch);
     }
+
+    if (userSearch == "") {
+      setSearchItems(null)
+    }
   
   }, [userSearch]);
-
 
   return (
     <>
@@ -101,6 +109,13 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
               <input type="text" placeholder="Search the Shop" value={userSearch} onChange={(e) => setUserSearch(e.target.value)} autoFocus={true} />
               <span>< MdOutlineArrowForwardIos/></span>
             </div>
+            {searchItems && (
+              <div className="navbar_search_result">
+                {Object.values(searchItems).map((value, index) => (
+                  <p key={index}>{value}</p>
+                ))}
+              </div>
+            )}
           </div>
         </>
       )}

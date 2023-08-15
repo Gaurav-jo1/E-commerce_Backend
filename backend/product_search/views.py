@@ -61,6 +61,7 @@ class ProductSearch(APIView):
     def post(self, request):
         try:
             search_text = request.data.get("search_text")
+            print(search_text)
         except (KeyError, AttributeError) as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -73,17 +74,17 @@ class ProductSearch(APIView):
             # Parse the input data and structure it into a dictionary
 
             dictionary = {}
-
             # Loop over the array with a step of 2
-            for i in range(0, len(redis_response), 2):
+            for i in range(0, min(len(redis_response), 10), 2):
                 # Get the product ID by removing the "product:" prefix
                 product_id = redis_response[i].replace("product:", "")
                 # Get the nested list
-                product_info = redis_response[i+1]
+                product_info = redis_response[i+1][1]
                 # Add the key-value pair to the dictionary
                 dictionary[product_id] = product_info
 
             return Response(data=json.dumps(dictionary),status=status.HTTP_200_OK)
+        
         except Exception as e:
             # Return error response for any other exceptions
             return Response(
