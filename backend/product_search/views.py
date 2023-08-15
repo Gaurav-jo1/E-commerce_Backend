@@ -83,12 +83,7 @@ class ProductSearch(APIView):
                 # Add the key-value pair to the dictionary
                 dictionary[product_id] = product_info
 
-            # Convert the dictionary to JSON
-            json_string = json.dumps(dictionary)
-
-            print(json_string)
-
-            return Response(data=json_string,status=status.HTTP_200_OK)
+            return Response(data=json.dumps(dictionary),status=status.HTTP_200_OK)
         except Exception as e:
             # Return error response for any other exceptions
             return Response(

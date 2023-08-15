@@ -1,11 +1,11 @@
 import axios from "axios";
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect ,useContext } from "react";
 import { Link } from "react-router-dom";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CiShoppingCart } from "react-icons/ci";
+import {MdOutlineArrowForwardIos} from "react-icons/md"
 import { SignComponentProps } from "./CommonInterfaces";
-
 import { AuthContext } from "../context/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 
@@ -18,27 +18,19 @@ interface MyData {
   picture: string;
 }
 
-const Navbar: React.FC<SignComponentProps> = ({
-  setSignupOpen,
-  setLoginOpen,
-}) => {
+const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) => {
   const [userSearch, setUserSearch] = useState<string>("");
   const [fetchData, setFetchData] = useState<boolean>(false);
   const [searchBar, setSearchBar] = useState<boolean>(false);
 
   const { authTokens } = useContext(AuthContext);
 
-  console.log(searchBar);
-
   if (authTokens && !fetchData) {
     setFetchData(true);
   }
 
-  const { data: userInfo } = useQuery<MyData>(
-    ["user_profile"],
-    () =>
-      axios
-        .get<MyData>("http://127.0.0.1:8000/user_profile/info/", {
+  const { data: userInfo } = useQuery<MyData>( ["user_profile"], () =>
+      axios.get<MyData>("http://127.0.0.1:8000/user_profile/info/", {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + String(authTokens.access),
@@ -48,31 +40,43 @@ const Navbar: React.FC<SignComponentProps> = ({
     { enabled: fetchData }
   );
 
+  const productSearch = (userSearch:string) => {
+    axios.post("http://127.0.0.1:8000/product_search/search/", {
+        search_text: userSearch,
+      })
+      .then(function (response) {
+        console.log("Search result", response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    if (userSearch !== "") {
+      productSearch(userSearch);
+    }
+  
+  }, [userSearch]);
+
+
   return (
     <>
       <nav className="navbar_container">
         <div onClick={() => setSearchBar(true)} className="navbar_search">
-          <p>
-            <HiMagnifyingGlass />
-          </p>
+          <p> <HiMagnifyingGlass /> </p>
           <input
-            value={userSearch}
             type="text"
             placeholder="Search..."
-            onChange={(e) => setUserSearch(e.target.value)}
           />
         </div>
         <div className="navbar_logo">
-          <Link to="/">
-            <p>Shoppy</p>
-          </Link>
+          <Link to="/"> <p>Shoppy</p> </Link>
         </div>
         {userInfo ? (
           <div className="navbar_profile">
             <Link to="/cart">
-              <p>
-                <CiShoppingCart />
-              </p>
+              <p> <CiShoppingCart /> </p>
             </Link>
             <Link to="/profile">
               <img
@@ -90,14 +94,12 @@ const Navbar: React.FC<SignComponentProps> = ({
       </nav>
       {searchBar && (
         <>
-          <div
-            onClick={() => setSearchBar(false)}
-            className="navbar_container_search"
-          ></div>
+          <div onClick={() => setSearchBar(false)} className="navbar_container_search"/>
           <div className="navbar_user_search">
             <div className="navbar_search_input">
               <p><AiOutlineSearch /> </p>
-              <input type="text" placeholder="Search the Shop" autoFocus={true} />
+              <input type="text" placeholder="Search the Shop" value={userSearch} onChange={(e) => setUserSearch(e.target.value)} autoFocus={true} />
+              <span>< MdOutlineArrowForwardIos/></span>
             </div>
           </div>
         </>

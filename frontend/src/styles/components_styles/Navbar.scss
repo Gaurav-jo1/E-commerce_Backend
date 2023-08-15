@@ -149,13 +149,12 @@
   height: 100vh;
   width: 100%;
   z-index: 90;
-  background-color: rgba(16, 21, 30, 0.805);
+  background-color: rgba(16, 21, 30, 0.9);
   justify-content: center;
   align-items: center;
 }
 
 .navbar_user_search {
-
   .navbar_search_input {
     display: flex;
     position: fixed;
@@ -163,9 +162,9 @@
     justify-content: center;
     z-index: 110;
     align-items: center;
-    top: 190px;
+    top: 140px;
 
-    p {
+    p:first-child {
       position: relative;
       color: rgb(131, 131, 131);
       font-size: 22px;
@@ -175,7 +174,7 @@
 
     input {
       padding: 22px 42px;
-      width: 40%;
+      width: 38%;
       background-color: rgb(45, 55, 72);
       color: white;
       border: 1px solid rgb(48, 48, 48);
@@ -184,6 +183,19 @@
 
       &:focus {
         outline: none;
+      }
+    }
+
+    span {
+      font-size: 20px;
+      color: white;
+      display: flex;
+      align-items: center;
+      position: relative;
+      right: 32px;
+
+      &:hover {
+        cursor: pointer;
       }
     }
   }
