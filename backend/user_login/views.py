@@ -1,12 +1,11 @@
 import os
+import redis
 import random
 
 # Django
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
-from django.core.cache import cache
 from django.template.loader import render_to_string
 from django.shortcuts import get_object_or_404
 
@@ -18,7 +17,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 from rest_framework import permissions
 from django.contrib.auth import authenticate
-import redis
 from .serializers import UserCredentialsSerializer, UserNewSerializer
 
 
@@ -82,12 +80,19 @@ class RegisterView(APIView):
             # Check if all required information is present
             if username and email and password:
                 # Check if a user with the same email address already exists
-                user_exists = User.objects.filter(email=email).first()
+                username_exists = User.objects.filter(username=username).first()
+                user_email_exists = User.objects.filter(email=email).first()
 
-                if user_exists:
-                    # If a user with this email already exists, return an error message
+                if user_email_exists:
+                    # If a user with this email and username already exists, return an error message
                     return Response(
-                        {"error": "User with this credential already exists"},
+                        {"error": "User with this Email already exists"},
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
+                
+                elif username_exists:
+                    return Response(
+                        {"error": "User with this Username already exists"},
                         status=status.HTTP_400_BAD_REQUEST,
                     )
 
@@ -132,7 +137,7 @@ class ResetPassword(APIView):
             user_email = request.data.get("user_email")
         except AttributeError:
             return Response(
-                {"error": "Missing product"}, status=status.HTTP_404_NOT_FOUND
+                {"error": "Missing User Email"}, status=status.HTTP_404_NOT_FOUND
             )
 
         try:

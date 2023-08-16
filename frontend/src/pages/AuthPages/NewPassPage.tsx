@@ -1,8 +1,5 @@
 import React, { useState, useContext } from "react";
 
-// style
-import "../../styles/AuthPages_styles/NewPassPage.scss";
-
 // Interface and Types
 import { NewPassComponentProps } from "../../components/CommonInterfaces";
 
@@ -16,6 +13,8 @@ import { GlobalValue } from "../../context/GlobalValue";
 import new_art from "../../assets/new_part.jpeg";
 
 import axios from "axios";
+
+import "../../styles/AuthPages_styles/NewPassPage.scss";
 
 const NewPassPage: React.FC<NewPassComponentProps> = ({
   setNewPassword,
