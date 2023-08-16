@@ -170,7 +170,6 @@
 .maincontent_container_shoes_banner {
   display: flex;
   align-items: center;
-  justify-content: space-around;
   padding: 0px 50px;
   margin: 30px 0;
   background: rgb(243, 235, 235);
@@ -179,10 +178,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
     img {
       width: 62px;
       padding-bottom: 10px;
     }
+
     h1 {
       font-size: 65px;
       text-align: center;
@@ -194,18 +195,36 @@
     }
   }
 
-  button {
-    padding: 12px 28px;
-    height: fit-content;
-    background-color: black;
-    font-size: 22px;
-    color: white;
-    border: none;
-    outline-color: transparent;
-    border-radius: 30px;
+  .shoe_banner_poster_container {
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      object-fit: cover;
+    }
+  }
 
-    &:hover {
-      cursor: pointer;
+  .shoe_banner_button_container {
+    display: flex;
+    justify-content: center;
+
+    button {
+      display: flex;
+      flex-direction: row;
+      padding: 12px 28px;
+      height: fit-content;
+      background-color: black;
+      font-size: 22px;
+      color: white;
+      border: none;
+      outline-color: transparent;
+      border-radius: 30px;
+      white-space: nowrap;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -288,11 +307,10 @@
       width: 100%;
       height: 540px;
       object-fit: cover;
-      object-position: center;
       transition: transform 0.3s ease;
 
       &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
         cursor: pointer;
       }
     }
@@ -317,28 +335,31 @@
 
 // 7. About Page
 .maincontent_container_about_section {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   background: rgb(243, 235, 235);
   margin: 30px 50px;
-  display: flex;
-  padding: 70px 40px;
-  justify-content: space-between;
-  align-items: flex-start;
+  padding: 60px 30px;
+  grid-auto-flow: row;
+
+  .maincontent_container_about_heading {
+    h1 {
+      padding-right: 25px;
+      font-size: 30px;
+      white-space: nowrap;
+    }
+  }
 
   .maincontent_container-about_text {
     display: flex;
     flex-direction: column;
-    width: 60%;
     padding: 0 15px;
-  }
 
-  h1 {
-    width: 40%;
-    padding: 0 15px;
-  }
+    p {
+      font-size: 15px;
+      line-height: 24px;
+    }
 
-  p {
-    font-size: 15px;
-    line-height: 24px;
   }
 
   button {

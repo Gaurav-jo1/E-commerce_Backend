@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 
 // Media
 import MainBG from "../assets/1.webp";
-import ShoeBanner from "../assets/shoe_banner.png";
+import ShoeBanner from "../assets/shoe-banner.webp";
 import ShoppyLogo from "../assets/android-chrome-512x512.png";
 
 // Styling
@@ -23,14 +23,14 @@ const MainPage: React.FC = () => {
       <div key={key} className="maincontent_shop_image_container">
         <Link to="/Shop">
           <img
-            id={`hide_img_${isHovered === key ? key : ''}`}
+            id={`hide_img_${isHovered === key ? key : ""}`}
             className="shop_options_main_img"
             src={myLists[key].property1}
             alt={myLists[key].property1}
             onMouseEnter={() => setIsHovered(key)}
           />
           <img
-            id={`show_img_${isHovered === key ? key : ''}`}
+            id={`show_img_${isHovered === key ? key : ""}`}
             className="shop_options_hover_img"
             src={myLists[key].property4}
             alt={myLists[key].property4}
@@ -41,7 +41,6 @@ const MainPage: React.FC = () => {
       </div>
     ));
   };
-
 
   return (
     <div className="maincontent_container">
@@ -57,7 +56,7 @@ const MainPage: React.FC = () => {
         </div>
         <div className="maincontent_container_text">
           <p>PREETY FOR SUMMER</p>
-          <Link to="/Shop">
+          <Link to="/New & Featured">
             <span>SHOP&nbsp;ALL&nbsp;NEW</span>
           </Link>
         </div>
@@ -71,7 +70,7 @@ const MainPage: React.FC = () => {
           Move. Explore. Bring your boldest <br /> Get after summer's endless
           possibilities with ready-for-anything fits.
         </p>
-        <Link to="/Shop">
+        <Link to="/Women">
           <button>Shop</button>
         </Link>
       </div>
@@ -85,12 +84,16 @@ const MainPage: React.FC = () => {
       <div className="maincontent_container_shoes_banner">
         <div className="shoe_banner_logo_text_container">
           <img src={ShoppyLogo} alt="Shoppy Logo" />
-          <h1> New <br /> Arrivals </h1>
+          <h1>New <br /> Arrivals</h1>
         </div>
-        <img src={ShoeBanner} alt="Shoe Banner" />
-        <Link to="/Shop">
-          <button>Shop Now</button>
-        </Link>
+        <div className="shoe_banner_poster_container">
+          <img src={ShoeBanner} alt="Shoe Banner" />
+        </div>
+        <div className="shoe_banner_button_container">
+          <Link to="/Men">
+            <button>Shop Now</button>
+          </Link>
+        </div>
       </div>
 
       {/* 5. Card Options Component */}
@@ -115,8 +118,8 @@ const MainPage: React.FC = () => {
       <div className="maincontent_container_gender_sections">
         {Object.entries(mySections).map(([section, properties]) => (
           <div key={section} className="maincontent_container_sections">
-            <Link to="/Shop">
-              <img src={properties.property1} alt="" />
+            <Link to={`/${properties.property2}`}>
+              <img src={properties.property1} alt={properties.property2} />
               <button>{properties.property2}'s</button>
             </Link>
           </div>
@@ -125,7 +128,10 @@ const MainPage: React.FC = () => {
 
       {/* 7. About Page */}
       <div className="maincontent_container_about_section">
-        <h1> MADE FOR THE MODERN <br /> SHOPPING </h1>
+        <div className="maincontent_container_about_heading">
+          <h1> MADE FOR THE </h1>
+          <h1>MODERN SHOPPING</h1>
+        </div>
 
         <div className="maincontent_container_about_text">
           <p>
@@ -133,15 +139,11 @@ const MainPage: React.FC = () => {
             trendsetters, the style mavens, and the shopping destination that
             fuels your passion for all things fabulous. Dive into our carefully
             curated collection of cutting-edge fashion, statement accessories,
-            and irresistible homeware. From runway-inspired looks to everyday
-            essentials, Shoppy empowers you to express your unique style
-            effortlessly. Step into a world of endless possibilities and let
-            your inner fashionista shine bright with Shoppy!
+            and irresistible homeware.Shoppy empowers you to express your unique style
+            effortlessly.
           </p>
           <a href="https://github.com/Gaurav-jo1" target="_blank">
-            <button>
-              ABOUT US
-            </button>
+            <button>ABOUT US</button>
           </a>
         </div>
       </div>
@@ -150,7 +152,6 @@ const MainPage: React.FC = () => {
         <Footer />
       </div>
     </div>
-
   );
 };
 

@@ -10,7 +10,7 @@ import { BsFillUnlockFill } from "react-icons/bs";
 import { GlobalValue } from "../../context/GlobalValue";
 
 // Media
-import new_art from "../../assets/new_part.jpeg";
+import new_art from "../../assets/new_part.webp";
 
 import axios from "axios";
 

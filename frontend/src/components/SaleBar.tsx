@@ -15,10 +15,10 @@ const SaleBar: React.FC = () => {
           </Link>
         </li>
         <li className="salebar-item">
-          <Link to="/Shop" className="salebar-link">
-            <p className="salebar-heading">Free Delivery</p>
+          <Link to="/Kids" className="salebar-link">
+            <p className="salebar-heading">Hello Shoppy Kid's Store</p>
             <p className="salebar-description">
-              Applies to orders of ₹ 14 000.00 or more. View details
+              Get access to Kid's Fashion Store
             </p>
           </Link>
         </li>

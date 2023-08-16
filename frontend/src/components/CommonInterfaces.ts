@@ -51,6 +51,7 @@ export interface CardImages {
 
 export interface SectionImages {
   [section: string]: {
+    property0: string;
     property1: string;
     property2: string;
   };

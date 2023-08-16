@@ -6,7 +6,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { SignComponentProps } from "../../components/CommonInterfaces";
 import { AuthContext } from "../../context/AuthContext";
 
-import signup_art from "../../assets/signup_art.jpeg";
+import signup_art from "../../assets/signup_art.webp";
 
 // Styling
 import "../../styles/AuthPages_styles/Auth.scss";

@@ -7,7 +7,7 @@ import { LoginComponentProps } from "../../components/CommonInterfaces";
 import { GlobalValue } from "../../context/GlobalValue";
 import { AuthContext } from "../../context/AuthContext";
 
-import login_art from "../../assets/login_art.jpeg";
+import login_art from "../../assets/login_art.webp";
 
 // Styling
 import "../../styles/AuthPages_styles/Auth.scss";

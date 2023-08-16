@@ -1,6 +1,6 @@
 import React from "react";
 import {BsGithub, BsLinkedin, BsFillFileEarmarkCodeFill } from "react-icons/bs";
-import x_logo from "../assets/x_logo.png"
+import x_logo from "../assets/x_logo.webp"
 
 import "../styles/components_styles/Footer.scss";
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import { GlobalValue } from "../../context/GlobalValue";
 import { ForgotPassComponentProps } from "../../components/CommonInterfaces";
 import { ImKey } from "react-icons/im";
-import forgot_art from "../../assets/forgot_art.jpeg";
+import forgot_art from "../../assets/forgot_art.webp";
 
 // Styling
 import "../../styles/AuthPages_styles/ForgotPage.scss";
