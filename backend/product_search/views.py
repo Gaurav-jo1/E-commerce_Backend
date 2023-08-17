@@ -69,6 +69,12 @@ class ProductSearch(APIView):
             r = redis.Redis(host="redis", port=6379, db=0, decode_responses=True)
             command = f"FT.SEARCH idx:product '%{search_text}%' RETURN 3 name price image"
             redis_response = r.execute_command(command)
+
+            print(redis_response)
+
+            # if redis_response is None:
+            #     return Response(data="No Result found", status=status.HTTP_404_NOT_FOUND)
+
             redis_response.pop(0)
 
             # Parse the input data and structure it into a dictionary

@@ -53,7 +53,7 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
         setSearchItems(JSON.parse(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        console.log("error",error);
       });
   }
 
@@ -106,7 +106,7 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
           <div className="navbar_user_search">
             <div className="navbar_search_input">
               <p><AiOutlineSearch /> </p>
-              <input type="text" placeholder="Search the Shop" value={userSearch} onChange={(e) => setUserSearch(e.target.value)} autoFocus={true} />
+              <input type="text" placeholder="Search the Shop" value={userSearch} onChange={(e) => setUserSearch(e.target.value)} autoFocus={true}/>
               <span>< MdOutlineArrowForwardIos/></span>
             </div>
             {searchItems && (
