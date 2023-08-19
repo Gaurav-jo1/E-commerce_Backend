@@ -6,10 +6,10 @@ import random
 # Create your models here.
 class Avatar(models.Model):
     id = models.AutoField(primary_key=True, null=False)
-    image = models.ImageField(upload_to='images/',default=None)
+    image = models.ImageField(upload_to='avatar/',default=None)
 
     def __str__(self):
-        return f"ID: {self.id}"
+        return f"Avatar: {self.id}"
     
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True, null=False)
@@ -25,5 +25,4 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return "%s's Profile" % self.user
-    
     

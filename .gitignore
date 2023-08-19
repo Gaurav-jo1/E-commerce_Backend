@@ -1,6 +1,3 @@
-venv
-.env
-
 # Logs
 logs
 *.log
@@ -32,16 +29,10 @@ client_secret.json
 *.pyc
 
 # Ignore the virtual environment directory
-venv/
-
-# Ignore the Django settings file
-myproject/settings.py
-
-# Ignore the static files directory
-myproject/static/
+backend/venv/
 
 # Ignore the media files directory
-myproject/media/
+backend/media/
 
 # Ignore the database file
 db.sqlite3
