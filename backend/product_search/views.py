@@ -5,13 +5,12 @@ from rest_framework import permissions
 from shop.models import ProductsModel
 
 from redis.exceptions import ResponseError
+from redis.commands.search.query import Query
 
 import redis
 import json
 
-
 # Create your views here.
-
 class LoadProducts:
     def RedisCreateIndex(self):
         # Establish a connection to the Redis server
@@ -27,13 +26,9 @@ class LoadProducts:
                 return print(f"Index {index_name} already exists")
 
         except ResponseError as e:
-            if "Unknown Index name" in str(e):
-                response = r.execute_command('FT.CREATE', 'idx:product', 'ON', 'hash', 'PREFIX', '1', 'product:', 'SCHEMA', 'name', 'TEXT', 'SORTABLE', 'price', 'NUMERIC', 'image', 'TEXT')
-                return print("RedisCreateIndex: ", response)
-
-            else:
-                return print(f"Redis error: {str(e)}")
-
+            response = r.execute_command('FT.CREATE', 'idx:product', 'ON', 'hash', 'PREFIX', '1', 'product:', 'SCHEMA', 'name', 'TEXT', 'SORTABLE', 'price', 'NUMERIC', 'image', 'TEXT')
+            return print("RedisCreateIndex: ", response)
+        
     def RedisDataLoad(self):
         r = redis.Redis(host="redis", port=6379, db=0)
 
@@ -46,9 +41,11 @@ class LoadProducts:
         for product in products_list:
             product_id = f"product:{product.id}"
 
-            r.hset(product_id, "name", product.name)
-            r.hset(product_id, "price", product.price)
-            r.hset(product_id, "image", product.image.url)
+            r.hset(product_id, mapping={
+                'name': product.name,
+                "price": product.price,
+                "image": product.image.url,
+            })
 
         # Set the flag key to indicate that the data has been loaded
         r.set(flag_key, "loaded")
@@ -67,33 +64,31 @@ class ProductSearch(APIView):
 
         try:
             r = redis.Redis(host="redis", port=6379, db=0, decode_responses=True)
-            command = f"FT.SEARCH idx:product '%{search_text}%' RETURN 3 name price image"
-            redis_response = r.execute_command(command)
+            index = r.ft("idx:product")
+            redis_search_test = f'{search_text.rstrip()}*'
+            redis_response = index.search(Query(redis_search_test).return_field("name").paging(0, 5))
 
             print(redis_response)
 
-            # if redis_response is None:
-            #     return Response(data="No Result found", status=status.HTTP_404_NOT_FOUND)
+            result_list = []
 
-            redis_response.pop(0)
+            # Iterate through the documents in the response
+            for doc in redis_response.docs:
+                result_dict = {
+                    'id': doc.id,
+                    'name': doc.name,
+                    # Add other relevant fields here
+                }
+                result_list.append(result_dict)
 
-            # Parse the input data and structure it into a dictionary
+            # Convert the list of dictionaries into a JSON format
+            result_json = json.dumps(result_list)
 
-            dictionary = {}
-            # Loop over the array with a step of 2
-            for i in range(0, min(len(redis_response), 10), 2):
-                # Get the product ID by removing the "product:" prefix
-                product_id = redis_response[i].replace("product:", "")
-                # Get the nested list
-                product_info = redis_response[i+1][1]
-                # Add the key-value pair to the dictionary
-                dictionary[product_id] = product_info
+            return Response(data=result_json,status=status.HTTP_200_OK)
 
-            return Response(data=json.dumps(dictionary),status=status.HTTP_200_OK)
-        
-        except Exception as e:
+        except ResponseError as e:
             # Return error response for any other exceptions
             return Response(
-                {"error": "Internal Server Error"},
+                {"error": {str(e)}},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )

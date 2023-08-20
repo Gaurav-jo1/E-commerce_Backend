@@ -18,20 +18,20 @@ interface MyData {
   picture: string;
 }
 
-interface SearchResult {
-  [key: string]: string;
+interface Product {
+  id: string;
+  name: string;
 }
-
 const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) => {
   const [userSearch, setUserSearch] = useState<string>("");
   const [fetchData, setFetchData] = useState<boolean>(false);
   const [searchBar, setSearchBar] = useState<boolean>(false);
-  const [searchItems, setSearchItems] = useState<SearchResult | null >(null)
+  const [searchItems, setSearchItems] = useState<Product[]>()
 
   const { authTokens } = useContext(AuthContext);
 
   if (authTokens && !fetchData) {
-    setFetchData(true);searchItems
+    setFetchData(true);
   }
 
   const { data: userInfo } = useQuery<MyData>( ["user_profile"], () =>
@@ -62,11 +62,14 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
       productSearch(userSearch);
     }
 
-    if (userSearch == "") {
-      setSearchItems(null)
-    }
-  
+    // if (userSearch == "") {
+    //   setSearchItems(null)
+    // }
+
+    
   }, [userSearch]);
+  
+  console.log(searchItems)
 
   return (
     <>
@@ -111,8 +114,8 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
             </div>
             {searchItems && (
               <div className="navbar_search_result">
-                {Object.values(searchItems).map((value, index) => (
-                  <p key={index}>{value}</p>
+                {searchItems.map(product => (
+                  <p key={product.id}>{product.name}</p>
                 ))}
               </div>
             )}
