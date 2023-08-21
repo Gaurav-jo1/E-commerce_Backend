@@ -68,23 +68,31 @@ class ProductSearch(APIView):
             redis_search_test = f'{search_text.rstrip()}*'
             redis_response = index.search(Query(redis_search_test).return_field("name").paging(0, 5))
 
-            print(redis_response)
+            print()
 
-            result_list = []
+            if len(redis_response.docs) != 0:
 
-            # Iterate through the documents in the response
-            for doc in redis_response.docs:
-                result_dict = {
-                    'id': doc.id,
-                    'name': doc.name,
-                    # Add other relevant fields here
-                }
-                result_list.append(result_dict)
+                result_list = []
 
-            # Convert the list of dictionaries into a JSON format
-            result_json = json.dumps(result_list)
+                # Iterate through the documents in the response
+                for doc in redis_response.docs:
+                    result_dict = {
+                        'id': doc.id,
+                        'name': doc.name,
+                        # Add other relevant fields here
+                    }
+                    result_list.append(result_dict)
 
-            return Response(data=result_json,status=status.HTTP_200_OK)
+                # Convert the list of dictionaries into a JSON format
+                result_json = json.dumps(result_list)
+
+                print(result_json)
+
+                return Response(data=result_json,status=status.HTTP_200_OK)
+            
+            else:
+                print("No Product Found")
+                return Response({"message": "No Product found"},status=status.HTTP_404_NOT_FOUND)
 
         except ResponseError as e:
             # Return error response for any other exceptions

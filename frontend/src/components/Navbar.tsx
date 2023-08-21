@@ -1,16 +1,15 @@
 import axios from "axios";
-import React, { useState, useEffect ,useContext } from "react";
+import React, { useState ,useContext } from "react";
 import { Link } from "react-router-dom";
 import { HiMagnifyingGlass } from "react-icons/hi2";
-import { AiOutlineSearch } from "react-icons/ai";
 import { CiShoppingCart } from "react-icons/ci";
-import {MdOutlineArrowForwardIos} from "react-icons/md"
 import { SignComponentProps } from "./CommonInterfaces";
 import { AuthContext } from "../context/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 
 // Styling
 import "../styles/components_styles/Navbar.scss";
+import SearchBar from "./SearchBar";
 
 interface MyData {
   id: number;
@@ -18,15 +17,11 @@ interface MyData {
   picture: string;
 }
 
-interface Product {
-  id: string;
-  name: string;
-}
+
 const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) => {
-  const [userSearch, setUserSearch] = useState<string>("");
   const [fetchData, setFetchData] = useState<boolean>(false);
   const [searchBar, setSearchBar] = useState<boolean>(false);
-  const [searchItems, setSearchItems] = useState<Product[]>()
+
 
   const { authTokens } = useContext(AuthContext);
 
@@ -45,31 +40,7 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
     { enabled: fetchData }
   );
 
-  const productSearch = (userSearch:string) => {
-    axios.post("http://127.0.0.1:8000/product_search/search/", {
-        search_text: userSearch,
-      })
-      .then(function (response) {
-        setSearchItems(JSON.parse(response.data));
-      })
-      .catch(function (error) {
-        console.log("error",error);
-      });
-  }
 
-  useEffect(() => {
-    if (userSearch !== "") {
-      productSearch(userSearch);
-    }
-
-    // if (userSearch == "") {
-    //   setSearchItems(null)
-    // }
-
-    
-  }, [userSearch]);
-  
-  console.log(searchItems)
 
   return (
     <>
@@ -104,23 +75,7 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
         )}
       </nav>
       {searchBar && (
-        <>
-          <div onClick={() => setSearchBar(false)} className="navbar_container_search"/>
-          <div className="navbar_user_search">
-            <div className="navbar_search_input">
-              <p><AiOutlineSearch /> </p>
-              <input type="text" placeholder="Search the Shop" value={userSearch} onChange={(e) => setUserSearch(e.target.value)} autoFocus={true}/>
-              <span>< MdOutlineArrowForwardIos/></span>
-            </div>
-            {searchItems && (
-              <div className="navbar_search_result">
-                {searchItems.map(product => (
-                  <p key={product.id}>{product.name}</p>
-                ))}
-              </div>
-            )}
-          </div>
-        </>
+        <SearchBar setSearchBar={setSearchBar}/>
       )}
     </>
   );
