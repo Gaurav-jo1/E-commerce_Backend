@@ -17,7 +17,6 @@ interface MyData {
   picture: string;
 }
 
-
 const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) => {
   const [fetchData, setFetchData] = useState<boolean>(false);
   const [searchBar, setSearchBar] = useState<boolean>(false);

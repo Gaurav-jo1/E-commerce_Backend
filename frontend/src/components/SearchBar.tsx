@@ -48,8 +48,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
     }
   }, [userSearch]);
 
-  console.log(searchItems);
-
   return (
     <div>
       <div

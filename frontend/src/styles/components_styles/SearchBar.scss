@@ -14,17 +14,17 @@
 .navbar_user_search {
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
+  top: 0;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   z-index: 110;
 
   .navbar_search_input {
     display: flex;
     align-items: center;
     position: relative;
-    bottom: 65px;
+    top: 120px;
 
     p:first-child {
       position: relative;
@@ -37,7 +37,7 @@
     input {
       padding: 22px 42px;
       width: 60vh;
-      background-color: rgba(20, 26, 37, 0.9);
+      background-color: rgb(20, 26, 37);
       color: white;
       border: 1px solid rgb(48, 48, 48);
       border-radius: 10px;
@@ -70,11 +70,11 @@
   .navbar_search_result {
     display: flex;
     flex-direction: column;
-    position: relative;
-    bottom: 65px;
     align-items: center;
     margin-top: 15px;
     text-align: center;
+    position: relative;
+    top: 120px;
 
     p,
     span {
@@ -101,3 +101,11 @@
     }
   }
 }
+
+// .navbar_user_search {
+//   z-index: 110;
+//   position: absolute;
+//   top: 0;
+//   left: 50%;
+//   transform: translateX(-50%);
+// }
