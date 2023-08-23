@@ -26,7 +26,7 @@ class LoadProducts:
             if index_exists:
                 return print(f"Index {index_name} already exists")
 
-        except ResponseError as e:
+        except ResponseError:
             response = r.execute_command(
                 "FT.CREATE",
                 "idx:product",
@@ -77,18 +77,27 @@ class ProductSearch(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
-        try:
-            search_text = request.data.get("search_text")
-        except (KeyError, AttributeError) as e:
-            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+        search_text = request.data.get("search_text")
+        user_search = request.data.get("user_search")
 
         try:
             r = redis.Redis(host="redis", port=6379, db=0, decode_responses=True)
             index = r.ft("idx:product")
-            redis_search_test = f"{search_text.rstrip()}*"
-            redis_response = index.search(
-                Query(redis_search_test).return_field("name").paging(0, 5)
-            )
+
+            if search_text:
+                print("Search Text")
+                redis_search_test = f"{search_text.rstrip()}*"
+                redis_response = index.search(
+                    Query(redis_search_test).return_field("name").paging(0, 5)
+                )
+
+            elif user_search:
+                print("On Click Result")
+                redis_user_search = f"{user_search.rstrip()}*"
+                redis_response = index.search(
+                    Query(redis_user_search).return_field("name")
+                )
 
             if len(redis_response.docs) != 0:
                 result_list = []

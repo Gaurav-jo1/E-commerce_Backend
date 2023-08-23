@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import axios from "axios";
 
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 
+import { useNavigate } from "react-router-dom";
+
 // Styling
 import "../styles/components_styles/SearchBar.scss";
+import { GlobalValue } from "../context/GlobalValue";
 
 interface SearchBarProps {
   setSearchBar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,12 +25,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
   const [searchItems, setSearchItems] = useState<Product[] | null>();
   const [searchError, setSearchError] = useState<string>();
 
+  const {setUserProSearch} = useContext(GlobalValue)
+
   const productSearch = (userSearch: string) => {
     axios
       .post("http://127.0.0.1:8000/product_search/search/", {
         search_text: userSearch,
       })
       .then(function (response) {
+        console.log("Product Search", JSON.parse(response.data));
         setSearchError("");
         setSearchItems(JSON.parse(response.data));
       })
@@ -46,7 +52,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
     if (userSearch == "") {
       setSearchItems(null);
     }
+
   }, [userSearch]);
+
+  const navigate = useNavigate();
+
+  // Search for Men or any other catergory:
+  const userProductSearch = (product_text:string) => {
+    setSearchBar(false);
+    setUserProSearch(product_text)
+    navigate("/search")
+  };
 
   return (
     <div>
@@ -67,14 +83,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
             autoFocus={true}
             minLength={2}
           />
-          <span>
+          <span onClick={() => userProductSearch(userSearch)}>
             <MdOutlineArrowForwardIos />
           </span>
         </div>
         {searchItems && (
           <div className="navbar_search_result">
             {searchItems.map((product) => (
-              <p key={product.id}>{product.name}</p>
+              <p key={product.id} onClick={() => userProductSearch(product.name)}>
+                {" "}
+                {product.name}
+              </p>
             ))}
           </div>
         )}

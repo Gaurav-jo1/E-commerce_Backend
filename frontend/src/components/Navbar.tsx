@@ -21,7 +21,6 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
   const [fetchData, setFetchData] = useState<boolean>(false);
   const [searchBar, setSearchBar] = useState<boolean>(false);
 
-
   const { authTokens } = useContext(AuthContext);
 
   if (authTokens && !fetchData) {
@@ -38,8 +37,6 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
         .then((response) => response.data),
     { enabled: fetchData }
   );
-
-
 
   return (
     <>

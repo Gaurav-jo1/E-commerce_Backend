@@ -23,6 +23,10 @@ interface CurrentVarContextType {
   setNewPassword: SetBooleanStateAction;
   passChanged: boolean;
   setPassChanged: SetBooleanStateAction;
+
+  // User Product Search
+  userProSearch: string;
+  setUserProSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const GlobalValue = createContext<CurrentVarContextType>(
@@ -46,6 +50,9 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
   const [emailCode, setEmailCode] = useState<boolean>(false);
   const [newPassword, setNewPassword] = useState<boolean>(false);
 
+  // User Product Search
+  const [userProSearch, setUserProSearch] = useState<string>("");
+
   return (
     <GlobalValue.Provider
       value={{
@@ -67,6 +74,9 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
         setForgotOpen,
         setEmailCode,
         setNewPassword,
+
+        userProSearch,
+        setUserProSearch,
       }}
     >
       {children}

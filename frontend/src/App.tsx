@@ -11,7 +11,7 @@ import MenPage from "./pages/ShopPages/MenPage";
 import WomenPage from "./pages/ShopPages/WomenPage";
 import KidsPage from "./pages/ShopPages/KidsPage";
 import SalePage from "./pages/ShopPages/SalePage";
-
+import SearchPage from "./pages/ShopPages/SearchPage";
 
 // Global Context
 import AuthProvider from "./context/AuthContext";
@@ -36,6 +36,7 @@ function App(): JSX.Element {
               <Route path="/Women" element={<WomenPage />} />
               <Route path="/Kids" element={<KidsPage />} />
               <Route path="/Sale" element={<SalePage />} />
+              <Route path="/search" element={<SearchPage />} />
             </Routes>
           </div>
         </GlobalProvider>

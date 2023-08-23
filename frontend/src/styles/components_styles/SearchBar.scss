@@ -54,16 +54,32 @@
       display: flex;
       align-items: center;
       position: relative;
-      right: 40px;
+      right: 45px;
       padding: 6px;
       border-radius: 50%;
       transition: 0.3s ease;
 
-      &:hover {
-        cursor: pointer;
-        background-color: aliceblue;
-        color: rgba(16, 21, 30, 0.9);
+      svg {
+        position: relative;
+        left: 1px;
       }
+      
+      &:hover {
+        background-color: aliceblue;
+        color: rgb(20, 26, 37);
+        cursor: pointer;
+      }
+    }
+  }
+
+  @keyframes revealFromBottom {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
     }
   }
 
@@ -85,12 +101,14 @@
     }
 
     p {
-      background-color: rgba(12, 16, 23, 0.9);
+      background-color: rgba(12, 16, 23);
       transition: background-color 0.3s, color 0.3s;
       font-size: 16px;
+      animation: revealFromBottom 0.5s ease;
 
       &:hover {
         cursor: pointer;
+        outline: 0.5px solid white;
         background-color: rgba(24, 31, 44, 0.9);
         transform: scale(1.07);
       }
@@ -101,11 +119,3 @@
     }
   }
 }
-
-// .navbar_user_search {
-//   z-index: 110;
-//   position: absolute;
-//   top: 0;
-//   left: 50%;
-//   transform: translateX(-50%);
-// }
