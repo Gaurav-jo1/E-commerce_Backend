@@ -61,6 +61,7 @@ class LoadProducts:
             r.hset(
                 product_id,
                 mapping={
+                    "id": product.id,
                     "name": product.name,
                     "price": product.price,
                     "image": product.image.url,
@@ -86,17 +87,15 @@ class ProductSearch(APIView):
             index = r.ft("idx:product")
 
             if search_text:
-                print("Search Text")
                 redis_search_test = f"{search_text.rstrip()}*"
                 redis_response = index.search(
-                    Query(redis_search_test).return_field("name").paging(0, 5)
+                    Query(redis_search_test).paging(0, 5)
                 )
 
             elif user_search:
-                print("On Click Result")
                 redis_user_search = f"{user_search.rstrip()}*"
                 redis_response = index.search(
-                    Query(redis_user_search).return_field("name")
+                    Query(redis_user_search)
                 )
 
             if len(redis_response.docs) != 0:
@@ -107,7 +106,7 @@ class ProductSearch(APIView):
                     result_dict = {
                         "id": doc.id,
                         "name": doc.name,
-                        # Add other relevant fields here
+                        "image": doc.image
                     }
                     result_list.append(result_dict)
 

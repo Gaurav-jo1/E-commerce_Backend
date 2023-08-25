@@ -61,6 +61,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
   const userProductSearch = (product_text:string) => {
     setSearchBar(false);
     setUserProSearch(product_text)
+    localStorage.setItem("userProSearch", product_text)
     navigate("/search")
   };
 

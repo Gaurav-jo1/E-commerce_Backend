@@ -25,8 +25,8 @@ interface CurrentVarContextType {
   setPassChanged: SetBooleanStateAction;
 
   // User Product Search
-  userProSearch: string;
-  setUserProSearch: React.Dispatch<React.SetStateAction<string>>;
+  userProSearch: string | undefined;
+  setUserProSearch: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 export const GlobalValue = createContext<CurrentVarContextType>(
@@ -51,7 +51,8 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
   const [newPassword, setNewPassword] = useState<boolean>(false);
 
   // User Product Search
-  const [userProSearch, setUserProSearch] = useState<string>("");
+  const [userProSearch, setUserProSearch] = useState<string | undefined>(() =>
+  localStorage.getItem("userProSearch") ? localStorage.getItem("userProSearch") || "" : undefined);
 
   return (
     <GlobalValue.Provider
