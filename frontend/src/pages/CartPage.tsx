@@ -75,12 +75,8 @@ const CartPage: React.FC = () => {
 
   if (isLoading) return "Loading...";
 
-  if (error) {
-    console.log(error);
-  }
-
-  console.log(CartPageData)
-
+  if (error) { console.log(error); }
+  
   return (
     <div className="cart_page_container">
       <AuthPages />

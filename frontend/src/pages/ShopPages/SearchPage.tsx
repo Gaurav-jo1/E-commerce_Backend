@@ -9,7 +9,7 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 
-import "../../styles/ShopPage.scss"
+import "../../styles/ShopPage.scss";
 
 interface Product {
   id: number;
@@ -20,11 +20,12 @@ interface Product {
 const SearchPage: React.FC = () => {
   const [searchData, setSearchData] = useState<Product[] | null>(null);
 
-  const { setLoginOpen, setSignupOpen, userProSearch } = useContext(GlobalValue);
+  const { setLoginOpen, setSignupOpen, userProSearch } =
+    useContext(GlobalValue);
 
   const { authTokens } = useContext(AuthContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userProSearch) {
@@ -38,37 +39,34 @@ const SearchPage: React.FC = () => {
         .catch(function (error) {
           console.log(error);
         });
+    } else {
+      navigate("/");
     }
-
-    else {
-      navigate("/")
-    }
-  }, [navigate, userProSearch]);
+  }, [ userProSearch]); // eslint-disable-line
+  
   const addProductToCard = (product_id: number) => {
     if (authTokens) {
       axios
-      .post(
-        "http://127.0.0.1:8000/cart/products/add/",
-        {
-          product_id: product_id,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + String(authTokens.access),
+        .post(
+          "http://127.0.0.1:8000/cart/products/add/",
+          {
+            product_id: product_id,
           },
-        }
-      )
-      .then(function (response) {
-        console.log("Response from Cart Page: ", response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
-
-    else {
-      setLoginOpen(true)
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + String(authTokens.access),
+            },
+          }
+        )
+        .then(function (response) {
+          console.log("Response from Cart Page: ", response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else {
+      setLoginOpen(true);
     }
   };
 
@@ -89,7 +87,6 @@ const SearchPage: React.FC = () => {
                   width={"100%"}
                 />
               </div>
-
 
               <div className="shop_page_products_container_item_title">
                 <p>{product.name}</p>
