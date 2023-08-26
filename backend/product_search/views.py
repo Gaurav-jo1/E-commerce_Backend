@@ -61,7 +61,7 @@ class LoadProducts:
             r.hset(
                 product_id,
                 mapping={
-                    "id": product.id,
+                    "item_id": product.id,
                     "name": product.name,
                     "price": product.price,
                     "image": product.image.url,
@@ -103,8 +103,11 @@ class ProductSearch(APIView):
 
                 # Iterate through the documents in the response
                 for doc in redis_response.docs:
+
+                    # print(doc.item_id)
+
                     result_dict = {
-                        "id": doc.id,
+                        "id": doc.item_id,
                         "name": doc.name,
                         "image": doc.image
                     }
@@ -112,8 +115,8 @@ class ProductSearch(APIView):
 
                 # Convert the list of dictionaries into a JSON format
                 result_json = json.dumps(result_list)
+                return Response(data=result_json,status=status.HTTP_200_OK)
 
-                return Response(data=result_json, status=status.HTTP_200_OK)
 
             else:
                 return Response(

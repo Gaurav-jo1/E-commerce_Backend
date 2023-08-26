@@ -15,14 +15,12 @@ interface Product {
   id: number;
   name: string;
   image: string;
-  price: number;
 }
 
 const SearchPage: React.FC = () => {
   const [searchData, setSearchData] = useState<Product[] | null>(null);
 
-  const { setLoginOpen, setSignupOpen, userProSearch } =
-    useContext(GlobalValue);
+  const { setLoginOpen, setSignupOpen, userProSearch } = useContext(GlobalValue);
 
   const { authTokens } = useContext(AuthContext);
 
@@ -46,9 +44,9 @@ const SearchPage: React.FC = () => {
       navigate("/")
     }
   }, [navigate, userProSearch]);
-
   const addProductToCard = (product_id: number) => {
-    axios
+    if (authTokens) {
+      axios
       .post(
         "http://127.0.0.1:8000/cart/products/add/",
         {
@@ -67,6 +65,11 @@ const SearchPage: React.FC = () => {
       .catch(function (error) {
         console.log(error);
       });
+    }
+
+    else {
+      setLoginOpen(true)
+    }
   };
 
   return (
@@ -86,6 +89,7 @@ const SearchPage: React.FC = () => {
                   width={"100%"}
                 />
               </div>
+
 
               <div className="shop_page_products_container_item_title">
                 <p>{product.name}</p>
