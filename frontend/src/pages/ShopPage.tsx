@@ -24,22 +24,28 @@ const ShopPage: React.FC<ShopPageProps> = ({
     (a, b) => a.position_id - b.position_id
   );
 
-  const addProductToCard = (product_id:number) => {
-    axios.post("http://127.0.0.1:8000/cart/products/add/", {
-      product_id: product_id
-    }, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-
-    })
-      .then(function (response) {
-        console.log("Response from Cart Page: ", response.data);
+  const addProductToCart = (product_id:number) => {
+    if (authTokens) {
+      axios.post("http://127.0.0.1:8000/cart/products/add/", {
+        product_id: product_id
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+  
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then(function (response) {
+          console.log("Response from Cart Page: ", response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    else {
+      setLoginOpen(true)
+    }
   };
 
   return (
@@ -79,7 +85,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
               </div>
 
               <div className="shop_page_products_container_item_cart">
-                <button onClick={() => addProductToCard(product.product.id)}>
+                <button onClick={() => addProductToCart(product.product.id)}>
                   {" "}
                   <p>
                     {" "}

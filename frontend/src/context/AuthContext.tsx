@@ -44,7 +44,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       })
       .then(function (response) {
         setAuthTokens(response.data);
-        console.log(response.data)
         localStorage.setItem("authTokens", JSON.stringify(response.data));
         setLoading(true);
       })

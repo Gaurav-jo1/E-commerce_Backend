@@ -51,7 +51,7 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
         <div className="navbar_logo">
           <Link to="/"> <p>Shoppy</p> </Link>
         </div>
-        {userInfo ? (
+        {userInfo && userInfo ? (
           <div className="navbar_profile">
             <Link to="/cart">
               <p> <CiShoppingCart /> </p>
