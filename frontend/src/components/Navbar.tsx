@@ -1,17 +1,19 @@
 import React, { useState, useEffect ,useContext } from "react";
 
 import axios from "axios";
+
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiShoppingCart } from "react-icons/ci";
 import { AuthContext } from "../context/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom"; 
+import { GlobalValue } from "../context/GlobalValue";
 
 import SearchBar from "./SearchBar";
 
 // Styling
 import "../styles/components_styles/Navbar.scss";
-import { GlobalValue } from "../context/GlobalValue";
+import ProfilePage from "../pages/ProfilePage";
 
 interface MyData {
   id: number;
@@ -24,7 +26,7 @@ const Navbar: React.FC = () => {
   const [searchBar, setSearchBar] = useState<boolean>(false);
 
   const { authTokens } = useContext(AuthContext);
-  const {setSignupOpen, setLoginOpen} = useContext(GlobalValue)
+  const {setSignupOpen, setLoginOpen, setProfilePage, profilePage} = useContext(GlobalValue)
 
   const { data: userInfo } = useQuery<MyData>( ["user_profile"], () =>
       axios.get<MyData>("http://127.0.0.1:8000/user_profile/info/", {
@@ -38,7 +40,7 @@ const Navbar: React.FC = () => {
   );
 
   useEffect(() => {
-    if (searchBar) {
+    if (searchBar || profilePage) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -47,7 +49,7 @@ const Navbar: React.FC = () => {
     if (authTokens && !fetchData) {
       setFetchData(true);
     }
-  }, [searchBar, authTokens, fetchData]);
+  }, [searchBar, authTokens, fetchData, profilePage]);
 
   return (
     <>
@@ -64,12 +66,11 @@ const Navbar: React.FC = () => {
             <Link to="/cart">
               <p> <CiShoppingCart /> </p>
             </Link>
-            <Link to="/profile">
               <img
                 src={`http://127.0.0.1:8000${userInfo.picture}`}
                 alt="Profile"
+                onClick={() => setProfilePage(true)}
               />
-            </Link>
           </div>
         ) : (
           <div className="navbar_buttons">
@@ -80,6 +81,10 @@ const Navbar: React.FC = () => {
       </nav>
       {searchBar && (
         <SearchBar setSearchBar={setSearchBar}/>
+      )}
+
+      {profilePage && (
+        <ProfilePage />
       )}
     </>
   );
