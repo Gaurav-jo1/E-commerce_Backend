@@ -40,7 +40,6 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
         id_token: idToken,
       })
       .then(function (response) {
-        console.log(response.data);
         setAuthTokens(response.data);
         localStorage.setItem("authTokens", JSON.stringify(response.data));
         setLoginOpen(false);

@@ -1,15 +1,17 @@
+import React, { useState, useEffect ,useContext } from "react";
+
 import axios from "axios";
-import React, { useState ,useContext } from "react";
-import { Link } from "react-router-dom";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiShoppingCart } from "react-icons/ci";
-import { SignComponentProps } from "./CommonInterfaces";
 import { AuthContext } from "../context/AuthContext";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom"; 
+
+import SearchBar from "./SearchBar";
 
 // Styling
 import "../styles/components_styles/Navbar.scss";
-import SearchBar from "./SearchBar";
+import { GlobalValue } from "../context/GlobalValue";
 
 interface MyData {
   id: number;
@@ -17,15 +19,12 @@ interface MyData {
   picture: string;
 }
 
-const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) => {
+const Navbar: React.FC = () => {
   const [fetchData, setFetchData] = useState<boolean>(false);
   const [searchBar, setSearchBar] = useState<boolean>(false);
 
   const { authTokens } = useContext(AuthContext);
-
-  if (authTokens && !fetchData) {
-    setFetchData(true);
-  }
+  const {setSignupOpen, setLoginOpen} = useContext(GlobalValue)
 
   const { data: userInfo } = useQuery<MyData>( ["user_profile"], () =>
       axios.get<MyData>("http://127.0.0.1:8000/user_profile/info/", {
@@ -38,15 +37,24 @@ const Navbar: React.FC<SignComponentProps> = ({ setSignupOpen, setLoginOpen, }) 
     { enabled: fetchData }
   );
 
+  useEffect(() => {
+    if (searchBar) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    if (authTokens && !fetchData) {
+      setFetchData(true);
+    }
+  }, [searchBar, authTokens, fetchData]);
+
   return (
     <>
       <nav className="navbar_container">
         <div onClick={() => setSearchBar(true)} className="navbar_search">
           <p> <HiMagnifyingGlass /> </p>
-          <input
-            type="text"
-            placeholder="Search..."
-          />
+          <input type="text" placeholder="Search..." />
         </div>
         <div className="navbar_logo">
           <Link to="/"> <p>Shoppy</p> </Link>

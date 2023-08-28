@@ -19,6 +19,8 @@ import GlobalProvider from "./context/GlobalValue";
 
 // Styling
 import "./App.scss";
+import Navbar from "./components/Navbar";
+import NavPage from "./components/NavPage";
 
 function App(): JSX.Element {
   return (
@@ -26,6 +28,8 @@ function App(): JSX.Element {
       <AuthProvider>
         <GlobalProvider>
           <div>
+            <Navbar/>
+            <NavPage/>
             <Routes>
               <Route path="*" element={<Navigate to="/" replace/>} />
               <Route path="/" element={<HomePage />} />

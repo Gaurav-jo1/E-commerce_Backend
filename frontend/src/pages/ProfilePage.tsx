@@ -5,11 +5,8 @@ import { useQuery,useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../context/AuthContext";
 import { AuthPages } from "../components/Commonfun";
 import { useNavigate } from "react-router-dom";
-
-import { GlobalValue } from "../context/GlobalValue";
-import Navbar from "../components/Navbar";
-import NavPage from "../components/NavPage";
 import Footer from "../components/Footer";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 // Styling
 import "../styles/ProfilePage.scss"
@@ -22,7 +19,6 @@ interface MyData {
 
 const ProfilePage: React.FC = () => {
   const { authTokens, callLogout } = useContext(AuthContext);
-  const { setLoginOpen, setSignupOpen } = useContext(GlobalValue);
 
   const navigate = useNavigate();
 
@@ -38,7 +34,7 @@ const ProfilePage: React.FC = () => {
       .then((response) => response.data)
   );
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <LoadingSpinner />;
 
   if (error) {
     navigate("/")
@@ -50,12 +46,9 @@ const ProfilePage: React.FC = () => {
     queryClient.removeQueries(["user_profile"]);
   }
 
-  console.log(UserProfile)
   return (
     <div className="profile_page_container">
       <AuthPages />
-      <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
-      <NavPage />
 
       <main className="profile_main_container">
           <div className="profile_container_picture">

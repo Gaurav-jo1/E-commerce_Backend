@@ -4,7 +4,6 @@ import axios from "axios";
 
 import { MdDelete } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
-import { GlobalValue } from "../context/GlobalValue";
 import { AuthContext } from "../context/AuthContext";
 import { queryClient } from "../main";
 import { Link ,useNavigate } from "react-router-dom";
@@ -14,6 +13,7 @@ import { AuthPages } from "../components/Commonfun";
 import Navbar from "../components/Navbar";
 import NavPage from "../components/NavPage";
 import Footer from "../components/Footer";
+import LoadingSpinner from "../components/LoadingSpinner";
 import empty_cart from "../assets/empty_cart.webp"
 // Styling
 import "../styles/CartPage.scss";
@@ -26,7 +26,6 @@ interface MyCart {
 }
 
 const CartPage: React.FC = () => {
-  const { setLoginOpen, setSignupOpen } = useContext(GlobalValue);
   const { authTokens } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -73,15 +72,13 @@ const CartPage: React.FC = () => {
       }
   );
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <LoadingSpinner />;
 
   if (error) { console.log(error); }
   
   return (
     <div className="cart_page_container">
       <AuthPages />
-      <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
-      <NavPage />
       {CartPageData.length != 0 ?
       <div className="cart_page_main_container_div">
         <div className="cart_page_main_container">

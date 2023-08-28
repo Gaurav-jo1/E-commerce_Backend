@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import ShopPage from '../ShopPage';
 
 import SalePoster from "../../assets/saleposter.webp";
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const SalePage:React.FC = () => {
   const { isLoading, error, data: SalePageData} = useQuery(["SalePage_Data"], () =>
@@ -12,7 +13,7 @@ const SalePage:React.FC = () => {
     .then((response) => response.data)
   );
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <LoadingSpinner />;
 
   if (error) return "An error has occurred: " + error;
 

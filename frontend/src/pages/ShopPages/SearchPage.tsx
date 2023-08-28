@@ -9,6 +9,9 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 
+import LoadingSpinner from "../../components/LoadingSpinner";
+
+// Styling
 import "../../styles/ShopPage.scss";
 
 interface Product {
@@ -18,10 +21,10 @@ interface Product {
 }
 
 const SearchPage: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [searchData, setSearchData] = useState<Product[] | null>(null);
 
-  const { setLoginOpen, setSignupOpen, userProSearch } =
-    useContext(GlobalValue);
+  const { setLoginOpen, userProSearch } = useContext(GlobalValue);
 
   const { authTokens } = useContext(AuthContext);
 
@@ -29,6 +32,7 @@ const SearchPage: React.FC = () => {
 
   useEffect(() => {
     if (userProSearch) {
+      setIsLoading(true)
       axios
         .post("http://127.0.0.1:8000/product_search/search/", {
           user_search: userProSearch,
@@ -38,6 +42,9 @@ const SearchPage: React.FC = () => {
         })
         .catch(function (error) {
           console.log(error);
+        })
+        .finally(() => {
+          setIsLoading(false); // Set isLoading to false when the request completes (success or error)
         });
     } else {
       navigate("/");
@@ -72,8 +79,11 @@ const SearchPage: React.FC = () => {
 
   return (
     <div className="search_page_container">
+
+      {isLoading ? <LoadingSpinner/> : ""}
+
       <AuthPages />
-      <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
+      <Navbar />
       <NavPage />
       <div className="shop_page_products_container">
         {searchData &&

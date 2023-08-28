@@ -1,6 +1,4 @@
 import React, { useContext } from "react";
-import Navbar from "../components/Navbar";
-import NavPage from "../components/NavPage";
 import { GlobalValue } from "../context/GlobalValue";
 import { AuthPages } from "../components/Commonfun";
 import { ShopPageProps } from "../components/CommonInterfaces";
@@ -17,7 +15,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
   mainImage,
   pageName,
 }) => {
-  const { setLoginOpen, setSignupOpen } = useContext(GlobalValue);
+  const { setLoginOpen } = useContext(GlobalValue);
   const { authTokens } = useContext(AuthContext);
 
   const sortedProducts = productData.sort(
@@ -51,12 +49,6 @@ const ShopPage: React.FC<ShopPageProps> = ({
   return (
     <div className="shop_page_container">
       <AuthPages />
-      <div className="shop_page_navbar_container">
-        <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
-      </div>
-      <div className="shop_page_navpage_container">
-        <NavPage />
-      </div>
       <div className="shop_page_container_main">
         <div className="shop_page_container_main_poster">
           <img
