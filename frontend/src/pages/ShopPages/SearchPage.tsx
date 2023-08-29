@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthPages } from "../../components/Commonfun";
-import Navbar from "../../components/Navbar";
-import NavPage from "../../components/NavPage";
 import { GlobalValue } from "../../context/GlobalValue";
 import { useNavigate } from "react-router-dom";
 import { BsFillCartCheckFill } from "react-icons/bs";
@@ -11,18 +9,14 @@ import { AuthContext } from "../../context/AuthContext";
 
 import LoadingSpinner from "../../components/LoadingSpinner";
 
+import { MyProductInterface } from "../../components/CommonInterfaces";
+
 // Styling
 import "../../styles/ShopPage.scss";
 
-interface Product {
-  id: number;
-  name: string;
-  image: string;
-}
-
 const SearchPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [searchData, setSearchData] = useState<Product[] | null>(null);
+  const [searchData, setSearchData] = useState<MyProductInterface[] | null>(null);
 
   const { setLoginOpen, userProSearch } = useContext(GlobalValue);
 
@@ -83,8 +77,6 @@ const SearchPage: React.FC = () => {
       {isLoading ? <LoadingSpinner/> : ""}
 
       <AuthPages />
-      <Navbar />
-      <NavPage />
       <div className="shop_page_products_container">
         {searchData &&
           searchData.map((product) => (

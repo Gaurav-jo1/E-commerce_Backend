@@ -82,3 +82,15 @@ export interface ShopPageProps {
   productData: ShopPageData[];
   mainImage: string;
 }
+
+export interface MyProductInterface {
+  id: number;
+  name: string;
+  image: string;
+}
+
+export interface MyUserInterface {
+  id: number;
+  user: string;
+  picture: string;
+}

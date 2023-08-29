@@ -1,8 +1,15 @@
+// Variables
+$main-color: rgb(243, 235, 235);
+$secondary-color: rgb(142, 142, 142);
+$highlight-color: rgb(255, 255, 255);
+$border-color: rgb(167, 167, 167);
+$profile-color: rgb(65, 65, 65);
+$button-color: blueviolet;
+
 .navbar_container {
-  background-color: rgb(243, 235, 235);
+  background-color: $main-color;
   display: flex;
   justify-content: space-between;
-  align-content: center;
   padding: 5px 30px 8px 30px;
   text-align: center;
 }
@@ -13,7 +20,6 @@
   text-align: center;
 
   p {
-    display: flex;
     font-size: 18px;
     font-weight: bold;
     color: black;
@@ -26,34 +32,34 @@
   }
 
   input {
+    border: 1px solid white;
     border-radius: 15px;
     height: 35px;
     width: 140px;
     padding-left: 40px;
     background-color: white;
     color: black;
-    border: 1px solid white;
     outline: none;
 
     &::placeholder {
-      color: rgb(142, 142, 142);
+      color: $secondary-color;
     }
 
     &:hover {
-      outline: none;
-      background-color: rgb(255, 255, 255);
+      background-color: $highlight-color;
+      border: 1px solid $border-color;
       color: black;
-      border: 1px solid rgb(167, 167, 167);
+      outline: none;
 
       &:focus {
-        outline: none;
-        background-color: rgb(255, 255, 255);
+        background-color: $highlight-color;
+        border: 1px solid $border-color;
         color: black;
-        border: 1px solid rgb(167, 167, 167);
+        outline: none;
       }
 
       &::placeholder {
-        color: rgb(121, 121, 121);
+        color: $secondary-color;
       }
     }
   }
@@ -69,9 +75,19 @@
     font-weight: 500;
     font-family: "Abril Fatface", cursive;
     letter-spacing: 1.8px;
+
     &:hover {
       cursor: pointer;
     }
+  }
+}
+
+.navbar_logo_image {
+  display: none;
+
+  img {
+    object-fit: cover;
+    width: 40px;
   }
 }
 
@@ -95,13 +111,18 @@
     }
   }
 
+  #search_icon {
+    display: none;
+    font-size: 29px;
+    margin-right: 10px;
+  }
+
   p {
     font-size: 32px;
-    font-size: bold;
-    color: rgb(65, 65, 65);
-    margin: 0px 10px;
-    padding-top: 10px;
-    padding-bottom: 5px;
+    font-weight: bold;
+    color: $profile-color;
+    margin-right: 10px;
+    padding: 10px 0px 5px;
     display: flex;
     align-items: center;
 
@@ -114,8 +135,8 @@
 .navbar_buttons {
   display: flex;
   align-items: center;
-  color: white;
   width: 194.6px;
+  color: white;
 
   p {
     margin-right: 10px;
@@ -130,7 +151,7 @@
     border: none;
     padding: 10px 14px;
     border-radius: 30px;
-    background-color: blueviolet;
+    background-color: $button-color;
     color: white;
 
     &:hover {
@@ -138,5 +159,28 @@
     }
 
     margin-left: 10px;
+  }
+}
+
+// Responsive
+
+@media (max-width: 1024px) {
+
+  .navbar_logo {
+    display: none;
+  }
+
+  .navbar_logo_image {
+    display: flex;
+  }
+
+  .navbar_search {
+    display: none;
+  }
+
+  .navbar_profile {
+    #search_icon {
+      display: flex;
+    }
   }
 }

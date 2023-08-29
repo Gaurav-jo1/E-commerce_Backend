@@ -41,6 +41,9 @@ function App(): JSX.Element {
               <Route path="/Kids" element={<KidsPage />} />
               <Route path="/Sale" element={<SalePage />} />
               <Route path="/search" element={<SearchPage />} />
+
+              <Route path="/test" element={<Navbar />} />
+
             </Routes>
           </div>
         </GlobalProvider>

@@ -9,12 +9,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 // Styling
 import "../styles/ProfilePage.scss";
 import { GlobalValue } from "../context/GlobalValue";
-
-interface MyData {
-  id: number;
-  picture: string;
-  user: string;
-}
+import { MyUserInterface } from "../components/CommonInterfaces";
 
 const ProfilePage: React.FC = () => {
   const { authTokens, callLogout } = useContext(AuthContext);
@@ -28,9 +23,9 @@ const ProfilePage: React.FC = () => {
     isLoading,
     error,
     data: UserProfile,
-  } = useQuery<MyData>(["user_profile"], () =>
+  } = useQuery<MyUserInterface>(["user_profile"], () =>
     axios
-      .get<MyData>("http://127.0.0.1:8000/user_profile/info/", {
+      .get<MyUserInterface>("http://127.0.0.1:8000/user_profile/info/", {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + String(authTokens.access),
