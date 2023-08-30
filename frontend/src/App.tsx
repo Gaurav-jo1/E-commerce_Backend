@@ -4,7 +4,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 // Pages
 import HomePage from "./pages/HomePage";
-import ProfilePage from "./pages/ProfilePage";
 import CartPage from "./pages/CartPage";
 import NewFeatured from "./pages/ShopPages/NewFeatured";
 import MenPage from "./pages/ShopPages/MenPage";
@@ -28,12 +27,11 @@ function App(): JSX.Element {
       <AuthProvider>
         <GlobalProvider>
           <div>
-            <Navbar/>
-            <NavPage/>
+            <Navbar />
+            <NavPage />
             <Routes>
-              <Route path="*" element={<Navigate to="/" replace/>} />
+              <Route path="*" element={<Navigate to="/" replace />} />
               <Route path="/" element={<HomePage />} />
-              <Route path="/profile" element={<ProfilePage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/New & Featured" element={<NewFeatured />} />
               <Route path="/Men" element={<MenPage />} />
@@ -43,7 +41,6 @@ function App(): JSX.Element {
               <Route path="/search" element={<SearchPage />} />
 
               <Route path="/test" element={<Navbar />} />
-
             </Routes>
           </div>
         </GlobalProvider>

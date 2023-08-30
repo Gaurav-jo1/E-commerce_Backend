@@ -4,14 +4,16 @@ import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import LoadingSpinner from "../components/LoadingSpinner";
-
-// Styling
-import "../styles/ProfilePage.scss";
 import { GlobalValue } from "../context/GlobalValue";
 import { MyUserInterface } from "../components/CommonInterfaces";
+// Styling
+import "../styles/ProfilePage.scss";
 
-const ProfilePage: React.FC = () => {
+interface ProfilePageInterface {
+  setUserData: React.Dispatch<React.SetStateAction<MyUserInterface | null>>;
+}
+
+const ProfilePage: React.FC<ProfilePageInterface> = ({setUserData}) => {
   const { authTokens, callLogout } = useContext(AuthContext);
   const { setProfilePage } = useContext(GlobalValue);
 
@@ -20,9 +22,8 @@ const ProfilePage: React.FC = () => {
   const queryClient = useQueryClient();
 
   const {
-    isLoading,
-    error,
     data: UserProfile,
+    error
   } = useQuery<MyUserInterface>(["user_profile"], () =>
     axios
       .get<MyUserInterface>("http://127.0.0.1:8000/user_profile/info/", {
@@ -34,8 +35,6 @@ const ProfilePage: React.FC = () => {
       .then((response) => response.data)
   );
 
-  if (isLoading) return <LoadingSpinner />;
-
   if (error) {
     navigate("/");
   }
@@ -43,6 +42,8 @@ const ProfilePage: React.FC = () => {
   const logUserOut = () => {
     callLogout();
     navigate("/");
+    setProfilePage(false)
+    setUserData(null)
     queryClient.removeQueries(["user_profile"]);
   };
 
