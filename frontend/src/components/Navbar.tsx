@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiShoppingCart } from "react-icons/ci";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { FcMenu } from "react-icons/fc";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { GlobalValue } from "../context/GlobalValue";
@@ -21,9 +21,10 @@ import { MyUserInterface } from "./CommonInterfaces";
 const Navbar: React.FC = () => {
   const [userData, setUserData] = useState<MyUserInterface | null>(null);
   const [searchBar, setSearchBar] = useState<boolean>(false);
+  const [profilePage, setProfilePage] = useState<boolean>(false);
 
   const { authTokens } = useContext(AuthContext);
-  const { setSignupOpen, setLoginOpen, setProfilePage, profilePage } =
+  const { setSignupOpen, setLoginOpen, setNavOptions, navOptions } =
     useContext(GlobalValue);
 
   const UserProfileSearch = () => {
@@ -44,7 +45,7 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
-    if (searchBar || profilePage) {
+    if (searchBar || profilePage || navOptions) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -53,7 +54,7 @@ const Navbar: React.FC = () => {
     if (authTokens) {
       UserProfileSearch();
     }
-  }, [searchBar, authTokens, profilePage]);
+  }, [searchBar, authTokens, profilePage, navOptions]);
 
   return (
     <>
@@ -64,11 +65,7 @@ const Navbar: React.FC = () => {
           </p>
           <input type="text" placeholder="Search..." />
         </div>
-        <div onClick={() => setSearchBar(true)} className="navbar_search_glass">
-          <p>
-            <HiMagnifyingGlass />
-          </p>
-        </div>
+
         <div className="navbar_logo">
           <Link to="/">
             <p>Shoppy</p>
@@ -87,15 +84,9 @@ const Navbar: React.FC = () => {
                 alt="Profile"
                 onClick={() => setProfilePage(true)}
               />
-            </div>
-
-            {/* Add On Click Navigation, Cart and Logout on Mobile */}
-            <div className="navbar_profile_mobile">
-              <img
-                src={`http://127.0.0.1:8000${userData.picture}`}
-                alt="Profile"
-                onClick={() => setProfilePage(true)}
-              />
+              <span onClick={() => setNavOptions(true)}>
+                <FcMenu />
+              </span>
             </div>
           </>
         ) : (
@@ -105,8 +96,11 @@ const Navbar: React.FC = () => {
               <button onClick={() => setLoginOpen(true)}>Sign in</button>
             </div>
             <div className="navbar_button_slider">
-              <p>
-                <RxHamburgerMenu />
+              <p onClick={() => setSearchBar(true)}>
+                <HiMagnifyingGlass />
+              </p>
+              <p onClick={() => setNavOptions(true)}>
+                <FcMenu />
               </p>
             </div>
           </>
@@ -114,7 +108,12 @@ const Navbar: React.FC = () => {
       </nav>
       {searchBar && <SearchBar setSearchBar={setSearchBar} />}
 
-      {profilePage && <ProfilePage setUserData={setUserData} />}
+      {profilePage && (
+        <ProfilePage
+          setUserData={setUserData}
+          setProfilePage={setProfilePage}
+        />
+      )}
     </>
   );
 };

@@ -12,17 +12,6 @@
   }
 }
 
-@keyframes slideInFromRight {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
 .profile_main_container {
   display: flex;
   flex-direction: column;
@@ -30,14 +19,13 @@
   align-items: center;
   background-color: white;
   border-left: 5px solid silver;
-  position: absolute;
+  position: fixed;
   width: 350px;
   height: 100vh;
   z-index: 1000;
   top: 0;
   right: 0;
   animation: slideInFromRight 0.4s ease-in-out;
-
 
   main {
     display: flex;
@@ -79,5 +67,11 @@
         background-color: #2980b9;
       }
     }
+  }
+}
+
+@media (max-width: 780px) {
+  .profile_main_container {
+    width: 280px;
   }
 }

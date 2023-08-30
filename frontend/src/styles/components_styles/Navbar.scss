@@ -16,7 +16,7 @@ $button-color: blueviolet;
   @include flex-center();
   background-color: $main-color;
   justify-content: space-between;
-  padding: 5px 30px 8px 30px;
+  padding: 8px 30px;
 }
 
 .navbar_search {
@@ -68,18 +68,26 @@ $button-color: blueviolet;
   }
 }
 
-.navbar_search_glass {
+.navbar_search_icons {
   display: none;
-  font-size: 23px;
   margin: 0 10px;
 
   p {
     display: flex;
     justify-content: flex-end;
+    margin: 0 6px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
-  &:hover {
-    cursor: pointer;
+  p:first-child {
+    font-size: 23px;
+    padding-top: 1px;
+  }
+
+  p:last-child {
+    font-size: 26px;
   }
 }
 
@@ -102,16 +110,15 @@ $button-color: blueviolet;
 
 .navbar_profile {
   @include flex-center();
-  justify-content: center;
+  justify-content: flex-end;
   width: 194.6px;
   height: 50px;
   border-radius: 50%;
-  overflow: hidden;
 
   img {
     height: 45px;
     width: 45px;
-    margin: 0 10px;
+    margin: 0 15px;
 
     &:hover {
       cursor: pointer;
@@ -122,7 +129,6 @@ $button-color: blueviolet;
     font-size: 32px;
     font-weight: bold;
     color: $profile-color;
-    margin-right: 10px;
     padding: 10px 0px 5px;
     display: flex;
     align-items: center;
@@ -131,18 +137,13 @@ $button-color: blueviolet;
       cursor: pointer;
     }
   }
-}
 
-.navbar_profile_mobile {
-  display: none;
-  img {
-    height: 45px;
-    width: 45px;
-    margin: 0 10px;
-
-    &:hover {
-      cursor: pointer;
-    }
+  span {
+    display: none;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    padding: 10px 0px 5px;
   }
 }
 
@@ -178,11 +179,13 @@ $button-color: blueviolet;
 
 .navbar_button_slider {
   display: none;
-  font-size: 23px;
 
   p {
+    font-size: 24px;
     display: flex;
     justify-content: flex-end;
+    margin: 0 10px;
+    font-weight: bold;
   }
 
   &:hover {
@@ -194,30 +197,40 @@ $button-color: blueviolet;
 
 @media (max-width: 780px) {
   .navbar_container {
-    padding: 5px 25px 8px 25px;
+    padding: 8px 25px;
+    background-color: $highlight-color;
   }
 
   .navbar_search,
-  .navbar_buttons,
-  .navbar_profile {
+  .navbar_buttons {
     display: none;
   }
 
-  .navbar_search_glass,
-  .navbar_button_slider,
-  .navbar_profile_mobile {
+  .navbar_search_icons,
+  .navbar_button_slider{
     display: flex;
+  }
+
+  .navbar_profile {
+    span {
+      display: flex;
+    }
   }
 }
 
 @media (max-width: 460px) {
   .navbar_container {
-    padding: 5px 20px 8px 20px;
+    padding: 8px 20px;
   }
 
   .navbar_logo {
     p {
-      font-size: 34px;
+      font-size: 0;
+    }
+
+    p::before {
+      content: "S";
+      font-size: 40px;
     }
   }
 }

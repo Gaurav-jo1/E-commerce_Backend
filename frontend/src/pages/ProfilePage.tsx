@@ -4,18 +4,17 @@ import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { GlobalValue } from "../context/GlobalValue";
 import { MyUserInterface } from "../components/CommonInterfaces";
 // Styling
 import "../styles/ProfilePage.scss";
 
 interface ProfilePageInterface {
   setUserData: React.Dispatch<React.SetStateAction<MyUserInterface | null>>;
+  setProfilePage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ProfilePage: React.FC<ProfilePageInterface> = ({setUserData}) => {
+const ProfilePage: React.FC<ProfilePageInterface> = ({setUserData, setProfilePage}) => {
   const { authTokens, callLogout } = useContext(AuthContext);
-  const { setProfilePage } = useContext(GlobalValue);
 
   const navigate = useNavigate();
 

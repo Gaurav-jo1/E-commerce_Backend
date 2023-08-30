@@ -28,9 +28,9 @@ interface CurrentVarContextType {
   userProSearch: string | undefined;
   setUserProSearch: React.Dispatch<React.SetStateAction<string | undefined>>;
 
-  // Profile Page
-  profilePage: boolean;
-  setProfilePage: SetBooleanStateAction;
+  // Mobile Navigation Bar
+  navOptions: boolean;
+  setNavOptions: SetBooleanStateAction;
 }
 
 export const GlobalValue = createContext<CurrentVarContextType>(
@@ -58,8 +58,8 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
   const [userProSearch, setUserProSearch] = useState<string | undefined>(() =>
   localStorage.getItem("userProSearch") ? localStorage.getItem("userProSearch") || "" : undefined);
 
-  // Profile Page
-  const [profilePage ,setProfilePage] = useState<boolean>(false)
+  // Mobile Navigation Bar
+  const [navOptions ,setNavOptions] = useState<boolean>(false);
 
   return (
     <GlobalValue.Provider
@@ -86,8 +86,8 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
         userProSearch,
         setUserProSearch,
 
-        profilePage,
-        setProfilePage
+        navOptions,
+        setNavOptions
       }}
     >
       {children}
