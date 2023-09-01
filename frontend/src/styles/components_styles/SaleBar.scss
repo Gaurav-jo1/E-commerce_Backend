@@ -48,7 +48,7 @@
     display: flex;
     flex-direction: row;
     text-align: center;
-    padding: 9px 0;
+    padding: 8px 0;
     list-style: none;
     position: relative;
 
@@ -73,17 +73,62 @@
     }
 
     .salebar-heading {
-      font-size: 15px;
-      font-family: 'Lunasima', sans-serif;
+      font-size: 16px;
+      font-family: "Lunasima", sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .salebar-description {
-      font-size: 12px;
+      font-size: 13px;
       text-decoration: underline;
-      padding: 3px 0;
+      padding-top: 4px;
 
       &:hover {
         cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  .salebar {
+    ul {
+      .salebar-heading {
+        font-size: 15px;
+      }
+
+      .salebar-description {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .salebar {
+    ul {
+      .salebar-heading {
+        font-size: 12px;
+      }
+
+      .salebar-description {
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .salebar {
+    ul {
+      .salebar-heading {
+        font-size: 11px;
+      }
+
+      .salebar-description {
+        font-size: 9px;
       }
     }
   }

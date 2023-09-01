@@ -118,11 +118,15 @@ $button-color: blueviolet;
   img {
     height: 45px;
     width: 45px;
-    margin: 0 15px;
 
     &:hover {
       cursor: pointer;
     }
+  }
+
+  #search {
+    font-size: 28px;
+    display: none;
   }
 
   p {
@@ -132,6 +136,7 @@ $button-color: blueviolet;
     padding: 10px 0px 5px;
     display: flex;
     align-items: center;
+    margin-right: 15px;
 
     &:hover {
       cursor: pointer;
@@ -143,6 +148,7 @@ $button-color: blueviolet;
     font-size: 24px;
     align-items: center;
     padding: 10px 0px 5px;
+    margin-left: 15px
   }
 }
 
@@ -211,6 +217,9 @@ $button-color: blueviolet;
   }
 
   .navbar_profile {
+    #search {
+      display: flex;
+    }
     span {
       display: flex;
     }

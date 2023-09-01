@@ -10,8 +10,6 @@ import { Link ,useNavigate } from "react-router-dom";
 
 // Components
 import { AuthPages } from "../components/Commonfun";
-import Navbar from "../components/Navbar";
-import NavPage from "../components/NavPage";
 import Footer from "../components/Footer";
 import LoadingSpinner from "../components/LoadingSpinner";
 import empty_cart from "../assets/empty_cart.webp"

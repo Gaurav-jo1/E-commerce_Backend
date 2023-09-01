@@ -1,9 +1,10 @@
 import React from 'react'
+import SaleBar from '../components/SaleBar'
 
 const Test:React.FC = () => {
   return (
     <div>
-        {/* <h1>Hello</h1 */}
+      <SaleBar />
     </div>
   )
 }

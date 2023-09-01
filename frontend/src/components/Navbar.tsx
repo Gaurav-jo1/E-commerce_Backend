@@ -36,7 +36,6 @@ const Navbar: React.FC = () => {
         },
       })
       .then(function (response) {
-        console.log(response.data);
         setUserData(response.data);
       })
       .catch(function (error) {
@@ -74,6 +73,9 @@ const Navbar: React.FC = () => {
         {userData && userData ? (
           <>
             <div className="navbar_profile">
+              <p id="search" onClick={() => setSearchBar(true)}>
+                <HiMagnifyingGlass />
+              </p>
               <Link to="/cart">
                 <p>
                   <CiShoppingCart />
