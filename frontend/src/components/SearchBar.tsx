@@ -8,7 +8,7 @@ import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 // Styling
-import "../styles/components_styles/SearchBar.scss";
+import "../styles/Components_styles/SearchBar.scss";
 import { GlobalValue } from "../context/GlobalValue";
 
 interface SearchBarProps {

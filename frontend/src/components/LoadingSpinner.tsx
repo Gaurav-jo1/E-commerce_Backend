@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/components_styles/LoadingSpinner.scss";
+import "../styles/Components_styles/LoadingSpinner.scss";
 
 const LoadingSpinner: React.FC = () => {
   return (

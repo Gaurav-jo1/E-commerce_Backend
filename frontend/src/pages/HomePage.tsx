@@ -4,6 +4,7 @@ import React from "react";
 import { AuthPages } from "../components/Commonfun";
 import SaleBar from "../components/SaleBar";
 import MainPage from "./MainPage";
+import Footer from "../components/Footer";
 
 // Styling
 import "../styles/HomePage.scss";
@@ -19,6 +20,7 @@ const HomePage: React.FC = () => {
       <div className="homepage_main_container">
         <MainPage />
       </div>
+      <Footer />
     </div>
   );
 };

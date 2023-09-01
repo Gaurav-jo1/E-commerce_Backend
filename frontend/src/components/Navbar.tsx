@@ -13,7 +13,7 @@ import { GlobalValue } from "../context/GlobalValue";
 import SearchBar from "./SearchBar";
 
 // Styling
-import "../styles/components_styles/Navbar.scss";
+import "../styles/Components_styles/Navbar.scss";
 import ProfilePage from "../pages/ProfilePage";
 
 import { MyUserInterface } from "./CommonInterfaces";

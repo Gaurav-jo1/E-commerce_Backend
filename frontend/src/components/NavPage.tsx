@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 // Styling
 import { Link } from "react-router-dom";
-import "../styles/components_styles/NavPage.scss";
+import "../styles/Components_styles/NavPage.scss";
 import { GlobalValue } from "../context/GlobalValue";
 import { RxCross1 } from "react-icons/rx";
 import { AuthContext } from "../context/AuthContext";

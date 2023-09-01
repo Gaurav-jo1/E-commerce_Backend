@@ -2,7 +2,7 @@ import React from "react";
 import {BsGithub, BsLinkedin, BsFillFileEarmarkCodeFill } from "react-icons/bs";
 import x_logo from "../assets/x_logo.webp"
 
-import "../styles/components_styles/Footer.scss";
+import "../styles/Components_styles/Footer.scss";
 
 const Footer: React.FC = () => {
   return (

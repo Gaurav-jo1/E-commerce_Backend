@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // Styling
-import "../styles/components_styles/SaleBar.scss";
+import "../styles/Components_styles/SaleBar.scss";
 
 const SaleBar: React.FC = () => {
   return (
