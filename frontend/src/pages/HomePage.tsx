@@ -8,6 +8,8 @@ import { myLists, myCards, mySections } from "../components/CommonData";
 import MainBG from "../assets/1.webp";
 import ShoeBanner from "../assets/shoe-banner.webp";
 import ShoppyLogo from "../assets/android-chrome-512x512.png";
+import ShoeBanner1 from "../assets/shoe-banner-r1.webp"
+import ShoeBanner2 from "../assets/shoe-banner-r2.webp"
 
 import { AuthPages } from "../components/Commonfun";
 import SaleBar from "../components/SaleBar";
@@ -89,6 +91,10 @@ const HomePage: React.FC = () => {
         </div>
         <div className="shoe_banner_poster_container">
           <img src={ShoeBanner} alt="Shoe Banner" />
+        </div>
+        <div className="shoe_banner_poster_mobile">
+          <img src={ShoeBanner1} alt="Shoe Banner" />
+          <img src={ShoeBanner2} alt="Shoe Banner" />
         </div>
         <div className="shoe_banner_button_container">
           <Link to="/Men">

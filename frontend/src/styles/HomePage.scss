@@ -276,7 +276,7 @@ $buttonTextColor: whitesmoke;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0px 50px;
+  padding: 10px 50px;
   margin: 30px 0;
   background: rgb(243, 235, 235);
 
@@ -290,12 +290,12 @@ $buttonTextColor: whitesmoke;
     }
 
     h1 {
-      font-size: 65px;
+      font-size: 52px;
       text-align: center;
       font-family: "Fira Sans Condensed", sans-serif;
       font-weight: bolder;
       text-transform: uppercase;
-      line-height: 50px;
+      line-height: 44px;
       letter-spacing: -2px;
     }
   }
@@ -306,6 +306,21 @@ $buttonTextColor: whitesmoke;
       height: auto;
       display: block;
       margin: 0 auto;
+      object-fit: cover;
+    }
+  }
+
+  .shoe_banner_poster_mobile {
+    display: none;
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+    padding: 40px 0;
+    justify-items: center;
+    align-items: center;
+
+    img {
+      height: auto;
+      width: 100%;
       object-fit: cover;
     }
   }
@@ -329,6 +344,63 @@ $buttonTextColor: whitesmoke;
 
       &:hover {
         cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  .homepage_container_shoes_banner {
+    flex-direction: column;
+    padding: 30px 40px;
+
+    .shoe_banner_logo_text_container {
+      h1 {
+        font-size: 70px;
+        line-height: 56px;
+      }
+    }
+
+    .shoe_banner_poster_container {
+      display: none;
+    }
+
+    .shoe_banner_poster_mobile {
+      display: grid;
+      padding: 20px 0;
+    }
+
+    .shoe_banner_poster_mobile {
+  
+      img {
+        width: 70%;
+      }
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .homepage_container_shoes_banner {
+    flex-direction: column;
+    padding: 30px 40px;
+    .shoe_banner_logo_text_container {
+      h1 {
+        font-size: 56px;
+        line-height: 48px;
+      }
+    }
+
+    .shoe_banner_button_container {
+      button {
+        font-size: 18px;
+      }
+    }
+
+
+    .shoe_banner_poster_mobile {
+  
+      img {
+        width: 90%;
       }
     }
   }

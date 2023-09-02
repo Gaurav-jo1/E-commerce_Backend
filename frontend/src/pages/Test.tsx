@@ -1,18 +1,21 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import SaleBar from "../components/SaleBar";
 import MainBG from "../assets/1.webp";
-
+import ShoeBanner from "../assets/shoe-banner.webp";
+import ShoppyLogo from "../assets/android-chrome-512x512.png";
 import { Link } from "react-router-dom";
 
-import { myLists } from "../components/CommonData";
+import ShoeBanner1 from "../assets/shoe_banner_R1.png"
+import ShoeBanner2 from "../assets/shoe_banner_R2.png"
 
+import { myLists } from "../components/CommonData";
 
 const Test: React.FC = () => {
   const [isHovered, setIsHovered] = useState<string | null>(null);
 
   return (
     <div className="homepage_container">
-            <div className="homepage_salebar_container">
+      <div className="homepage_salebar_container">
         <SaleBar />
       </div>
       {/* 1. First Component */}
@@ -65,6 +68,26 @@ const Test: React.FC = () => {
             <p>{myLists[key].property2}</p>
           </div>
         ))}
+      </div>
+
+      {/* 4. Shoe Banner Component */}
+      <div className="homepage_container_shoes_banner">
+        <div className="shoe_banner_logo_text_container">
+          <img src={ShoppyLogo} alt="Shoppy Logo" />
+          <h1> New <br /> Arrivals</h1>
+        </div>
+        <div className="shoe_banner_poster_container">
+          <img src={ShoeBanner} alt="Shoe Banner" />
+        </div>
+        <div className="shoe_banner_poster_mobile">
+          <img src={ShoeBanner1} alt="Shoe Banner" />
+          <img src={ShoeBanner2} alt="Shoe Banner" />
+        </div>
+        <div className="shoe_banner_button_container">
+          <Link to="/Men">
+            <button>Shop Now</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
