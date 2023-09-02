@@ -1,22 +1,26 @@
-import React, { useState } from "react";
-import "../styles/MainPage.scss";
+import React, {useState} from "react";
+import SaleBar from "../components/SaleBar";
+import MainBG from "../assets/1.webp";
 
 import { Link } from "react-router-dom";
 
-import MainBG from "../assets/1.webp";
-
 import { myLists } from "../components/CommonData";
+
 
 const Test: React.FC = () => {
   const [isHovered, setIsHovered] = useState<string | null>(null);
 
   return (
-    <div>
-      <div className="maincontent_container_textbg">
-        <div className="maincontent_container_bg">
+    <div className="homepage_container">
+            <div className="homepage_salebar_container">
+        <SaleBar />
+      </div>
+      {/* 1. First Component */}
+      <div className="homepage_container_textbg">
+        <div className="homepage_container_bg">
           <img src={MainBG} alt="Dress Background" />
         </div>
-        <div className="maincontent_container_text">
+        <div className="homepage_container_text">
           <p>PREETY FOR SUMMER</p>
           <Link to="/New & Featured">
             <span>SHOP&nbsp;ALL&nbsp;NEW</span>
@@ -24,7 +28,8 @@ const Test: React.FC = () => {
         </div>
       </div>
 
-      <div className="maincontent_container_summer_text">
+      {/* 2. Summer text Banner Component */}
+      <div className="homepage_container_summer_text">
         <span>Summer Essentials</span>
         <h3>Chase the day</h3>
         <p>
@@ -37,9 +42,10 @@ const Test: React.FC = () => {
         </Link>
       </div>
 
-      <div className="maincontent_container_shop_options">
+      {/* 3. Shop Options Component */}
+      <div className="homepage_container_shop_options">
         {Object.keys(myLists).map((key) => (
-          <div key={key} className="maincontent_shop_image_container">
+          <div key={key} className="homepage_shop_image_container">
             <Link to="/Shop">
               <img
                 id={`hide_img_${isHovered === key ? key : ""}`}
