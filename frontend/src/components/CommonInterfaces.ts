@@ -44,7 +44,6 @@ export interface ShopImages {
 export interface CardImages {
   [card: string]: {
     property1: string;
-    property2: string;
     property3: string;
   };
 }

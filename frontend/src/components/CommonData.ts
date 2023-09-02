@@ -11,7 +11,7 @@ import HoverImage3 from "../assets/22.webp";
 import HoverImage4 from "../assets/32.webp";
 
 import ImageCard1 from "../assets/card1.webp";
-import ImageCard2 from "../assets/card2.webp";
+import ImageCard2 from "../assets/card111.webp";
 
 import Men from "../assets/men.webp";
 import Women from "../assets/women.webp";
@@ -47,13 +47,11 @@ export const myLists: ShopImages = {
 export const myCards: CardImages = {
   card1: {
     property1: ImageCard1,
-    property2: "App Drops",
-    property3: "Shoppy Dunk Low",
+    property3: "LifeStyle Footwear",
   },
   card2: {
     property1: ImageCard2,
-    property2: "Trending: That 90's vibe with the Nike Air Max 90 Futura",
-    property3: "Stylin' Up With Wasu",
+    property3: "Shoppy Dunk Low",
   },
 };
 

@@ -109,7 +109,6 @@ const HomePage: React.FC = () => {
           <div key={card} className="homepage_shop_card_container">
             <img src={properties.property1} alt={card} />
             <div className="homepage_shop_card_texts">
-              <span>{properties.property2}</span>
               <p>{properties.property3}</p>
             </div>
           </div>

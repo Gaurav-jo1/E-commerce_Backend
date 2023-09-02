@@ -371,7 +371,6 @@ $buttonTextColor: whitesmoke;
     }
 
     .shoe_banner_poster_mobile {
-  
       img {
         width: 70%;
       }
@@ -396,9 +395,7 @@ $buttonTextColor: whitesmoke;
       }
     }
 
-
     .shoe_banner_poster_mobile {
-  
       img {
         width: 90%;
       }
@@ -411,7 +408,7 @@ $buttonTextColor: whitesmoke;
   display: grid;
   @include center-content;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
+  grid-gap: 30px;
   padding: 0 50px;
   margin: 30px 0;
 
@@ -428,21 +425,39 @@ $buttonTextColor: whitesmoke;
       color: white;
       padding: 20px 80px;
 
-      span {
-        font-size: 15px;
-        padding-bottom: 10px;
-        color: whitesmoke;
-      }
-
       p {
         font-size: 20px;
         padding-bottom: 30px;
+        text-shadow: 1px 0px 0px black;
       }
     }
   }
 
   img {
-    width: 90%;
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 780px) {
+  .homepage_container_cards_options {
+    grid-template-columns: repeat(1, 1fr);
+
+    .homepage_shop_card_container {
+      .homepage_shop_card_texts {
+        padding: 10px 40px;
+      }
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .homepage_container_cards_options {
+    .homepage_shop_card_container {
+      .homepage_shop_card_texts {
+        padding: 0px 20px;
+      }
+    }
   }
 }
 
@@ -455,7 +470,7 @@ $buttonTextColor: whitesmoke;
 
   p {
     font-size: 32px;
-    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
   }
 }
 
@@ -464,18 +479,21 @@ $buttonTextColor: whitesmoke;
   @include center-content;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 15px;
-  padding: 0 50px;
   margin: 30px 0;
+  padding: 0 30px;
 
   .homepage_container_sections {
     @include flex-column;
     @include center-content;
-    position: relative;
     overflow: hidden;
+
+    a {
+      position: relative;
+    }
 
     img {
       width: 100%;
-      height: 540px;
+      height: 520px;
       object-fit: cover;
       transition: transform 0.3s ease;
 
@@ -503,6 +521,13 @@ $buttonTextColor: whitesmoke;
   }
 }
 
+@media (max-width: 780px) {
+  .homepage_container_gender_sections {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0 0px;
+  }
+}
+
 // 7. About Page
 .homepage_container_about_section {
   display: grid;
@@ -510,23 +535,22 @@ $buttonTextColor: whitesmoke;
   background: rgb(243, 235, 235);
   margin: 30px 50px;
   padding: 60px 30px;
-  grid-auto-flow: row;
+  height: auto;
 
   .homepage_container_about_heading {
     h1 {
       padding-right: 25px;
       font-size: 30px;
-      white-space: nowrap;
     }
   }
 
-  .homepage_container-about_text {
+  .homepage_container_about_text {
     @include flex-column;
-    padding: 0 15px;
+    text-align: justify;
+    overflow: hidden;
 
     p {
-      font-size: 15px;
-      line-height: 24px;
+      font-size: 18px;
     }
   }
 
@@ -539,6 +563,62 @@ $buttonTextColor: whitesmoke;
 
     &:hover {
       cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .homepage_container_about_section {
+    grid-template-columns: repeat(1, 1fr);
+
+    .homepage_container_about_heading {
+      padding: 10px 0;
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .homepage_container_about_section {
+    margin: 30px 30px;
+    padding: 40px 20px;
+
+    .homepage_container_about_heading {
+      display: flex;
+      text-align: left;
+      flex-direction: column;
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+
+    .homepage_container_about_text {
+      margin-top: 5px;
+      p {
+        font-size: 15px;
+        line-height: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .homepage_container_about_section {
+    .homepage_container_about_heading {
+      h1 {
+        font-size: 19px;
+      }
+    }
+
+    .homepage_container_about_text {
+      p {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+
+    button {
+      padding: 8px 40px;
     }
   }
 }

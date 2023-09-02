@@ -5,10 +5,10 @@ import ShoeBanner from "../assets/shoe-banner.webp";
 import ShoppyLogo from "../assets/android-chrome-512x512.png";
 import { Link } from "react-router-dom";
 
-import ShoeBanner1 from "../assets/shoe_banner_R1.png"
-import ShoeBanner2 from "../assets/shoe_banner_R2.png"
+import ShoeBanner1 from "../assets/shoe-banner-r1.webp";
+import ShoeBanner2 from "../assets/shoe-banner-r2.webp";
 
-import { myLists } from "../components/CommonData";
+import { myLists, myCards, mySections } from "../components/CommonData";
 
 const Test: React.FC = () => {
   const [isHovered, setIsHovered] = useState<string | null>(null);
@@ -74,7 +74,10 @@ const Test: React.FC = () => {
       <div className="homepage_container_shoes_banner">
         <div className="shoe_banner_logo_text_container">
           <img src={ShoppyLogo} alt="Shoppy Logo" />
-          <h1> New <br /> Arrivals</h1>
+          <h1>
+            {" "}
+            New <br /> Arrivals
+          </h1>
         </div>
         <div className="shoe_banner_poster_container">
           <img src={ShoeBanner} alt="Shoe Banner" />
@@ -87,6 +90,56 @@ const Test: React.FC = () => {
           <Link to="/Men">
             <button>Shop Now</button>
           </Link>
+        </div>
+      </div>
+
+      {/* 5. Card Options Component */}
+      <div className="homepage_container_cards_options">
+        {Object.entries(myCards).map(([card, properties]) => (
+          <div key={card} className="homepage_shop_card_container">
+            <img src={properties.property1} alt={card} />
+            <div className="homepage_shop_card_texts">
+              <p>{properties.property3}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* 6. Men's, Women and Kids Section  */}
+      <div className="homepage_container_section_heading">
+        <p>Explore</p>
+      </div>
+
+      <div className="homepage_container_gender_sections">
+        {Object.entries(mySections).map(([section, properties]) => (
+          <div key={section} className="homepage_container_sections">
+            <Link to={`/${properties.property2}`}>
+              <img src={properties.property1} alt={properties.property2} />
+              <button>{properties.property2}'s</button>
+            </Link>
+          </div>
+        ))}
+      </div>
+
+      {/* 7. About Page */}
+      <div className="homepage_container_about_section">
+        <div className="homepage_container_about_heading">
+          <h1> MADE FOR THE </h1>
+          <h1>MODERN SHOPPING</h1>
+        </div>
+
+        <div className="homepage_container_about_text">
+          <p>
+            Welcome to Shoppy, where dreams become fashion reality! We are the
+            trendsetters, the style mavens, and the shopping destination that
+            fuels your passion for all things fabulous. Dive into our carefully
+            curated collection of cutting-edge fashion, statement accessories,
+            and irresistible homeware. Shoppy empowers you to express your unique
+            style effortlessly.
+          </p>
+          <a href="https://github.com/Gaurav-jo1" target="_blank">
+            <button>ABOUT US</button>
+          </a>
         </div>
       </div>
     </div>
