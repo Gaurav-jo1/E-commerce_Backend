@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { GlobalValue } from "../../context/GlobalValue";
-import { ForgotPassComponentProps } from "../../components/CommonInterfaces";
+import { ForgotPassComponentProps } from "../../common/CommonInterfaces";
 import { ImKey } from "react-icons/im";
 import forgot_art from "../../assets/forgot_art.webp";
 

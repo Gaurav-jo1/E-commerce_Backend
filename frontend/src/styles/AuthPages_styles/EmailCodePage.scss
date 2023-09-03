@@ -90,3 +90,14 @@
     }
   }
 }
+
+@media (max-width: 800px) {
+  .email-code-container {
+    width: auto;
+    border-radius: 5px;
+
+    .email-code-recover-form {
+      padding: 45px;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalValue } from "../context/GlobalValue";
-import { AuthPages } from "../components/Commonfun";
-import { ShopPageProps } from "../components/CommonInterfaces";
+import { AuthPages } from "../common/Commonfun.tsx";
+import { ShopPageProps } from "../common/CommonInterfaces";
 import Footer from "../components/Footer";
 import axios from "axios";
 import { BsFillCartCheckFill } from "react-icons/bs";

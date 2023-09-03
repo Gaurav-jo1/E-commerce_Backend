@@ -1,6 +1,6 @@
 .signup-page,
 .login-page {
-  height: 460px;
+  height: auto;
   width: 800px;
   background-color: rgba(255, 255, 255, 0.852);
   border-radius: 20px;
@@ -153,5 +153,21 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 800px) {
+  .signup-page,
+  .login-page {
+    width: auto;
+    border-radius: 5px;
+
+    .auth-form {
+      padding: 45px;
+    }
+  }
+
+  .auth_bg_img {
+    display: none;
   }
 }

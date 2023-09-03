@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthPages } from "../../components/Commonfun";
+import { AuthPages } from "../../common/Commonfun.tsx";
 import { GlobalValue } from "../../context/GlobalValue";
 import { useNavigate } from "react-router-dom";
 import { BsFillCartCheckFill } from "react-icons/bs";
@@ -9,7 +9,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 import LoadingSpinner from "../../components/LoadingSpinner";
 
-import { MyProductInterface } from "../../components/CommonInterfaces";
+import { MyProductInterface } from "../../common/CommonInterfaces";
 
 // Styling
 import "../../styles/ShopPage.scss";

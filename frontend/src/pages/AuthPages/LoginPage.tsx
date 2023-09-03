@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 
 import { GoogleLogin } from "@react-oauth/google";
-import { LoginComponentProps } from "../../components/CommonInterfaces";
+import { LoginComponentProps } from "../../common/CommonInterfaces";
 import { GlobalValue } from "../../context/GlobalValue";
 import { AuthContext } from "../../context/AuthContext";
 

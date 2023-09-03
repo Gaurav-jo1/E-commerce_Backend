@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 
 import { GoogleLogin } from "@react-oauth/google";
-import { SignComponentProps } from "../../components/CommonInterfaces";
+import { SignComponentProps } from "../../common/CommonInterfaces";
 import { AuthContext } from "../../context/AuthContext";
 
 import signup_art from "../../assets/signup_art.webp";

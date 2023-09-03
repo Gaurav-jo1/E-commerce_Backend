@@ -16,7 +16,7 @@ import SearchBar from "./SearchBar";
 import "../styles/Components_styles/Navbar.scss";
 import ProfilePage from "../pages/ProfilePage";
 
-import { MyUserInterface } from "./CommonInterfaces";
+import { MyUserInterface } from "../common/CommonInterfaces";
 
 const Navbar: React.FC = () => {
   const [userData, setUserData] = useState<MyUserInterface | null>(null);

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import { myLists, myCards, mySections } from "../components/CommonData";
+import { myLists, myCards, mySections } from "../common/CommonData";
 
 // Media
 import MainBG from "../assets/1.webp";
@@ -11,7 +11,7 @@ import ShoppyLogo from "../assets/android-chrome-512x512.png";
 import ShoeBanner1 from "../assets/shoe-banner-r1.webp"
 import ShoeBanner2 from "../assets/shoe-banner-r2.webp"
 
-import { AuthPages } from "../components/Commonfun";
+import { AuthPages } from "../common/Commonfun.tsx";
 import SaleBar from "../components/SaleBar";
 import Footer from "../components/Footer";
 

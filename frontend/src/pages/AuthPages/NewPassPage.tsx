@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 
 // Interface and Types
-import { NewPassComponentProps } from "../../components/CommonInterfaces";
+import { NewPassComponentProps } from "../../common/CommonInterfaces";
 
 // Icons
 import { BsFillUnlockFill } from "react-icons/bs";

@@ -59,7 +59,6 @@ a {
 .homepage_backdrop_bg {
   height: 100vh;
   width: 100%;
-  position: absolute;
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(4px);
   z-index: 20;
@@ -104,6 +103,17 @@ a {
       &:hover {
         cursor: pointer;
       }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .homepage_login_dialog {
+    .homepage_login_close {
+      top: 0;
+      right: 2px;
+      bottom: 40px;
+      padding-bottom: 10px;
     }
   }
 }

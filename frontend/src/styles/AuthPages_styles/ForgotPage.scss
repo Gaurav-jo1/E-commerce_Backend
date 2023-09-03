@@ -100,5 +100,15 @@
       }
     }
   }
+}
 
+@media (max-width: 800px) {
+  .forgot-page-container {
+    width: auto;
+    border-radius: 5px;
+
+    .forgot-page-forgot-form {
+      padding: 45px;
+    }
+  }
 }

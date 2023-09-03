@@ -19,7 +19,7 @@
 
     .new_pass_page_password_match {
       padding-bottom: 20px;
-  
+
       span {
         display: flex;
         text-align: center;
@@ -91,5 +91,15 @@
       }
     }
   }
+}
 
+@media (max-width: 800px) {
+  .new_pass_page_container {
+    width: auto;
+    border-radius: 5px;
+
+    .new_pass_page_container_form {
+      padding: 45px;
+    }
+  }
 }

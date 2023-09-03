@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { GlobalValue } from "../../context/GlobalValue";
-import { EmailCodeComponentProps } from "../../components/CommonInterfaces";
+import { EmailCodeComponentProps } from "../../common/CommonInterfaces";
 import code_art from "../../assets/code_art.webp";
 
 // Styling

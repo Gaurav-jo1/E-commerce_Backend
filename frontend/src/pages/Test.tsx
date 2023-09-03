@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import ShoeBanner1 from "../assets/shoe-banner-r1.webp";
 import ShoeBanner2 from "../assets/shoe-banner-r2.webp";
 
-import { myLists, myCards, mySections } from "../components/CommonData";
+import { myLists, myCards, mySections } from "../common/CommonData";
 
 const Test: React.FC = () => {
   const [isHovered, setIsHovered] = useState<string | null>(null);

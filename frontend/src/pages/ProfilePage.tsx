@@ -4,7 +4,7 @@ import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { MyUserInterface } from "../components/CommonInterfaces";
+import { MyUserInterface } from "../common/CommonInterfaces";
 // Styling
 import "../styles/ProfilePage.scss";
 
