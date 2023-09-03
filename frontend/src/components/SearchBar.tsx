@@ -27,6 +27,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
 
   const {setUserProSearch} = useContext(GlobalValue)
 
+  const navigate = useNavigate();
+
   const productSearch = (userSearch: string) => {
     axios
       .post("http://127.0.0.1:8000/product_search/search/", {
@@ -55,14 +57,19 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
 
   }, [userSearch]);
 
-  const navigate = useNavigate();
 
   // Search for Men or any other catergory:
   const userProductSearch = (product_text:string) => {
-    setSearchBar(false);
-    setUserProSearch(product_text)
-    localStorage.setItem("userProSearch", product_text)
     navigate("/search")
+    setUserProSearch(product_text)
+    setSearchBar(false);
+    localStorage.setItem("userProSearch", product_text)
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      userProductSearch(userSearch);
+    }
   };
 
   return (
@@ -83,6 +90,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
             onChange={(e) => setUserSearch(e.target.value)}
             autoFocus={true}
             minLength={2}
+            onKeyDown={handleKeyPress}
           />
           <span onClick={() => userProductSearch(userSearch)}>
             <MdOutlineArrowForwardIos />
