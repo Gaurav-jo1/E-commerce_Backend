@@ -42,55 +42,115 @@
       align-items: center;
       padding: 40px 0;
       background-color: rgb(231, 231, 231);
+      text-align: center;
 
-      .shop_page_products_container_item_image {
-        object-fit: contain;
-        object-position: center;
-        height: 100%;
-        width: 100%;
+      span {
+        color: rgba(0, 0, 0, 0.7);
+        font-size: 26px;
+        padding-top: 15px;
       }
 
-      .shop_page_products_container_item_title {
+      p {
+        font-size: 35px;
+        color: black;
+        text-transform: uppercase;
+        line-height: 35px;
+      }
+
+      button {
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        padding: 8px 5px;
+        border-radius: 30px;
+        background: rgb(115, 115, 236);
+        color: white;
+        border: none;
         text-transform: uppercase;
 
+        &:hover {
+          cursor: pointer;
+        }
+
         p {
-          font-size: 35px;
-          color: black;
+          display: flex;
+          justify-content: center;
+          background-color: white;
+          color: rgb(115, 115, 236);
+          margin-right: 8px;
+          padding: 6px;
+          border-radius: 50%;
+          font-size: 20px;
+          font-weight: bold;
+
+          svg {
+            color: rgb(115, 115, 236);
+          }
         }
       }
+    }
+  }
+}
 
-      .shop_page_products_container_item_cart {
-        margin-top: 30px;
+@media (max-width: 800px) {
+  .shop_page_container_main,
+  .search_page_container {
+    .shop_page_container_main_poster {
+      .shop_page_container_main_text {
+        h1 {
+          font-size: 42px;
+        }
+      }
+    }
+
+    .shop_page_products_container {
+      padding: 40px 60px;
+
+      .shop_page_products_container_item {
+        p {
+          font-size: 26px;
+          line-height: 26px;
+        }
+
+        span {
+          font-size: 22px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .shop_page_container_main,
+  .search_page_container {
+    .shop_page_container_main_poster {
+      .shop_page_container_main_text {
+        h1 {
+          font-size: 30px;
+        }
+      }
+    }
+    .shop_page_products_container {
+      padding: 10px 20px;
+
+      .shop_page_products_container_item {
+        p {
+          font-size: 16px;
+          line-height: 21px;
+        }
+
+        span  {
+          font-size: 18px;
+          padding-top: 5px;
+        }
 
         button {
-          display: flex;
-          align-items: center;
-          font-size: 14px;
-          padding: 8px 5px;
-          border-radius: 30px;
-          background: rgb(115, 115, 236);
-          color: white;
-          border: none;
-          text-transform: uppercase;
-
-          &:hover {
-            cursor: pointer;
-          }
-
+          font-size: 10px;
+          padding: 4px 4px;
+            margin-top: 20px;
           p {
-            display: flex;
-            justify-content: center;
-            background-color: white;
-            color: rgb(115, 115, 236);
-            margin-right: 8px;
-            padding: 6px;
-            border-radius: 50%;
-            font-size: 20px;
-            font-weight: bold;
-
-            svg {
-              color: rgb(115, 115, 236);
-            }
+            font-size: 16px;
           }
         }
       }

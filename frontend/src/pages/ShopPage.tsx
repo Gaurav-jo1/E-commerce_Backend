@@ -22,27 +22,29 @@ const ShopPage: React.FC<ShopPageProps> = ({
     (a, b) => a.position_id - b.position_id
   );
 
-  const addProductToCart = (product_id:number) => {
+  const addProductToCart = (product_id: number) => {
     if (authTokens) {
-      axios.post("http://127.0.0.1:8000/cart/products/add/", {
-        product_id: product_id
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + String(authTokens.access),
-        },
-  
-      })
+      axios
+        .post(
+          "http://127.0.0.1:8000/cart/products/add/",
+          {
+            product_id: product_id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + String(authTokens.access),
+            },
+          }
+        )
         .then(function (response) {
           console.log("Response from Cart Page: ", response.data);
         })
         .catch(function (error) {
           console.log(error);
         });
-    }
-
-    else {
-      setLoginOpen(true)
+    } else {
+      setLoginOpen(true);
     }
   };
 
@@ -64,28 +66,18 @@ const ShopPage: React.FC<ShopPageProps> = ({
         <div className="shop_page_products_container">
           {sortedProducts.map((product) => (
             <div key={product.id} className="shop_page_products_container_item">
-              <div className="shop_page_products_container_item_image">
-                <img
-                  src={`http://127.0.0.1:8000${product.product.image}`}
-                  alt={product.product.name}
-                  height={"100%"}
-                  width={"100%"}
-                />
-              </div>
-              <div className="shop_page_products_container_item_title">
-                <p>{product.product.name}</p>
-              </div>
-
-              <div className="shop_page_products_container_item_cart">
-                <button onClick={() => addProductToCart(product.product.id)}>
-                  {" "}
-                  <p>
-                    {" "}
-                    <BsFillCartCheckFill />{" "}
-                  </p>
-                  Add to Cart &nbsp;{" "}
-                </button>
-              </div>
+              <img
+                src={`http://127.0.0.1:8000${product.product.image}`}
+                alt={product.product.name}
+                height={"100%"}
+                width={"100%"}
+              />
+              <p>{product.product.name}</p>
+              <span>${product.product.price}</span>
+              <button onClick={() => addProductToCart(product.product.id)}>
+                <p> <BsFillCartCheckFill /> </p>
+                Add to Cart &nbsp;{" "}
+              </button>
             </div>
           ))}
         </div>
@@ -95,7 +87,6 @@ const ShopPage: React.FC<ShopPageProps> = ({
         <Footer />
       </div>
     </div>
-
   );
 };
 

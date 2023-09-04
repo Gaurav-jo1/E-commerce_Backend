@@ -77,8 +77,8 @@ interface ShopPageData {
   product: Product;
 }
 export interface ShopPageProps {
-  pageName: string;
   productData: ShopPageData[];
+  pageName: string;
   mainImage: string;
 }
 
