@@ -16,6 +16,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [wrongC, setWrongC] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>("The credentials you entered are incorrect");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const field_state = username.includes("@") && ".com" ? true : false;
@@ -46,6 +47,8 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
       })
       .catch(function (error) {
         console.log(error);
+        setWrongC(true);
+        setErrorText("Oops! Something went wrong on our end.")
       });
   };
 
@@ -93,7 +96,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
 
         {wrongC && (
           <div className="login-page-password-wrong">
-            <span>"The credentials you entered are incorrect"</span>
+            <span>{errorText}</span>
           </div>
         )}
 

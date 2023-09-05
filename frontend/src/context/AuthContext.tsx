@@ -50,6 +50,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       .catch(function (error) {
         console.log(error);
         callLogout();
+        setLoading(true);
       });
   }
 

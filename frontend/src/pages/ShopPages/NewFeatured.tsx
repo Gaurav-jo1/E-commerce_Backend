@@ -16,8 +16,6 @@ const NewFeatured:React.FC = () => {
 
   if (error) return "An error has occurred: " + error;
 
-  console.log("Data:", NewFeaturedData)
-
   return (
     <div>
       <ShopPage productData={NewFeaturedData} mainImage={NewFeature} pageName={"New & Featured"}/>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import ShopPage from '../ShopPage';
 import WomensPoster from "../../assets/womenposter.webp";
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const WomenPage:React.FC = () => {
   const { isLoading, error, data:WomenPageData} = useQuery(["WomenPage_Data"], () =>
@@ -11,7 +12,7 @@ const WomenPage:React.FC = () => {
     .then((response) => response.data)
   );
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <LoadingSpinner />;
 
   if (error) return "An error has occurred: " + error;
 

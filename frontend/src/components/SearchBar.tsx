@@ -73,7 +73,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
   return (
     <div>
       <div
-        onClick={() => setSearchBar(false)}
         className="navbar_container_search"
       />
       <div className="navbar_user_search">
@@ -102,7 +101,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
             <MdOutlineArrowForwardIos />
           </span>
         </div>
-        {/* {searchItems && (
+        {searchItems && (
           <div className="navbar_search_result">
             {searchItems.map((product) => (
               <p key={product.id} onClick={() => userProductSearch(product.name)}>
@@ -110,14 +109,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
               </p>
             ))}
           </div>
-        )} */}
-        <div className="navbar_search_result">
-          <p>Men 1</p>
-          <p>Men 1</p>
-          <p>Men 1</p>
-          <p>Men 1</p>
-          <p>Men 1</p>
-        </div>
+        )}
         {searchError && (
           <div className="navbar_search_result">
             <span>{searchError}</span>

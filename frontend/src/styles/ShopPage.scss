@@ -57,17 +57,51 @@
         line-height: 35px;
       }
 
-      button {
+      @keyframes moveRight {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      @keyframes moveLeft {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      
+
+      #add {
+        background: rgb(115, 115, 236);
+        transition: background-color 1s ease-in-out;
+      }
+      
+      #added {
+        background: green;
+        transition: background-color 1s ease-in-out;
+      
+      }
+
+      #add, #added {
         margin-top: 30px;
         display: flex;
         align-items: center;
-        font-size: 14px;
-        padding: 8px 5px;
+        padding: 8px 6px;
         border-radius: 30px;
-        background: rgb(115, 115, 236);
-        color: white;
         border: none;
         text-transform: uppercase;
+        overflow: hidden;
+        
+        span {
+          color: white;
+          font-size: 14px;
+          padding: 0 4px;
+        }
 
         &:hover {
           cursor: pointer;

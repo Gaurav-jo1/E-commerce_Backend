@@ -1,4 +1,8 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useContext } from "react";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { AuthContext } from "./AuthContext";
+import { Product } from "../common/CommonInterfaces";
 
 type SetBooleanStateAction = React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -31,6 +35,9 @@ interface CurrentVarContextType {
   // Mobile Navigation Bar
   navOptions: boolean;
   setNavOptions: SetBooleanStateAction;
+
+  // User Cart
+  CartPageData: Product[]
 }
 
 export const GlobalValue = createContext<CurrentVarContextType>(
@@ -61,6 +68,25 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
   // Mobile Navigation Bar
   const [navOptions ,setNavOptions] = useState<boolean>(false);
 
+  // User Cart
+  const { authTokens } = useContext(AuthContext);
+
+  const isAuthenticated = authTokens && !!authTokens.access;
+
+  const { data: CartPageData } = useQuery(
+    ["user_cart"],
+    () =>
+      axios
+        .get("http://127.0.0.1:8000/cart/products/get/", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authTokens.access),
+          },
+        })
+        .then((response) => response.data),
+    { enabled: isAuthenticated }
+  );
+
   return (
     <GlobalValue.Provider
       value={{
@@ -87,7 +113,9 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
         setUserProSearch,
 
         navOptions,
-        setNavOptions
+        setNavOptions,
+
+        CartPageData,
       }}
     >
       {children}

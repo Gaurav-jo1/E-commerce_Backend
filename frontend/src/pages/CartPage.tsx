@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../context/AuthContext";
 import { queryClient } from "../main";
 import { Link ,useNavigate } from "react-router-dom";
-
+import { Product } from "../common/CommonInterfaces.ts";
 // Components
 import { AuthPages } from "../common/Commonfun.tsx";
 import Footer from "../components/Footer";
@@ -15,13 +15,6 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import empty_cart from "../assets/empty_cart.webp"
 // Styling
 import "../styles/CartPage.scss";
-
-interface MyCart {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-}
 
 const CartPage: React.FC = () => {
   const { authTokens } = useContext(AuthContext);
@@ -36,7 +29,7 @@ const CartPage: React.FC = () => {
     }
   }, [authTokens, navigate]);
 
-  const calculateSubtotal = (products: MyCart[]): number => {
+  const calculateSubtotal = (products: Product[]): number => {
     return products.reduce((total, product) => total + product.price, 0);
   };
 
@@ -80,7 +73,7 @@ const CartPage: React.FC = () => {
       {CartPageData.length != 0 ?
       <div className="cart_page_main_container_div">
         <div className="cart_page_main_container">
-          {CartPageData && CartPageData.map((product: MyCart) => (
+          {CartPageData && CartPageData.map((product: Product) => (
             <div key={product.id} className="cart_page_product">
               <div className="cart_page_image_name_container">
                 <div className="cart_page_image_container">
@@ -109,7 +102,7 @@ const CartPage: React.FC = () => {
             <span></span>
           </div>
           <div className="cart_page_products_container">
-            {CartPageData && CartPageData.map((product: MyCart) => (
+            {CartPageData && CartPageData.map((product: Product) => (
               <div key={product.id} className="cart_page_products">
                 <p>{product.name}</p>
                 <b>${product.price}</b>
