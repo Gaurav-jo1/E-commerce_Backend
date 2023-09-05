@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
-
+import { RxCross1 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 
 // Styling
@@ -25,7 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
   const [searchItems, setSearchItems] = useState<Product[] | null>();
   const [searchError, setSearchError] = useState<string>();
 
-  const {setUserProSearch} = useContext(GlobalValue)
+  const { setUserProSearch } = useContext(GlobalValue);
 
   const navigate = useNavigate();
 
@@ -54,20 +54,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
     if (userSearch == "") {
       setSearchItems(null);
     }
-
   }, [userSearch]);
 
-
   // Search for Men or any other catergory:
-  const userProductSearch = (product_text:string) => {
-    navigate("/search")
-    setUserProSearch(product_text)
+  const userProductSearch = (product_text: string) => {
+    navigate("/search");
+    setUserProSearch(product_text);
     setSearchBar(false);
-    localStorage.setItem("userProSearch", product_text)
+    localStorage.setItem("userProSearch", product_text);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       userProductSearch(userSearch);
     }
   };
@@ -79,6 +77,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
         className="navbar_container_search"
       />
       <div className="navbar_user_search">
+        <div
+          className="navbar_search_close"
+          onClick={() => setSearchBar(false)}
+        >
+          <p>
+            <RxCross1 />
+          </p>
+        </div>
         <div className="navbar_search_input">
           <p>
             <AiOutlineSearch />{" "}
@@ -96,16 +102,22 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
             <MdOutlineArrowForwardIos />
           </span>
         </div>
-        {searchItems && (
+        {/* {searchItems && (
           <div className="navbar_search_result">
             {searchItems.map((product) => (
               <p key={product.id} onClick={() => userProductSearch(product.name)}>
-                {" "}
                 {product.name}
               </p>
             ))}
           </div>
-        )}
+        )} */}
+        <div className="navbar_search_result">
+          <p>Men 1</p>
+          <p>Men 1</p>
+          <p>Men 1</p>
+          <p>Men 1</p>
+          <p>Men 1</p>
+        </div>
         {searchError && (
           <div className="navbar_search_result">
             <span>{searchError}</span>
