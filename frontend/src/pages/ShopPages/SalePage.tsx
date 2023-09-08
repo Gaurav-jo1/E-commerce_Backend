@@ -19,7 +19,7 @@ const SalePage:React.FC = () => {
 
   return (
     <div>
-      <ShopPage productData={SalePageData} mainImage={SalePoster} pageName={"Sale"} />
+      <ShopPage productData={SalePageData} mainImage={SalePoster} pageName={"Sale"} imgHash='fBGS}*_40h~A-QEj-SM|tQt6E1-:bwjF%0M|R-xaOZafs8NGxuRjkWWBV@kCW=WB'/>
     </div>
   )
 }

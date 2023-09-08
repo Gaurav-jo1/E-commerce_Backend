@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { GlobalValue } from "../context/GlobalValue";
 import { AuthPages } from "../common/Commonfun.tsx";
@@ -8,6 +8,7 @@ import { MdDoneAll } from "react-icons/md";
 import { queryClient } from "../main.tsx";
 import Footer from "../components/Footer";
 import { AuthContext } from "../context/AuthContext";
+import { Blurhash } from "react-blurhash";
 
 // styling
 import "../styles/ShopPage.scss";
@@ -16,9 +17,12 @@ const ShopPage: React.FC<ShopPageProps> = ({
   productData,
   mainImage,
   pageName,
+  imgHash
 }) => {
   const { setLoginOpen, CartPageData } = useContext(GlobalValue);
   const { authTokens } = useContext(AuthContext);
+
+  const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
 
   const sortedProducts = productData.sort(
     (a, b) => a.position_id - b.position_id
@@ -82,7 +86,20 @@ const ShopPage: React.FC<ShopPageProps> = ({
             alt="Mens Section"
             height={"100%"}
             width={"100%"}
+            onLoad={() => setIsImgLoaded(true)}
+            style={{display: isImgLoaded ? "block" : "none"}}
           />
+
+          {!isImgLoaded && (
+            <Blurhash
+              hash={imgHash}
+              resolutionX={32}
+              resolutionY={32}
+              height={"470px"}
+              width={"100%"}
+              punch={1}
+            />
+          )}
           <div className="shop_page_container_main_text">
             <h1>{pageName}</h1>
           </div>

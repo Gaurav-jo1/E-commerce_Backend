@@ -18,7 +18,7 @@ const WomenPage:React.FC = () => {
 
   return (
     <div>
-      <ShopPage productData={WomenPageData} mainImage={WomensPoster} pageName={"Women"}/>
+      <ShopPage productData={WomenPageData} mainImage={WomensPoster} pageName={"Women"} imgHash='fCDwjY%~1-WVv|E3AIPV?aUuIB^i%2Z~vz%2KQJUtkNxs=xDE1afV_Rkr;s9R-s.'/>
     </div>
   )
 }

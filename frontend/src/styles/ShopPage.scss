@@ -12,6 +12,11 @@
     display: flex;
     position: relative;
 
+    img {
+      height: 470px;
+      width: 100%;
+    }
+
     .shop_page_container_main_text {
       display: flex;
       justify-content: center;
@@ -74,20 +79,19 @@
           transform: translateX(0);
         }
       }
-      
 
       #add {
         background: rgb(115, 115, 236);
         transition: background-color 1s ease-in-out;
       }
-      
+
       #added {
         background: green;
         transition: background-color 1s ease-in-out;
-      
       }
 
-      #add, #added {
+      #add,
+      #added {
         margin-top: 30px;
         display: flex;
         align-items: center;
@@ -96,7 +100,7 @@
         border: none;
         text-transform: uppercase;
         overflow: hidden;
-        
+
         span {
           color: white;
           font-size: 14px;
@@ -174,7 +178,7 @@
           line-height: 21px;
         }
 
-        span  {
+        span {
           font-size: 18px;
           padding-top: 5px;
         }
@@ -182,7 +186,7 @@
         button {
           font-size: 10px;
           padding: 4px 4px;
-            margin-top: 20px;
+          margin-top: 20px;
           p {
             font-size: 16px;
           }

@@ -80,6 +80,7 @@ export interface ShopPageProps {
   productData: ShopPageData[];
   pageName: string;
   mainImage: string;
+  imgHash: string;
 }
 
 export interface MyProductInterface {

@@ -19,7 +19,7 @@ const KidsPage:React.FC = () => {
 
   return (
     <div>
-      <ShopPage productData={KidsPageData} mainImage={KidsPoster}  pageName={"Kids"}/>
+      <ShopPage productData={KidsPageData} mainImage={KidsPoster}  pageName={"Kids"} imgHash='ffQ+_^j[j[oebHs:~oj[ayWVjZR+I[j[ayayayj[R4ayj[oLj[oe%hjsayWXf6WC'/>
     </div>
   )
 }
