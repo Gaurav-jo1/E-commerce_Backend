@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
+import { Blurhash } from "react-blurhash";
 
 import { myLists, myCards, mySections } from "../common/CommonData";
 
@@ -8,19 +9,20 @@ import { myLists, myCards, mySections } from "../common/CommonData";
 import MainBG from "../assets/1.webp";
 import ShoeBanner from "../assets/shoe-banner.webp";
 import ShoppyLogo from "../assets/android-chrome-512x512.png";
-import ShoeBanner1 from "../assets/shoe-banner-r1.webp"
-import ShoeBanner2 from "../assets/shoe-banner-r2.webp"
+import ShoeBanner1 from "../assets/shoe-banner-r1.webp";
+import ShoeBanner2 from "../assets/shoe-banner-r2.webp";
 
 import { AuthPages } from "../common/Commonfun.tsx";
 import SaleBar from "../components/SaleBar";
 import Footer from "../components/Footer";
-
 
 // Styling
 import "../styles/HomePage.scss";
 
 const HomePage: React.FC = () => {
   const [isHovered, setIsHovered] = useState<string | null>(null);
+
+  const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
 
   return (
     <div className="homepage_container">
@@ -31,7 +33,23 @@ const HomePage: React.FC = () => {
       {/* 1. First Component */}
       <div className="homepage_container_textbg">
         <div className="homepage_container_bg">
-          <img src={MainBG} alt="Dress Background" />
+          <img
+            src={MainBG}
+            alt="Mens Section"
+            onLoad={() => setIsImgLoaded(true)}
+            style={{ display: isImgLoaded ? "block" : "none" }}
+          />
+
+          {!isImgLoaded && (
+            <Blurhash
+              hash="pKLNb|%h.m-CMwOFM{00xbMwSi%2$*baXSV[V@S4xts;W;_3kD%2xakWbbMx-pofj?xtRkozWAbaIURPt6tRj]V["
+              resolutionX={32}
+              resolutionY={32}
+              width={"100%"}
+              height={"747px"}
+              punch={1}
+              />
+            )}
         </div>
         <div className="homepage_container_text">
           <p>PREETY FOR SUMMER</p>
@@ -66,6 +84,7 @@ const HomePage: React.FC = () => {
                 src={myLists[key].property1}
                 alt={myLists[key].property1}
                 onMouseEnter={() => setIsHovered(key)}
+                loading="lazy"
               />
               <img
                 id={`show_img_${isHovered === key ? key : ""}`}
@@ -83,18 +102,18 @@ const HomePage: React.FC = () => {
       {/* 4. Shoe Banner Component */}
       <div className="homepage_container_shoes_banner">
         <div className="shoe_banner_logo_text_container">
-          <img src={ShoppyLogo} alt="Shoppy Logo" />
+          <img src={ShoppyLogo} alt="Shoppy Logo" loading="lazy"/>
           <h1>
             {" "}
             New <br /> Arrivals{" "}
           </h1>
         </div>
         <div className="shoe_banner_poster_container">
-          <img src={ShoeBanner} alt="Shoe Banner" />
+          <img src={ShoeBanner} alt="Shoe Banner" loading="lazy"/>
         </div>
         <div className="shoe_banner_poster_mobile">
-          <img src={ShoeBanner1} alt="Shoe Banner" />
-          <img src={ShoeBanner2} alt="Shoe Banner" />
+          <img src={ShoeBanner1} alt="Shoe Banner" loading="lazy"/>
+          <img src={ShoeBanner2} alt="Shoe Banner" loading="lazy"/>
         </div>
         <div className="shoe_banner_button_container">
           <Link to="/Men">
@@ -107,7 +126,7 @@ const HomePage: React.FC = () => {
       <div className="homepage_container_cards_options">
         {Object.entries(myCards).map(([card, properties]) => (
           <div key={card} className="homepage_shop_card_container">
-            <img src={properties.property1} alt={card} />
+            <img src={properties.property1} alt={card} loading="lazy"/>
             <div className="homepage_shop_card_texts">
               <p>{properties.property3}</p>
             </div>
@@ -124,7 +143,7 @@ const HomePage: React.FC = () => {
         {Object.entries(mySections).map(([section, properties]) => (
           <div key={section} className="homepage_container_sections">
             <Link to={`/${properties.property2}`}>
-              <img src={properties.property1} alt={properties.property2} />
+              <img src={properties.property1} alt={properties.property2} loading="lazy"/>
               <button>{properties.property2}'s</button>
             </Link>
           </div>

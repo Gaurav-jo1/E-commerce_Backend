@@ -17,7 +17,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
   productData,
   mainImage,
   pageName,
-  imgHash
+  imgHash,
 }) => {
   const { setLoginOpen, CartPageData } = useContext(GlobalValue);
   const { authTokens } = useContext(AuthContext);
@@ -84,10 +84,8 @@ const ShopPage: React.FC<ShopPageProps> = ({
           <img
             src={mainImage}
             alt="Mens Section"
-            height={"100%"}
-            width={"100%"}
             onLoad={() => setIsImgLoaded(true)}
-            style={{display: isImgLoaded ? "block" : "none"}}
+            style={{ display: isImgLoaded ? "block" : "none" }}
           />
 
           {!isImgLoaded && (
@@ -95,7 +93,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
               hash={imgHash}
               resolutionX={32}
               resolutionY={32}
-              height={"470px"}
+              height={"100%"}
               width={"100%"}
               punch={1}
             />

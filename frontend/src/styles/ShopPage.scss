@@ -11,9 +11,10 @@
   .shop_page_container_main_poster {
     display: flex;
     position: relative;
+    height: 470px;
 
     img {
-      height: 470px;
+      height: 100%;
       width: 100%;
     }
 
@@ -163,6 +164,7 @@
   .shop_page_container_main,
   .search_page_container {
     .shop_page_container_main_poster {
+      height: 280px;
       .shop_page_container_main_text {
         h1 {
           font-size: 30px;

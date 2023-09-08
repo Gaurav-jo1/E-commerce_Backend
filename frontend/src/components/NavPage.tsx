@@ -6,10 +6,9 @@ import "../styles/Components_styles/NavPage.scss";
 import { GlobalValue } from "../context/GlobalValue";
 import { RxCross1 } from "react-icons/rx";
 import { AuthContext } from "../context/AuthContext";
-import {IoIosArrowForward} from "react-icons/io"
+import { IoIosArrowForward } from "react-icons/io";
 
 const myNavArray: string[] = ["New & Featured", "Men", "Women", "Kids", "Sale"];
-
 
 const NavPage: React.FC = () => {
   const { navOptions, setNavOptions, setLoginOpen, setSignupOpen } =
@@ -17,27 +16,26 @@ const NavPage: React.FC = () => {
   const { authTokens } = useContext(AuthContext);
 
   const OpenAuth = (isLogin: boolean) => {
-    setNavOptions(false)
+    setNavOptions(false);
 
     if (isLogin) {
-      setLoginOpen(true)
+      setLoginOpen(true);
     } else {
-      setSignupOpen(true)
+      setSignupOpen(true);
     }
-  }
+  };
 
   const NavLinks: React.FC = () => (
     <ul>
       {myNavArray.map((item, index) => (
-        <li key={index} onClick={() =>  setNavOptions(false)}>
-          <Link to={`/${item}`}>
-            {item} <p>{navOptions && (<IoIosArrowForward/>)}</p>
-          </Link>
-        </li>
+        <Link key={index} to={`/${item}`}>
+          <li onClick={() => setNavOptions(false)}>
+            {item} <p>{navOptions && <IoIosArrowForward />}</p>
+          </li>
+        </Link>
       ))}
     </ul>
   );
-  
 
   return (
     <>
