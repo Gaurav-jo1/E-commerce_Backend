@@ -95,9 +95,12 @@
     width: 100%;
 
     li {
+      display: flex;
+      justify-content: space-between;
       font-size: 24px;
       padding: 14px 0;
       font-family: "Lunasima", sans-serif;
+      width: 100%;
       color: rgb(37, 37, 37);
 
       &:hover {

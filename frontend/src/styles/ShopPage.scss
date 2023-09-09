@@ -96,6 +96,7 @@
         margin-top: 30px;
         display: flex;
         align-items: center;
+        text-align: center;
         padding: 8px 6px;
         border-radius: 30px;
         border: none;
@@ -106,6 +107,7 @@
           color: white;
           font-size: 14px;
           padding: 0 4px;
+          white-space: nowrap;
         }
 
         &:hover {

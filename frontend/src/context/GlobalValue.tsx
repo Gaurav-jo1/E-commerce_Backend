@@ -71,20 +71,15 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
   // User Cart
   const { authTokens } = useContext(AuthContext);
 
-  const isAuthenticated = authTokens && !!authTokens.access;
-
-  const { data: CartPageData } = useQuery(
-    ["user_cart"],
-    () =>
-      axios
-        .get("http://127.0.0.1:8000/cart/products/get/", {
+  const { data: CartPageData } = useQuery(["user_cart"],() =>
+      axios.get("http://127.0.0.1:8000/cart/products/get/", {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + String(authTokens.access),
           },
         })
         .then((response) => response.data),
-    { enabled: isAuthenticated }
+    { enabled: !!authTokens }
   );
 
   return (

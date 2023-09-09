@@ -121,6 +121,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
             text="signin_with"
             logo_alignment="left"
             width="260px"
+            useOneTap
           />
         </div>
         <div className="auth-form-divider">
