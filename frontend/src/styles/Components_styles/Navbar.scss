@@ -6,21 +6,19 @@ $border-color: rgb(167, 167, 167);
 $profile-color: rgb(65, 65, 65);
 $button-color: blueviolet;
 
-@mixin flex-center {
+.navbar {
   display: flex;
   align-items: center;
   text-align: center;
-}
-
-.navbar_container {
-  @include flex-center();
   background-color: $main-color;
   justify-content: space-between;
   padding: 8px 30px;
 }
 
-.navbar_search {
-  @include flex-center();
+.navbar__search {
+  display: flex;
+  align-items: center;
+  text-align: center;
 
   p {
     font-size: 18px;
@@ -68,7 +66,7 @@ $button-color: blueviolet;
   }
 }
 
-.navbar_search_icons {
+.navbar__search-icons {
   display: none;
   margin: 0 10px;
 
@@ -91,7 +89,7 @@ $button-color: blueviolet;
   }
 }
 
-.navbar_logo {
+.navbar__logo {
   a {
     all: unset;
   }
@@ -108,8 +106,10 @@ $button-color: blueviolet;
   }
 }
 
-.navbar_profile {
-  @include flex-center();
+.navbar__profile {
+  display: flex;
+  align-items: center;
+  text-align: center;
   justify-content: flex-end;
   width: 194.6px;
   height: 50px;
@@ -148,12 +148,14 @@ $button-color: blueviolet;
     font-size: 24px;
     align-items: center;
     padding: 10px 0px 5px;
-    margin-left: 15px
+    margin-left: 15px;
   }
 }
 
-.navbar_buttons {
-  @include flex-center();
+.navbar__buttons {
+  display: flex;
+  align-items: center;
+  text-align: center;
   justify-content: flex-end;
   width: 194.6px;
   color: white;
@@ -182,7 +184,7 @@ $button-color: blueviolet;
   }
 }
 
-.navbar_button_slider {
+.navbar__button-slider {
   display: none;
 
   p {
@@ -201,22 +203,22 @@ $button-color: blueviolet;
 // Responsive
 
 @media (max-width: 780px) {
-  .navbar_container {
+  .navbar {
     padding: 8px 25px;
     background-color: $highlight-color;
   }
 
-  .navbar_search,
-  .navbar_buttons {
+  .navbar__search,
+  .navbar__buttons {
     display: none;
   }
 
-  .navbar_search_icons,
-  .navbar_button_slider{
+  .navbar__search-icons,
+  .navbar__button-slider {
     display: flex;
   }
 
-  .navbar_profile {
+  .navbar__profile {
     #search {
       display: flex;
     }
@@ -227,11 +229,11 @@ $button-color: blueviolet;
 }
 
 @media (max-width: 460px) {
-  .navbar_container {
+  .navbar {
     padding: 8px 20px;
   }
 
-  .navbar_logo {
+  .navbar__logo {
     p {
       font-size: 0;
     }

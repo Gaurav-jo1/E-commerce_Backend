@@ -1,12 +1,19 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { GlobalValue } from "../../context/GlobalValue";
-import { ForgotPassComponentProps } from "../../common/CommonInterfaces";
+
 import { ImKey } from "react-icons/im";
 import forgot_art from "../../assets/forgot_art.webp";
 
+// Global Context
+import { GlobalValue } from "../../context/GlobalValue";
+
 // Styling
 import "../../styles/AuthPages_styles/ForgotPage.scss";
+export interface ForgotPassComponentProps {
+  setForgotOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const ForgotPage: React.FC<ForgotPassComponentProps> = ({
   setForgotOpen,

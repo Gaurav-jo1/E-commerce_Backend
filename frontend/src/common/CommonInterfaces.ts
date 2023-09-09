@@ -1,37 +1,3 @@
-type SetBooleanStateAction = React.Dispatch<React.SetStateAction<boolean>>;
-
-// Sign up Page
-export interface SignComponentProps {
-  setSignupOpen: SetBooleanStateAction;
-  setLoginOpen: SetBooleanStateAction;
-}
-
-// Login Page
-export interface LoginComponentProps extends SignComponentProps {
-  setForgotOpen: SetBooleanStateAction;
-}
-
-// Forgot Component
-export interface ForgotPassComponentProps {
-  setForgotOpen: SetBooleanStateAction;
-  setLoginOpen: SetBooleanStateAction;
-  setEmailCode: SetBooleanStateAction;
-}
-
-// Email Verification Component
-
-export interface EmailCodeComponentProps {
-  setNewPassword: SetBooleanStateAction;
-  setEmailCode: SetBooleanStateAction;
-}
-
-// New Password Component
-export interface NewPassComponentProps {
-  setNewPassword: SetBooleanStateAction;
-  setLoginOpen: SetBooleanStateAction;
-}
-
-// Main Page Interface
 export interface ShopImages {
   [key: string]: {
     property1: string;
@@ -54,13 +20,6 @@ export interface SectionImages {
     property1: string;
     property2: string;
   };
-}
-
-// Auth Components
-export interface AuthContainerProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
 }
 
 // ShopPage

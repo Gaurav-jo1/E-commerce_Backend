@@ -1,18 +1,27 @@
-import {useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
-import { AuthContainerProps } from "./CommonInterfaces";
 
 // Pages
-import LoginPage from "../pages/AuthPages/LoginPage";
-import SignupPage from "../pages/AuthPages/SignupPage";
-import ForgotPage from "../pages/AuthPages/ForgotPage";
-import NewPassPage from "../pages/AuthPages/NewPassPage";
-import EmailCodePage from "../pages/AuthPages/EmailCodePage";
+import LoginPage from "./LoginPage";
+import SignupPage from "./SignupPage";
+import ForgotPage from "./ForgotPage";
+import NewPassPage from "./NewPassPage";
+import EmailCodePage from "./EmailCodePage";
 
 // Context
-import { GlobalValue } from "../context/GlobalValue";
+import { GlobalValue } from "../../context/GlobalValue";
 
-export function AuthContainer({ isOpen, onClose, children, }: AuthContainerProps) {
+export interface AuthContainerProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
+
+export function AuthContainer({
+  isOpen,
+  onClose,
+  children,
+}: AuthContainerProps) {
   if (!isOpen) {
     return null;
   }
@@ -56,7 +65,7 @@ export function AuthPages() {
       document.body.style.overflow = "auto";
     }
   }, [loginOpen, signupOpen, forgotOpen, newPassword, emailCode]);
-  
+
   return (
     <>
       {/* LoginPage */}

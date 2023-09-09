@@ -4,8 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "./AuthContext";
 import { Product } from "../common/CommonInterfaces";
 
-type SetBooleanStateAction = React.Dispatch<React.SetStateAction<boolean>>;
-
 interface CurrentVarContextType {
   userEmail: string;
   setUserEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -16,17 +14,17 @@ interface CurrentVarContextType {
 
   // Login and Signup Interface
   loginOpen: boolean;
-  setLoginOpen: SetBooleanStateAction;
+  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
   signupOpen: boolean;
-  setSignupOpen: SetBooleanStateAction;
+  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
   forgotOpen: boolean;
-  setForgotOpen: SetBooleanStateAction;
+  setForgotOpen: React.Dispatch<React.SetStateAction<boolean>>;
   emailCode: boolean;
-  setEmailCode: SetBooleanStateAction;
+  setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
   newPassword: boolean;
-  setNewPassword: SetBooleanStateAction;
+  setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
   passChanged: boolean;
-  setPassChanged: SetBooleanStateAction;
+  setPassChanged: React.Dispatch<React.SetStateAction<boolean>>;
 
   // User Product Search
   userProSearch: string | undefined;
@@ -34,7 +32,7 @@ interface CurrentVarContextType {
 
   // Mobile Navigation Bar
   navOptions: boolean;
-  setNavOptions: SetBooleanStateAction;
+  setNavOptions: React.Dispatch<React.SetStateAction<boolean>>;
 
   // User Cart
   CartPageData: Product[]

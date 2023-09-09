@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthPages } from "../../common/Commonfun.tsx";
+import { AuthPages } from "../AuthPages/AuthPages.tsx";
 import { GlobalValue } from "../../context/GlobalValue";
 import { useNavigate } from "react-router-dom";
 import { BsFillCartCheckFill } from "react-icons/bs";

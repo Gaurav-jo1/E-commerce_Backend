@@ -9,7 +9,7 @@ import { queryClient } from "../main";
 import { Link, useNavigate } from "react-router-dom";
 import { Product } from "../common/CommonInterfaces.ts";
 // Components
-import { AuthPages } from "../common/Commonfun.tsx";
+import { AuthPages } from "./AuthPages/AuthPages.tsx";
 import Footer from "../components/Footer";
 import LoadingSpinner from "../components/LoadingSpinner";
 import empty_cart from "../assets/empty_cart.webp";

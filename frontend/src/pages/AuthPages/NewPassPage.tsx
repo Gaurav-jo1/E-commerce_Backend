@@ -1,8 +1,4 @@
 import React, { useState, useContext } from "react";
-
-// Interface and Types
-import { NewPassComponentProps } from "../../common/CommonInterfaces";
-
 // Icons
 import { BsFillUnlockFill } from "react-icons/bs";
 
@@ -15,6 +11,12 @@ import new_art from "../../assets/new_part.webp";
 import axios from "axios";
 
 import "../../styles/AuthPages_styles/NewPassPage.scss";
+
+interface NewPassComponentProps {
+  setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 
 const NewPassPage: React.FC<NewPassComponentProps> = ({
   setNewPassword,

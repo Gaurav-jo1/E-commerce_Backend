@@ -64,7 +64,7 @@
       width: 100%;
     }
 
-    .salebar-link {
+    a {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -72,7 +72,7 @@
       color: inherit;
     }
 
-    .salebar-heading {
+    .salebar__heading {
       font-size: 16px;
       font-family: "Lunasima", sans-serif;
       white-space: nowrap;
@@ -80,7 +80,7 @@
       text-overflow: ellipsis;
     }
 
-    .salebar-description {
+    .salebar__description {
       font-size: 13px;
       text-decoration: underline;
       padding-top: 4px;
@@ -95,11 +95,11 @@
 @media (max-width: 780px) {
   .salebar {
     ul {
-      .salebar-heading {
+      .salebar__heading {
         font-size: 15px;
       }
 
-      .salebar-description {
+      .salebar__description {
         font-size: 12px;
       }
     }
@@ -109,11 +109,11 @@
 @media (max-width: 460px) {
   .salebar {
     ul {
-      .salebar-heading {
+      .salebar__heading {
         font-size: 12px;
       }
 
-      .salebar-description {
+      .salebar__description {
         font-size: 10px;
       }
     }
@@ -123,11 +123,11 @@
 @media (max-width: 400px) {
   .salebar {
     ul {
-      .salebar-heading {
+      .salebar__heading {
         font-size: 11px;
       }
 
-      .salebar-description {
+      .salebar__description {
         font-size: 9px;
       }
     }

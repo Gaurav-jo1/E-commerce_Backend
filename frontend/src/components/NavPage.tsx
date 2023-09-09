@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 
-// Styling
 import { Link } from "react-router-dom";
-import "../styles/Components_styles/NavPage.scss";
-import { GlobalValue } from "../context/GlobalValue";
 import { RxCross1 } from "react-icons/rx";
-import { AuthContext } from "../context/AuthContext";
 import { IoIosArrowForward } from "react-icons/io";
+
+// Global Context
+import { GlobalValue } from "../context/GlobalValue";
+import { AuthContext } from "../context/AuthContext";
+
+// Styling
+import "../styles/Components_styles/NavPage.scss";
 
 const myNavArray: string[] = ["New & Featured", "Men", "Women", "Kids", "Sale"];
 
@@ -39,27 +42,29 @@ const NavPage: React.FC = () => {
 
   return (
     <>
-      <nav className="navpage_container">
+      <nav className="navpage">
         <NavLinks />
       </nav>
       {navOptions && (
         <>
           <div
-            className="navpage_container_mobile_bg"
+            className="navpage__container-mobile-bg"
             onClick={() => setNavOptions(false)}
           />
-          <nav className="navpage_container_mobile">
+          <nav className="navpage__container-mobile">
             <span onClick={() => setNavOptions(false)}>
               <RxCross1 />
             </span>
+
             <NavLinks />
+
             {!authTokens ? (
-              <div className="navpage_container_mobile_auth">
-                <button onClick={() => OpenAuth(true)}>Sign up</button>
-                <button onClick={() => OpenAuth(false)}>Sign in</button>
+              <div className="navpage__container-mobile-auth">
+                <button onClick={() => OpenAuth(false)}>Sign up</button>
+                <button onClick={() => OpenAuth(true)}>Sign in</button>
               </div>
             ) : (
-              <div className="navpage_container_mobile_auth"></div>
+              <div className="navpage__container-mobile-auth"></div>
             )}
           </nav>
         </>

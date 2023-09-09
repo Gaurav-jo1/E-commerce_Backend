@@ -1,4 +1,4 @@
-.navpage_container {
+.navpage {
   background-color: white;
   margin: 9px 0;
   position: relative;
@@ -40,7 +40,7 @@
   }
 }
 
-.navpage_container_mobile_bg {
+.navpage__container-mobile-bg {
   display: none;
   position: absolute;
   overflow: hidden;
@@ -55,7 +55,7 @@
   }
 }
 
-.navpage_container_mobile {
+.navpage__container-mobile {
   display: none;
   flex-direction: column;
   justify-content: space-around;
@@ -110,7 +110,7 @@
   }
 }
 
-.navpage_container_mobile_auth {
+.navpage__container-mobile-auth {
   display: flex;
   flex-direction: column;
 

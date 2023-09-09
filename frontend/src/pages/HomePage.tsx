@@ -12,7 +12,7 @@ import ShoppyLogo from "../assets/android-chrome-512x512.png";
 import ShoeBanner1 from "../assets/shoe-banner-r1.webp";
 import ShoeBanner2 from "../assets/shoe-banner-r2.webp";
 
-import { AuthPages } from "../common/Commonfun.tsx";
+import { AuthPages } from "./AuthPages/AuthPages.tsx";
 import SaleBar from "../components/SaleBar";
 import Footer from "../components/Footer";
 

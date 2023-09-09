@@ -1,15 +1,19 @@
 import React, { useState, useContext } from "react";
 
 import axios from "axios";
-
 import { GoogleLogin } from "@react-oauth/google";
-import { SignComponentProps } from "../../common/CommonInterfaces";
-import { AuthContext } from "../../context/AuthContext";
 
 import signup_art from "../../assets/signup_art.webp";
 
+// Global Context
+import { AuthContext } from "../../context/AuthContext";
 // Styling
 import "../../styles/AuthPages_styles/Auth.scss";
+
+interface SignComponentProps {
+  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const SignupPage: React.FC<SignComponentProps> = ({
   setSignupOpen,

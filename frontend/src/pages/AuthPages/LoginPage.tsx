@@ -3,20 +3,33 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 
 import { GoogleLogin } from "@react-oauth/google";
-import { LoginComponentProps } from "../../common/CommonInterfaces";
-import { GlobalValue } from "../../context/GlobalValue";
-import { AuthContext } from "../../context/AuthContext";
 
 import login_art from "../../assets/login_art.webp";
+
+// Global Context
+import { GlobalValue } from "../../context/GlobalValue";
+import { AuthContext } from "../../context/AuthContext";
 
 // Styling
 import "../../styles/AuthPages_styles/Auth.scss";
 
-const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen, setForgotOpen, }) => {
+interface LoginComponentProps {
+  setSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setForgotOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Loginpage: React.FC<LoginComponentProps> = ({
+  setSignupOpen,
+  setLoginOpen,
+  setForgotOpen,
+}) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [wrongC, setWrongC] = useState<boolean>(false);
-  const [errorText, setErrorText] = useState<string>("The credentials you entered are incorrect");
+  const [errorText, setErrorText] = useState<string>(
+    "The credentials you entered are incorrect"
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const field_state = username.includes("@") && ".com" ? true : false;
@@ -48,7 +61,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({ setSignupOpen, setLoginOpen,
       .catch(function (error) {
         console.log(error);
         setWrongC(true);
-        setErrorText("Oops! Something went wrong on our end.")
+        setErrorText("Oops! Something went wrong on our end.");
       });
   };
 

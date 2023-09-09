@@ -2,11 +2,15 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { GlobalValue } from "../../context/GlobalValue";
-import { EmailCodeComponentProps } from "../../common/CommonInterfaces";
 import code_art from "../../assets/code_art.webp";
 
 // Styling
 import "../../styles/AuthPages_styles/EmailCodePage.scss"
+
+interface EmailCodeComponentProps {
+  setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, setEmailCode, }) => {
   const [noCode, setNoCode] = useState<boolean>(false);

@@ -3,20 +3,21 @@ import React, { useState, useEffect, useContext } from "react";
 
 import axios from "axios";
 
-import { HiMagnifyingGlass } from "react-icons/hi2";
-import { CiShoppingCart } from "react-icons/ci";
-import { FcMenu } from "react-icons/fc";
-import { AuthContext } from "../context/AuthContext";
-import { Link } from "react-router-dom";
-import { GlobalValue } from "../context/GlobalValue";
-
 import SearchBar from "./SearchBar";
+import ProfilePage from "../pages/ProfilePage";
+
+import { Link } from "react-router-dom";
+import { FcMenu } from "react-icons/fc";
+import { CiShoppingCart } from "react-icons/ci";
+import { HiMagnifyingGlass } from "react-icons/hi2";
+
+import { MyUserInterface } from "../common/CommonInterfaces";
+// Global Context
+import { AuthContext } from "../context/AuthContext";
+import { GlobalValue } from "../context/GlobalValue";
 
 // Styling
 import "../styles/Components_styles/Navbar.scss";
-import ProfilePage from "../pages/ProfilePage";
-
-import { MyUserInterface } from "../common/CommonInterfaces";
 
 const Navbar: React.FC = () => {
   const [userData, setUserData] = useState<MyUserInterface | null>(null);
@@ -57,22 +58,22 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className="navbar_container">
-        <div onClick={() => setSearchBar(true)} className="navbar_search">
+      <nav className="navbar">
+        <div onClick={() => setSearchBar(true)} className="navbar__search">
           <p>
             <HiMagnifyingGlass />
           </p>
           <input type="text" placeholder="Search..." />
         </div>
 
-        <div className="navbar_logo">
+        <div className="navbar__logo">
           <Link to="/">
             <p>Shoppy</p>
           </Link>
         </div>
         {userData && userData ? (
           <>
-            <div className="navbar_profile">
+            <div className="navbar__profile">
               <p id="search" onClick={() => setSearchBar(true)}>
                 <HiMagnifyingGlass />
               </p>
@@ -93,11 +94,11 @@ const Navbar: React.FC = () => {
           </>
         ) : (
           <>
-            <div className="navbar_buttons">
+            <div className="navbar__buttons">
               <p onClick={() => setSignupOpen(true)}>Sign up</p>
               <button onClick={() => setLoginOpen(true)}>Sign in</button>
             </div>
-            <div className="navbar_button_slider">
+            <div className="navbar__button-slider">
               <p onClick={() => setSearchBar(true)}>
                 <HiMagnifyingGlass />
               </p>

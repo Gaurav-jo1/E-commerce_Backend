@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { GlobalValue } from "../context/GlobalValue";
-import { AuthPages } from "../common/Commonfun.tsx";
+import { AuthPages } from "./AuthPages/AuthPages.tsx";
 import { ShopPageProps } from "../common/CommonInterfaces";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import { MdDoneAll } from "react-icons/md";
