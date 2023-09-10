@@ -1,14 +1,22 @@
-.shop_page_container {
+.shop {
   overflow: hidden;
 }
 
-.shop_page_container_main,
-.search_page_container {
+.shop__main {
   display: flex;
   flex-direction: column;
   position: relative;
 
-  .shop_page_container_main_poster {
+  .shop__main-heading {
+    text-align: center;
+    padding-top: 30px;
+     
+    h1 {
+      font-family:cursive;
+    }
+  }
+
+  .shop__main-poster {
     display: flex;
     position: relative;
     height: 470px;
@@ -18,7 +26,7 @@
       width: 100%;
     }
 
-    .shop_page_container_main_text {
+    .shop__main-text {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -34,7 +42,7 @@
     }
   }
 
-  .shop_page_products_container {
+  .shop__products-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
@@ -42,7 +50,7 @@
     margin: 30px 0;
     line-height: 25px;
 
-    .shop_page_products_container_item {
+    .shop__products-item {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -135,20 +143,19 @@
 }
 
 @media (max-width: 800px) {
-  .shop_page_container_main,
-  .search_page_container {
-    .shop_page_container_main_poster {
-      .shop_page_container_main_text {
+  .shop__main{
+    .shop__main-poster {
+      .shop__main-text {
         h1 {
           font-size: 42px;
         }
       }
     }
 
-    .shop_page_products_container {
+    .shop__products-container {
       padding: 40px 60px;
 
-      .shop_page_products_container_item {
+      .shop__products-item {
         p {
           font-size: 26px;
           line-height: 26px;
@@ -163,20 +170,19 @@
 }
 
 @media (max-width: 460px) {
-  .shop_page_container_main,
-  .search_page_container {
-    .shop_page_container_main_poster {
+  .shop__main {
+    .shop__main-poster {
       height: 280px;
-      .shop_page_container_main_text {
+      .shop__main-text {
         h1 {
           font-size: 30px;
         }
       }
     }
-    .shop_page_products_container {
+    .shop__products-container {
       padding: 10px 20px;
 
-      .shop_page_products_container_item {
+      .shop__products-item {
         p {
           font-size: 16px;
           line-height: 21px;

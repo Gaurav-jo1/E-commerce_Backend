@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 
 import axios from "axios";
 
-import Footer from "../components/Footer";
 import { queryClient } from "../main.tsx";
 import { AuthPages } from "./AuthPages/AuthPages.tsx";
 import { ShopPageProps } from "../common/CommonInterfaces";
@@ -82,10 +81,10 @@ const ShopPage: React.FC<ShopPageProps> = ({
     : [];
 
   return (
-    <div className="shop_page_container">
+    <div className="shop">
       <AuthPages />
-      <div className="shop_page_container_main">
-        <div className="shop_page_container_main_poster">
+      <div className="shop__main">
+        <div className="shop__main-poster">
           <img
             src={mainImage}
             alt="Mens Section"
@@ -103,13 +102,13 @@ const ShopPage: React.FC<ShopPageProps> = ({
               punch={1}
             />
           )}
-          <div className="shop_page_container_main_text">
+          <div className="shop__main-text">
             <h1>{pageName}</h1>
           </div>
         </div>
-        <div className="shop_page_products_container">
+        <div className="shop__products-container">
           {sortedProducts.map((product) => (
-            <div key={product.id} className="shop_page_products_container_item">
+            <div key={product.id} className="shop__products-item">
               <img
                 src={`http://127.0.0.1:8000${product.product.image}`}
                 alt={product.product.name}
@@ -144,10 +143,6 @@ const ShopPage: React.FC<ShopPageProps> = ({
             </div>
           ))}
         </div>
-      </div>
-
-      <div className="shop_page_footer_container">
-        <Footer />
       </div>
     </div>
   );

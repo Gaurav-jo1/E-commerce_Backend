@@ -20,14 +20,12 @@ const MenPage: React.FC = () => {
   if (error) return "An error has occurred: " + error;
 
   return (
-    <div>
-      <ShopPage
-        productData={MenPageData}
-        mainImage={MensPoster}
-        pageName={"Mens"}
-        imgHash="fHF~dPpyx]9ZPCcZ9|xGWCkWRkWB0h%2Ipwbr;xC-UT0WqxCs:kDn4Ipe:xYfkae"
-      />
-    </div>
+    <ShopPage
+      productData={MenPageData}
+      mainImage={MensPoster}
+      pageName={"Mens"}
+      imgHash="fHF~dPpyx]9ZPCcZ9|xGWCkWRkWB0h%2Ipwbr;xC-UT0WqxCs:kDn4Ipe:xYfkae"
+    />
   );
 };
 

@@ -20,14 +20,12 @@ const NewFeatured: React.FC = () => {
   if (error) return "An error has occurred: " + error;
 
   return (
-    <div>
-      <ShopPage
-        productData={NewFeaturedData}
-        mainImage={NewFeature}
-        pageName={"New & Featured"}
-        imgHash="fgN13@OeoMWVlSEWx@Roa{odM|oytQt7oJaKaLe.SPS5WXayWVWVoff6j@ofjFoJ"
-      />
-    </div>
+    <ShopPage
+      productData={NewFeaturedData}
+      mainImage={NewFeature}
+      pageName={"New & Featured"}
+      imgHash="fgN13@OeoMWVlSEWx@Roa{odM|oytQt7oJaKaLe.SPS5WXayWVWVoff6j@ofjFoJ"
+    />
   );
 };
 

@@ -73,9 +73,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
       <div className="navbar__user-search">
         <div
           className="navbar__search-close"
-          onClick={() => setSearchBar(false)}
         >
-          <p>
+          <p onClick={() => setSearchBar(false)}>
             <RxCross1 />
           </p>
         </div>

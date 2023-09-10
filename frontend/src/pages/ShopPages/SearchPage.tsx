@@ -1,24 +1,30 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthPages } from "../AuthPages/AuthPages.tsx";
-import { GlobalValue } from "../../context/GlobalValue";
-import { useNavigate } from "react-router-dom";
-import { BsFillCartCheckFill } from "react-icons/bs";
 
 import axios from "axios";
-import { AuthContext } from "../../context/AuthContext";
 
+import { queryClient } from "../../main.tsx";
+import { AuthPages } from "../AuthPages/AuthPages.tsx";
 import LoadingSpinner from "../../components/LoadingSpinner";
 
+import { useNavigate } from "react-router-dom";
+import { MdDoneAll } from "react-icons/md";
+import { BsFillCartCheckFill } from "react-icons/bs";
+
 import { MyProductInterface } from "../../common/CommonInterfaces";
+// Global Context
+import { GlobalValue } from "../../context/GlobalValue";
+import { AuthContext } from "../../context/AuthContext";
 
 // Styling
 import "../../styles/ShopPage.scss";
 
 const SearchPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [searchData, setSearchData] = useState<MyProductInterface[] | null>(null);
+  const [searchData, setSearchData] = useState<MyProductInterface[] | null>(
+    null
+  );
 
-  const { setLoginOpen, userProSearch } = useContext(GlobalValue);
+  const { setLoginOpen, userProSearch, CartPageData } = useContext(GlobalValue);
 
   const { authTokens } = useContext(AuthContext);
 
@@ -26,7 +32,7 @@ const SearchPage: React.FC = () => {
 
   useEffect(() => {
     if (userProSearch) {
-      setIsLoading(true)
+      setIsLoading(true);
       axios
         .post("http://127.0.0.1:8000/product_search/search/", {
           user_search: userProSearch,
@@ -43,9 +49,9 @@ const SearchPage: React.FC = () => {
     } else {
       navigate("/");
     }
-  }, [ userProSearch]); // eslint-disable-line
-  
-  const addProductToCard = (product_id: number) => {
+  }, [userProSearch]); // eslint-disable-line
+
+  const addProductToCart = (product_id: number) => {
     if (authTokens) {
       axios
         .post(
@@ -71,39 +77,68 @@ const SearchPage: React.FC = () => {
     }
   };
 
-  return (
-    <div className="search_page_container">
+  const handleDelete = (product_id: number) => {
+    axios
+      .delete(`http://127.0.0.1:8000/cart/products/delete/${product_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        queryClient.invalidateQueries(["user_cart"]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
-      {isLoading ? <LoadingSpinner/> : ""}
+  const Products_ids: number[] = CartPageData
+    ? CartPageData.map((item) => item.id)
+    : [];
+
+  console.log(Products_ids)
+
+  return (
+    <div className="shop__main">
+      {isLoading ? <LoadingSpinner /> : ""}
+
+      <div className="shop__main-heading">
+        <h1>Search Results</h1>
+      </div>
 
       <AuthPages />
-      <div className="shop_page_products_container">
+      <div className="shop__products-container">
         {searchData &&
           searchData.map((product) => (
-            <div key={product.id} className="shop_page_products_container_item">
-              <div className="shop_page_products_container_item_image">
-                <img
-                  src={`http://127.0.0.1:8000${product.image}`}
-                  alt={product.name}
-                  height={"100%"}
-                  width={"100%"}
-                />
-              </div>
+            <div key={product.id} className="shop__products-item">
+              <img
+                src={`http://127.0.0.1:8000${product.image}`}
+                alt={product.name}
+                height={"100%"}
+                width={"100%"}
+              />
 
-              <div className="shop_page_products_container_item_title">
-                <p>{product.name}</p>
-              </div>
-
-              <div className="shop_page_products_container_item_cart">
-                <button onClick={() => addProductToCard(product.id)}>
-                  {" "}
+              <p>{product.name}</p>
+              <span>{product.id}</span>
+              {Products_ids.includes(product.id) ? (
+                <button id="added" onClick={() => handleDelete(product.id)}>
+                  <p>
+                    {" "}
+                    <MdDoneAll />{" "}
+                  </p>
+                  <span>Added to Cart &nbsp; </span>
+                </button>
+              ) : (
+                <button id="add" onClick={() => addProductToCart(product.id)}>
                   <p>
                     {" "}
                     <BsFillCartCheckFill />{" "}
                   </p>
-                  Add to Cart &nbsp;{" "}
+                  <span>Add to Cart &nbsp; </span>
                 </button>
-              </div>
+              )}
             </div>
           ))}
       </div>

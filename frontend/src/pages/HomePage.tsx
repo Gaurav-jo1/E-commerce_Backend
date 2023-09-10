@@ -25,14 +25,12 @@ const HomePage: React.FC = () => {
   const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
 
   return (
-    <div className="homepage_container">
+    <div className="homepage">
       <AuthPages />
-      <div className="homepage_salebar_container">
-        <SaleBar />
-      </div>
+      <SaleBar />
       {/* 1. First Component */}
-      <div className="homepage_container_textbg">
-        <div className="homepage_container_bg">
+      <div className="homepage__first-textbg">
+        <div className="homepage__first-bg">
           <img
             src={MainBG}
             alt="Mens Section"
@@ -51,7 +49,7 @@ const HomePage: React.FC = () => {
             />
           )}
         </div>
-        <div className="homepage_container_text">
+        <div className="homepage__first-text">
           <p>PREETY FOR SUMMER</p>
           <Link to="/New & Featured">
             <span>SHOP&nbsp;ALL&nbsp;NEW</span>
@@ -60,7 +58,7 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* 2. Summer text Banner Component */}
-      <div className="homepage_container_summer_text">
+      <div className="homepage__summer-text">
         <span>Summer Essentials</span>
         <h3>Chase the day</h3>
         <p>
@@ -74,9 +72,9 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* 3. Shop Options Component */}
-      <div className="homepage_container_shop_options">
+      <div className="homepage__shop-options">
         {Object.keys(myLists).map((key) => (
-          <div key={key} className="homepage_shop_image_container">
+          <div key={key} className="homepage_shop-images">
             <Link to="/Shop">
               <img
                 id={`hide_img_${isHovered === key ? key : ""}`}
@@ -100,22 +98,22 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* 4. Shoe Banner Component */}
-      <div className="homepage_container_shoes_banner">
-        <div className="shoe_banner_logo_text_container">
+      <div className="homepage__shoes-banner">
+        <div className="homepage__shoes-text-logo">
           <img src={ShoppyLogo} alt="Shoppy Logo" loading="lazy" />
           <h1>
             {" "}
             New <br /> Arrivals{" "}
           </h1>
         </div>
-        <div className="shoe_banner_poster_container">
+        <div className="homepage__shoes-poster">
           <img src={ShoeBanner} alt="Shoe Banner" loading="lazy" />
         </div>
-        <div className="shoe_banner_poster_mobile">
+        <div className="homepage__shoes-poster-mobile">
           <img src={ShoeBanner1} alt="Shoe Banner" loading="lazy" />
           <img src={ShoeBanner2} alt="Shoe Banner" loading="lazy" />
         </div>
-        <div className="shoe_banner_button_container">
+        <div className="homepage__shoes-button">
           <Link to="/Men">
             <button>Shop Now</button>
           </Link>
@@ -123,11 +121,11 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* 5. Card Options Component */}
-      <div className="homepage_container_cards_options">
+      <div className="homepage__card">
         {Object.entries(myCards).map(([card, properties]) => (
-          <div key={card} className="homepage_shop_card_container">
+          <div key={card} className="homepage__card-container">
             <img src={properties.property1} alt={card} loading="lazy" />
-            <div className="homepage_shop_card_texts">
+            <div className="homepage__card-texts">
               <p>{properties.property3}</p>
             </div>
           </div>
@@ -135,13 +133,13 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* 6. Men's, Women and Kids Section  */}
-      <div className="homepage_container_section_heading">
+      <div className="homepage__genders-heading">
         <p>Explore</p>
       </div>
 
-      <div className="homepage_container_gender_sections">
+      <div className="homepage__genders-sections">
         {Object.entries(mySections).map(([section, properties]) => (
-          <div key={section} className="homepage_container_sections">
+          <div key={section} className="homepage__genders-images">
             <Link to={`/${properties.property2}`}>
               <img
                 src={properties.property1}
@@ -155,13 +153,13 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* 7. About Page */}
-      <div className="homepage_container_about_section">
-        <div className="homepage_container_about_heading">
+      <div className="homepage__about">
+        <div className="homepage__about-heading">
           <h1> MADE FOR THE </h1>
           <h1>MODERN SHOPPING</h1>
         </div>
 
-        <div className="homepage_container_about_text">
+        <div className="homepage__about-text">
           <p>
             Welcome to Shoppy, where dreams become fashion reality! We are the
             trendsetters, the style mavens, and the shopping destination that

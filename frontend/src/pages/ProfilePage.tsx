@@ -54,23 +54,20 @@ const ProfilePage: React.FC<ProfilePageInterface> = ({
 
   return (
     <>
-      <div
-        className="profile_page_container"
-        onClick={() => setProfilePage(false)}
-      />
-      <section className="profile_main_container">
+      <div className="profile" onClick={() => setProfilePage(false)} />
+      <section className="profile__container">
         <main>
-          <div className="profile_container_picture">
+          <div className="profile__container-picture">
             <img
               src={`http://127.0.0.1:8000${UserProfile?.picture}`}
               alt={UserProfile?.user}
             />
           </div>
-          <div className="profile_container_name">
+          <div className="profile__container-name">
             <p>{UserProfile?.user}</p>
           </div>
         </main>
-        <div className="profile_container_logout">
+        <div className="profile__container-logout">
           <button onClick={logUserOut}>Logout User</button>
         </div>
       </section>

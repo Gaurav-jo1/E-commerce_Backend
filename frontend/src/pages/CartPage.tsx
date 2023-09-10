@@ -77,15 +77,15 @@ const CartPage: React.FC = () => {
   }
 
   return (
-    <div className="cart_page_container">
+    <div className="cart__container">
       <AuthPages />
       {CartPageData?.length != 0 ? (
-        <div className="cart_page_main_container_div">
-          <div className="cart_page_main_container">
+        <div className="cart__main">
+          <div className="cart__container-main">
             {CartPageData &&
               CartPageData.map((product: Product) => (
-                <div key={product.id} className="cart_page_product">
-                  <div className="cart_page_image_name_container">
+                <div key={product.id} className="cart__product">
+                  <div className="cart__container-image-name">
                     <img
                       src={`http://127.0.0.1:8000${product.image}`}
                       alt={product.name}
@@ -99,33 +99,33 @@ const CartPage: React.FC = () => {
                 </div>
               ))}
           </div>
-          <div className="cart_page_grand_total_section">
-            <div className="cart_page_grand_total_container">
-              <div className="cart_page_grand_heading">
+          <div className="cart__grand_total-section">
+            <div className="cart__grand_total-container">
+              <div className="cart__grand-heading">
                 <h1>Subtotal</h1>
                 <span></span>
               </div>
-              <div className="cart_page_products_container">
+              <div className="cart__products-container">
                 {CartPageData &&
                   CartPageData.map((product: Product) => (
-                    <div key={product.id} className="cart_page_products">
+                    <div key={product.id} className="cart__products">
                       <p>{product.name}</p>
                       <b>${product.price}</b>
                     </div>
                   ))}
               </div>
-              <div className="cart_page_products_total_price">
+              <div className="cart__products-total-price">
                 <span></span>
                 <p>${CartPageData && calculateSubtotal(CartPageData)}</p>
               </div>
-              <div className="cart_page_products_shop_button">
+              <div className="cart__products-shop-button">
                 <button>Proceed to Buy &nbsp;💸</button>
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <div className="cart_page_empty_message">
+        <div className="cart__empty-message">
           <img src={empty_cart} alt="Empty Cart" width={"500px"} />
           <h1>Your cart is currently empty.</h1>
           <p>Start adding items to your cart and discover amazing products!</p>
