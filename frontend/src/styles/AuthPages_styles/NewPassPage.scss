@@ -1,4 +1,4 @@
-.new_pass_page_container {
+.new-pass {
   height: 460px;
   width: 800px;
   background-color: rgba(255, 255, 255, 0.852);
@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
 
-  .new_pass_page_container_form {
+  .new-pass__form {
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@
     text-align: center;
     width: 100%;
 
-    .new_pass_page_password_match {
+    .new-pass__password-match {
       padding-bottom: 20px;
 
       span {
@@ -29,7 +29,7 @@
       }
     }
 
-    .new_pass_page_container_text {
+    .new-pass__text {
       padding-bottom: 20px;
 
       p:first-child {
@@ -48,7 +48,7 @@
       }
     }
 
-    .new_pass_page_container_inputs {
+    .new-pass__inputs {
       form {
         display: flex;
         flex-direction: column;
@@ -94,11 +94,11 @@
 }
 
 @media (max-width: 800px) {
-  .new_pass_page_container {
+  .new-pass {
     width: auto;
     border-radius: 5px;
 
-    .new_pass_page_container_form {
+    .new-pass__form {
       padding: 45px;
     }
   }

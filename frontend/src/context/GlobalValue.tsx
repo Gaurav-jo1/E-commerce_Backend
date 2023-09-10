@@ -35,7 +35,7 @@ interface CurrentVarContextType {
   setNavOptions: React.Dispatch<React.SetStateAction<boolean>>;
 
   // User Cart
-  CartPageData: Product[]
+  CartPageData: Product[] | undefined
 }
 
 export const GlobalValue = createContext<CurrentVarContextType>(
@@ -69,7 +69,7 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
   // User Cart
   const { authTokens } = useContext(AuthContext);
 
-  const { data: CartPageData } = useQuery(["user_cart"],() =>
+  const { data: CartPageData } = useQuery<Product[] | undefined>(["user_cart"],() =>
       axios.get("http://127.0.0.1:8000/cart/products/get/", {
           headers: {
             "Content-Type": "application/json",

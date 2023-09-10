@@ -174,11 +174,9 @@
   }
 }
 
-
 @media (max-width: 900px) {
   .cart_page_main_container_div {
     padding: 20px 40px;
-
   }
 
   .cart_page_main_container {
@@ -198,24 +196,12 @@
 @media (max-width: 480px) {
   .cart_page_main_container_div {
     padding: 20px 10px;
-
   }
 
   .cart_page_main_container {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
-
-    .cart_page_product {
-
-      .cart_page_image_name_container {
-        p {
-          // font-size: 20px;
-        }
-      }
-    }
   }
-
-  
 }
 
 .cart_page_empty_message {

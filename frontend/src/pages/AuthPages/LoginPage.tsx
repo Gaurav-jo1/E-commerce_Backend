@@ -71,14 +71,14 @@ const Loginpage: React.FC<LoginComponentProps> = ({
         [field_name]: username.toLowerCase(),
         password: password,
       })
-      .then(function (response) {
+      .then((response) => {
         setIsLoading(false);
         setLoginOpen(false);
         console.log("Response from LoginPage: ", response.data);
         setAuthTokens(response.data);
         localStorage.setItem("authTokens", JSON.stringify(response.data));
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
         setWrongC(true);
         setIsLoading(false);
@@ -100,7 +100,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({
     <div className="login-page">
       <div className="auth-form">
         {passChanged && (
-          <div className="login-page-password-changed">
+          <div className="login-page__password-changed">
             <span>
               "Password Changed Successfully" &nbsp; <p>✅</p>{" "}
             </span>
@@ -108,21 +108,21 @@ const Loginpage: React.FC<LoginComponentProps> = ({
         )}
 
         {wrongC && (
-          <div className="login-page-password-wrong">
+          <div className="login-page__password-wrong">
             <span>{errorText}</span>
           </div>
         )}
 
-        <div className="auth-text">
+        <div className="auth-form__text">
           <h4>Welcome back to Shoppy!</h4>
           <h4>Please sign in</h4>
 
-          <div className="auth-sign-in-or-up-link">
+          <div className="auth-form__auth-link">
             <p>New to Shoppy? &nbsp; </p>
             <p onClick={SignupLink}>Create an account</p>
           </div>
         </div>
-        <div className="auth-google-div">
+        <div className="auth-form_google-div">
           <GoogleLogin
             onSuccess={(credentialResponse) => {
               handleGoogleLogin(credentialResponse.credential);
@@ -137,10 +137,10 @@ const Loginpage: React.FC<LoginComponentProps> = ({
             useOneTap
           />
         </div>
-        <div className="auth-form-divider">
+        <div className="auth-form__divider">
           <p>or</p>
         </div>
-        <div className="auth-inputs">
+        <div className="auth-form__inputs">
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -158,7 +158,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <div className="auth-forgot-password">
+            <div className="auth-form__forgot-password">
               <p onClick={ForgotLink}>Forgot your password?</p>
             </div>
 

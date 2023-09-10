@@ -57,7 +57,7 @@ const SignupPage: React.FC<SignComponentProps> = ({
         email: email,
         password: password,
       })
-      .then(function (response) {
+      .then((response) => {
         console.log(response.data);
         setIsLoading(false);
 
@@ -68,7 +68,7 @@ const SignupPage: React.FC<SignComponentProps> = ({
           setSignupOpen(false);
         }
       })
-      .catch(function (error) {
+      .catch((error) => {
         setErrorText(error.response.data.error);
         setIsLoading(false);
       });
@@ -79,18 +79,18 @@ const SignupPage: React.FC<SignComponentProps> = ({
       {/* Form Container */}
       <div className="auth-form">
         {errorText && (
-          <div className="signup-page-password-wrong">
+          <div className="signup-page__password-wrong">
             <span>"{errorText}"</span>
           </div>
         )}
-        <div className="auth-text">
+        <div className="auth-form__text">
           <h4>Sign up with Shoppy for free</h4>
-          <div className="auth-sign-in-or-up-link">
+          <div className="auth-form__auth-link">
             <p>Already have an account?&nbsp; </p>
             <p onClick={SigninLink}>Sign in</p>
           </div>
         </div>
-        <div className="auth-google-div">
+        <div className="auth-form__google-div">
           <GoogleLogin
             onSuccess={(credentialResponse) => {
               handleGoogleLogin(credentialResponse.credential);
@@ -104,10 +104,10 @@ const SignupPage: React.FC<SignComponentProps> = ({
             width="260px"
           />
         </div>
-        <div className="auth-form-divider">
+        <div className="auth-form__divider">
           <p>or</p>
         </div>
-        <div className="auth-inputs">
+        <div className="auth-form__inputs">
           <form onSubmit={handleSubmit}>
             <input
               type="email"
@@ -136,7 +136,7 @@ const SignupPage: React.FC<SignComponentProps> = ({
               required
             />
 
-            <div className="auth-forgot-password"></div>
+            <div className="auth-form__forgot-password"></div>
 
             {isLoading ? (
               <button disabled={true} type="submit">

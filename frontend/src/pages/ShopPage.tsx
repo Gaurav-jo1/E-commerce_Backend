@@ -1,14 +1,19 @@
 import React, { useContext, useState } from "react";
+
 import axios from "axios";
-import { GlobalValue } from "../context/GlobalValue";
+
+import Footer from "../components/Footer";
+import { queryClient } from "../main.tsx";
 import { AuthPages } from "./AuthPages/AuthPages.tsx";
 import { ShopPageProps } from "../common/CommonInterfaces";
-import { BsFillCartCheckFill } from "react-icons/bs";
-import { MdDoneAll } from "react-icons/md";
-import { queryClient } from "../main.tsx";
-import Footer from "../components/Footer";
-import { AuthContext } from "../context/AuthContext";
+
 import { Blurhash } from "react-blurhash";
+import { MdDoneAll } from "react-icons/md";
+import { BsFillCartCheckFill } from "react-icons/bs";
+
+// Global Context
+import { AuthContext } from "../context/AuthContext";
+import { GlobalValue } from "../context/GlobalValue";
 
 // styling
 import "../styles/ShopPage.scss";
@@ -43,11 +48,11 @@ const ShopPage: React.FC<ShopPageProps> = ({
             },
           }
         )
-        .then(function (response) {
+        .then((response) => {
           console.log(response.data);
           queryClient.invalidateQueries(["user_cart"]);
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
         });
     } else {

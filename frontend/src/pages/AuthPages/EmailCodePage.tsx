@@ -1,18 +1,26 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
-import { MdMarkEmailUnread } from "react-icons/md";
-import { GlobalValue } from "../../context/GlobalValue";
-import code_art from "../../assets/code_art.webp";
 
-// Styling
-import "../../styles/AuthPages_styles/EmailCodePage.scss"
+import axios from "axios";
+
+import { MdMarkEmailUnread } from "react-icons/md";
+
+import code_art from "../../assets/code_art.webp";
 
 interface EmailCodeComponentProps {
   setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
   setEmailCode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, setEmailCode, }) => {
+// Global Context
+import { GlobalValue } from "../../context/GlobalValue";
+
+// Styling
+import "../../styles/AuthPages_styles/EmailCodePage.scss";
+
+const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({
+  setNewPassword,
+  setEmailCode,
+}) => {
   const [noCode, setNoCode] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorText, setErrorText] = useState<string>("");
@@ -23,11 +31,12 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, se
     e.preventDefault();
     setIsLoading(true);
 
-    axios.post("http://127.0.0.1:8000/user_login/reset_code/", {
+    axios
+      .post("http://127.0.0.1:8000/user_login/reset_code/", {
         user_id: userId,
         user_code: userCode,
       })
-      .then(function (response) {
+      .then((response) => {
         if (response.status == 200) {
           setEmailCode(false);
           setNewPassword(true);
@@ -35,7 +44,7 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, se
         }
         console.log(response.data);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
         setErrorText(error.response.data.error);
         setNoCode(true);
@@ -44,15 +53,15 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, se
   };
 
   return (
-    <div className="email-code-container">
+    <div className="email-code">
       {/* Form Container */}
-      <div className="email-code-recover-form">
+      <div className="email-code__recover-form">
         {noCode && (
-          <div className="email-code-recover-match">
+          <div className="email-code__recover-match">
             <span>"{errorText}"</span>
           </div>
         )}
-        <div className="email-code-container-text">
+        <div className="email-code__container-text">
           <p>
             <MdMarkEmailUnread />
           </p>
@@ -75,7 +84,7 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({ setNewPassword, se
           {isLoading ? (
             <button disabled={true} type="submit">
               Submitting... &nbsp;
-              <span className="loading-circle"></span>
+              <span></span>
             </button>
           ) : (
             <button type="submit">Submit</button>

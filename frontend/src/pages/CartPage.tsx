@@ -2,17 +2,20 @@ import React, { useContext, useEffect } from "react";
 
 import axios from "axios";
 
+import Footer from "../components/Footer";
+import LoadingSpinner from "../components/LoadingSpinner.tsx";
+import { queryClient } from "../main.tsx";
+import { AuthPages } from "./AuthPages/AuthPages.tsx";
+
+import { Link, useNavigate } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
-import { AuthContext } from "../context/AuthContext";
-import { queryClient } from "../main";
-import { Link, useNavigate } from "react-router-dom";
-import { Product } from "../common/CommonInterfaces.ts";
-// Components
-import { AuthPages } from "./AuthPages/AuthPages.tsx";
-import Footer from "../components/Footer";
-import LoadingSpinner from "../components/LoadingSpinner";
+
 import empty_cart from "../assets/empty_cart.webp";
+
+import { Product } from "../common/CommonInterfaces.ts";
+// Global Context
+import { AuthContext } from "../context/AuthContext";
 
 // Styling
 import "../styles/CartPage.scss";
@@ -23,9 +26,7 @@ const CartPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if authTokens exist
     if (!authTokens) {
-      // Redirect the user to the homepage
       navigate("/");
     }
   }, [authTokens, navigate]);
@@ -42,20 +43,20 @@ const CartPage: React.FC = () => {
           Authorization: "Bearer " + String(authTokens.access),
         },
       })
-      .then(function (response) {
+      .then((response) => {
         console.log(response);
         queryClient.invalidateQueries(["user_cart"]);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
 
   const {
+    data: CartPageData,
     isLoading,
     error,
-    data: CartPageData,
-  } = useQuery(
+  } = useQuery<Product[]>(
     ["user_cart"],
     () =>
       axios
@@ -66,9 +67,7 @@ const CartPage: React.FC = () => {
           },
         })
         .then((response) => response.data),
-    {
-      refetchOnWindowFocus: false,
-    }
+    { enabled: !!authTokens, refetchOnWindowFocus: false }
   );
 
   if (isLoading) return <LoadingSpinner />;
@@ -80,7 +79,7 @@ const CartPage: React.FC = () => {
   return (
     <div className="cart_page_container">
       <AuthPages />
-      {CartPageData.length != 0 ? (
+      {CartPageData?.length != 0 ? (
         <div className="cart_page_main_container_div">
           <div className="cart_page_main_container">
             {CartPageData &&

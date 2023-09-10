@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
 
-  .forgot-page-forgot-form {
+  .forgot-page__forgot-form {
     width: 100%;
     padding: 25px;
     display: flex;
@@ -16,7 +16,7 @@
     align-items: center;
     text-align: center;
 
-    .forgot-page-email-match {
+    .forgot-page__email-match {
       padding-bottom: 20px;
 
       span {
@@ -28,7 +28,7 @@
       }
     }
 
-    .forgot-page-container-text {
+    .forgot-page__container-text {
       p:first-child {
         color: rgb(91, 91, 91);
         font-size: 38px;
@@ -46,7 +46,7 @@
       }
     }
 
-    .forgot-page-container-inputs {
+    .forgot-page__container-inputs {
       form {
         width: 100%;
         display: flex;
@@ -100,14 +100,12 @@
       }
     }
   }
-}
 
-@media (max-width: 800px) {
-  .forgot-page-container {
+  @media (max-width: 800px) {
     width: auto;
     border-radius: 5px;
 
-    .forgot-page-forgot-form {
+    .forgot-page__forgot-form {
       padding: 45px;
     }
   }

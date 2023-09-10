@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from "react";
 
 import axios from "axios";
@@ -28,22 +27,6 @@ const Navbar: React.FC = () => {
   const { setSignupOpen, setLoginOpen, setNavOptions, navOptions } =
     useContext(GlobalValue);
 
-  const UserProfileSearch = () => {
-    axios
-      .get("http://127.0.0.1:8000/user_profile/info/", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + String(authTokens.access),
-        },
-      })
-      .then(function (response) {
-        setUserData(response.data);
-      })
-      .catch(function (error) {
-        console.log("error", error);
-      });
-  };
-
   useEffect(() => {
     if (searchBar || profilePage || navOptions) {
       document.body.style.overflow = "hidden";
@@ -52,7 +35,19 @@ const Navbar: React.FC = () => {
     }
 
     if (authTokens) {
-      UserProfileSearch();
+      axios
+        .get("http://127.0.0.1:8000/user_profile/info/", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authTokens.access),
+          },
+        })
+        .then(function (response) {
+          setUserData(response.data);
+        })
+        .catch(function (error) {
+          console.log("error", error);
+        });
     }
   }, [searchBar, authTokens, profilePage, navOptions]);
 

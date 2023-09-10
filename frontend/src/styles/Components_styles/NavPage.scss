@@ -133,12 +133,12 @@
 }
 
 @media (max-width: 780px) {
-  .navpage_container {
+  .navpage {
     display: none;
   }
 
-  .navpage_container_mobile,
-  .navpage_container_mobile_bg {
+  .navpage__container-mobile,
+  .navpage__container-mobile-bg {
     display: flex;
   }
 }

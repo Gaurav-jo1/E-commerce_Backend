@@ -1,37 +1,43 @@
 import React, { useContext } from "react";
+
 import axios from "axios";
 
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { MyUserInterface } from "../common/CommonInterfaces";
-// Styling
-import "../styles/ProfilePage.scss";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { MyUserInterface } from "../common/CommonInterfaces";
 interface ProfilePageInterface {
   setUserData: React.Dispatch<React.SetStateAction<MyUserInterface | null>>;
   setProfilePage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ProfilePage: React.FC<ProfilePageInterface> = ({setUserData, setProfilePage}) => {
+// Global Context
+import { AuthContext } from "../context/AuthContext";
+
+// Styling
+import "../styles/ProfilePage.scss";
+
+const ProfilePage: React.FC<ProfilePageInterface> = ({
+  setUserData,
+  setProfilePage,
+}) => {
   const { authTokens, callLogout } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 
-  const {
-    data: UserProfile,
-    error
-  } = useQuery<MyUserInterface>(["user_profile"], () =>
-    axios
-      .get<MyUserInterface>("http://127.0.0.1:8000/user_profile/info/", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + String(authTokens.access),
-        },
-      })
-      .then((response) => response.data)
+  const { data: UserProfile, error } = useQuery<MyUserInterface>(
+    ["user_profile"],
+    () =>
+      axios
+        .get<MyUserInterface>("http://127.0.0.1:8000/user_profile/info/", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authTokens.access),
+          },
+        })
+        .then((response) => response.data)
   );
 
   if (error) {
@@ -41,8 +47,8 @@ const ProfilePage: React.FC<ProfilePageInterface> = ({setUserData, setProfilePag
   const logUserOut = () => {
     callLogout();
     navigate("/");
-    setProfilePage(false)
-    setUserData(null)
+    setProfilePage(false);
+    setUserData(null);
     queryClient.removeQueries(["user_profile"]);
   };
 

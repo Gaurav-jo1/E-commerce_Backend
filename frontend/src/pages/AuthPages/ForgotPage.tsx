@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+
 import axios from "axios";
 
 import { ImKey } from "react-icons/im";
@@ -34,7 +35,7 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
       .post("http://127.0.0.1:8000/user_login/reset_password/", {
         user_email: userEmail,
       })
-      .then(function (response) {
+      .then((response) => {
         setUserId(response.data.user_id);
 
         if (response.status == 200) {
@@ -43,7 +44,7 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
           setIsLoading(false);
         }
       })
-      .catch(function (error) {
+      .catch((error) => {
         setErrorText(error.response.data.error);
         setNoEmail(true);
         setIsLoading(false);
@@ -59,20 +60,20 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
   return (
     <div className="forgot-page-container">
       {/* Form Container */}
-      <div className="forgot-page-forgot-form">
+      <div className="forgot-page__forgot-form">
         {noEmail && (
-          <div className="forgot-page-email-match">
+          <div className="forgot-page__email-match">
             <span>"{errorText}"</span>
           </div>
         )}
-        <div className="forgot-page-container-text">
+        <div className="forgot-page__container-text">
           <p>
             <ImKey />
           </p>
           <h3>Yo! Forgot your Password?</h3>
           <p>No worries! Enter your email to reset your password.</p>
         </div>
-        <div className="forgot-page-container-inputs">
+        <div className="forgot-page__container-inputs">
           <form onSubmit={handleSubmit}>
             <input
               type="email"
@@ -96,7 +97,6 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
           </form>
         </div>
       </div>
-
       {/* Image Container */}
       <div className="auth_bg_img">
         <div className="auth_bg_img_logo"></div>

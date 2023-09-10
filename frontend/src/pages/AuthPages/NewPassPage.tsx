@@ -1,22 +1,20 @@
 import React, { useState, useContext } from "react";
-// Icons
+
+import axios from "axios";
+
 import { BsFillUnlockFill } from "react-icons/bs";
+import new_art from "../../assets/new_part.webp";
 
 // Global Values
 import { GlobalValue } from "../../context/GlobalValue";
 
-// Media
-import new_art from "../../assets/new_part.webp";
-
-import axios from "axios";
-
+// Styling
 import "../../styles/AuthPages_styles/NewPassPage.scss";
 
 interface NewPassComponentProps {
   setNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
   setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
 
 const NewPassPage: React.FC<NewPassComponentProps> = ({
   setNewPassword,
@@ -49,7 +47,7 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({
           user_new_password: newPass,
           user_reEnter_password: reNewPass,
         })
-        .then(function (response) {
+        .then((response) => {
           console.log(response);
 
           if (response.status == 200) {
@@ -62,7 +60,7 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({
             setIsLoading(false);
           }
         })
-        .catch(function (error) {
+        .catch((error) => {
           if (error.response.status == 404) {
             setPassNot(true);
             setIsLoading(false);
@@ -78,15 +76,15 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({
   };
 
   return (
-    <div className="new_pass_page_container">
-      <div className="new_pass_page_container_form">
+    <div className="new-pass">
+      <div className="new-pass__form">
         {passNot && (
-          <div className="new_pass_page_password_match">
+          <div className="new-pass__password-match">
             <span>"The password you entered does not match"</span>
           </div>
         )}
 
-        <div className="new_pass_page_container_text">
+        <div className="new-pass__text">
           <p>
             <BsFillUnlockFill />
           </p>
@@ -95,7 +93,7 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({
             Please enter a new password for your email <b>{userEmail}</b>
           </p>
         </div>
-        <div className="new_pass_page_container_inputs">
+        <div className="new-pass__inputs">
           <form onSubmit={handleSubmit}>
             <input
               type="password"

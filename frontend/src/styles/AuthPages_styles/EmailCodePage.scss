@@ -1,4 +1,4 @@
-.email-code-container {
+.email-code {
   height: 460px;
   width: 800px;
   background-color: rgba(255, 255, 255, 0.852);
@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
 
-  .email-code-recover-form {
+  .email-code__recover-form {
     padding: 25px;
     width: 100%;
     display: flex;
@@ -16,7 +16,7 @@
     align-items: center;
     text-align: center;
 
-    .email-code-recover-match {
+    .email-code__recover-match {
       padding-bottom: 20px;
 
       span {
@@ -71,7 +71,7 @@
       }
     }
 
-    .email-code-container-text {
+    .email-code__container-text {
       padding-bottom: 20px;
 
       p:first-child {
@@ -89,10 +89,8 @@
       }
     }
   }
-}
 
-@media (max-width: 800px) {
-  .email-code-container {
+  @media (max-width: 800px) {
     width: auto;
     border-radius: 5px;
 
