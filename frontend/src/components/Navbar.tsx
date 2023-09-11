@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import axios from "axios";
-
+import { AxiosResponse, AxiosError } from 'axios';
 import SearchBar from "./SearchBar";
 import ProfilePage from "../pages/ProfilePage";
 
@@ -42,10 +42,10 @@ const Navbar: React.FC = () => {
             Authorization: "Bearer " + String(authTokens.access),
           },
         })
-        .then(function (response) {
+        .then((response:AxiosResponse ) => {
           setUserData(response.data);
         })
-        .catch(function (error) {
+        .catch((error: AxiosError) => {
           console.log("error", error);
         });
     }

@@ -45,12 +45,12 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       .post("http://127.0.0.1:8000/user_login/api/token/refresh/", {
         refresh: authTokens.refresh,
       })
-      .then((response) => {
+      .then((response: AxiosResponse) => {
         setAuthTokens(response.data);
         localStorage.setItem("authTokens", JSON.stringify(response.data));
         setLoading(true);
       })
-      .catch((error) => {
+      .catch((error: AxiosError) => {
         console.log(error);
         callLogout();
         setLoading(true);
@@ -65,11 +65,11 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           Authorization: "Bearer " + String(authTokens.access),
         },
       })
-      .then(function (response: AxiosResponse) {
+      .then((response: AxiosResponse) => {
         console.log(response);
         queryClient.invalidateQueries(["user_cart"]);
       })
-      .catch(function (error: AxiosError) {
+      .catch((error: AxiosError) => {
         console.log(error);
       });
   };

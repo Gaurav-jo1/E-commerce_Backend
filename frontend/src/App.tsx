@@ -23,10 +23,10 @@ import NavPage from "./components/NavPage";
 
 function App(): JSX.Element {
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
-      <AuthProvider>
-        <GlobalProvider>
-          <div>
+    <div>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
+        <AuthProvider>
+          <GlobalProvider>
             <Navbar />
             <NavPage />
             <Routes>
@@ -40,10 +40,10 @@ function App(): JSX.Element {
               <Route path="/Sale" element={<SalePage />} />
               <Route path="/search" element={<SearchPage />} />
             </Routes>
-          </div>
-        </GlobalProvider>
-      </AuthProvider>
-    </GoogleOAuthProvider>
+          </GlobalProvider>
+        </AuthProvider>
+      </GoogleOAuthProvider>
+    </div>
   );
 }
 

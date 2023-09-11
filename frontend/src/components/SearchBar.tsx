@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import axios from "axios";
+import { AxiosResponse } from 'axios';
 
 import { useNavigate } from "react-router-dom";
 import { RxCross1 } from "react-icons/rx";
@@ -31,12 +32,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
       .post("http://127.0.0.1:8000/product_search/search/", {
         search_text: userSearch,
       })
-      .then(function (response) {
+      .then((response: AxiosResponse) => {
         console.log("Product Search", JSON.parse(response.data));
         setSearchError("");
         setSearchItems(JSON.parse(response.data));
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log("error", error);
         setSearchError(error.response.data.message);
         setSearchItems(null);

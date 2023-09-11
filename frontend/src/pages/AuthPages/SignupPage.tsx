@@ -37,13 +37,13 @@ const SignupPage: React.FC<SignComponentProps> = ({
       .post("http://127.0.0.1:8000/google_login/google/", {
         id_token: idToken,
       })
-      .then(function (response) {
+      .then((response) => {
         console.log("User Created");
         setAuthTokens(response.data);
         localStorage.setItem("authTokens", JSON.stringify(response.data));
         setSignupOpen(false);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };

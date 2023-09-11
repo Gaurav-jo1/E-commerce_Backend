@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import axios from "axios";
 
@@ -6,9 +6,10 @@ import Footer from "../components/Footer";
 import LoadingSpinner from "../components/LoadingSpinner.tsx";
 import { AuthPages } from "./AuthPages/AuthPages.tsx";
 
-import { Link, useNavigate } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
+import {RxCross1} from "react-icons/rx"
 import { useQuery } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
 
 import empty_cart from "../assets/empty_cart.webp";
 
@@ -20,6 +21,7 @@ import { AuthContext } from "../context/AuthContext";
 import "../styles/CartPage.scss";
 
 const CartPage: React.FC = () => {
+  const [buyProducts, setBuyProducts] = useState<boolean>(false);
   const { authTokens, handleDelete } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -101,8 +103,14 @@ const CartPage: React.FC = () => {
                 <p>${CartPageData && calculateSubtotal(CartPageData)}</p>
               </div>
               <div className="cart__products-shop-button">
-                <button>Proceed to Buy &nbsp;💸</button>
+                <button onClick={() => setBuyProducts(true)}>Proceed to Buy &nbsp;💸</button>
               </div>
+              {buyProducts && (
+                <div className={`cart__products-bought ${buyProducts ? 'slide-in' : 'slide-out'}`}>
+                  <p>Thanks for using Shoopy 🎉 </p>
+                  <span onClick={() => setBuyProducts(false)}><RxCross1/></span>
+                </div>
+              )}
             </div>
           </div>
         </div>
