@@ -1,15 +1,13 @@
 import React, { useContext, useState } from "react";
 
-import axios from "axios";
-
-import { queryClient } from "../main.tsx";
+import Footer from "../components/Footer.tsx";
 import { AuthPages } from "./AuthPages/AuthPages.tsx";
-import { ShopPageProps } from "../common/CommonInterfaces";
 
 import { Blurhash } from "react-blurhash";
 import { MdDoneAll } from "react-icons/md";
 import { BsFillCartCheckFill } from "react-icons/bs";
 
+import { ShopPageProps } from "../common/CommonInterfaces";
 // Global Context
 import { AuthContext } from "../context/AuthContext";
 import { GlobalValue } from "../context/GlobalValue";
@@ -23,8 +21,8 @@ const ShopPage: React.FC<ShopPageProps> = ({
   pageName,
   imgHash,
 }) => {
-  const { setLoginOpen, CartPageData } = useContext(GlobalValue);
-  const { authTokens } = useContext(AuthContext);
+  const { addProductToCart } = useContext(GlobalValue);
+  const { handleDelete } = useContext(AuthContext);
 
   const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
 
@@ -32,53 +30,9 @@ const ShopPage: React.FC<ShopPageProps> = ({
     (a, b) => a.position_id - b.position_id
   );
 
-  const addProductToCart = (product_id: number) => {
-    if (authTokens) {
-      axios
-        .post(
-          "http://127.0.0.1:8000/cart/products/add/",
-          {
-            product_id: product_id,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + String(authTokens.access),
-            },
-          }
-        )
-        .then((response) => {
-          console.log(response.data);
-          queryClient.invalidateQueries(["user_cart"]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      setLoginOpen(true);
-    }
-  };
-
-  const handleDelete = (product_id: number) => {
-    axios
-      .delete(`http://127.0.0.1:8000/cart/products/delete/${product_id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + String(authTokens.access),
-        },
-      })
-      .then(function (response) {
-        console.log(response);
-        queryClient.invalidateQueries(["user_cart"]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const Products_ids: number[] = CartPageData
-    ? CartPageData.map((item) => item.id)
-    : [];
+  const Products_ids: number[] = localStorage.getItem("User_products")
+  ? JSON.parse(localStorage.getItem("User_products") || "")
+  : []
 
   return (
     <div className="shop">
@@ -143,6 +97,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
             </div>
           ))}
         </div>
+        <Footer />
       </div>
     </div>
   );

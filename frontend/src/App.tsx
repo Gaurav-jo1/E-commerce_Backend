@@ -20,7 +20,6 @@ import GlobalProvider from "./context/GlobalValue";
 import "./App.scss";
 import Navbar from "./components/Navbar";
 import NavPage from "./components/NavPage";
-import Footer from "./components/Footer";
 
 function App(): JSX.Element {
   return (
@@ -41,7 +40,6 @@ function App(): JSX.Element {
               <Route path="/Sale" element={<SalePage />} />
               <Route path="/search" element={<SearchPage />} />
             </Routes>
-            <Footer />
           </div>
         </GlobalProvider>
       </AuthProvider>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, createContext } from "react";
 
 import axios from "axios";
+import { queryClient } from "../main";
+import { AxiosResponse, AxiosError } from 'axios';
 
 export type AccessTokensType = {
   access: string | undefined;
@@ -13,6 +15,7 @@ interface CurrentUserContextType {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   callLogout: () => void;
+  handleDelete: (product_id: number)  => void;
 }
 
 export const AuthContext = createContext<CurrentUserContextType>(
@@ -42,17 +45,35 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       .post("http://127.0.0.1:8000/user_login/api/token/refresh/", {
         refresh: authTokens.refresh,
       })
-      .then(function (response) {
+      .then((response) => {
         setAuthTokens(response.data);
         localStorage.setItem("authTokens", JSON.stringify(response.data));
         setLoading(true);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
         callLogout();
         setLoading(true);
       });
   }
+
+  const handleDelete = (product_id: number): void => {
+    axios
+      .delete(`http://127.0.0.1:8000/cart/products/delete/${product_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      })
+      .then(function (response: AxiosResponse) {
+        console.log(response);
+        queryClient.invalidateQueries(["user_cart"]);
+      })
+      .catch(function (error: AxiosError) {
+        console.log(error);
+      });
+  };
+
 
   useEffect(() => {
     if (authTokens && !loading) {
@@ -74,7 +95,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ authTokens, setAuthTokens, loading, setLoading, callLogout }}
+      value={{ authTokens, setAuthTokens, loading, setLoading, callLogout, handleDelete }}
     >
       {loading ? children : null}
     </AuthContext.Provider>

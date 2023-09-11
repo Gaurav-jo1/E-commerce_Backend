@@ -3,7 +3,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "./AuthContext";
 import { Product } from "../common/CommonInterfaces";
-
+import { queryClient } from "../main";
 interface CurrentVarContextType {
   userEmail: string;
   setUserEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -35,7 +35,10 @@ interface CurrentVarContextType {
   setNavOptions: React.Dispatch<React.SetStateAction<boolean>>;
 
   // User Cart
-  CartPageData: Product[] | undefined
+  CartPageData: Product[] | undefined;
+
+  // Add products
+  addProductToCart: (product_id: number)  => void;
 }
 
 export const GlobalValue = createContext<CurrentVarContextType>(
@@ -61,24 +64,66 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
 
   // User Product Search
   const [userProSearch, setUserProSearch] = useState<string | undefined>(() =>
-  localStorage.getItem("userProSearch") ? localStorage.getItem("userProSearch") || "" : undefined);
+    localStorage.getItem("userProSearch")
+      ? localStorage.getItem("userProSearch") || ""
+      : undefined
+  );
 
   // Mobile Navigation Bar
-  const [navOptions ,setNavOptions] = useState<boolean>(false);
+  const [navOptions, setNavOptions] = useState<boolean>(false);
 
   // User Cart
   const { authTokens } = useContext(AuthContext);
 
-  const { data: CartPageData } = useQuery<Product[] | undefined>(["user_cart"],() =>
-      axios.get("http://127.0.0.1:8000/cart/products/get/", {
+  const { data: CartPageData } = useQuery<Product[] | undefined>(
+    ["user_cart"],
+    () =>
+      axios
+        .get("http://127.0.0.1:8000/cart/products/get/", {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + String(authTokens.access),
           },
         })
-        .then((response) => response.data),
+        .then((response) => {
+          if (response.data) {
+            const ids = response.data.map((item: Product) => item.id);
+            localStorage.setItem("User_products", JSON.stringify(ids));
+          }
+
+          return response.data;
+        }),
     { enabled: !!authTokens }
   );
+
+  
+  const addProductToCart = (product_id: number) => {
+    if (authTokens) {
+      axios
+        .post(
+          "http://127.0.0.1:8000/cart/products/add/",
+          {
+            product_id: product_id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + String(authTokens.access),
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          queryClient.invalidateQueries(["user_cart"]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setLoginOpen(true);
+    }
+  };
+
 
   return (
     <GlobalValue.Provider
@@ -109,6 +154,7 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
         setNavOptions,
 
         CartPageData,
+        addProductToCart
       }}
     >
       {children}

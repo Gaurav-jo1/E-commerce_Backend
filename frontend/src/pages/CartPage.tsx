@@ -4,7 +4,6 @@ import axios from "axios";
 
 import Footer from "../components/Footer";
 import LoadingSpinner from "../components/LoadingSpinner.tsx";
-import { queryClient } from "../main.tsx";
 import { AuthPages } from "./AuthPages/AuthPages.tsx";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -21,7 +20,7 @@ import { AuthContext } from "../context/AuthContext";
 import "../styles/CartPage.scss";
 
 const CartPage: React.FC = () => {
-  const { authTokens } = useContext(AuthContext);
+  const { authTokens, handleDelete } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -33,23 +32,6 @@ const CartPage: React.FC = () => {
 
   const calculateSubtotal = (products: Product[]): number => {
     return products.reduce((total, product) => total + product.price, 0);
-  };
-
-  const handleDelete = (product_id: number) => {
-    axios
-      .delete(`http://127.0.0.1:8000/cart/products/delete/${product_id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + String(authTokens.access),
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        queryClient.invalidateQueries(["user_cart"]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const {
