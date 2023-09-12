@@ -177,7 +177,6 @@ const Loginpage: React.FC<LoginComponentProps> = ({
       </div>
 
       <div className="auth_bg_img">
-        <div className="auth_bg_img_logo"></div>
         <div className="auth_bg_img_art" style={{ width: "460px" }}>
           <img src={login_art} alt="login_art" />
         </div>

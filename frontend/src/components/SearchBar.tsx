@@ -45,12 +45,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
   };
 
   useEffect(() => {
-    if (userSearch !== "" && userSearch.length >= 2) {
+    if (userSearch !== "" && userSearch.length == 2) {
       productSearch(userSearch);
-    }
-
-    if (userSearch == "") {
-      setSearchItems(null);
     }
   }, [userSearch]);
 
@@ -64,9 +60,23 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      userProductSearch(userSearch);
+      if (userSearch.length <= 1) {
+        setSearchError("Minimum 2 characters required");
+        setSearchItems(null)
+      } else {
+        userProductSearch(userSearch);
+      }
     }
   };
+
+  const handleClickSearch = () => {
+    if (userSearch.length <= 1) {
+      setSearchError("Minimum 2 characters required");
+      setSearchItems(null)
+    } else {
+      userProductSearch(userSearch);
+    }
+  }
 
   return (
     <>
@@ -92,7 +102,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
             minLength={2}
             onKeyDown={handleKeyPress}
           />
-          <span onClick={() => userProductSearch(userSearch)}>
+          <span onClick={() => handleClickSearch()}>
             <MdOutlineArrowForwardIos />
           </span>
         </div>

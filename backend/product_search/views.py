@@ -109,7 +109,8 @@ class ProductSearch(APIView):
                     result_dict = {
                         "id": int(doc.item_id),
                         "name": doc.name,
-                        "image": doc.image
+                        "image": doc.image,
+                        "price": doc.price
                     }
                     result_list.append(result_dict)
 

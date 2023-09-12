@@ -8,11 +8,23 @@
   position: relative;
 
   .shop__main-heading {
-    text-align: center;
+    display: flex;
+    justify-content: center;
     padding-top: 30px;
-     
+
     h1 {
-      font-family:cursive;
+      font-family: "Dancing Script", cursive;
+      font-size: 40px;
+      background-color: rgb(134, 134, 134);
+      padding: 20px;
+      border-radius: 20px;
+      color: white;
+    }
+
+    span {
+      color: pink;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      // text-decoration: underline;
     }
   }
 
@@ -142,8 +154,24 @@
   }
 }
 
+.shop__empty-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 60px;
+
+  p {
+    font-size: 30px;
+    color: rgb(236, 69, 167);
+  }
+
+  img {
+    width: 50vw;
+  }
+}
 @media (max-width: 800px) {
-  .shop__main{
+  .shop__main {
     .shop__main-poster {
       .shop__main-text {
         h1 {
@@ -170,7 +198,23 @@
 }
 
 @media (max-width: 460px) {
+
+
   .shop__main {
+    .shop__main-heading {
+  
+      h1 {
+        font-size: 26px;
+        background-color: rgb(134, 134, 134);
+        padding: 20px;
+        border-radius: 20px;
+        color: white;
+      }
+
+      span {
+        font-size: 24px;
+      }
+    }
     .shop__main-poster {
       height: 280px;
       .shop__main-text {
@@ -202,6 +246,19 @@
           }
         }
       }
+    }
+  }
+
+  .shop__empty-result {
+    text-align: center;
+    p {
+      font-size: 18px;
+      color: rgb(236, 69, 167);
+    }
+
+    img {
+      margin-top: 30px;
+      width: 80vw;
     }
   }
 }

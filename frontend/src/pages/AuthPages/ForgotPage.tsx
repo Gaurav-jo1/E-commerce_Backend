@@ -97,9 +97,8 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
           </form>
         </div>
       </div>
-      {/* Image Container */}
+
       <div className="auth_bg_img">
-        <div className="auth_bg_img_logo"></div>
         <div className="auth_bg_img_art" style={{ width: "460px" }}>
           <img src={forgot_art} alt="forgot_art" />
         </div>
