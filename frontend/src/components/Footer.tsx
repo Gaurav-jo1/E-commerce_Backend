@@ -68,6 +68,7 @@ const Footer: React.FC = () => {
           <p id="frontend">Frontend</p>
           <ul>
             <li>
+              TypeScript{" "}
               <span>
                 <BiLogoTypescript
                   style={{
@@ -77,23 +78,23 @@ const Footer: React.FC = () => {
                   }}
                 />
               </span>
-              TypeScript{" "}
             </li>
             <li>
+              React{" "}
               <span style={{ fontSize: "24px" }}>
                 <BiLogoReact style={{ color: "#00BCD4" }} />
               </span>
-              React{" "}
             </li>
             <li>
+              React Query{" "}
               <span style={{ fontSize: "19px" }}>
                 <SiReactquery
                   style={{ color: "#FF4500", paddingRight: "2px" }}
                 />
               </span>
-              React Query{" "}
             </li>
             <li>
+              SCSS (Sass){" "}
               <span>
                 <BiLogoSass
                   style={{
@@ -103,12 +104,12 @@ const Footer: React.FC = () => {
                   }}
                 />
               </span>
-              SCSS (Sass){" "}
             </li>
           </ul>
           <p id="backend">Backend</p>
           <ul>
             <li>
+              Python{" "}
               <span>
                 <BiLogoPython
                   style={{
@@ -118,9 +119,9 @@ const Footer: React.FC = () => {
                   }}
                 />
               </span>
-              Python{" "}
             </li>
             <li>
+              Django{" "}
               <span>
                 <BiLogoDjango
                   style={{
@@ -131,7 +132,6 @@ const Footer: React.FC = () => {
                   }}
                 />
               </span>
-              Django{" "}
             </li>
           </ul>
         </div>
@@ -139,38 +139,39 @@ const Footer: React.FC = () => {
           <p id="database">Databases</p>
           <ul>
             <li>
+              PostgreSQL{" "}
               <span>
                 <BiLogoPostgresql style={{ color: "#336791" }} />
               </span>
-              PostgreSQL{" "}
             </li>
             <li>
+              Redis{" "}
               <span>
                 <SiRedis style={{ color: "#D82C20" }} />
               </span>
-              Redis{" "}
             </li>
           </ul>
           <p id="devops">DevOps & Tools</p>
           <ul>
             <li>
+              Docker{" "}
               <span>
                 <BiLogoDocker style={{ color: "#0db7ed" }} />
               </span>
-              Docker{" "}
             </li>
             <li>
+              Linux{" "}
               <span>
                 <FcLinux
                   style={{ background: "white", borderRadius: "20px" }}
                 />
               </span>
-              Linux{" "}
             </li>
           </ul>
           <p id="design">Design & Testing</p>
           <ul>
             <li>
+              Photoshop{" "}
               <span>
                 <SiAdobephotoshop
                   style={{
@@ -180,9 +181,9 @@ const Footer: React.FC = () => {
                   }}
                 />
               </span>
-              Adobe Photoshop{" "}
             </li>
             <li>
+              Postman{" "}
               <span>
                 <SiPostman
                   style={{
@@ -192,7 +193,6 @@ const Footer: React.FC = () => {
                   }}
                 />
               </span>
-              Postman{" "}
             </li>
           </ul>
         </div>
