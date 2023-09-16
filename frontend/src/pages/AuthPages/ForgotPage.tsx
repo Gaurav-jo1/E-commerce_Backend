@@ -32,7 +32,7 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
     setIsLoading(true);
 
     axios
-      .post("http://127.0.0.1:8000/user_login/reset_password/", {
+      .post("https://shoppy-ly6w.onrender.com/user_login/reset_password/", {
         user_email: userEmail,
       })
       .then((response) => {

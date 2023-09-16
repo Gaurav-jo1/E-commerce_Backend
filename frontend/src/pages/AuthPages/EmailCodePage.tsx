@@ -32,7 +32,7 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({
     setIsLoading(true);
 
     axios
-      .post("http://127.0.0.1:8000/user_login/reset_code/", {
+      .post("https://shoppy-ly6w.onrender.com/user_login/reset_code/", {
         user_id: userId,
         user_code: userCode,
       })

@@ -11,11 +11,12 @@ import redis
 import json
 
 
-# Create your views here.
+redis_connnection = redis.Redis(host="redis", port=6379, db=0)
+
 class LoadProducts:
     def RedisCreateIndex(self):
         # Establish a connection to the Redis server
-        r = redis.Redis(host="redis", port=6379, db=0)
+        r = redis_connnection
 
         # Index name
         index_name = "idx:product"
@@ -47,7 +48,7 @@ class LoadProducts:
             return print("RedisCreateIndex: ", response)
 
     def RedisDataLoad(self):
-        r = redis.Redis(host="redis", port=6379, db=0)
+        r = redis_connnection
 
         flag_key = "Data_Loaded_Flag"
         if r.exists(flag_key):
@@ -78,46 +79,39 @@ class ProductSearch(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
-        
         search_text = request.data.get("search_text")
         user_search = request.data.get("user_search")
 
         try:
-            r = redis.Redis(host="redis", port=6379, db=0, decode_responses=True)
+            r = redis_connnection
             index = r.ft("idx:product")
 
             if search_text:
                 redis_search_test = f"{search_text.rstrip()}*"
-                redis_response = index.search(
-                    Query(redis_search_test).paging(0, 5)
-                )
+                redis_response = index.search(Query(redis_search_test).paging(0, 5))
 
             elif user_search:
                 redis_user_search = f"{user_search.rstrip()}*"
-                redis_response = index.search(
-                    Query(redis_user_search)
-                )
+                redis_response = index.search(Query(redis_user_search))
 
             if len(redis_response.docs) != 0:
                 result_list = []
 
                 # Iterate through the documents in the response
                 for doc in redis_response.docs:
-
                     # print(doc.item_id)
 
                     result_dict = {
                         "id": int(doc.item_id),
                         "name": doc.name,
                         "image": doc.image,
-                        "price": doc.price
+                        "price": doc.price,
                     }
                     result_list.append(result_dict)
 
                 # Convert the list of dictionaries into a JSON format
                 result_json = json.dumps(result_list)
-                return Response(data=result_json,status=status.HTTP_200_OK)
-
+                return Response(data=result_json, status=status.HTTP_200_OK)
 
             else:
                 return Response(

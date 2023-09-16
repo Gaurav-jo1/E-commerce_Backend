@@ -34,7 +34,7 @@ const SignupPage: React.FC<SignComponentProps> = ({
 
   const handleGoogleLogin = (idToken?: string) => {
     axios
-      .post("http://127.0.0.1:8000/google_login/google/", {
+      .post("https://shoppy-ly6w.onrender.com/google_login/google/", {
         id_token: idToken,
       })
       .then((response) => {
@@ -52,7 +52,7 @@ const SignupPage: React.FC<SignComponentProps> = ({
     e.preventDefault();
     setIsLoading(true);
     axios
-      .post("http://127.0.0.1:8000/user_login/register/", {
+      .post("https://shoppy-ly6w.onrender.com/user_login/register/", {
         username: username.toLowerCase(),
         email: email,
         password: password,

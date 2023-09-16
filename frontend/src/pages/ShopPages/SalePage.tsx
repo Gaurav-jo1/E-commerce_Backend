@@ -13,7 +13,7 @@ const SalePage: React.FC = () => {
     data: SalePageData,
   } = useQuery(["SalePage_Data"], () =>
     axios
-      .get(`http://127.0.0.1:8000/shop/Sale/`, {})
+      .get(`https://shoppy-ly6w.onrender.com/shop/Sale/`, {})
       .then((response) => response.data)
   );
 

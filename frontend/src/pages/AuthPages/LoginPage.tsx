@@ -50,7 +50,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({
 
   const handleGoogleLogin = (idToken?: string) => {
     axios
-      .post("http://127.0.0.1:8000/google_login/google/", {
+      .post("https://shoppy-ly6w.onrender.com/google_login/google/", {
         id_token: idToken,
       })
       .then((response) => {
@@ -67,7 +67,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({
 
   const postFunction = (field_name: string) => {
     axios
-      .post("http://127.0.0.1:8000/user_login/api/token/", {
+      .post("https://shoppy-ly6w.onrender.com/user_login/api/token/", {
         [field_name]: username.toLowerCase(),
         password: password,
       })

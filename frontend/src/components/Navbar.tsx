@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
 
     if (authTokens) {
       axios
-        .get("http://127.0.0.1:8000/user_profile/info/", {
+        .get("https://shoppy-ly6w.onrender.com/user_profile/info/", {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + String(authTokens.access),
@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
                 </p>
               </Link>
               <img
-                src={`http://127.0.0.1:8000${userData.picture}`}
+                src={`https://shoppy-ly6w.onrender.com${userData.picture}`}
                 alt="Profile"
                 onClick={() => setProfilePage(true)}
               />

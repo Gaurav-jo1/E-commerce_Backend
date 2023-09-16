@@ -31,7 +31,7 @@ const ProfilePage: React.FC<ProfilePageInterface> = ({
     ["user_profile"],
     () =>
       axios
-        .get<MyUserInterface>("http://127.0.0.1:8000/user_profile/info/", {
+        .get<MyUserInterface>("https://shoppy-ly6w.onrender.com/user_profile/info/", {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + String(authTokens.access),
@@ -59,7 +59,7 @@ const ProfilePage: React.FC<ProfilePageInterface> = ({
         <main>
           <div className="profile__container-picture">
             <img
-              src={`http://127.0.0.1:8000${UserProfile?.picture}`}
+              src={`https://shoppy-ly6w.onrender.com${UserProfile?.picture}`}
               alt={UserProfile?.user}
             />
           </div>

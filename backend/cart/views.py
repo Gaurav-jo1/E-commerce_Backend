@@ -11,14 +11,25 @@ from shop.models import ProductsModel
 from .serializers import CartSerializer
 from shop.serializers import ProductsModelSerializer
 # Tools
+import os
 import json
 import redis
+from django.conf import settings
+
+redis_url = os.environ.get("Redis_Server")
+
+if redis_url:
+    redis_domain = "redis://shoppy-redis.onrender.com:6379"
+    redis_connnection = redis.StrictRedis.from_url(redis_domain)
+else:
+    redis_connnection = redis.Redis(host="redis", port=6379, db=0)
+ 
 
 # Create your views here.
 class CartGetView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     # Create a connection to the Redis server
-    redis_connection = redis.Redis(host="redis", port=6379, db=0)
+    redis_connection = redis_connnection
 
     def get(self, request):
         try:
@@ -114,7 +125,7 @@ class CartAddView(APIView):
             return Response({"error": "Internal Server Error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def add_data_to_redis_set(self, cart_key, product_data_json):
-        r = redis.Redis(host="redis", port=6379, db=0)
+        r = redis_connnection
         r.sadd(cart_key, product_data_json)
         r.expire(cart_key, 600)  
 
@@ -158,5 +169,5 @@ class CartDeleteItemView(APIView):
 
     def remove_data_to_redis_set(self, cart_key, product_data_json):
         # Helper function to remove product data from the Redis set associated with the user's cart
-        r = redis.Redis(host="redis", port=6379, db=0)
+        r = redis_connnection
         r.srem(cart_key, product_data_json)

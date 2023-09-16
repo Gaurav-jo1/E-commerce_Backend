@@ -43,11 +43,16 @@ logs/
 # Ignore the local development environment file
 .env
 
-# Ignore the migration files
-**/migrations/
+# Ignore all files in the migrations directory
+migrations/*
+
+# Except for __init__.py
+!migrations/__init__.py
 
 # Ignore any secret or sensitive files
 **/secrets.txt
 
 # Ignore vs code setting
 .vscode
+
+backend/docker-compose.yml

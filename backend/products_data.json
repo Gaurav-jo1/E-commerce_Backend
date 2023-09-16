@@ -1,0 +1,194 @@
+[
+  {
+    "id": 20,
+    "image": "products/shoes-1.webp",
+    "name": "Men's Shoe",
+    "price": 120
+  },
+  {
+    "id": 19,
+    "image": "products/t-shirt-1.webp",
+    "name": "Men's T-shirt",
+    "price": 45
+  },
+  {
+    "id": 24,
+    "image": "products/Mens_wallet.webp",
+    "name": "Men's Wallet",
+    "price": 30
+  },
+  {
+    "id": 21,
+    "image": "products/watch.webp",
+    "name": "Men's Watch",
+    "price": 75
+  },
+  {
+    "id": 14,
+    "image": "products/women-bag-1.webp",
+    "name": "Women's Bag",
+    "price": 120
+  },
+  {
+    "id": 17,
+    "image": "products/women-glasses-1.webp",
+    "name": "Women's Glasses",
+    "price": 70
+  },
+  {
+    "id": 13,
+    "image": "products/women-dress-1.webp",
+    "name": "Women's Dress",
+    "price": 80
+  },
+  {
+    "id": 18,
+    "image": "products/women-crystal-1.webp",
+    "name": "Women's jewellery",
+    "price": 30
+  },
+  {
+    "id": 16,
+    "image": "products/women-shoe-2.webp",
+    "name": "Women's Shoe",
+    "price": 100
+  },
+  {
+    "id": 15,
+    "image": "products/women-watch.webp",
+    "name": "Women's Watch",
+    "price": 60
+  },
+  {
+    "id": 1,
+    "image": "products/kids-boy-dress.webp",
+    "name": "Boys' Dress",
+    "price": 30
+  },
+  {
+    "id": 2,
+    "image": "products/kids-girl-dress.webp",
+    "name": "Girls' Dress",
+    "price": 40
+  },
+  {
+    "id": 4,
+    "image": "products/kids-girl-shoe.webp",
+    "name": "Girls' Shoe",
+    "price": 45
+  },
+  {
+    "id": 3,
+    "image": "products/kids-boy-shoe.webp",
+    "name": "Boys' Shoe",
+    "price": 50
+  },
+  {
+    "id": 5,
+    "image": "products/sale1.webp",
+    "name": "Polka Dot Fluffy Jacket",
+    "price": 50
+  },
+  {
+    "id": 6,
+    "image": "products/sale2.webp",
+    "name": "Sea Life Button-Up Shirt",
+    "price": 45
+  },
+  {
+    "id": 7,
+    "image": "products/sale3.webp",
+    "name": "Patchwork Varsity Jacket",
+    "price": 40
+  },
+  {
+    "id": 8,
+    "image": "products/sale4.webp",
+    "name": "Flower Power Jacket",
+    "price": 55
+  },
+  {
+    "id": 9,
+    "image": "products/sale5.webp",
+    "name": "Black and White Butterfly Hoodie",
+    "price": 60
+  },
+  {
+    "id": 22,
+    "image": "products/men-bag.webp",
+    "name": "Men's Bag",
+    "price": 120
+  },
+  {
+    "id": 23,
+    "image": "products/sunglasses-1.webp",
+    "name": "Men's Glasses",
+    "price": 80
+  },
+  {
+    "id": 10,
+    "image": "products/sale6.webp",
+    "name": "Abstract Blue Fern Jacket",
+    "price": 50
+  },
+  {
+    "id": 11,
+    "image": "products/sale7-.webp",
+    "name": "Gray Knit Baby Romper",
+    "price": 25
+  },
+  {
+    "id": 12,
+    "image": "products/sale8.webp",
+    "name": "Baby Cozy Footed Onesie",
+    "price": 20
+  },
+  {
+    "id": 25,
+    "image": "products/new-double-breasted-pont-neuf-jacket.webp",
+    "name": "Men's Outerwear",
+    "price": 120
+  },
+  {
+    "id": 26,
+    "image": "products/new-toweling-utility-hoodie-ready-to-wear.webp",
+    "name": "Ladies' Outerwear",
+    "price": 60
+  },
+  {
+    "id": 27,
+    "image": "products/new-bag.webp",
+    "name": "Monogram Duffel Bag",
+    "price": 80
+  },
+  {
+    "id": 28,
+    "image": "products/new-handbags.webp",
+    "name": "Black Leather Handbag",
+    "price": 70
+  },
+  {
+    "id": 29,
+    "image": "products/new-men-hat.webp",
+    "name": "Baseball Cap",
+    "price": 30
+  },
+  {
+    "id": 30,
+    "image": "products/new-women-bag.webp",
+    "name": "Lilac Crossbody",
+    "price": 90
+  },
+  {
+    "id": 31,
+    "image": "products/new-men-perfume_X31rbIK.webp",
+    "name": "Manly Mystique",
+    "price": 50
+  },
+  {
+    "id": 32,
+    "image": "products/new-women-perfume.webp",
+    "name": "Floral Fantasy",
+    "price": 45
+  }
+]

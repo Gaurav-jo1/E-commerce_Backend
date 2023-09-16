@@ -40,7 +40,7 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({
 
     if (newPass == reNewPass) {
       axios
-        .post("http://127.0.0.1:8000/user_login/change_password/", {
+        .post("https://shoppy-ly6w.onrender.com/user_login/change_password/", {
           user_id: userId,
           user_email: userEmail,
           user_code: userCode,

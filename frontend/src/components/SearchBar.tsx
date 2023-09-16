@@ -29,7 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchBar }) => {
 
   const productSearch = (userSearch: string) => {
     axios
-      .post("http://127.0.0.1:8000/product_search/search/", {
+      .post("https://shoppy-ly6w.onrender.com/product_search/search/", {
         search_text: userSearch,
       })
       .then((response: AxiosResponse) => {

@@ -12,7 +12,7 @@ const MenPage: React.FC = () => {
     data: MenPageData,
   } = useQuery(["MenPage_Data"], () =>
     axios
-      .get(`http://127.0.0.1:8000/shop/Men/`, {})
+      .get(`https://shoppy-ly6w.onrender.com/shop/Men/`, {})
       .then((response) => response.data)
   );
 

@@ -18,7 +18,16 @@ from rest_framework import status
 from rest_framework import permissions
 from django.contrib.auth import authenticate
 from .serializers import UserCredentialsSerializer, UserNewSerializer
+from django.conf import settings
 
+redis_url = os.environ.get("Redis_Server")
+
+if redis_url:
+    redis_domain = "redis://shoppy-redis.onrender.com:6379"
+    redis_connnection = redis.StrictRedis.from_url(redis_domain)
+else:
+    redis_connnection = redis.Redis(host="redis", port=6379, db=0)
+ 
 
 class UserLoginView(APIView):
     permission_classes = [permissions.AllowAny]
@@ -89,7 +98,7 @@ class RegisterView(APIView):
                         {"error": "User with this Email already exists"},
                         status=status.HTTP_400_BAD_REQUEST,
                     )
-                
+
                 elif username_exists:
                     return Response(
                         {"error": "User with this Username already exists"},
@@ -182,7 +191,7 @@ class ResetPassword(APIView):
             )
 
     def add_code_to_redis(self, cache_key, random_number_str):
-        r = redis.Redis(host="redis", port=6379, db=0)
+        r = redis_connnection
         if r.exists(cache_key):
             r.delete(cache_key)
             r.set(cache_key, random_number_str)
@@ -210,7 +219,7 @@ class ResetcodeCheck(APIView):
 
             if correct_code is not None:
                 # Check if the code user sent is valid or not
-                if user_code == correct_code.decode('utf-8'):
+                if user_code == correct_code.decode("utf-8"):
                     # cache.delete(cache_key)
                     return Response(
                         {"Success": "User Has successfuly mathced the code"},
@@ -229,9 +238,9 @@ class ResetcodeCheck(APIView):
             return Response(
                 {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        
-    def get_code_from_redis(self,cache_key):
-        r = redis.Redis(host="redis", port=6379, db=0)
+
+    def get_code_from_redis(self, cache_key):
+        r = redis_connnection
         return r.get(cache_key)
 
 
@@ -267,7 +276,7 @@ class UserNewPassword(APIView):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
-            if user_code != correct_code.decode('utf-8'):
+            if user_code != correct_code.decode("utf-8"):
                 return Response(
                     {"error": "Invalid code"},
                     status=status.HTTP_401_UNAUTHORIZED,
@@ -285,7 +294,7 @@ class UserNewPassword(APIView):
             return Response(
                 {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-    
-    def get_code_from_redis(self,cache_key):
-        r = redis.Redis(host="redis", port=6379, db=0)
+
+    def get_code_from_redis(self, cache_key):
+        r = redis_connnection
         return r.get(cache_key)

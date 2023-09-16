@@ -42,7 +42,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   function updateAccess() {
     axios
-      .post("http://127.0.0.1:8000/user_login/api/token/refresh/", {
+      .post("https://shoppy-ly6w.onrender.com/user_login/api/token/refresh/", {
         refresh: authTokens.refresh,
       })
       .then((response: AxiosResponse) => {
@@ -59,7 +59,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const handleDelete = (product_id: number): void => {
     axios
-      .delete(`http://127.0.0.1:8000/cart/products/delete/${product_id}`, {
+      .delete(`https://shoppy-ly6w.onrender.com/cart/products/delete/${product_id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + String(authTokens.access),
