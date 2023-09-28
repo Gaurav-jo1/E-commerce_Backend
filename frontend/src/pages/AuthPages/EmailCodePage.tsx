@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 
 import { MdMarkEmailUnread } from "react-icons/md";
-
+import { Blurhash } from "react-blurhash";
 import code_art from "../../assets/code_art.webp";
 
 interface EmailCodeComponentProps {
@@ -24,6 +24,7 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({
   const [noCode, setNoCode] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorText, setErrorText] = useState<string>("");
+  const [imageLoad, setImageLoad] = useState<boolean>(false);
 
   const { userCode, userId, setUserCode, userEmail } = useContext(GlobalValue);
 
@@ -32,7 +33,7 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({
     setIsLoading(true);
 
     axios
-      .post("https://shoppy-ly6w.onrender.com/user_login/reset_code/", {
+      .post("http://127.0.0.1:8000/user_login/reset_code/", {
         user_id: userId,
         user_code: userCode,
       })
@@ -96,7 +97,23 @@ const RecoverCodePage: React.FC<EmailCodeComponentProps> = ({
       <div className="auth_bg_img">
         <div className="auth_bg_img_logo"></div>
         <div className="auth_bg_img_art" style={{ width: "460px" }}>
-          <img src={code_art} alt="code_art" />
+          <img
+            src={code_art}
+            alt="code_art"
+            style={{ display: imageLoad ? "block" : "none" }}
+            onLoad={() => setImageLoad(true)}
+          />
+          {!imageLoad && (
+            <Blurhash
+              hash={"oQF~L5u49GJTIBrwy=GEVyt9njs;H@jJXmW=$~ofIbT1t7#6wcRk9~Si,Uv}K6RlRo$d#REnKPsk"}
+              resolutionX={32}
+              resolutionY={32}
+              height={"100%"}
+              width={"100%"}
+              punch={1}
+              className="blur_hash_div"
+            />
+          )}
         </div>
       </div>
     </div>

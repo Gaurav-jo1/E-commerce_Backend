@@ -14,9 +14,9 @@ from shop.serializers import ProductsModelSerializer
 import os
 import json
 import redis
-from django.conf import settings
+from decouple import config
 
-redis_url = os.environ.get("Redis_Server")
+redis_url = config('Redis_Server',default=False, cast=bool)
 
 if redis_url:
     redis_domain = "redis://shoppy-redis.onrender.com:6379"

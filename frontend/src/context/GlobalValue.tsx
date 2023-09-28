@@ -79,7 +79,7 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
     ["user_cart"],
     () =>
       axios
-        .get("https://shoppy-ly6w.onrender.com/cart/products/get/", {
+        .get("http://127.0.0.1:8000/cart/products/get/", {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + String(authTokens.access),
@@ -101,7 +101,7 @@ const GlobalProvider: React.FC<GlobalProvider> = ({ children }) => {
     if (authTokens) {
       axios
         .post(
-          "https://shoppy-ly6w.onrender.com/cart/products/add/",
+          "http://127.0.0.1:8000/cart/products/add/",
           {
             product_id: product_id,
           },

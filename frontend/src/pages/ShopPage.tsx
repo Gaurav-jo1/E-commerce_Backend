@@ -64,7 +64,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
           {sortedProducts.map((product) => (
             <div key={product.id} className="shop__products-item">
               <img
-                src={`https://shoppy-ly6w.onrender.com${product.product.image}`}
+                src={`http://127.0.0.1:8000${product.product.image}`}
                 alt={product.product.name}
                 height={"100%"}
                 width={"100%"}

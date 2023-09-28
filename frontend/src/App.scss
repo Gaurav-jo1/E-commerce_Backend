@@ -1,10 +1,20 @@
 .auth_bg_img {
   width: 100%;
   height: 100%;
+  display: flex;
 
   .auth_bg_img_art {
     height: 100%;
     display: flex;
+    position: relative;
+
+    .blur_hash_div {
+      display: flex !important;
+      canvas {
+        position: relative !important;
+      }
+    }
+
     img {
       width: 100%;
       height: 100%;

@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { BsFillUnlockFill } from "react-icons/bs";
 import new_art from "../../assets/new_part.webp";
-
+import { Blurhash } from "react-blurhash";
 // Global Values
 import { GlobalValue } from "../../context/GlobalValue";
 
@@ -24,6 +24,8 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({
   const [reNewPass, setReNewPass] = useState<string>("");
   const [passNot, setPassNot] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [imageLoad, setImageLoad] = useState<boolean>(false);
+
   const {
     userEmail,
     userCode,
@@ -40,7 +42,7 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({
 
     if (newPass == reNewPass) {
       axios
-        .post("https://shoppy-ly6w.onrender.com/user_login/change_password/", {
+        .post("http://127.0.0.1:8000/user_login/change_password/", {
           user_id: userId,
           user_email: userEmail,
           user_code: userCode,
@@ -129,7 +131,21 @@ const NewPassPage: React.FC<NewPassComponentProps> = ({
       <div className="auth_bg_img">
         <div className="auth_bg_img_logo"></div>
         <div className="auth_bg_img_art" style={{ width: "460px" }}>
-          <img src={new_art} alt="new_art" />
+          <img src={new_art} alt="new_art" 
+            style={{ display: imageLoad ? "block" : "none" }}
+            onLoad={() => setImageLoad(true)}
+          />
+          {!imageLoad && (
+            <Blurhash
+              hash={"EHHVO,P_I9%#05H@0HER9sVg.5w]"}
+              resolutionX={32}
+              resolutionY={32}
+              height={"100%"}
+              width={"100%"}
+              punch={1}
+              className="blur_hash_div"
+            />
+          )}
         </div>
       </div>
     </div>

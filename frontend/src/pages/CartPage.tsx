@@ -44,7 +44,7 @@ const CartPage: React.FC = () => {
     ["user_cart"],
     () =>
       axios
-        .get("https://shoppy-ly6w.onrender.com/cart/products/get/", {
+        .get("http://127.0.0.1:8000/cart/products/get/", {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + String(authTokens.access),
@@ -71,7 +71,7 @@ const CartPage: React.FC = () => {
                 <div key={product.id} className="cart__product">
                   <div className="cart__container-image-name">
                     <img
-                      src={`https://shoppy-ly6w.onrender.com${product.image}`}
+                      src={`http://127.0.0.1:8000/${product.image}`}
                       alt={product.name}
                     />
                     <p>{product.name}</p>

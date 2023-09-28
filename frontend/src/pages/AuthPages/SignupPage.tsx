@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
-
+import { Blurhash } from "react-blurhash";
 import signup_art from "../../assets/signup_art.webp";
 
 // Global Context
@@ -24,6 +24,7 @@ const SignupPage: React.FC<SignComponentProps> = ({
   const [password, setPassword] = useState<string>("");
   const [errorText, setErrorText] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [imageLoad, setImageLoad] = useState<boolean>(false);
 
   const { setAuthTokens } = useContext(AuthContext);
 
@@ -34,7 +35,7 @@ const SignupPage: React.FC<SignComponentProps> = ({
 
   const handleGoogleLogin = (idToken?: string) => {
     axios
-      .post("https://shoppy-ly6w.onrender.com/google_login/google/", {
+      .post("http://127.0.0.1:8000/google_login/google/", {
         id_token: idToken,
       })
       .then((response) => {
@@ -52,7 +53,7 @@ const SignupPage: React.FC<SignComponentProps> = ({
     e.preventDefault();
     setIsLoading(true);
     axios
-      .post("https://shoppy-ly6w.onrender.com/user_login/register/", {
+      .post("http://127.0.0.1:8000/user_login/register/", {
         username: username.toLowerCase(),
         email: email,
         password: password,
@@ -112,6 +113,7 @@ const SignupPage: React.FC<SignComponentProps> = ({
             <input
               type="email"
               placeholder="Email"
+              name="email"
               title="Enter your Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -120,6 +122,7 @@ const SignupPage: React.FC<SignComponentProps> = ({
 
             <input
               type="text"
+              name="username"
               placeholder="Username"
               title="Enter your Username"
               value={username}
@@ -156,7 +159,25 @@ const SignupPage: React.FC<SignComponentProps> = ({
       <div className="auth_bg_img">
         <div className="auth_bg_img_logo"></div>
         <div className="auth_bg_img_art" style={{ width: "460px" }}>
-          <img src={signup_art} alt="signup_art" />
+          <img
+            src={signup_art}
+            alt="signup_art"
+            style={{ display: imageLoad ? "block" : "none" }}
+            onLoad={() => setImageLoad(true)}
+          />
+          {!imageLoad && (
+            <Blurhash
+              hash={
+                "oWIg[O?F${~oXlSvM|E+%fVZRQspKhSeIWD+xZsVE7-T%KS#SdNHXSjZMzWDniahNHoexYWCWqjZ"
+              }
+              resolutionX={32}
+              resolutionY={32}
+              height={"100%"}
+              width={"100%"}
+              punch={1}
+              className="blur_hash_div"
+            />
+          )}
         </div>
       </div>
     </div>

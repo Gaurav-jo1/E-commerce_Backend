@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { ImKey } from "react-icons/im";
 import forgot_art from "../../assets/forgot_art.webp";
-
+import { Blurhash } from "react-blurhash";
 // Global Context
 import { GlobalValue } from "../../context/GlobalValue";
 
@@ -22,8 +22,9 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
   setEmailCode,
 }) => {
   const [noEmail, setNoEmail] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorText, setErrorText] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [imageLoad, setImageLoad] = useState<boolean>(false);
 
   const { userEmail, setUserEmail, setUserId } = useContext(GlobalValue);
 
@@ -32,7 +33,7 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
     setIsLoading(true);
 
     axios
-      .post("https://shoppy-ly6w.onrender.com/user_login/reset_password/", {
+      .post("http://127.0.0.1:8000/user_login/reset_password/", {
         user_email: userEmail,
       })
       .then((response) => {
@@ -77,6 +78,7 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
           <form onSubmit={handleSubmit}>
             <input
               type="email"
+              name="email"
               placeholder="Email"
               title="Enter your Email Address"
               value={userEmail}
@@ -100,7 +102,23 @@ const ForgotPage: React.FC<ForgotPassComponentProps> = ({
 
       <div className="auth_bg_img">
         <div className="auth_bg_img_art" style={{ width: "460px" }}>
-          <img src={forgot_art} alt="forgot_art" />
+          <img
+            src={forgot_art}
+            alt="forgot_art"
+            style={{ display: imageLoad ? "block" : "none" }}
+            onLoad={() => setImageLoad(true)}
+          />
+          {!imageLoad && (
+            <Blurhash
+              hash={"U5EoJu-L0018T}k8z-e?00JY?]-300RW%~k%"}
+              resolutionX={32}
+              resolutionY={32}
+              height={"100%"}
+              width={"100%"}
+              punch={1}
+              className="blur_hash_div"
+            />
+          )}
         </div>
       </div>
     </div>

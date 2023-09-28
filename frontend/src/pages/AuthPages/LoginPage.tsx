@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 
 import { GoogleLogin } from "@react-oauth/google";
-
+import { Blurhash } from "react-blurhash";
 import login_art from "../../assets/login_art.webp";
 
 // Global Context
@@ -31,6 +31,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({
     "The credentials you entered are incorrect"
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [imageLoad, setImageLoad] = useState<boolean>(false);
 
   const field_state = username.includes("@") && ".com" ? true : false;
 
@@ -50,7 +51,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({
 
   const handleGoogleLogin = (idToken?: string) => {
     axios
-      .post("https://shoppy-ly6w.onrender.com/google_login/google/", {
+      .post("http://127.0.0.1:8000/google_login/google/", {
         id_token: idToken,
       })
       .then((response) => {
@@ -67,7 +68,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({
 
   const postFunction = (field_name: string) => {
     axios
-      .post("https://shoppy-ly6w.onrender.com/user_login/api/token/", {
+      .post("http://127.0.0.1:8000/user_login/api/token/", {
         [field_name]: username.toLowerCase(),
         password: password,
       })
@@ -144,6 +145,7 @@ const Loginpage: React.FC<LoginComponentProps> = ({
           <form onSubmit={handleSubmit}>
             <input
               type="text"
+              name="username"
               placeholder="Email or Username"
               title="Enter your Email or Username"
               value={username}
@@ -178,7 +180,25 @@ const Loginpage: React.FC<LoginComponentProps> = ({
 
       <div className="auth_bg_img">
         <div className="auth_bg_img_art" style={{ width: "460px" }}>
-          <img src={login_art} alt="login_art" />
+          <img
+            src={login_art}
+            alt="login_art"
+            style={{ display: imageLoad ? "block" : "none" }}
+            onLoad={() => setImageLoad(true)}
+          />
+          {!imageLoad && (
+            <Blurhash
+              hash={
+                "gSIqlnY6_MV@nNIVRPxZ0fNHbvo|WXbb4:WUDko|a#s.ozozRjVsxYrrozae-Smlt6oMWVS#bH"
+              }
+              resolutionX={32}
+              resolutionY={32}
+              height={"100%"}
+              width={"100%"}
+              punch={1}
+              className="blur_hash_div"
+            />
+          )}
         </div>
       </div>
     </div>

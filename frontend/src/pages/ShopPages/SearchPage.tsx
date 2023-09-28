@@ -38,7 +38,7 @@ const SearchPage: React.FC = () => {
     if (userProSearch) {
       setIsLoading(true);
       axios
-        .post("https://shoppy-ly6w.onrender.com/product_search/search/", {
+        .post("http://127.0.0.1:8000/product_search/search/", {
           user_search: userProSearch,
         })
         .then(function (response) {
@@ -75,14 +75,14 @@ const SearchPage: React.FC = () => {
           {searchData?.map((product) => (
             <div key={product.id} className="shop__products-item">
               <img
-                src={`https://shoppy-ly6w.onrender.com${product.image}`}
+                src={`http://127.0.0.1:8000/${product.image}`}
                 alt={product.name}
                 height={"100%"}
                 width={"100%"}
               />
 
               <p>{product.name}</p>
-              <span>{product.price}</span>
+              <span>${product.price}</span>
               {Products_ids.includes(product.id) ? (
                 <button id="added" onClick={() => handleDelete(product.id)}>
                   <p>
