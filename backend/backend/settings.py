@@ -186,9 +186,9 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"  # e.g., 'smtp.gmail.com'
 EMAIL_PORT = 587  # Update port according to email host's
 # Sender's email
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")  
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 # Sender's pass
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")  
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True  # Enable TLS encryption for security
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
