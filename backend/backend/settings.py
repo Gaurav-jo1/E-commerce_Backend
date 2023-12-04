@@ -2,9 +2,6 @@ import os
 import dotenv
 from pathlib import Path
 from datetime import timedelta
-import dj_database_url
-import redis
-import psycopg2
 from decouple import config
 
 
@@ -154,11 +151,12 @@ SESSION_CACHE_ALIAS = "default"
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
+validator_module = "django.contrib.auth.password_validation"
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    {"NAME": f"{validator_module}.UserAttributeSimilarityValidator"},
+    {"NAME": f"{validator_module}.MinimumLengthValidator"},
+    {"NAME": f"{validator_module}.CommonPasswordValidator"},
+    {"NAME": f"{validator_module}.NumericPasswordValidator"},
 ]
 
 
@@ -187,8 +185,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"  # e.g., 'smtp.gmail.com'
 EMAIL_PORT = 587  # Update port according to email host's
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")# Sender's email
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")# Sender's password
+# Sender's email
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")  
+# Sender's pass
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")  
 EMAIL_USE_TLS = True  # Enable TLS encryption for security
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
