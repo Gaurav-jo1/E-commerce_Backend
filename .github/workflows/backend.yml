@@ -27,6 +27,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
+    - name: Run Flake8 (Linting)
+      run: |
+       pip install flake8
+       flake8 ./backend
         
     - name: Update dependencies
       working-directory: ./backend
