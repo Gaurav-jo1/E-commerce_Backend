@@ -49,5 +49,5 @@ jobs:
         uses: docker/setup-buildx-action@v3.0.0
 
       - name: Change Working Directory
-        run: ./backend
+        run: cd ./backend
         working-directory: ${{ github.workflow }}
