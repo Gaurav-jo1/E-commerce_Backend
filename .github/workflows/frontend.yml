@@ -1,4 +1,4 @@
-name: React TypeScript CI
+name: Frontend React-TypeScript CI
 
 on:
   push:
