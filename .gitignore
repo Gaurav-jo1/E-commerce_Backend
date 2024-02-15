@@ -31,9 +31,6 @@ client_secret.json
 # Ignore the virtual environment directory
 backend/venv/
 
-# Ignore the media files directory
-backend/media/
-
 # Ignore the database file
 db.sqlite3
 

@@ -18,7 +18,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG_BOOLEAN", default=False, cast=bool)
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0"]
 
 EXTERNAL_HOSTNAME = os.environ.get("EXTERNAL_HOSTNAME")
 if EXTERNAL_HOSTNAME:
@@ -177,6 +177,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

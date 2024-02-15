@@ -1,17 +1,18 @@
 import os
-from rest_framework.decorators import APIView
+
+from django.db import IntegrityError
+from django.contrib.auth.models import User
+
+from google.oauth2 import id_token
+from google.auth.transport import requests
+
 from rest_framework import status
 from rest_framework import permissions
 from rest_framework.response import Response
+from rest_framework.decorators import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from google.oauth2 import id_token
-from django.contrib.auth.models import User
-from google.auth.transport import requests
-from django.contrib.auth.models import User
-from django.db import IntegrityError
+
 from jwt.exceptions import InvalidTokenError
-
-
 # Create your views here.
 
 class GoogleLogin(APIView):
@@ -26,6 +27,7 @@ class GoogleLogin(APIView):
         try:
             # Verify the ID token using the Google API
             CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
+
             idinfo = id_token.verify_oauth2_token(user_token, requests.Request(), CLIENT_ID)
             # Extract the user info from the user token
             email = idinfo['email']
