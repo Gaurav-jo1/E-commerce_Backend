@@ -7,10 +7,10 @@ import { Blurhash } from "react-blurhash";
 import { MdDoneAll } from "react-icons/md";
 import { BsFillCartCheckFill } from "react-icons/bs";
 
-import { ShopPageProps } from "../common/CommonInterfaces";
+import { ShopPageProps } from "../common/CommonInterfaces.ts";
 // Global Context
-import { AuthContext } from "../context/AuthContext";
-import { GlobalValue } from "../context/GlobalValue";
+import { AuthContext } from "../context/AuthContext.tsx";
+import { GlobalValue } from "../context/GlobalValue.tsx";
 
 // styling
 import "../styles/ShopPage.scss";

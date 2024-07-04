@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 
 import axios from "axios";
 
-import Footer from "../components/Footer";
+import Footer from "../components/Footer.tsx";
 import LoadingSpinner from "../components/LoadingSpinner.tsx";
 import { AuthPages } from "./AuthPages/AuthPages.tsx";
 
@@ -15,7 +15,7 @@ import empty_cart from "../assets/empty_cart.webp";
 
 import { Product } from "../common/CommonInterfaces.ts";
 // Global Context
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext.tsx";
 
 // Styling
 import "../styles/CartPage.scss";

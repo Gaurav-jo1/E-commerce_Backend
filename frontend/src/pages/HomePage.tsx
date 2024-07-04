@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import SaleBar from "../components/SaleBar";
-import Footer from "../components/Footer";
+import SaleBar from "../components/SaleBar.tsx";
+import Footer from "../components/Footer.tsx";
 
 import { Link } from "react-router-dom";
 import { Blurhash } from "react-blurhash";
@@ -12,7 +12,7 @@ import ShoeBanner from "../assets/shoe-banner.webp";
 import ShoeBanner1 from "../assets/shoe-banner-r1.webp";
 import ShoeBanner2 from "../assets/shoe-banner-r2.webp";
 import ShoppyLogo from "../assets/android-chrome-512x512.png";
-import { myLists, myCards, mySections } from "../common/CommonData";
+import { myLists, myCards, mySections } from "../common/CommonData.ts";
 
 // Global Context
 import { AuthPages } from "./AuthPages/AuthPages.tsx";

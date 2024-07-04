@@ -3,16 +3,16 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
 import { AuthPages } from "../AuthPages/AuthPages.tsx";
-import LoadingSpinner from "../../components/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner.tsx";
 
 import { useNavigate } from "react-router-dom";
 import { MdDoneAll } from "react-icons/md";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import search_empty from "../../assets/search_empty.webp";
-import { Product } from "../../common/CommonInterfaces";
+import { Product } from "../../common/CommonInterfaces.ts";
 // Global Context
-import { GlobalValue } from "../../context/GlobalValue";
-import { AuthContext } from "../../context/AuthContext";
+import { GlobalValue } from "../../context/GlobalValue.tsx";
+import { AuthContext } from "../../context/AuthContext.tsx";
 
 // Styling
 import "../../styles/ShopPage.scss";
