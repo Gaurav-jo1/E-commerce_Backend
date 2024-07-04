@@ -43,9 +43,6 @@ logs/
 # Ignore all files in migration directories
 **/migrations/*
 
-# But do not ignore __init__.py
-!**/migrations/__init__.py
-
 # Ignore any secret or sensitive files
 **/secrets.txt
 
@@ -53,5 +50,7 @@ logs/
 .vscode
 
 backend/docker-compose.yml
-
+*.pyc
+__pycache__/
+.pytest_cache
 test
