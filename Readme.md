@@ -71,3 +71,16 @@ That's it! You should now be able to get started with the project and use Docker
 
 
 
+
+
+# Notes
+
+UI Issue
+
+Responsive issue
+
+Image Size Issue
+
+Update the Frontend dependencies
+
+Make Design Better
