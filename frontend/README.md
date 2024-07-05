@@ -80,3 +80,8 @@ Feel free to modify the code and customize the React site according to your need
 ## License
 
 This project is licensed under the <a href="https://opensource.org/license/mit/"> MIT License</a>. Feel free to use and modify the code as per the terms of the license.
+
+
+# NOTE
+
+Cache Issue
