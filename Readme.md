@@ -62,7 +62,3 @@ To get started with the project, follow these steps:
 Access the application at [http://localhost:5173](http://localhost:5173).
 
 That's it! You should now be able to get started with the project and use Docker Compose to run the application. If you have any questions or issues, feel free to open an issue on the repository. Thanks for using my project!
-
-
-# Notes
-
