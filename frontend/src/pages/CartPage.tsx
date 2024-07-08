@@ -51,7 +51,7 @@ const CartPage: React.FC = () => {
           },
         })
         .then((response) => response.data),
-    { enabled: !!authTokens, refetchOnWindowFocus: false }
+    { enabled: false, refetchOnWindowFocus: false }
   );
 
   if (isLoading) return <LoadingSpinner />;
