@@ -13,7 +13,7 @@ dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = 'django-insecure-ailq_fayd6ime55&rey@bk4f+zwt4zgoqczh-8-y9mh_a6t0l('
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -129,13 +129,14 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ.get("PG_DB", "postgres"),
-        "USER": os.environ.get("PG_USER", "postgres"),
-        "PASSWORD": os.environ.get("PG_PASSWORD", "postgres"),
-        "HOST": os.environ.get("PG_HOST", "localhost"),
-        "PORT": "5432",
-    }
+        "NAME": config("PG_DB", default="postgres"),
+        "USER": config("PG_USER", default="postgres"),
+        "PASSWORD": config("PG_PASSWORD", default="postgres"),
+        "HOST": config("PG_HOST", default="db"),
+        "PORT": config("PG_PORT", default=5432),
+    },
 }
+
 
 # DATABASES = {
 #     "default": dj_database_url.config(
