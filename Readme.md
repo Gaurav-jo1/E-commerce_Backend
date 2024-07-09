@@ -29,7 +29,7 @@ To get started with the project, follow these steps:
         source ./venv/bin/activate && pip install -r requirements.txt
         ```
 
-5. For Google Sign-In credentials (optional):
+5. For Google Sign-In credentials (**optional**):
     - Set up a Google API Console project and configure the consent screen:
         - Go to the [Google API Console](https://console.cloud.google.com/apis/dashboard)
         - Create a new project
@@ -42,18 +42,18 @@ To get started with the project, follow these steps:
 
     - Refer to this [Video tutorial](https://www.youtube.com/watch?v=roxC8SMs7HU) for setting up the Google API console.
 
-6. Download the JSON file with your Google API credentials, name it `client_secret.json`, and place it in the `frontend` directory.
+    - Download the JSON file with your Google API credentials, name it `client_secret.json`, and place it in the `frontend` directory.
 
     <p align="center">
     <img src="https://user-images.githubusercontent.com/93304640/236677794-cddb3f35-2ef9-4a60-b9cf-8547a3a54753.png" alt="client_json_img" width="450" height="450">
     </p>
 
-7. Add the Google client ID to the backend `.env` file:
+6. Add the Google client ID to the backend `.env` file:
     ```sh
     GOOGLE_CLIENT_ID='your_google_client_id'
     ```
 
-8. **Run the application:**
+7. **Run the application:**
    - Navigate to the root directory and start the services with Docker:
      ```sh
      docker compose up
@@ -62,3 +62,7 @@ To get started with the project, follow these steps:
 Access the application at [http://localhost:5173](http://localhost:5173).
 
 That's it! You should now be able to get started with the project and use Docker Compose to run the application. If you have any questions or issues, feel free to open an issue on the repository. Thanks for using my project!
+
+# Note
+
+Add a SS on both for example UI
