@@ -1,6 +1,10 @@
 # E-commerce 🏢
 Welcome to **Shoppy**, Shoppy is a portfolio project designed to showcase a seamless online shopping experience. With features like user login, sign-up, Google login, a great UI, and Redis for caching, it offers a robust and efficient platform for modern e-commerce.
 
+![Screenshot from 2024-07-10 08-36-34](https://github.com/gaurav-jo1/E-commerce/assets/93304640/8cce0615-6110-4556-8e6b-eada028ffa34)
+
+![Screenshot from 2024-07-10 08-26-37](https://github.com/gaurav-jo1/E-commerce/assets/93304640/c38fda5d-490c-4bdd-ad10-c0ee4a410c7a)
+
 ## Getting Started 🔥
 To get started with the project, follow these steps:
 
@@ -62,7 +66,3 @@ To get started with the project, follow these steps:
 Access the application at [http://localhost:5173](http://localhost:5173).
 
 That's it! You should now be able to get started with the project and use Docker Compose to run the application. If you have any questions or issues, feel free to open an issue on the repository. Thanks for using my project!
-
-# Note
-
-Add a SS on both for example UI
