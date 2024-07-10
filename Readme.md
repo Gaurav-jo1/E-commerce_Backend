@@ -58,7 +58,7 @@ To get started with the project, follow these steps:
     ```
 
 7. **Run the application:**
-   - Navigate to the root directory and start the services with Docker:
+   Navigate to the root directory and start the services with Docker:
      ```sh
      docker compose up
      ```
