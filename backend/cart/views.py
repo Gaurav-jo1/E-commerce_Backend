@@ -170,4 +170,5 @@ class CartDeleteItemView(APIView):
     def remove_data_to_redis_set(self, cart_key, product_data_json):
         # Helper function to remove product data from the Redis set associated with the user's cart
         r = redis_connnection
-        r.srem(cart_key, product_data_json
+        r.srem(cart_key, product_data_json)
+        
